@@ -16,9 +16,32 @@ namespace BetterConsole
             displayed = new List<ConsoleComponent>();
         }
         
+        public void Reload()
+        {
+            Console.Clear();
+            for (int i = 0; i < displayed.Count; i++)
+            {
+                string toWrite = "";
+                ConsoleComponent current = displayed[i];
+                while (current != null)
+                {
+                    toWrite += current;
+                    current = current.Next;
+                }
+                Console.WriteLine(toWrite);
+            }
+        }
+        
         public void Write(ConsoleComponent component)
         {
-            displayed.Add(component);
+            if (displayed.Count == 0)
+            {
+                displayed.Add(component);
+            }
+            else
+            {
+                displayed[displayed.Count-1].Next = component;
+            }
         }
         
         public void WriteLine(ConsoleComponent component) //Enable line break and redirect to write.
@@ -33,7 +56,7 @@ namespace BetterConsole
         
         public void WriteLine(string item)
         {
-            Write(new StringComponent(true, item));
+            WriteLine(new StringComponent(item));
         }
 
         public void Clear()

@@ -4,9 +4,7 @@
     {
         private string content;
         
-        public StringComponent(string content) : this(false, content) { }
-        
-        public StringComponent(bool linebreak, string content) : base(linebreak)
+        public StringComponent(string content) : base()
         {
             this.content = content;
         }

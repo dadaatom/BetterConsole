@@ -2,20 +2,23 @@
 {
     public abstract class ConsoleComponent
     {
-        //line break param?
-        private bool linebreak;
-        
-        protected ConsoleComponent(bool linebreak)
+
+        public ConsoleComponent Next { get; set; }
+
+        protected ConsoleComponent()
         {
-            this.linebreak = linebreak;
+            Next = null;
         }
 
         public abstract override string ToString();
+        
     }
     
     /*
      * Components to create:
      * Figlet component using figlet .net
      * loading bar
+     * Timer
+     * Countdown
      */
 }
