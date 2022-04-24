@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 using BetterConsole.ConsoleComponents;
 
@@ -42,11 +43,13 @@ namespace BetterConsole
             {
                 displayed[displayed.Count-1].Next = component;
             }
+            Console.Write(component);
         }
         
         public void WriteLine(ConsoleComponent component) //Enable line break and redirect to write.
         {
             displayed.Add(component);
+            Console.WriteLine(component);
         }
         
         public void Write(string item)
