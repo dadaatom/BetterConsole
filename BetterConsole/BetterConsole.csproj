@@ -45,6 +45,7 @@
     <ItemGroup>
         <Compile Include="BetterConsole.cs" />
         <Compile Include="ConsoleComponents\ConsoleComponent.cs" />
+        <Compile Include="ConsoleComponents\LoadingComponent.cs" />
         <Compile Include="ConsoleComponents\StringComponent.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />

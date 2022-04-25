@@ -17,7 +17,6 @@
     /*
      * Components to create:
      * Figlet component using figlet .net
-     * loading bar
      * Timer
      * Countdown
      */
