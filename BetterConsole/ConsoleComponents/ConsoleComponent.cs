@@ -15,9 +15,11 @@
     }
     
     /*
-     * Components to create:
+     * TODO:
      * Figlet component using figlet .net
      * Timer
      * Countdown
+     * Style options (i.e. loading bar)
+     * Can colors be down?
      */
 }

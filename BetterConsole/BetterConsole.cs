@@ -6,6 +6,14 @@ using BetterConsole.ConsoleComponents;
 
 namespace BetterConsole
 {
+    /*
+     * TODO:
+     * - Create listener paradigm for loading bars so they dont have to be reloaded
+     * - user input threads
+     * - See console component todo.
+     */
+    
+    
     public class BetterConsole
     {
         public static BetterConsole Instance;
