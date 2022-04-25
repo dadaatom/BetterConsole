@@ -12,8 +12,7 @@ namespace BetterConsole
      * - user input threads
      * - See console component todo.
      */
-    
-    
+
     public class BetterConsole
     {
         public static BetterConsole Instance;

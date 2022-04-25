@@ -1,5 +1,14 @@
 ﻿namespace BetterConsole.ConsoleComponents
 {
+    /*
+     * TODO:
+     * Figlet component using figlet .net
+     * Timer
+     * Countdown
+     * Style options (i.e. loading bar)
+     * Can colors be down?
+     */
+    
     public abstract class ConsoleComponent
     {
 
@@ -13,13 +22,4 @@
         public abstract override string ToString();
         
     }
-    
-    /*
-     * TODO:
-     * Figlet component using figlet .net
-     * Timer
-     * Countdown
-     * Style options (i.e. loading bar)
-     * Can colors be down?
-     */
 }
