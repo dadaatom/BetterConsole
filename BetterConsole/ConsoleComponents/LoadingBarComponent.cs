@@ -2,7 +2,7 @@
 
 namespace BetterConsole.ConsoleComponents
 {
-    public class LoadingComponent : ConsoleComponent
+    public class LoadingBarComponent : ConsoleComponent
     {
         private int _size;
         private float _percentage;
@@ -10,7 +10,7 @@ namespace BetterConsole.ConsoleComponents
         private string _fillStyle = "#"; // Temp incorporate style enum or param.
         private string _emptyStyle = "_";
 
-        public LoadingComponent(int size) : base()
+        public LoadingBarComponent(int size) : base()
         {
             _size = size;
             _percentage = 0;

@@ -17,14 +17,14 @@ namespace BetterConsole
             console.Reload();
             console.WriteLine(new StringComponent("Loading: "));
 
-            LoadingComponent loadingBar = new LoadingComponent(10);
+            LoadingBarComponent loadingBarBar = new LoadingBarComponent(10);
             
-            console.Write(loadingBar);
+            console.Write(loadingBarBar);
 
             for (int i = 0; i <= 20; i++) {
                 Thread.Sleep(100);
 
-                loadingBar.SetPercentage(i*.05f);
+                loadingBarBar.SetPercentage(i*.05f);
                 console.Reload();
             }
         }
