@@ -2,16 +2,16 @@
 {
     public class StringComponent : ConsoleComponent
     {
-        private string content;
+        private readonly string _content;
         
         public StringComponent(string content) : base()
         {
-            this.content = content;
+            _content = content;
         }
 
         public override string ToString()
         {
-            return content;
+            return _content;
         }
     }
 }
