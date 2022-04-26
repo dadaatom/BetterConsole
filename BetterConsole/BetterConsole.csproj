@@ -44,14 +44,12 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="BetterConsole.cs" />
+        <Compile Include="Commands\ConsoleCommand.cs" />
         <Compile Include="ConsoleComponents\ConsoleComponent.cs" />
         <Compile Include="ConsoleComponents\LoadingBarComponent.cs" />
         <Compile Include="ConsoleComponents\StringComponent.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-    </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Commands" />
     </ItemGroup>
     <ItemGroup>
       <None Include="packages.config" />

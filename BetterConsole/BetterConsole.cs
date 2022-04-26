@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
+using BetterConsole.Commands;
 using BetterConsole.ConsoleComponents;
 
 namespace BetterConsole
@@ -16,46 +17,23 @@ namespace BetterConsole
     public class BetterConsole
     {
         public static BetterConsole Instance;
+        private List<ConsoleCommand> _commands;
         private List<ConsoleComponent> _displayed;
-        private readonly int _displayLimit;
 
-        public BetterConsole(int displayLimit = int.MaxValue)
+        //private readonly int _displayLimit;
+
+        public BetterConsole(int displayLimit = 1000)
         {
             Instance = this;
+            
+            _commands = new List<ConsoleCommand>();
+            
             _displayed = new List<ConsoleComponent>();
-            _displayLimit = displayLimit;
+            _displayed.Capacity = displayLimit;
         }
         
-        public void Reload()
-        {
-            Console.Clear();
-            for (int i = 0; i < _displayed.Count; i++)
-            {
-                string toWrite = "";
-                ConsoleComponent current = _displayed[i];
-                while (current != null)
-                {
-                    toWrite += current;
-                    current = current.Next;
-                }
-                Console.WriteLine(toWrite);
-            }
-        }
-
-        private void AddToDisplay(ConsoleComponent component)
-        {
-            if (_displayed.Count > _displayLimit)
-            {
-                _displayed.RemoveAt(0);
-                _displayed.Add(component);
-                Reload();
-            }
-            else
-            {
-                _displayed.Add(component);
-            }
-        }
-
+        //====================// Displays //====================//
+        
         public void Write(ConsoleComponent component)
         {
             if (_displayed.Count == 0)
@@ -89,6 +67,48 @@ namespace BetterConsole
         {
             _displayed = new List<ConsoleComponent>();
             Console.Clear();
+        }
+        
+        public void Reload()
+        {
+            Console.Clear();
+            for (int i = 0; i < _displayed.Count; i++)
+            {
+                string toWrite = "";
+                ConsoleComponent current = _displayed[i];
+                while (current != null)
+                {
+                    toWrite += current;
+                    current = current.Next;
+                }
+                Console.WriteLine(toWrite);
+            }
+        }
+
+        private void AddToDisplay(ConsoleComponent component)
+        {
+            if (_displayed.Count + 1 > _displayed.Capacity)
+            {
+                _displayed.RemoveAt(0);
+                _displayed.Add(component);
+                Reload();
+            }
+            else
+            {
+                _displayed.Add(component);
+            }
+        }
+        
+        //====================// Commands //====================//
+        
+        public List<ConsoleCommand> GetCommands()
+        {
+            return _commands;
+        }
+        
+        public void AddCommand(ConsoleCommand command)
+        {
+            _commands.Add(command);
         }
     }
 }
