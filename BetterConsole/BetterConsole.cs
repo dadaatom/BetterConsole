@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using BetterConsole.Commands;
 using BetterConsole.ConsoleComponents;
@@ -19,9 +20,9 @@ namespace BetterConsole
         public static BetterConsole Instance;
         private List<ConsoleCommand> _commands;
         private List<ConsoleComponent> _displayed;
-
-        //private readonly int _displayLimit;
-
+        
+        //====================// Constructors //====================//
+        
         public BetterConsole(int displayLimit = 1000)
         {
             Instance = this;
@@ -31,6 +32,13 @@ namespace BetterConsole
             _displayed = new List<ConsoleComponent>();
             _displayed.Capacity = displayLimit;
         }
+        
+        /*
+        ~BetterConsole()
+        {
+            // Stop thread here?
+        }
+        */
         
         //====================// Displays //====================//
         
@@ -101,9 +109,37 @@ namespace BetterConsole
         
         //====================// Commands //====================//
 
-        public void Read()
+        public string ReadLine()
         {
-            throw new NotImplementedException();
+            return Console.ReadLine();
+        }
+
+        private void HandleCommands() //Rename this function appropriately.
+        {
+            while (true)
+            {
+                string line = Console.ReadLine();
+                if (!string.IsNullOrEmpty(line))
+                {
+                    string[] inputs = line.Split(' ');
+
+                    string commandString = inputs[0];
+                    string[] parameters = new string[inputs.Length-1];
+                    
+                    for (int i = 1; i < inputs.Length; i++)
+                    {
+                        parameters[i - 1] = inputs[i];
+                    }
+                    
+                    foreach (ConsoleCommand command in _commands) {
+                        if (command.Command.Equals(commandString) || command.Aliases.Contains(commandString))
+                        {
+                            command.Execute(parameters);
+                            break;
+                        }
+                    }
+                }
+            }
         }
 
         //====================// Commands //====================//

@@ -2,15 +2,16 @@
 {
     public abstract class ConsoleCommand
     {
-        private string _command;
-        private string[] _aliases;
+        public string Command { get; }
+        public string[] Aliases { get; }
         
         private string _description;
         
         ConsoleCommand(string command, string[] aliases, string description)
         {
-            _command = command;
-            _aliases = aliases;
+            Command = command;
+            Aliases = aliases;
+            _description = description;
         }
         ConsoleCommand(string command, string description) : this(command, new string[0], description) { }
         ConsoleCommand(string command) : this(command, new string[0], "") { }
