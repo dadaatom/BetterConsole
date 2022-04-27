@@ -100,6 +100,13 @@ namespace BetterConsole
         }
         
         //====================// Commands //====================//
+
+        public void Read()
+        {
+            throw new NotImplementedException();
+        }
+
+        //====================// Commands //====================//
         
         public List<ConsoleCommand> GetCommands()
         {

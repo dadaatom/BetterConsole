@@ -6,7 +6,7 @@
      * Timer
      * Countdown
      * Style options (i.e. loading bar)
-     * Can colors be down?
+     * Can colors be done?
      */
     
     public abstract class ConsoleComponent
