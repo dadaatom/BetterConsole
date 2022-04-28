@@ -159,7 +159,21 @@ namespace BetterConsole
         
         public void AddCommand(ConsoleCommand command)
         {
-            _commands.Add(command);
+            bool exists = false;
+
+            foreach (ConsoleCommand c in _commands)
+            {
+                if (c.Command.Equals(command.Command))
+                {
+                    //throw new Exception(); // Throw some sort of duplicate command exception?
+                    exists = true;
+                }
+            }
+
+            if (!exists)
+            {
+                _commands.Add(command);
+            }
         }
     }
 }
