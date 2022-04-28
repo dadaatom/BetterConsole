@@ -45,6 +45,7 @@
     <ItemGroup>
         <Compile Include="BetterConsole.cs" />
         <Compile Include="Commands\ConsoleCommand.cs" />
+        <Compile Include="Commands\PingCommand.cs" />
         <Compile Include="ConsoleComponents\ConsoleComponent.cs" />
         <Compile Include="ConsoleComponents\LoadingBarComponent.cs" />
         <Compile Include="ConsoleComponents\StringComponent.cs" />

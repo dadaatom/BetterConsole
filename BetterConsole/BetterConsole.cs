@@ -20,6 +20,8 @@ namespace BetterConsole
         public static BetterConsole Instance;
         private List<ConsoleCommand> _commands;
         private List<ConsoleComponent> _displayed;
+
+        private Thread commandThread;
         
         //====================// Constructors //====================//
         
@@ -33,12 +35,12 @@ namespace BetterConsole
             _displayed.Capacity = displayLimit;
         }
         
-        /*
+        
         ~BetterConsole()
         {
-            // Stop thread here?
+            commandThread?.Interrupt();
         }
-        */
+        
         
         //====================// Displays //====================//
         
@@ -113,28 +115,34 @@ namespace BetterConsole
         {
             return Console.ReadLine();
         }
+        
+        //implement some sort of parallel read line.
+        
+        
+        public void BeginCommandHandling()
+        {
+            commandThread = new Thread(HandleCommands);
+            commandThread.Start();
+        }
 
-        private void HandleCommands() //Rename this function appropriately.
+        public void StopHandlingCommands()
+        {
+            commandThread?.Interrupt();
+        }
+
+        private void HandleCommands() //Rename this function appropriately?
         {
             while (true)
             {
                 string line = Console.ReadLine();
                 if (!string.IsNullOrEmpty(line))
                 {
-                    string[] inputs = line.Split(' ');
+                    string[] signature = line.Split(' ');
 
-                    string commandString = inputs[0];
-                    string[] parameters = new string[inputs.Length-1];
-                    
-                    for (int i = 1; i < inputs.Length; i++)
-                    {
-                        parameters[i - 1] = inputs[i];
-                    }
-                    
                     foreach (ConsoleCommand command in _commands) {
-                        if (command.Command.Equals(commandString) || command.Aliases.Contains(commandString))
+                        if (command.Command.Equals(signature[0]) || command.Aliases.Contains(signature[0]))
                         {
-                            command.Execute(parameters);
+                            command.Execute(signature);
                             break;
                         }
                     }

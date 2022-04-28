@@ -7,7 +7,7 @@
         
         private string _description;
         
-        ConsoleCommand(string command, string[] aliases, string description)
+        public ConsoleCommand(string command, string[] aliases, string description)
         {
             Command = command;
             Aliases = aliases;
@@ -16,6 +16,6 @@
         ConsoleCommand(string command, string description) : this(command, new string[0], description) { }
         ConsoleCommand(string command) : this(command, new string[0], "") { }
 
-        public abstract void Execute(string[] arguments);
+        public abstract void Execute(string[] signature);
     }
 }
