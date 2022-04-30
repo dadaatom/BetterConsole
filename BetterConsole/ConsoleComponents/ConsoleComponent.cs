@@ -13,16 +13,26 @@ namespace BetterConsole.ConsoleComponents
     
     public abstract class ConsoleComponent
     {
-        public ConsoleColor Color;
-        
         public ConsoleComponent Next { get; set; }
+        
+        public ConsoleColor Color;
         
         public ConsoleComponent(ConsoleColor color = ConsoleColor.Gray)
         {
             Next = null;
             Color = color;
         }
+        
+        public void Write()
+        {
+            ConsoleColor baseColor = Console.ForegroundColor;
 
+            Console.ForegroundColor = Color;
+            Console.Write(ToString());
+            Next?.Write();
+            Console.ForegroundColor = baseColor;
+        }
+        
         public abstract override string ToString();
         
     }

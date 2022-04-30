@@ -18,10 +18,12 @@ namespace BetterConsole
     public class BetterConsole
     {
         public static BetterConsole Instance;
+        
         private List<ConsoleCommand> _commands;
         private List<ConsoleComponent> _displayed;
-
         private Thread commandThread;
+
+        private int _displayLimit;
         
         //====================// Constructors //====================//
         
@@ -32,7 +34,7 @@ namespace BetterConsole
             _commands = new List<ConsoleCommand>();
             
             _displayed = new List<ConsoleComponent>();
-            _displayed.Capacity = displayLimit;
+            _displayLimit = displayLimit;
         }
         
         
@@ -84,6 +86,7 @@ namespace BetterConsole
             Console.Clear();
             for (int i = 0; i < _displayed.Count; i++)
             {
+                /*
                 string toWrite = "";
                 ConsoleComponent current = _displayed[i];
                 while (current != null)
@@ -92,12 +95,16 @@ namespace BetterConsole
                     current = current.Next;
                 }
                 Console.WriteLine(toWrite);
+                */
+                
+                _displayed[i].Write();
+                Console.Write("\n");
             }
         }
 
         private void AddToDisplay(ConsoleComponent component)
         {
-            if (_displayed.Count + 1 > _displayed.Capacity)
+            if (_displayed.Count + 1 > _displayLimit)
             {
                 _displayed.RemoveAt(0);
                 _displayed.Add(component);

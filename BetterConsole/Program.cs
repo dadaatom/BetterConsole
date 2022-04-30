@@ -16,7 +16,7 @@ namespace BetterConsole
             console.Reload();
             console.WriteLine(new StringComponent("Loading: "));
 
-            LoadingBarComponent loadingBarBar = new LoadingBarComponent(10);
+            LoadingBarComponent loadingBarBar = new LoadingBarComponent(10, ConsoleColor.Green);
             
             console.Write(loadingBarBar);
 

@@ -10,7 +10,7 @@ namespace BetterConsole.ConsoleComponents
         private string _fillStyle = "#"; // Temp incorporate style enum or param.
         private string _emptyStyle = "_";
 
-        public LoadingBarComponent(int size) : base()
+        public LoadingBarComponent(int size, ConsoleColor color = ConsoleColor.Gray) : base(color)
         {
             _size = size;
             _percentage = 0;
