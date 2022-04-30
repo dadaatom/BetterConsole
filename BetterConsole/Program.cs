@@ -8,7 +8,6 @@ namespace BetterConsole
     {
         public static void Main(string[] args)
         {
-            
             BetterConsole console = new BetterConsole();
             console.WriteLine("This will be cleared.");
             console.Clear();
