@@ -10,12 +10,12 @@ namespace BetterConsole.ConsoleComponents
      * countdown component
      */
     
-    public abstract class TimedComponent : ConsoleComponent
+    public abstract class TimeComponent : ConsoleComponent
     {
-        private DateTime _starting;
-        private DateTime _current;
+        protected DateTime _starting;
+        protected DateTime _current;
         
-        public TimedComponent()
+        public TimeComponent() : base()
         {
             _starting = DateTime.Now;
             _current = DateTime.Now;

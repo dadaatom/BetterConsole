@@ -50,7 +50,8 @@
         <Compile Include="ConsoleComponents\LoadingBarComponent.cs" />
         <Compile Include="ConsoleComponents\NumberComponent.cs" />
         <Compile Include="ConsoleComponents\TextComponent.cs" />
-        <Compile Include="ConsoleComponents\TimedComponent.cs" />
+        <Compile Include="ConsoleComponents\TimeComponent.cs" />
+        <Compile Include="ConsoleComponents\TimerComponent.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
