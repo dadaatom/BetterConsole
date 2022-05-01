@@ -15,7 +15,7 @@ namespace BetterConsole
             console.Write("Te");
             console.Write("st");
             console.Reload();
-            console.WriteLine(new StringComponent("Let's issue some commands:", ConsoleColor.DarkCyan));
+            console.WriteLine(new TextComponent("Let's issue some commands:", ConsoleColor.DarkCyan));
             console.AddCommand(new PingCommand());
             console.BeginCommandHandling();
             //console.WriteLine(new StringComponent("Loading: "));

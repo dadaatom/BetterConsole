@@ -48,7 +48,8 @@
         <Compile Include="Commands\PingCommand.cs" />
         <Compile Include="ConsoleComponents\ConsoleComponent.cs" />
         <Compile Include="ConsoleComponents\LoadingBarComponent.cs" />
-        <Compile Include="ConsoleComponents\StringComponent.cs" />
+        <Compile Include="ConsoleComponents\NumberComponent.cs" />
+        <Compile Include="ConsoleComponents\TextComponent.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>

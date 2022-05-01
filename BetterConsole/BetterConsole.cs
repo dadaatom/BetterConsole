@@ -67,12 +67,12 @@ namespace BetterConsole
         
         public void Write(string item)
         {
-            Write(new StringComponent(item));
+            Write(new TextComponent(item));
         }
         
         public void WriteLine(string item)
         {
-            WriteLine(new StringComponent(item));
+            WriteLine(new TextComponent(item));
         }
 
         public void Clear()
