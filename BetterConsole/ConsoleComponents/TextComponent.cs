@@ -2,6 +2,13 @@
 
 namespace BetterConsole.ConsoleComponents
 {
+    /*
+     * TODO:
+     * Headers
+     * Seperators
+     * Figlet.NET
+     */
+    
     public class TextComponent : ConsoleComponent
     {
         private string _content;
