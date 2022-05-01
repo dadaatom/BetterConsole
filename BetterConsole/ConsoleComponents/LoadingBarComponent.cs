@@ -7,14 +7,13 @@ namespace BetterConsole.ConsoleComponents
         private int _size;
         private float _percentage;
 
-        private string _fillStyle = "#"; // Temp incorporate style enum or param.
+        private string _fillStyle = "#"; // Temp incorporate style enum, param, or class.
         private string _emptyStyle = "_";
 
         public LoadingBarComponent(int size, ConsoleColor color = ConsoleColor.Gray) : base(color)
         {
             _size = size;
             _percentage = 0;
-            
         }
 
         public void SetPercentage(float percentage)

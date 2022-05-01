@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using BetterConsole.Commands;
 using BetterConsole.ConsoleComponents;
 
 namespace BetterConsole
@@ -14,10 +15,13 @@ namespace BetterConsole
             console.Write("Te");
             console.Write("st");
             console.Reload();
-            console.WriteLine(new StringComponent("Loading: "));
-
-            LoadingBarComponent loadingBarBar = new LoadingBarComponent(10, ConsoleColor.Green);
+            console.WriteLine(new StringComponent("Let's issue some commands:", ConsoleColor.DarkCyan));
+            console.AddCommand(new PingCommand());
+            console.BeginCommandHandling();
+            //console.WriteLine(new StringComponent("Loading: "));
             
+            /*
+            LoadingBarComponent loadingBarBar = new LoadingBarComponent(10, ConsoleColor.Green);
             console.Write(loadingBarBar);
 
             for (int i = 0; i <= 20; i++) {
@@ -26,6 +30,9 @@ namespace BetterConsole
                 loadingBarBar.SetPercentage(i*.05f);
                 console.Reload();
             }
+            */
+            
+            
         }
     }
 }

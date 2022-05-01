@@ -1,5 +1,9 @@
 ﻿namespace BetterConsole.Commands
 {
+    /*
+     * TODO:
+     * Command issue event or class? I'd like to incorporate time signatures
+     */
     public abstract class ConsoleCommand
     {
         public string Command { get; }
