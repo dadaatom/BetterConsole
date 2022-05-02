@@ -13,7 +13,7 @@ namespace BetterConsole.ConsoleComponents
     {
         private string _content;
 
-        public TextComponent(string content, ConsoleColor color = ConsoleColor.Gray) : base()
+        public TextComponent(string content)
         {
             _content = content;
         }
@@ -23,7 +23,7 @@ namespace BetterConsole.ConsoleComponents
             return _content;
         }
 
-        public void ModifyText(string text)
+        public void SetText(string text)
         {
             _content = text;
         }

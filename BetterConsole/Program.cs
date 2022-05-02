@@ -15,22 +15,21 @@ namespace BetterConsole
             console.Write("Te");
             console.Write("st");
             console.Reload();
-            console.WriteLine(new TextComponent("Let's issue some commands:", ConsoleColor.DarkCyan));
+            console.WriteLine(new TextComponent("Let's issue some commands:"));
             console.AddCommand(new PingCommand());
             console.BeginCommandHandling();
             //console.WriteLine(new StringComponent("Loading: "));
             
-            /*
-            LoadingBarComponent loadingBarBar = new LoadingBarComponent(10, ConsoleColor.Green);
+            
+            LoadingBar loadingBarBar = new LoadingBar(10);
             console.Write(loadingBarBar);
 
             for (int i = 0; i <= 20; i++) {
                 Thread.Sleep(100);
 
                 loadingBarBar.SetPercentage(i*.05f);
-                console.Reload();
             }
-            */
+            
             
             
         }

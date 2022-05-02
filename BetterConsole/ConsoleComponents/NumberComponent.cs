@@ -6,7 +6,7 @@ namespace BetterConsole.ConsoleComponents
     {
         private int _value;
 
-        public NumberComponent(int value, ConsoleColor color = ConsoleColor.Gray) : base()
+        public NumberComponent(int value)
         {
             _value = value;
         }

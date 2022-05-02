@@ -16,11 +16,23 @@ namespace BetterConsole.ConsoleComponents
         public ConsoleComponent Next { get; set; }
         
         private ConsoleColor _color;
-        
-        public ConsoleComponent()
+
+        public ConsoleComponent() : this(ConsoleColor.Gray) { }
+
+        public ConsoleComponent(ConsoleColor color)
         {
             Next = null;
-            _color = ConsoleColor.Gray;
+            _color = color;
+        }
+
+        public void SetColors(ConsoleColor color)
+        {
+            ConsoleComponent current = this;
+            while (current != null)
+            {
+                current.SetColor(color);
+                current = current.Next;
+            }
         }
 
         public void SetColor(ConsoleColor color)
