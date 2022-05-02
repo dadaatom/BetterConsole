@@ -46,7 +46,7 @@ namespace BetterConsole
             _commandThread?.Interrupt();
         }
         
-        //====================// Displays //====================//
+        //====================// Simple Methods //====================//
         
         public void Write(ConsoleComponent component)
         {
@@ -67,21 +67,44 @@ namespace BetterConsole
             Console.WriteLine(component);
         }
         
-        public void Write(string item)
+        public void Write(string text, ConsoleColor color)
         {
-            Write(new TextComponent(item));
+            TextComponent textComp = new TextComponent(text);
+            textComp.SetColor(color);
+            Write(textComp);
         }
         
-        public void WriteLine(string item)
+        public void Write(string text)
         {
-            WriteLine(new TextComponent(item));
+            Write(new TextComponent(text));
         }
-
+        
+        public void WriteLine(string text, ConsoleColor color)
+        {
+            TextComponent textComp = new TextComponent(text);
+            textComp.SetColor(color);
+            WriteLine(textComp);
+        }
+        
+        public void WriteLine(string text)
+        {
+            WriteLine(new TextComponent(text));
+        }
+        
+        //implement some sort of parallel read line?
+        
+        public string ReadLine()
+        {
+            return Console.ReadLine();
+        }
+        
         public void Clear()
         {
             _displayed = new List<ConsoleComponent>();
             Console.Clear();
         }
+        
+        //====================// Display //====================//
         
         public void Reload()
         {
@@ -125,14 +148,7 @@ namespace BetterConsole
              * threaded time reloads.
              */
         
-        //====================// Commands //====================//
-
-        public string ReadLine()
-        {
-            return Console.ReadLine();
-        }
-        
-        //implement some sort of parallel read line.
+        //====================// Command Handling //====================//
         
         public void BeginCommandHandling()
         {

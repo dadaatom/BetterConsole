@@ -20,7 +20,6 @@ namespace BetterConsole
             console.BeginCommandHandling();
             //console.WriteLine(new StringComponent("Loading: "));
             
-            
             LoadingBar loadingBarBar = new LoadingBar(10);
             console.Write(loadingBarBar);
 

@@ -25,7 +25,7 @@ namespace BetterConsole.ConsoleComponents
             _color = color;
         }
 
-        public void SetColors(ConsoleColor color)
+        public void SetLineColors(ConsoleColor color)
         {
             ConsoleComponent current = this;
             while (current != null)
