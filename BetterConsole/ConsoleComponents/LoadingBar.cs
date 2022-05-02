@@ -6,14 +6,16 @@ namespace BetterConsole.ConsoleComponents
     {
         private int _size;
         private float _percentage;
+        private int _count;
 
         private string _fillStyle = "#"; // Temp incorporate style enum, param, or class.
         private string _emptyStyle = "_";
 
-        public LoadingBar(int size, ConsoleColor color = ConsoleColor.Gray) : base(color)
+        public LoadingBar(int size, ConsoleColor color = ConsoleColor.Gray) : base()
         {
             _size = size;
             _percentage = 0;
+            _count = 0;
         }
 
         public void SetPercentage(float percentage)
@@ -28,16 +30,23 @@ namespace BetterConsole.ConsoleComponents
             }
 
             _percentage = percentage;
+            
+            int _prevCount = _count;
+            _count = (int)(_percentage*_size);
+
+            if (_prevCount != _count)
+            {
+                BetterConsole.Instance.Reload();
+            }
         }
 
         public override string ToString()
         {
             string toReturn = "[";
-            int completed = (int)(_percentage*_size);
             
             for (int i = 1; i <= _size; i++)
             {
-                if (i <= completed)
+                if (i <= _count)
                 {
                     toReturn += _fillStyle;
                 }

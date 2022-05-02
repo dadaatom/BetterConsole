@@ -15,25 +15,29 @@ namespace BetterConsole.ConsoleComponents
     {
         public ConsoleComponent Next { get; set; }
         
-        public ConsoleColor Color;
+        private ConsoleColor _color;
         
-        public ConsoleComponent(ConsoleColor color = ConsoleColor.Gray)
+        public ConsoleComponent()
         {
             Next = null;
-            Color = color;
+            _color = ConsoleColor.Gray;
         }
-        
+
+        public void SetColor(ConsoleColor color)
+        {
+            _color = color;
+        }
+
         public void Write()
         {
             ConsoleColor baseColor = Console.ForegroundColor;
 
-            Console.ForegroundColor = Color;
+            Console.ForegroundColor = _color;
             Console.Write(ToString());
             Next?.Write();
             Console.ForegroundColor = baseColor;
         }
         
         public abstract override string ToString();
-        
     }
 }
