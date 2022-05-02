@@ -21,9 +21,12 @@ namespace BetterConsole
         
         private List<ConsoleCommand> _commands;
         private List<ConsoleComponent> _displayed;
-        private Thread commandThread;
+        
+        private Thread _commandThread;
+        private Thread _timeThread;
 
         private int _displayLimit;
+        private int _timeComponentCount;
         
         //====================// Constructors //====================//
         
@@ -32,17 +35,16 @@ namespace BetterConsole
             Instance = this;
             
             _commands = new List<ConsoleCommand>();
-            
             _displayed = new List<ConsoleComponent>();
+            
             _displayLimit = displayLimit;
+            _timeComponentCount = 0;
         }
-        
-        
+
         ~BetterConsole()
         {
-            commandThread?.Interrupt();
+            _commandThread?.Interrupt();
         }
-        
         
         //====================// Displays //====================//
         
@@ -116,6 +118,13 @@ namespace BetterConsole
             }
         }
         
+        //====================// Time Components //====================//
+        
+            /*
+             * TODO:
+             * threaded time reloads.
+             */
+        
         //====================// Commands //====================//
 
         public string ReadLine()
@@ -125,16 +134,15 @@ namespace BetterConsole
         
         //implement some sort of parallel read line.
         
-        
         public void BeginCommandHandling()
         {
-            commandThread = new Thread(HandleCommands);
-            commandThread.Start();
+            _commandThread = new Thread(HandleCommands);
+            _commandThread.Start();
         }
 
         public void StopHandlingCommands()
         {
-            commandThread?.Interrupt();
+            _commandThread?.Interrupt();
         }
 
         private void HandleCommands() //Rename this function appropriately?

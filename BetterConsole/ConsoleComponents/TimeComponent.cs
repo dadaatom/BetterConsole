@@ -12,24 +12,29 @@ namespace BetterConsole.ConsoleComponents
     
     public abstract class TimeComponent : ConsoleComponent
     {
-        protected DateTime _starting;
-        protected DateTime _current;
+        public DateTime Starting;
+        public DateTime Current;
         
         public TimeComponent() : base()
         {
-            _starting = DateTime.Now;
-            _current = DateTime.Now;
+            Starting = DateTime.Now;
+            Current = DateTime.Now;
         }
 
-        public void Reset()
+        public void Start()
         {
-            _starting = DateTime.Now;
-            //reset time
+            
         }
 
         public void Stop()
         {
             // remove this component from timed reload.
+        }
+        
+        public void Reset()
+        {
+            Starting = DateTime.Now;
+            Current = DateTime.Now;
         }
     }
 }
