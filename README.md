@@ -56,3 +56,14 @@ for (int i = 0; i <= n; i++) {
     loadingBar.SetPercentage(i*(1/n));
 }
 ```
+##Time Components
+There are several types of time components including countdown and timer components. 
+Let's create a timer to display the execution time of our program.
+```
+Timer timer = new Timer();
+timer.Start();
+
+console.WriteLine("Current execution duration: ");
+console.Write(timer);
+```
+[NOTE TO SELF: UPDATE WITH TICK TIMES]
