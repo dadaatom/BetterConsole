@@ -10,7 +10,7 @@ namespace BetterConsole
 {
     /*
      * TODO:
-     * - Create listener paradigm for loading bars so they dont have to be reloaded
+     * - Create listener paradigm for loading bars so they dont have to be reloaded?
      * - user input threads
      * - See console component todo.
      */
@@ -109,22 +109,20 @@ namespace BetterConsole
         public void Reload()
         {
             Console.Clear();
-            for (int i = 0; i < _displayed.Count; i++)
+            for (int i = 0; i < _displayed.Count; i++) // Fix the order in which
             {
-                /*
-                string toWrite = "";
-                ConsoleComponent current = _displayed[i];
-                while (current != null)
-                {
-                    toWrite += current;
-                    current = current.Next;
-                }
-                Console.WriteLine(toWrite);
-                */
-                
                 _displayed[i].Write();
-                Console.Write("\n");
+                if (i == _displayed.Count-1)
+                {
+                    Console.Write("\n");
+                }
             }
+        }
+
+        public void ReloadLast()
+        {
+            Console.Write("\r");
+            _displayed[_displayed.Count-1].Write();
         }
 
         private void AddToDisplay(ConsoleComponent component)

@@ -20,17 +20,12 @@ namespace BetterConsole
             console.BeginCommandHandling();
             //console.WriteLine(new StringComponent("Loading: "));
             
-            LoadingBar loadingBarBar = new LoadingBar(10);
-            console.Write(loadingBarBar);
-
+            LoadingBar loadingBar = new LoadingBar(10);
+            console.Write(loadingBar);
             for (int i = 0; i <= 20; i++) {
                 Thread.Sleep(100);
-
-                loadingBarBar.SetPercentage(i*.05f);
+                loadingBar.SetPercentage(i*(1/20));
             }
-            
-            
-            
         }
     }
 }

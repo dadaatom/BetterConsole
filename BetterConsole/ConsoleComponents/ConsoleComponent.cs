@@ -5,7 +5,6 @@ namespace BetterConsole.ConsoleComponents
     /*
      * TODO:
      * Figlet component using figlet .net
-     * Timer
      * Countdown
      * Style options (i.e. loading bar)
      * Can colors be done?
@@ -25,7 +24,7 @@ namespace BetterConsole.ConsoleComponents
             _color = color;
         }
 
-        public void SetLineColors(ConsoleColor color)
+        public void SetAllColors(ConsoleColor color)
         {
             ConsoleComponent current = this;
             while (current != null)
