@@ -39,7 +39,7 @@ Alternatively, for plain text it's easier to use the method below.
 console.WriteLine("This will also appear green!", ConsoleColor.Green);
 ```
 ## Loading Bars
-Let's now create a loading bar to display the execution process of our program. We will be setting a length of 10 units and writing it to our value.
+Let's now create a loading bar to display the execution process of our program. We will be setting a length of 10 units and passing the loading bar to a write function.
 ```
 LoadingBar loadingBar = new LoadingBar(10);
 console.WriteLine("Execution process: ");
