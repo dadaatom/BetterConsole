@@ -41,7 +41,7 @@ console.WriteLine("This will also appear green!", ConsoleColor.Green);
 ## Loading Bars
 Let's now create a loading bar to display the execution process of our program. Whilst optional, I am going to select different style settings below.
 ```
-LoadingBarStyle style = new LoadingBarStyle("-","_","(", ")");
+LoadingBarStyle style = new LoadingBarStyle("-", "_", "(", ")");
 ```
 We will now call the loading bar constructor with the style and length, then write the resulting loading bar to the console.
 ```
@@ -49,7 +49,7 @@ LoadingBar loadingBar = new LoadingBar(style, 10);
 console.WriteLine("Execution process: ");
 console.Write(loadingBar);
 ```
-Great, now all we need to do is provide our loading bar with its progress percentage. Note that input values to the SetPercentage method are bounded between 0 and 1.
+Great, now all we need to do is provide our loading bar with its progress percentage. Note that input values to the SetPercentage method are automatically bounded between 0 and 1.
 ```
 for (int i = 0; i <= n; i++) {
     //Do stuff.
