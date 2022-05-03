@@ -1,7 +1,7 @@
 # BetterConsole
 Better console with prebuilt functionalities and offers improved display tools. Implements a ConsoleCommand framework so that new user defined commands can easily be added and executed.
 
-# Examples
+# Usage
 ## Creating the BetterConsole
 First, let's create an instance of the `BetterConsole` class. 
 ```
@@ -27,7 +27,7 @@ console.Reload();
 ```
 ## Console Components
 Console components can be described as linked lists where each node is a portion of text in a console line. The Write and WriteLine methods also accept console components.
-### Text Component
+## Text Component
 Let's write a text component in the color green.
 ```
 TextComponent text = new TextComponent("This will appear green!");
@@ -57,7 +57,8 @@ for (int i = 0; i <= n; i++) {
 }
 ```
 ## Time Components
-There are several types of time components including countdown and timer components. 
+There are several types of time components including countdown and timer components.
+
 Let's create a timer to display the execution time of our program.
 ```
 Timer timer = new Timer();
