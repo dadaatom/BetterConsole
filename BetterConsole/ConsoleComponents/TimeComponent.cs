@@ -13,12 +13,10 @@ namespace BetterConsole.ConsoleComponents
     public abstract class TimeComponent : ConsoleComponent
     {
         public DateTime Starting;
-        public DateTime Current;
         
         public TimeComponent() : base()
         {
             Starting = DateTime.Now;
-            Current = DateTime.Now;
         }
 
         public void Start()
@@ -34,7 +32,6 @@ namespace BetterConsole.ConsoleComponents
         public void Reset()
         {
             Starting = DateTime.Now;
-            Current = DateTime.Now;
         }
     }
 }

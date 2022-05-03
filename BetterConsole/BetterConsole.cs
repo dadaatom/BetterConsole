@@ -154,7 +154,7 @@ namespace BetterConsole
             _commandThread.Start();
         }
 
-        public void StopHandlingCommands()
+        public void StopCommandHandling()
         {
             _commandThread?.Interrupt();
         }

@@ -2,7 +2,7 @@
 {
     /*
      * TODO:
-     * Command issue event or class? I'd like to incorporate time signatures
+     * Command issue event/class/struct? I'd like to incorporate time signatures
      */
     public abstract class ConsoleCommand
     {

@@ -8,8 +8,7 @@ namespace BetterConsole.ConsoleComponents
 
         public override string ToString()
         {
-            Current = DateTime.Now;
-            TimeSpan toDisplay = Current - Starting;
+            TimeSpan toDisplay = DateTime.Now - Starting;
             return toDisplay.ToString(); // Include styles, only potentially include days, hours, minutes, seconds, and milliseconds.
         }
     }
