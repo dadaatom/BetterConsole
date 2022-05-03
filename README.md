@@ -12,13 +12,18 @@ By default the BetterConsole will only reload up to 1000 console lines, as depen
 BetterConsole console = new BetterConsole(displayLimit = 100);
 ```
 ## Simple console commands
-Reading and writing can still be done the same as before.
+Read, write, and clear functions are all present as before.
 ```
 console.WriteLine("This is a line of text.");
 console.Write("Here's some more text.");
 console.Clear();
 console.Write("Enter some text: ");
 string text = console.ReadLine();
+```
+Using the write methods of the console will register them internally so written lines can be modified and updated within the console.
+Call the reload method to clear and redisplay all console lines.
+```
+console.Reload();
 ```
 ## Console Components
 Console components can be described as linked lists where each node is a portion of text in a console line. The Write and WriteLine methods also accept console components.
@@ -33,14 +38,14 @@ Alternatively, for plain text it's easier to use the method below.
 ```
 console.WriteLine("This will also appear green!", ConsoleColor.Green);
 ```
-## Loading Bar
+## Loading Bars
 Let's now create a loading bar to display the execution process of our program. We will be setting a length of 10 units and writing it to our value.
 ```
 LoadingBar loadingBar = new LoadingBar(10);
 console.WriteLine("Execution process: ");
 console.Write(loadingBar);
 ```
-Great, now all we need to do is set the percentage of our loading bar. Note that input values to the SetPercentage method are bounded between 0 and 1.
+Great, now all we need to do is provide our loading bar with its progress percentage. Note that input values to the SetPercentage method are bounded between 0 and 1.
 ```
 for (int i = 0; i <= n; i++) {
     //Do stuff.
