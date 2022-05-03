@@ -39,9 +39,13 @@ Alternatively, for plain text it's easier to use the method below.
 console.WriteLine("This will also appear green!", ConsoleColor.Green);
 ```
 ## Loading Bars
-Let's now create a loading bar to display the execution process of our program. We will be setting a length of 10 units and passing the loading bar to a write function.
+Let's now create a loading bar to display the execution process of our program. Whilst optional, I am going to select different style settings below.
 ```
-LoadingBar loadingBar = new LoadingBar(10);
+LoadingBarStyle style = new LoadingBarStyle("-","_","(", ")");
+```
+We will now call the loading bar constructor with the style and length, then write the resulting loading bar to the console.
+```
+LoadingBar loadingBar = new LoadingBar(style, 10);
 console.WriteLine("Execution process: ");
 console.Write(loadingBar);
 ```
