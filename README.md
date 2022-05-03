@@ -68,3 +68,21 @@ console.WriteLine("Current execution duration: ");
 console.Write(timer);
 ```
 [NOTE TO SELF: UPDATE WITH TICK TIMES]
+## Custom Commands
+Creating custom console commands is easy, let's create a simple `PingCommand` class below.
+```
+public class PingCommand : ConsoleCommand
+{
+    public PingCommand() : base("ping", new string[]{"p"}, "Pings the console for a response.") { }
+
+    public override void Execute(string[] signature)
+    {
+        Console.WriteLine("pong");
+    }
+}
+```
+Great, now all we need to do is add this command to the console's command registry and begin command handling.
+```
+console.AddCommand(new PingCommand()):
+console.BeginCommandHandling();
+```
