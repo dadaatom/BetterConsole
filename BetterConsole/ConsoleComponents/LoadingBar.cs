@@ -4,20 +4,43 @@ namespace BetterConsole.ConsoleComponents
 {
     public class LoadingBar : ConsoleComponent
     {
+        private LoadingBarStyle _style;
         private int _size;
+        
         private float _percentage;
         private int _count;
 
-        private string _fillStyle = "#"; // Temp incorporate style enum, param, or class.
-        private string _emptyStyle = "_";
-
-        public LoadingBar(int size)
+        public LoadingBar(LoadingBarStyle loadingBarStyle, int size)
         {
+            _style = loadingBarStyle;
             _size = size;
+            
             _percentage = 0;
             _count = 0;
         }
 
+        public LoadingBar(int size) : this(new LoadingBarStyle("#","_"), size) { }
+        
+        public override string ToString()
+        {
+            string toReturn = _style.LeftBorder;
+            
+            for (int i = 1; i <= _size; i++)
+            {
+                if (i <= _count)
+                {
+                    toReturn += _style.Fill;
+                }
+                else
+                {
+                    toReturn += _style.Empty;
+                }
+                //toReturn += ((i <= completed) ? _fillStyle : _emptyStyle);
+            }
+
+            return toReturn + _style.RightBorder;
+        }
+        
         public void SetPercentage(float percentage)
         {
             if (percentage > 1)
@@ -40,24 +63,9 @@ namespace BetterConsole.ConsoleComponents
             }
         }
 
-        public override string ToString()
+        public void SetStyle(LoadingBarStyle loadingBarStyle)
         {
-            string toReturn = "[";
-            
-            for (int i = 1; i <= _size; i++)
-            {
-                if (i <= _count)
-                {
-                    toReturn += _fillStyle;
-                }
-                else
-                {
-                    toReturn += _emptyStyle;
-                }
-                //toReturn += ((i <= completed) ? _fillStyle : _emptyStyle);
-            }
-
-            return toReturn + "]";
+            _style = loadingBarStyle;
         }
     }
 }
