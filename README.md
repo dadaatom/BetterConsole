@@ -69,7 +69,7 @@ console.Write(timer);
 ```
 [NOTE TO SELF: UPDATE WITH TICK TIMES]
 ## Custom Commands
-Creating custom console commands is easy, let's create a simple `PingCommand` class below.
+Creating custom console commands is easy, let's make a simple `PingCommand` class below. We just need to extend the `ConsoleCommand` class and to be sure to override the Execute method.
 ```
 public class PingCommand : ConsoleCommand
 {
