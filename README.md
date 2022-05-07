@@ -81,7 +81,7 @@ public class PingCommand : ConsoleCommand
     }
 }
 ```
-Great, now all we need to do is add this command to the console's command registry and begin command handling.
+Great, now all we need to do is add this command to the console's command registry and begin command handling. The `BeginCommandHandling` method creates a new thread to handle incoming user inputs so new content can still be output to the console.
 ```
 console.AddCommand(new PingCommand()):
 console.BeginCommandHandling();
