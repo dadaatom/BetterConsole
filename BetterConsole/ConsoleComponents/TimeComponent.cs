@@ -6,12 +6,11 @@ namespace BetterConsole.ConsoleComponents
     /*
      * TODO:
      * Create some sort of static multithreaded reload for timedcomponents include update ticks.
-     * timer component
-     * countdown component
      */
     
     public abstract class TimeComponent : ConsoleComponent
     {
+        private bool _active;
         public DateTime Starting;
         
         public TimeComponent() : base()
@@ -21,14 +20,27 @@ namespace BetterConsole.ConsoleComponents
 
         public void Start()
         {
-            
+            if (!_active)
+            {
+                _active = true;
+            }
+            // throw error if started?
         }
 
         public void Stop()
         {
-            // remove this component from timed reload.
+            if (_active)
+            {
+                // remove this component from timed reload.
+            }
+            // throw error is not active?
         }
-        
+
+        public bool IsActive()
+        {
+            return _active;
+        }
+
         public void Reset()
         {
             Starting = DateTime.Now;

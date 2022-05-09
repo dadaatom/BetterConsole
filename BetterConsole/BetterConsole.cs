@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using BetterConsole.Commands;
@@ -26,7 +27,9 @@ namespace BetterConsole
         private Thread _timeThread;
 
         private int _displayLimit;
-        private int _timeComponentCount;
+        private bool _enforceLimit = false;
+        
+        private long _tickFrequency;
         
         //====================// Constructors //====================//
         
@@ -38,7 +41,6 @@ namespace BetterConsole
             _displayed = new List<ConsoleComponent>();
             
             _displayLimit = displayLimit;
-            _timeComponentCount = 0;
         }
 
         ~BetterConsole()
@@ -90,7 +92,7 @@ namespace BetterConsole
         {
             WriteLine(new TextComponent(text));
         }
-        
+
         //implement some sort of parallel read line?
         
         public string ReadLine()
@@ -131,7 +133,10 @@ namespace BetterConsole
             {
                 _displayed.RemoveAt(0);
                 _displayed.Add(component);
-                Reload();
+                if (_enforceLimit)
+                {
+                    Reload();
+                }
             }
             else
             {
@@ -141,11 +146,43 @@ namespace BetterConsole
         
         //====================// Time Components //====================//
         
-            /*
-             * TODO:
-             * threaded time reloads.
-             */
-        
+        /*
+         * TODO:
+         * threaded time reloads.
+         */
+    
+        public void BeginTimeHandling(long tickFrequency)
+        {
+            _tickFrequency = tickFrequency;
+            
+            _timeThread = new Thread(HandleTimedReloads);
+            _timeThread.Start();
+        }
+
+        public void StopTimeHandling()
+        {
+            _timeThread?.Interrupt();
+        }
+
+        private void HandleTimedReloads() //Rename this function appropriately?
+        {
+            long sum = 0;
+            
+            DateTime prev = DateTime.Now;
+            while (true)
+            {
+                DateTime current = DateTime.Now;
+                sum += (current - prev).Milliseconds;
+
+                if (sum >= _tickFrequency)
+                {
+                    sum -= _tickFrequency;
+                    Reload();
+                    // ONLY RELOAD LAST IF POSSIBLE.
+                }
+            }
+        }
+            
         //====================// Command Handling //====================//
         
         public void BeginCommandHandling()
