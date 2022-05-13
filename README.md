@@ -86,3 +86,9 @@ Great, now all we need to do is add this command to the console's command regist
 console.AddCommand(new PingCommand()):
 console.BeginCommandHandling();
 ```
+
+# Incoming Features
+- Figlet text
+- Preset style choices
+- Time component implementation
+- Preformance improvements
