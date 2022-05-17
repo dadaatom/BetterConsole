@@ -56,7 +56,7 @@ for (int i = 0; i <= n; i++) {
     loadingBar.SetPercentage(i*(1/n));
 }
 ```
-## Time Components
+## Time Components [WIP]
 There are several types of time components including countdown and timer components.
 
 Let's create a timer to display the execution time of our program.
@@ -67,7 +67,7 @@ timer.Start();
 console.WriteLine("Current execution duration: ");
 console.Write(timer);
 ```
-[NOTE TO SELF: UPDATE WITH TICK TIMES]
+
 ## Custom Commands
 Creating custom console commands is easy, let's make a simple `PingCommand` class below. We just need to extend the `ConsoleCommand` class and to be sure to override the Execute method.
 ```
@@ -86,3 +86,9 @@ Great, now all we need to do is add this command to the console's command regist
 console.AddCommand(new PingCommand()):
 console.BeginCommandHandling();
 ```
+
+# Incoming Features
+- Figlet text
+- Preset style choices
+- Time component implementation
+- Preformance improvements
