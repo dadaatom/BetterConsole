@@ -13,7 +13,9 @@ namespace BetterConsole.ConsoleComponents
 
         public override string ToString()
         {
-            TimeSpan toDisplay = Target - DateTime.Now;
+            Update();
+            
+            TimeSpan toDisplay = Target - Current;
             return toDisplay.ToString();
         }
     }
