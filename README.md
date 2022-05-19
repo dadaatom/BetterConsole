@@ -92,3 +92,5 @@ console.BeginCommandHandling();
 - Preset style choices
 - Time component implementation
 - Preformance improvements
+- Tables
+- Borders / Seperators
