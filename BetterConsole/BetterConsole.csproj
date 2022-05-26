@@ -46,11 +46,12 @@
         <Compile Include="BetterConsole.cs" />
         <Compile Include="Commands\ConsoleCommand.cs" />
         <Compile Include="Commands\PingCommand.cs" />
+        <Compile Include="ConsoleComponents\Cell.cs" />
         <Compile Include="ConsoleComponents\ConsoleComponent.cs" />
         <Compile Include="ConsoleComponents\Countdown.cs" />
         <Compile Include="ConsoleComponents\LoadingBar.cs" />
-        <Compile Include="ConsoleComponents\LoadingBarStyle.cs" />
         <Compile Include="ConsoleComponents\NumberComponent.cs" />
+        <Compile Include="ConsoleComponents\Styles\LoadingBarStyle.cs" />
         <Compile Include="ConsoleComponents\Table.cs" />
         <Compile Include="ConsoleComponents\TextComponent.cs" />
         <Compile Include="ConsoleComponents\TimeComponent.cs" />
