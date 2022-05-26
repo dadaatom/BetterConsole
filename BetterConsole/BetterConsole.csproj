@@ -51,6 +51,7 @@
         <Compile Include="ConsoleComponents\LoadingBar.cs" />
         <Compile Include="ConsoleComponents\LoadingBarStyle.cs" />
         <Compile Include="ConsoleComponents\NumberComponent.cs" />
+        <Compile Include="ConsoleComponents\Table.cs" />
         <Compile Include="ConsoleComponents\TextComponent.cs" />
         <Compile Include="ConsoleComponents\TimeComponent.cs" />
         <Compile Include="ConsoleComponents\Timer.cs" />
@@ -59,6 +60,9 @@
     </ItemGroup>
     <ItemGroup>
       <None Include="packages.config" />
+    </ItemGroup>
+    <ItemGroup>
+      <Content Include="ConsoleComponents\Styles\StyleTest.txt" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
