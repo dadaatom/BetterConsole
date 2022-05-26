@@ -61,7 +61,7 @@
         {
             TargetWidth = width;
             TargetHeight = height;
-
+            
             CenteredValue = center(Value, TargetWidth, TargetHeight);
         }
 
