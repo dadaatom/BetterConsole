@@ -31,9 +31,9 @@ namespace BetterConsole.ConsoleComponents
         /// <summary>
         /// Used to set cells within the table.
         /// </summary>
-        /// <param name="cell">Cell to be added to table</param>
-        /// <param name="row">Row position within cells matrix</param>
-        /// <param name="column">Column position within cells matrix</param>
+        /// <param name="cell">Cell to be added to table.</param>
+        /// <param name="row">Row position within cells matrix.</param>
+        /// <param name="column">Column position within cells matrix.</param>
         public void SetCell(Cell cell, int row, int column)
         {
             if (cell != null)

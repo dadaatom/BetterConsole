@@ -27,7 +27,11 @@
             
             SetValue(value);
         }
-
+        
+        /// <summary>
+        /// Sets value of the table cell.
+        /// </summary>
+        /// <param name="value">New value for the cell.</param>
         public void SetValue(string value)
         {
             Value = value;
@@ -56,7 +60,13 @@
 
             CenteredValue = center(Value, TargetWidth, TargetHeight);
         }
-
+        
+        /// <summary>
+        /// Sets target size of the cell, will recompute the centered string array.
+        /// Target sizes cannot be less than the cell width or height.
+        /// </summary>
+        /// <param name="width">New target width of the cell.</param>
+        /// <param name="height">New target height of the cell.</param>
         public void SetTargetSizes(int width, int height)
         {
             TargetWidth = width;
@@ -73,12 +83,19 @@
 
             CenteredValue = center(Value, TargetWidth, TargetHeight);
         }
-
-        private string[] center(string str, int totalWidth, int totalHeight)
+        
+        /// <summary>
+        /// Will compute the centered string array with padded spaces and line breaks.
+        /// </summary>
+        /// <param name="str">String value to be centered.</param>
+        /// <param name="targetWidth">Target width of the padded string.</param>
+        /// <param name="targetHeight">Target height of the padded string.</param>
+        /// <returns></returns>
+        private string[] center(string str, int targetWidth, int targetHeight)
         {
             string toCenter = str;
             
-            int heightToAdd = totalHeight - toCenter.Split('\n').Length;
+            int heightToAdd = targetHeight - toCenter.Split('\n').Length;
             bool upper = false;
             
             for (int i = 0; i < heightToAdd; i++) {
@@ -97,7 +114,7 @@
             string[] strList = toCenter.Split('\n');
 
             for (int i = 0; i < strList.Length; i++) {
-                int widthToAdd = totalWidth - strList[i].Length;
+                int widthToAdd = targetWidth - strList[i].Length;
                 bool forward = true;
 
                 for (int j = 0; j < widthToAdd; j++)
