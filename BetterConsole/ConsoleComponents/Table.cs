@@ -8,6 +8,7 @@ namespace BetterConsole.ConsoleComponents
      * Create max width/heights where the cell will omit some data where it can
      * Add wraparound logic to Cell if max vals are defined.
      * Create resize method
+     * dynamic row and column sizing instead of resizing all cells.
      */
     
     public class Table : ConsoleComponent
@@ -53,19 +54,22 @@ namespace BetterConsole.ConsoleComponents
         }
         
         /// <summary>
-        /// Update target size of all cells within the cells matrix.
+        /// Resizes table and copies old cells to fit new matrix.
         /// </summary>
-        /// <param name="width">Target width of all cells</param>
-        /// <param name="height">Target height of all cells</param>
-        private void UpdateTargetSizes(int width, int height)
+        /// <param name="width">New matrix width.</param>
+        /// <param name="height">New matrix height.</param>
+        public void Resize(int width, int height)
         {
-            for (int i = 0; i < Cells.GetLength(0); i++)
-            {
-                for (int j = 0; j < Cells.GetLength(1); j++)
+            Cell[,] newCells = new Cell[width, height];
+            
+            for (int i = 0; i < Math.Min(width, Cells.GetLength(0)); i++) {
+                for (int j = 0; j < Math.Min(height, Cells.GetLength(1)); j++)
                 {
-                    Cells[i,j]?.SetTargetSizes(width, height);
+                    newCells[i, j] = Cells[i, j];
                 }
             }
+
+            Cells = newCells;
         }
 
         public override string ToString()
@@ -163,6 +167,22 @@ namespace BetterConsole.ConsoleComponents
             }
 
             return toReturn;
+        }
+        
+        /// <summary>
+        /// Update target size of all cells within the cells matrix.
+        /// </summary>
+        /// <param name="width">Target width of all cells</param>
+        /// <param name="height">Target height of all cells</param>
+        private void UpdateTargetSizes(int width, int height)
+        {
+            for (int i = 0; i < Cells.GetLength(0); i++)
+            {
+                for (int j = 0; j < Cells.GetLength(1); j++)
+                {
+                    Cells[i,j]?.SetTargetSizes(width, height);
+                }
+            }
         }
     }
 }

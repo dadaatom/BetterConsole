@@ -11,12 +11,28 @@ namespace BetterConsole
         {
             BetterConsole console = new BetterConsole();
 
-            Table table = new Table(2,2);
-            table.SetCell(new Cell("36", 3,2),0,0);
-            table.SetCell(new Cell("603", 3,2),0,1);
-            table.SetCell(new Cell("2345", 3,2),1,0);
+            Table table = new Table(3,3);
+            
+            table.SetCell(new Cell("Tom"),0,1);
+            table.SetCell(new Cell("John"),0,2);
+            
+            table.SetCell(new Cell("Dogs"),1,0);
+            table.SetCell(new Cell("Cats"),2,0);
+            
+            table.SetCell(new Cell("10"),1,1);
+            table.SetCell(new Cell("2"),1,2);
+            table.SetCell(new Cell("6"),2,1);
+            table.SetCell(new Cell("9"),2,2);
             
             console.WriteLine(table);
+            
+            table.Resize(4,3);
+            
+            table.SetCell(new Cell("Cool\nBird"),3,0);
+            table.SetCell(new Cell("1"),3,1);
+            table.SetCell(new Cell("0"),3,2);
+            
+            console.Reload();
         }
     }
 }
