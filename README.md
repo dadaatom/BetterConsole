@@ -127,3 +127,4 @@ console.BeginCommandHandling();
 - Time component implementation
 - Performance improvements
 - Borders / Seperators
+- Default help command
