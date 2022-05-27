@@ -7,10 +7,7 @@ namespace BetterConsole.ConsoleComponents
      * TODO:
      * Create max width/heights where the cell will omit some data where it can
      * Add wraparound logic to Cell if max vals are defined.
-     *
-     * Accept null fields in the toString method.
-     *
-     * 
+     * Create resize method
      */
     
     public class Table : ConsoleComponent
@@ -30,7 +27,13 @@ namespace BetterConsole.ConsoleComponents
         {
             Cells = new Cell[rows, columns];
         }
-
+        
+        /// <summary>
+        /// Used to set cells within the table.
+        /// </summary>
+        /// <param name="cell">Cell to be added to table</param>
+        /// <param name="row">Row position within cells matrix</param>
+        /// <param name="column">Column position within cells matrix</param>
         public void SetCell(Cell cell, int row, int column)
         {
             if (cell != null)
@@ -48,7 +51,12 @@ namespace BetterConsole.ConsoleComponents
 
             Cells[row, column] = cell;
         }
-
+        
+        /// <summary>
+        /// Update target size of all cells within the cells matrix.
+        /// </summary>
+        /// <param name="width">Target width of all cells</param>
+        /// <param name="height">Target height of all cells</param>
         private void UpdateTargetSizes(int width, int height)
         {
             for (int i = 0; i < Cells.GetLength(0); i++)
