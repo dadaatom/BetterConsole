@@ -27,14 +27,14 @@ console.Reload();
 ```
 ## Console Components
 Console components can be described as linked lists where each node is a portion of text in a console line. The Write and WriteLine methods also accept console components.
-## Text Component
+## Text Components
 Let's write a text component in the color green.
 ```
 TextComponent text = new TextComponent("This will appear green!");
 text.SetColor(ConsoleColor.Green);
 console.WriteLine(text);
 ```
-Alternatively, for plain text it's easier to use the method below.
+Alternatively, for plain text the regular Console methods are implemented to make usage easier.
 ```
 console.WriteLine("This will also appear green!", ConsoleColor.Green);
 ```
@@ -56,6 +56,40 @@ for (int i = 0; i <= n; i++) {
     loadingBar.SetPercentage(i*(1/n));
 }
 ```
+## Tables
+Tables are handy for organizing and displaying information. They are able to support multiline strings of varying lengths.
+
+Example: two friends want to track how many pets they each saw throughout the day, let's help them display this important information in a table.
+First we will create a 3x3 table and label the columns appropriately.
+```
+Table table = new Table(3,3);
+            
+table.SetCell(new Cell("Tom"),0,1);
+table.SetCell(new Cell("John"),0,2);
+
+table.SetCell(new Cell("Dogs"),1,0);
+table.SetCell(new Cell("Cats"),2,0);
+```
+Good job, now we can fill the inner cells with their data and have the console write the table.
+```
+table.SetCell(new Cell("10"),1,1);
+table.SetCell(new Cell("2"),1,2);
+table.SetCell(new Cell("6"),2,1);
+table.SetCell(new Cell("9"),2,2);
+
+console.Write(table);
+```
+Let's say one of the friends saw a cool bird, let's resize the table, add the new data, and finally reload the console.
+```
+table.Resize(4,3);
+            
+table.SetCell(new Cell("Cool\nBird"),3,0);
+table.SetCell(new Cell("1"),3,1);
+table.SetCell(new Cell("0"),3,2);
+            
+console.Reload();
+```
+
 ## Time Components [WIP]
 There are several types of time components including countdown and timer components.
 
@@ -91,6 +125,5 @@ console.BeginCommandHandling();
 - Figlet text
 - Preset style choices
 - Time component implementation
-- Preformance improvements
-- Tables
+- Performance improvements
 - Borders / Seperators
