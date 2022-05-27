@@ -41,6 +41,11 @@ namespace BetterConsole.ConsoleComponents
             return toReturn + _style.RightBorder;
         }
         
+        /// <summary>
+        /// Sets the percentage of completion for the loading bar.
+        /// Values are bounded between 0 and 1.
+        /// </summary>
+        /// <param name="percentage">Percentage to be displayed by the loading bar.</param>
         public void SetPercentage(float percentage)
         {
             if (percentage > 1)
@@ -62,7 +67,11 @@ namespace BetterConsole.ConsoleComponents
                 BetterConsole.Instance.Reload();
             }
         }
-
+        
+        /// <summary>
+        /// Sets the display style.
+        /// </summary>
+        /// <param name="loadingBarStyle">Style element information.</param>
         public void SetStyle(LoadingBarStyle loadingBarStyle)
         {
             _style = loadingBarStyle;
