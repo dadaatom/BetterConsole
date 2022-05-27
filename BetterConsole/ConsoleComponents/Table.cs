@@ -9,89 +9,90 @@ namespace BetterConsole.ConsoleComponents
      * Add wraparound logic to Cell if max vals are defined.
      *
      * Accept null fields in the toString method.
+     *
+     * 
      */
     
     public class Table : ConsoleComponent
     {
-        public Cell[,] cells;
+        public Cell[,] Cells { get; private set; }
 
-        public int CellWidth { get; private set; }
-        public int CellHeight { get; private set; }
+        public int CellWidth;
+        public int CellHeight;
         
         //TODO: Loop these variables into a style class.
         private string upper = "_";
-        private string lower = "‾";
+        private string lower = "_";//"\u0305";//"‾";
         private string seperator = "-";
         private string border = "|";
         
         public Table (int rows, int columns)
         {
-            cells = new Cell[rows, columns];
+            Cells = new Cell[rows, columns];
         }
 
         public void SetCell(Cell cell, int row, int column)
         {
-            bool changed = false;
-            if (cell.Width > CellWidth)
+            if (cell != null)
             {
-                CellWidth = cell.Width;
-                changed = true;
+                if (cell.TargetWidth > CellWidth)
+                {
+                    CellWidth = cell.Width;
+                }
+
+                if (cell.TargetHeight > CellHeight)
+                {
+                    CellHeight = cell.Height;
+                }
             }
 
-            if (cell.Height > CellHeight)
-            {
-                CellHeight = cell.Height;
-                changed = true;
-            }
-
-            if (changed)
-            {
-                UpdateTargetSizes(CellWidth, CellHeight);
-            }
-
-            cells[row, column] = cell;
+            Cells[row, column] = cell;
         }
 
-        public void UpdateTargetSizes(int width, int height)
+        private void UpdateTargetSizes(int width, int height)
         {
-            for (int i = 0; i < cells.GetLength(0); i++)
+            for (int i = 0; i < Cells.GetLength(0); i++)
             {
-                for (int j = 0; j < cells.GetLength(1); j++)
+                for (int j = 0; j < Cells.GetLength(1); j++)
                 {
-                    cells[i,j]?.SetTargetSizes(width, height);
+                    Cells[i,j]?.SetTargetSizes(width, height);
                 }
             }
         }
 
         public override string ToString()
         {
-            if (cells.GetLength(0) == 0 || cells.GetLength(1) == 0)
+            if (Cells.GetLength(0) == 0 || Cells.GetLength(1) == 0)
             {
-                throw new Exception("Table empty bro.");
+                throw new Exception("Table is empty."); //TODO: Make custom exceptions
             }
 
-            int width = 1;
-            int height = 1;
+            int width = CellWidth;
+            int height = CellHeight;
 
-            for (int i = 0; i < cells.GetLength(0); i++) {
-                for (int j = 0; j < cells.GetLength(1); j++)
+            for (int i = 0; i < Cells.GetLength(0); i++) {
+                for (int j = 0; j < Cells.GetLength(1); j++)
                 {
-                    Cell cell = cells[i, j];
+                    if (Cells[i, j] != null)
+                    {
+                        if (Cells[i, j].Width > width)
+                        {
+                            width = Cells[i, j].Width;
+                        }
 
-                    if (cell.Width > width)
-                    {
-                        width = cell.Width;
-                    }
-                    if (cell.Height > height)
-                    {
-                        height = cell.Height;
+                        if (Cells[i, j].Height > height)
+                        {
+                            height = Cells[i, j].Height;
+                        }
                     }
                 }
             }
 
+            UpdateTargetSizes(width, height);
+            
             string toReturn = " ";
 
-            for (int i = 0; i < cells.GetLength(1); i++) 
+            for (int i = 0; i < Cells.GetLength(1); i++) 
             {
                 for (int w = 0; w < width; w++)
                 {
@@ -102,27 +103,55 @@ namespace BetterConsole.ConsoleComponents
 
             toReturn += "\n";
 
-            for (int i = 0; i < cells.GetLength(0); i++)
+            for (int i = 0; i < Cells.GetLength(0); i++)
             {
                 for (int h = 0; h < height; h++)
                 {
                     toReturn += border;
-                    for (int j = 0; j < cells.GetLength(1); j++)
+                    for (int j = 0; j < Cells.GetLength(1); j++)
                     {
-                        toReturn += cells[i, j].CenteredValue[h] + border;
+                        if (Cells[i, j] != null)
+                        {
+                            toReturn += Cells[i, j].CenteredValue[h] + border;
+                        }
+                        else
+                        {
+                            for (int w = 0; w < width; w++)
+                            {
+                                toReturn += " ";
+                            }
+
+                            toReturn += border;
+                        }
                     }
+                    toReturn += "\n";
+                }
+
+                if (i < Cells.GetLength(0)-1)
+                {
+                    toReturn += border;
+                    for (int j = 0; j < Cells.GetLength(1); j++)
+                    {
+                        for (int w = 0; w < width; w++)
+                        {
+                            toReturn += seperator;
+                        }
+
+                        toReturn += border;
+                    }
+
                     toReturn += "\n";
                 }
             }
 
-            toReturn += " ";
-            for (int i = 0; i < cells.GetLength(1); i++) 
+            toReturn += border;
+            for (int i = 0; i < Cells.GetLength(1); i++) 
             {
                 for (int w = 0; w < width; w++)
                 {
                     toReturn += lower;
                 }
-                toReturn += " ";
+                toReturn += border;
             }
 
             return toReturn;
