@@ -1,5 +1,5 @@
 # BetterConsole
-Better console with prebuilt functionalities and offers improved display tools. Implements a ConsoleCommand framework so that new user defined commands can easily be added and executed.
+Better console with prebuilt functionalities and offers improved display tools. Implements a ConsoleCommand framework so that user defined commands can easily be added and handled.
 
 # Usage
 ## Creating the BetterConsole
