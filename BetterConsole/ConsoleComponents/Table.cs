@@ -38,14 +38,14 @@ namespace BetterConsole.ConsoleComponents
         {
             if (cell != null)
             {
-                if (cell.TargetWidth > CellWidth)
+                if (cell.Value.Width > CellWidth)
                 {
-                    CellWidth = cell.Width;
+                    CellWidth = cell.Value.Width;
                 }
 
-                if (cell.TargetHeight > CellHeight)
+                if (cell.Value.Height > CellHeight)
                 {
-                    CellHeight = cell.Height;
+                    CellHeight = cell.Value.Height;
                 }
             }
 
@@ -70,7 +70,11 @@ namespace BetterConsole.ConsoleComponents
 
             Cells = newCells;
         }
-
+        
+        /// <summary>
+        /// Creates the entire matrix of cells into a table.
+        /// </summary>
+        /// <returns>The table formatted as a string.</returns>
         public override string ToString()
         {
             if (Cells.GetLength(0) == 0 || Cells.GetLength(1) == 0)
@@ -86,14 +90,14 @@ namespace BetterConsole.ConsoleComponents
                 {
                     if (Cells[i, j] != null)
                     {
-                        if (Cells[i, j].Width > width)
+                        if (Cells[i, j].Value.Width > width)
                         {
-                            width = Cells[i, j].Width;
+                            width = Cells[i, j].Value.Width;
                         }
 
-                        if (Cells[i, j].Height > height)
+                        if (Cells[i, j].Value.Height > height)
                         {
-                            height = Cells[i, j].Height;
+                            height = Cells[i, j].Value.Height;
                         }
                     }
                 }
@@ -123,7 +127,7 @@ namespace BetterConsole.ConsoleComponents
                     {
                         if (Cells[i, j] != null)
                         {
-                            toReturn += Cells[i, j].CenteredValue[h] + border;
+                            toReturn += Cells[i, j].Value.PaddedValue[h] + border;
                         }
                         else
                         {
@@ -179,7 +183,7 @@ namespace BetterConsole.ConsoleComponents
             {
                 for (int j = 0; j < Cells.GetLength(1); j++)
                 {
-                    Cells[i,j]?.SetTargetSizes(width, height);
+                    Cells[i,j]?.Value.SetPaddings(width - Cells[i,j].Value.Width, height - Cells[i,j].Value.Height);
                 }
             }
         }

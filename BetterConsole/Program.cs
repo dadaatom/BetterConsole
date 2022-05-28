@@ -10,7 +10,7 @@ namespace BetterConsole
         public static void Main(string[] args)
         {
             BetterConsole console = new BetterConsole();
-
+            
             Table table = new Table(3,3);
             
             table.SetCell(new Cell("Tom"),0,1);

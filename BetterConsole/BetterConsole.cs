@@ -177,7 +177,7 @@ namespace BetterConsole
         /// <summary>
         /// Reloads just the last line of the console.
         /// </summary>
-        public void ReloadLast()
+        public void ReloadLast() //todo: take larger length of previous line into account.
         {
             Console.Write("\r");
             _displayed[_displayed.Count-1].Write();
