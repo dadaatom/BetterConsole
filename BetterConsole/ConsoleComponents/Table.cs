@@ -8,11 +8,15 @@ namespace BetterConsole.ConsoleComponents
      * Create max width/heights where the cell will omit some data where it can
      * Add wraparound logic to Cell if max vals are defined.
      * dynamic row and column sizing instead of resizing all cells.
+     * multi cell cells
      */
     
     public class Table : ConsoleComponent
     {
         public Cell[,] Cells { get; private set; }
+
+        private int[] rowSizes;
+        private int[] columnSizes;
 
         public int CellWidth;
         public int CellHeight;
@@ -26,10 +30,13 @@ namespace BetterConsole.ConsoleComponents
         public Table (int rows, int columns)
         {
             Cells = new Cell[rows, columns];
+
+            rowSizes = new int[rows];
+            columnSizes = new int[columns];
         }
         
         /// <summary>
-        /// Used to set cells within the table.
+        /// Sets a cell within the table.
         /// </summary>
         /// <param name="cell">Cell to be added to table.</param>
         /// <param name="row">Row position within cells matrix.</param>
@@ -38,14 +45,14 @@ namespace BetterConsole.ConsoleComponents
         {
             if (cell != null)
             {
-                if (cell.Value.Width > CellWidth)
+                if (cell.Value.Width > columnSizes[column])
                 {
-                    CellWidth = cell.Value.Width;
+                    columnSizes[column] = cell.Value.Width;
                 }
 
-                if (cell.Value.Height > CellHeight)
+                if (cell.Value.Height > rowSizes[row])
                 {
-                    CellHeight = cell.Value.Height;
+                    rowSizes[row] = cell.Value.Height;
                 }
             }
 
@@ -68,7 +75,21 @@ namespace BetterConsole.ConsoleComponents
                 }
             }
 
+            int[] newRowSizes = new int[rows];
+            for (int i = 0; i < Math.Min(rows, rowSizes.Length); i++)
+            {
+                newRowSizes[i] = rowSizes[i];
+            }
+            
+            int[] newColumnSizes = new int[columns];
+            for (int i = 0; i < Math.Min(columns, columnSizes.Length); i++)
+            {
+                newColumnSizes[i] = columnSizes[i];
+            }
+
             Cells = newCells;
+            rowSizes = newRowSizes;
+            columnSizes = newColumnSizes;
         }
         
         /// <summary>
@@ -82,34 +103,35 @@ namespace BetterConsole.ConsoleComponents
                 throw new Exception("Table is empty."); //TODO: Make custom exceptions
             }
 
-            int width = CellWidth;
-            int height = CellHeight;
+            rowSizes = new int[rowSizes.Length];
+            columnSizes = new int[columnSizes.Length];
 
-            for (int i = 0; i < Cells.GetLength(0); i++) {
+            for (int i = 0; i < Cells.GetLength(0); i++)
+            {
                 for (int j = 0; j < Cells.GetLength(1); j++)
                 {
-                    if (Cells[i, j] != null)
+                    if (Cells[i,j] != null)
                     {
-                        if (Cells[i, j].Value.Width > width)
+                        if (Cells[i, j].Value.Height > rowSizes[i])
                         {
-                            width = Cells[i, j].Value.Width;
+                            rowSizes[i] = Cells[i, j].Value.Height;
                         }
 
-                        if (Cells[i, j].Value.Height > height)
+                        if (Cells[i, j].Value.Width > columnSizes[j])
                         {
-                            height = Cells[i, j].Value.Height;
+                            columnSizes[j] = Cells[i, j].Value.Width;
                         }
                     }
                 }
             }
 
-            UpdateTargetSizes(width, height);
+            UpdateTargetSizes();
             
             string toReturn = " ";
 
             for (int i = 0; i < Cells.GetLength(1); i++) 
             {
-                for (int w = 0; w < width; w++)
+                for (int w = 0; w < columnSizes[i]; w++)
                 {
                     toReturn += upper;
                 }
@@ -120,7 +142,7 @@ namespace BetterConsole.ConsoleComponents
 
             for (int i = 0; i < Cells.GetLength(0); i++)
             {
-                for (int h = 0; h < height; h++)
+                for (int h = 0; h < rowSizes[i]; h++)
                 {
                     toReturn += border;
                     for (int j = 0; j < Cells.GetLength(1); j++)
@@ -131,7 +153,7 @@ namespace BetterConsole.ConsoleComponents
                         }
                         else
                         {
-                            for (int w = 0; w < width; w++)
+                            for (int w = 0; w < columnSizes[j]; w++)
                             {
                                 toReturn += " ";
                             }
@@ -147,7 +169,7 @@ namespace BetterConsole.ConsoleComponents
                     toReturn += border;
                     for (int j = 0; j < Cells.GetLength(1); j++)
                     {
-                        for (int w = 0; w < width; w++)
+                        for (int w = 0; w < columnSizes[j]; w++)
                         {
                             toReturn += seperator;
                         }
@@ -162,7 +184,7 @@ namespace BetterConsole.ConsoleComponents
             toReturn += border;
             for (int i = 0; i < Cells.GetLength(1); i++) 
             {
-                for (int w = 0; w < width; w++)
+                for (int w = 0; w < columnSizes[i]; w++)
                 {
                     toReturn += lower;
                 }
@@ -175,15 +197,13 @@ namespace BetterConsole.ConsoleComponents
         /// <summary>
         /// Update target size of all cells within the cells matrix.
         /// </summary>
-        /// <param name="width">Target width of all cells</param>
-        /// <param name="height">Target height of all cells</param>
-        private void UpdateTargetSizes(int width, int height)
+        private void UpdateTargetSizes()
         {
             for (int i = 0; i < Cells.GetLength(0); i++)
             {
                 for (int j = 0; j < Cells.GetLength(1); j++)
                 {
-                    Cells[i,j]?.Value.SetPaddings(width - Cells[i,j].Value.Width, height - Cells[i,j].Value.Height);
+                    Cells[i,j]?.Value.SetPaddings(columnSizes[j] - Cells[i,j].Value.Width, rowSizes[i] - Cells[i,j].Value.Height);
                 }
             }
         }
