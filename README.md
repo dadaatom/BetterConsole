@@ -111,7 +111,7 @@ public class PingCommand : ConsoleCommand
 
     public override void Execute(string[] signature)
     {
-        Console.WriteLine("pong");
+        BetterConsole.Instance.WriteLine("pong");
     }
 }
 ```
