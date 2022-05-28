@@ -14,11 +14,13 @@ namespace BetterConsole
      * - Create listener paradigm for loading bars so they dont have to be reloaded?
      * - user input threads
      * - See console component todo.
+     * - See Table todo.
+     * - See console command todo.
      */
 
     public class BetterConsole
     {
-        public static BetterConsole Instance;
+        public static BetterConsole Instance = new BetterConsole();
         
         private List<ConsoleCommand> _commands;
         private List<ConsoleComponent> _displayed;
@@ -26,9 +28,9 @@ namespace BetterConsole
         private Thread _commandThread;
         private Thread _timeThread;
 
+        public bool EnforceLimit = false;
         private int _displayLimit;
-        private bool _enforceLimit = false;
-        
+
         private long _tickFrequency;
         
         //====================// Constructors //====================//
@@ -46,10 +48,15 @@ namespace BetterConsole
         ~BetterConsole()
         {
             _commandThread?.Interrupt();
+            _timeThread?.Interrupt();
         }
         
         //====================// Simple Methods //====================//
         
+        /// <summary>
+        /// Writes the component within the console.
+        /// </summary>
+        /// <param name="component">Console component to be written.</param>
         public void Write(ConsoleComponent component)
         {
             if (_displayed.Count == 0)
@@ -60,15 +67,25 @@ namespace BetterConsole
             {
                 _displayed[_displayed.Count-1].Next = component;
             }
-            Console.Write(component);
+            component.Write();
         }
         
+        /// <summary>
+        /// Writes the component to the new line within the console.
+        /// </summary>
+        /// <param name="component">Console component to be written.</param>
         public void WriteLine(ConsoleComponent component) //Enable line break and redirect to write.
         {
             AddToDisplay(component);
-            Console.WriteLine(component);
+            component.Write();
+            Console.Write("\n");
         }
         
+        /// <summary>
+        /// Forwards a colored text component to the Write function.
+        /// </summary>
+        /// <param name="text">Text to be written.</param>
+        /// <param name="color">Color to display the text.</param>
         public void Write(string text, ConsoleColor color)
         {
             TextComponent textComp = new TextComponent(text);
@@ -76,11 +93,20 @@ namespace BetterConsole
             Write(textComp);
         }
         
+        /// <summary>
+        /// Forwards a text component to the Write function.
+        /// </summary>
+        /// <param name="text">Text to be written.</param>
         public void Write(string text)
         {
             Write(new TextComponent(text));
         }
         
+        /// <summary>
+        /// Forwards a colored text component to the WriteLine function.
+        /// </summary>
+        /// <param name="text">Text to be written.</param>
+        /// <param name="color">Color to display the text.</param>
         public void WriteLine(string text, ConsoleColor color)
         {
             TextComponent textComp = new TextComponent(text);
@@ -88,6 +114,10 @@ namespace BetterConsole
             WriteLine(textComp);
         }
         
+        /// <summary>
+        /// Forwards a text component to the WriteLine function.
+        /// </summary>
+        /// <param name="text">Text to be written.</param>
         public void WriteLine(string text)
         {
             WriteLine(new TextComponent(text));
@@ -95,11 +125,31 @@ namespace BetterConsole
 
         //implement some sort of parallel read line?
         
+        
+        /// <summary>
+        /// Reads line and adds user input to the consoles displayed list.
+        /// </summary>
+        /// <returns>User input read from the console.</returns>
         public string ReadLine()
         {
-            return Console.ReadLine();
+            string val = Console.ReadLine();
+            AddToDisplay(new TextComponent(val)); //todo: revisit when read / read line are updated inline of Console functionality
+            return val;
         }
         
+        /// <summary>
+        /// Reads and adds user input to the consoles displayed list.
+        /// </summary>
+        /// <returns>User input read from the console.</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public string Read()
+        {
+            throw new NotImplementedException();
+        }
+        
+        /// <summary>
+        /// Clears the console and list of displayed items.
+        /// </summary>
         public void Clear()
         {
             _displayed = new List<ConsoleComponent>();
@@ -108,6 +158,9 @@ namespace BetterConsole
         
         //====================// Display //====================//
         
+        /// <summary>
+        /// Clears the console and rewrites all items stored within the displayed list.
+        /// </summary>
         public void Reload()
         {
             Console.Clear();
@@ -120,20 +173,27 @@ namespace BetterConsole
                 }
             }
         }
-
+        
+        /// <summary>
+        /// Reloads just the last line of the console.
+        /// </summary>
         public void ReloadLast()
         {
             Console.Write("\r");
             _displayed[_displayed.Count-1].Write();
         }
-
+        
+        /// <summary>
+        /// Adds component to the displayed list and will enforce the display limit if enabled.
+        /// </summary>
+        /// <param name="component">Console component to save within the displayed list.</param>
         private void AddToDisplay(ConsoleComponent component)
         {
             if (_displayed.Count + 1 > _displayLimit)
             {
                 _displayed.RemoveAt(0);
                 _displayed.Add(component);
-                if (_enforceLimit)
+                if (EnforceLimit)
                 {
                     Reload();
                 }
@@ -144,7 +204,7 @@ namespace BetterConsole
             }
         }
         
-        //====================// Time Components //====================//
+        //====================// Time Handling //====================//
         
         /*
          * TODO:

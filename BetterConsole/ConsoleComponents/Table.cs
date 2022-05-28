@@ -7,7 +7,6 @@ namespace BetterConsole.ConsoleComponents
      * TODO:
      * Create max width/heights where the cell will omit some data where it can
      * Add wraparound logic to Cell if max vals are defined.
-     * Create resize method
      * dynamic row and column sizing instead of resizing all cells.
      */
     
@@ -56,14 +55,14 @@ namespace BetterConsole.ConsoleComponents
         /// <summary>
         /// Resizes table and copies old cells to fit new matrix.
         /// </summary>
-        /// <param name="width">New matrix width.</param>
-        /// <param name="height">New matrix height.</param>
-        public void Resize(int width, int height)
+        /// <param name="rows">New matrix width.</param>
+        /// <param name="columns">New matrix height.</param>
+        public void Resize(int rows, int columns)
         {
-            Cell[,] newCells = new Cell[width, height];
+            Cell[,] newCells = new Cell[rows, columns];
             
-            for (int i = 0; i < Math.Min(width, Cells.GetLength(0)); i++) {
-                for (int j = 0; j < Math.Min(height, Cells.GetLength(1)); j++)
+            for (int i = 0; i < Math.Min(rows, Cells.GetLength(0)); i++) {
+                for (int j = 0; j < Math.Min(columns, Cells.GetLength(1)); j++)
                 {
                     newCells[i, j] = Cells[i, j];
                 }
