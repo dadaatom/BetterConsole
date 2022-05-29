@@ -10,13 +10,13 @@ namespace BetterConsole.ConsoleComponents
     {
         public ConsoleComponent Contents { get; private set; }
 
-        private PaddedString _paddedContents;
+        public PaddedString PaddedContents;
         
         public Border(ConsoleComponent contents)
         {
             Contents = contents;
-            _paddedContents = new PaddedString(contents.ToString());
-            _paddedContents.SetPaddings(6,2);
+            PaddedContents = new PaddedString(contents.ToString());
+            PaddedContents.SetPaddings(6,1);
         }
 
         public void SetContents(ConsoleComponent contents)
@@ -36,28 +36,28 @@ namespace BetterConsole.ConsoleComponents
                 current = current.Next;
             }
             
-            _paddedContents.SetValue(value);
+            PaddedContents.SetValue(value);
         }
 
         public override string ToString()
         {
             string toReturn = " ";
             
-            for (int j = 0; j < _paddedContents.TotalWidth; j++)
+            for (int j = 0; j < PaddedContents.TotalWidth; j++)
             {
                 toReturn += "_";
             }
             
             toReturn += " \n";
             
-            for (int i = 0; i < _paddedContents.PaddedValue.Length; i++)
+            for (int i = 0; i < PaddedContents.PaddedValue.Length; i++)
             {
-                toReturn += "|" + _paddedContents.PaddedValue[i] + "|\n";
+                toReturn += "|" + PaddedContents.PaddedValue[i] + "|\n";
             }
             
             toReturn += "|";
             
-            for (int j = 0; j < _paddedContents.TotalWidth; j++)
+            for (int j = 0; j < PaddedContents.TotalWidth; j++)
             {
                 toReturn += "_";
             }

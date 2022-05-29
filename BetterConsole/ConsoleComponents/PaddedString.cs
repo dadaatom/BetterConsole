@@ -1,9 +1,5 @@
 ﻿namespace BetterConsole.ConsoleComponents
 {
-    /*
-     * TODO:
-     * Add text alignment options 
-     */
     public class PaddedString
     {
         public string Value { get; private set; }
@@ -21,6 +17,10 @@
         public int HorizontalPadding { get; private set; }
 
         public int VerticalPadding { get; private set; }
+
+        public HorizontalAlignment HorizontalAlignment { get; private set; } = HorizontalAlignment.Center;
+
+        public VerticalAlignment VerticalAlignment { get; private set; } = VerticalAlignment.Center;
 
         public PaddedString(string value)
         {
@@ -63,7 +63,20 @@
             
             Compute();
         }
-        
+
+        /// <summary>
+        /// Sets the horizontal and vertical alignments of the string contents.
+        /// </summary>
+        /// <param name="horizontalAlignment">Horizontal alignment of the text.</param>
+        /// <param name="verticalAlignment">Vertical alignment of the text.</param>
+        public void SetAlignments(HorizontalAlignment horizontalAlignment, VerticalAlignment verticalAlignment)
+        {
+            HorizontalAlignment = horizontalAlignment;
+            VerticalAlignment = verticalAlignment;
+            
+            Compute();
+        }
+
         /// <summary>
         /// Computed the padded value array.
         /// </summary>
@@ -71,8 +84,8 @@
         {
             string toCenter = Value;
             
-            bool upper = false;
-            
+            bool upper = VerticalAlignment == VerticalAlignment.Lower;
+
             for (int i = 0; i < VerticalPadding; i++) {
                 if (upper)
                 {
@@ -83,14 +96,18 @@
                     toCenter += "\n";
                 }
 
-                upper = !upper;
+                if (VerticalAlignment == VerticalAlignment.Center)
+                {
+                    upper = !upper;
+                }
             }
             
             string[] strList = toCenter.Split('\n');
             
             for (int i = 0; i < strList.Length; i++) {
                 int widthToAdd = HorizontalPadding + (Width == 0 ? 1 : Width) - strList[i].Length;
-                bool forward = true;
+                
+                bool forward = HorizontalAlignment != HorizontalAlignment.Left;
 
                 for (int j = 0; j < widthToAdd; j++)
                 {
@@ -103,7 +120,10 @@
                         strList[i] += " ";
                     }
 
-                    forward = !forward;
+                    if (HorizontalAlignment == HorizontalAlignment.Center)
+                    {
+                        forward = !forward;
+                    }
                 }
             }
 

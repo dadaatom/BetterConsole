@@ -28,7 +28,9 @@ namespace BetterConsole
             table.SetCell(new Cell("1"),3,1);
             table.SetCell(new Cell("0"),3,2);
 
-            Border border = new Border(table);
+            Border border = new Border(new TextComponent("WELCOME!"));
+            border.PaddedContents.SetPaddings(8,1);
+            border.PaddedContents.SetAlignments(HorizontalAlignment.Center, VerticalAlignment.Lower);
             
             console.Write(border);
         }

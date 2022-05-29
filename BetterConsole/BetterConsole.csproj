@@ -50,6 +50,7 @@
         <Compile Include="ConsoleComponents\Cell.cs" />
         <Compile Include="ConsoleComponents\ConsoleComponent.cs" />
         <Compile Include="ConsoleComponents\Countdown.cs" />
+        <Compile Include="ConsoleComponents\HorizontalAlignment.cs" />
         <Compile Include="ConsoleComponents\LoadingBar.cs" />
         <Compile Include="ConsoleComponents\NumberComponent.cs" />
         <Compile Include="ConsoleComponents\PaddedString.cs" />
@@ -58,6 +59,7 @@
         <Compile Include="ConsoleComponents\TextComponent.cs" />
         <Compile Include="ConsoleComponents\TimeComponent.cs" />
         <Compile Include="ConsoleComponents\Timer.cs" />
+        <Compile Include="ConsoleComponents\VerticalAlignment.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
