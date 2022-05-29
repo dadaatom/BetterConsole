@@ -11,7 +11,7 @@ namespace BetterConsole
         {
             BetterConsole console = new BetterConsole();
             
-            Table table = new Table(3,3);
+            Table table = new Table(4,3);
             
             table.SetCell(new Cell("Tom"),0,1);
             table.SetCell(new Cell("John"),0,2);
@@ -24,15 +24,13 @@ namespace BetterConsole
             table.SetCell(new Cell("6"),2,1);
             table.SetCell(new Cell("9"),2,2);
             
-            console.WriteLine(table);
-            
-            table.Resize(4,3);
-            
             table.SetCell(new Cell("Cool\nBird"),3,0);
             table.SetCell(new Cell("1"),3,1);
             table.SetCell(new Cell("0"),3,2);
+
+            Border border = new Border(table);
             
-            console.Reload();
+            console.Write(border);
         }
     }
 }

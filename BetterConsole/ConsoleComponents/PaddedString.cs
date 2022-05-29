@@ -14,6 +14,10 @@
 
         public int Height { get; private set; }
 
+        public int TotalWidth => Width + HorizontalPadding;
+
+        public int TotalHeight => Height + VerticalPadding;
+
         public int HorizontalPadding { get; private set; }
 
         public int VerticalPadding { get; private set; }
