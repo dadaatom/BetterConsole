@@ -22,7 +22,11 @@ namespace BetterConsole.ConsoleComponents
             Next = null;
             _color = color;
         }
-
+        
+        /// <summary>
+        /// Sets the color for this component and all subsequent components in the line.
+        /// </summary>
+        /// <param name="color">New text color.</param>
         public void SetAllColors(ConsoleColor color)
         {
             ConsoleComponent current = this;
@@ -32,12 +36,19 @@ namespace BetterConsole.ConsoleComponents
                 current = current.Next;
             }
         }
-
+        
+        /// <summary>
+        /// Sets the color for just this component.
+        /// </summary>
+        /// <param name="color">New text color.</param>
         public void SetColor(ConsoleColor color)
         {
             _color = color;
         }
-
+        
+        /// <summary>
+        /// Writes the entire line to the console.
+        /// </summary>
         public void Write()
         {
             ConsoleColor baseColor = Console.ForegroundColor;

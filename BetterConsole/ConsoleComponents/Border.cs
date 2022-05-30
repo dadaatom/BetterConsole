@@ -10,8 +10,10 @@ namespace BetterConsole.ConsoleComponents
     {
         public ConsoleComponent Contents { get; private set; }
 
-        public PaddedString PaddedContents;
-        
+        public readonly PaddedString PaddedContents;
+
+        public Border(string contents) : this(new TextComponent(contents)) { }
+
         public Border(ConsoleComponent contents)
         {
             Contents = contents;
@@ -19,12 +21,19 @@ namespace BetterConsole.ConsoleComponents
             PaddedContents.SetPaddings(6,1);
         }
 
+        /// <summary>
+        /// Sets the inner contents of the border.
+        /// </summary>
+        /// <param name="contents">New inner contents.</param>
         public void SetContents(ConsoleComponent contents)
         {
             Contents = contents;
             ComputeContents();
         }
 
+        /// <summary>
+        /// Computes the inner contents before padding them.
+        /// </summary>
         private void ComputeContents()
         {
             string value = "";
@@ -39,6 +48,10 @@ namespace BetterConsole.ConsoleComponents
             PaddedContents.SetValue(value);
         }
 
+        /// <summary>
+        /// Adds a border to the padded contents.
+        /// </summary>
+        /// <returns>A padded string with a surrounding border.</returns>
         public override string ToString()
         {
             string toReturn = " ";

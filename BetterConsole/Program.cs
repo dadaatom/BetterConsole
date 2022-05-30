@@ -32,7 +32,7 @@ namespace BetterConsole
             border.PaddedContents.SetPaddings(8,1);
             border.PaddedContents.SetAlignments(HorizontalAlignment.Center, VerticalAlignment.Lower);
             
-            console.Write(border);
+            console.Write(table);
         }
     }
 }

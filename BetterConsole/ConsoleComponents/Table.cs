@@ -15,11 +15,8 @@ namespace BetterConsole.ConsoleComponents
     {
         public Cell[,] Cells { get; private set; }
 
-        private int[] rowSizes;
-        private int[] columnSizes;
-
-        public int CellWidth;
-        public int CellHeight;
+        private int[] _rowSizes;
+        private int[] _columnSizes;
         
         //TODO: Loop these variables into a style class.
         private string upper = "_";
@@ -31,8 +28,8 @@ namespace BetterConsole.ConsoleComponents
         {
             Cells = new Cell[rows, columns];
 
-            rowSizes = new int[rows];
-            columnSizes = new int[columns];
+            _rowSizes = new int[rows];
+            _columnSizes = new int[columns];
         }
         
         /// <summary>
@@ -45,14 +42,14 @@ namespace BetterConsole.ConsoleComponents
         {
             if (cell != null)
             {
-                if (cell.Value.Width > columnSizes[column])
+                if (cell.Value.Width > _columnSizes[column])
                 {
-                    columnSizes[column] = cell.Value.Width;
+                    _columnSizes[column] = cell.Value.Width;
                 }
 
-                if (cell.Value.Height > rowSizes[row])
+                if (cell.Value.Height > _rowSizes[row])
                 {
-                    rowSizes[row] = cell.Value.Height;
+                    _rowSizes[row] = cell.Value.Height;
                 }
             }
 
@@ -76,20 +73,20 @@ namespace BetterConsole.ConsoleComponents
             }
 
             int[] newRowSizes = new int[rows];
-            for (int i = 0; i < Math.Min(rows, rowSizes.Length); i++)
+            for (int i = 0; i < Math.Min(rows, _rowSizes.Length); i++)
             {
-                newRowSizes[i] = rowSizes[i];
+                newRowSizes[i] = _rowSizes[i];
             }
             
             int[] newColumnSizes = new int[columns];
-            for (int i = 0; i < Math.Min(columns, columnSizes.Length); i++)
+            for (int i = 0; i < Math.Min(columns, _columnSizes.Length); i++)
             {
-                newColumnSizes[i] = columnSizes[i];
+                newColumnSizes[i] = _columnSizes[i];
             }
 
             Cells = newCells;
-            rowSizes = newRowSizes;
-            columnSizes = newColumnSizes;
+            _rowSizes = newRowSizes;
+            _columnSizes = newColumnSizes;
         }
         
         /// <summary>
@@ -103,8 +100,8 @@ namespace BetterConsole.ConsoleComponents
                 throw new Exception("Table is empty."); //TODO: Make custom exceptions
             }
 
-            rowSizes = new int[rowSizes.Length];
-            columnSizes = new int[columnSizes.Length];
+            _rowSizes = new int[_rowSizes.Length];
+            _columnSizes = new int[_columnSizes.Length];
 
             for (int i = 0; i < Cells.GetLength(0); i++)
             {
@@ -112,14 +109,14 @@ namespace BetterConsole.ConsoleComponents
                 {
                     if (Cells[i,j] != null)
                     {
-                        if (Cells[i, j].Value.Height > rowSizes[i])
+                        if (Cells[i, j].Value.Height > _rowSizes[i])
                         {
-                            rowSizes[i] = Cells[i, j].Value.Height;
+                            _rowSizes[i] = Cells[i, j].Value.Height;
                         }
 
-                        if (Cells[i, j].Value.Width > columnSizes[j])
+                        if (Cells[i, j].Value.Width > _columnSizes[j])
                         {
-                            columnSizes[j] = Cells[i, j].Value.Width;
+                            _columnSizes[j] = Cells[i, j].Value.Width;
                         }
                     }
                 }
@@ -131,7 +128,7 @@ namespace BetterConsole.ConsoleComponents
 
             for (int i = 0; i < Cells.GetLength(1); i++) 
             {
-                for (int w = 0; w < columnSizes[i]; w++)
+                for (int w = 0; w < _columnSizes[i]; w++)
                 {
                     toReturn += upper;
                 }
@@ -142,7 +139,7 @@ namespace BetterConsole.ConsoleComponents
 
             for (int i = 0; i < Cells.GetLength(0); i++)
             {
-                for (int h = 0; h < rowSizes[i]; h++)
+                for (int h = 0; h < _rowSizes[i]; h++)
                 {
                     toReturn += border;
                     for (int j = 0; j < Cells.GetLength(1); j++)
@@ -153,7 +150,7 @@ namespace BetterConsole.ConsoleComponents
                         }
                         else
                         {
-                            for (int w = 0; w < columnSizes[j]; w++)
+                            for (int w = 0; w < _columnSizes[j]; w++)
                             {
                                 toReturn += " ";
                             }
@@ -169,7 +166,7 @@ namespace BetterConsole.ConsoleComponents
                     toReturn += border;
                     for (int j = 0; j < Cells.GetLength(1); j++)
                     {
-                        for (int w = 0; w < columnSizes[j]; w++)
+                        for (int w = 0; w < _columnSizes[j]; w++)
                         {
                             toReturn += seperator;
                         }
@@ -184,7 +181,7 @@ namespace BetterConsole.ConsoleComponents
             toReturn += border;
             for (int i = 0; i < Cells.GetLength(1); i++) 
             {
-                for (int w = 0; w < columnSizes[i]; w++)
+                for (int w = 0; w < _columnSizes[i]; w++)
                 {
                     toReturn += lower;
                 }
@@ -203,7 +200,7 @@ namespace BetterConsole.ConsoleComponents
             {
                 for (int j = 0; j < Cells.GetLength(1); j++)
                 {
-                    Cells[i,j]?.Value.SetPaddings(columnSizes[j] - Cells[i,j].Value.Width, rowSizes[i] - Cells[i,j].Value.Height);
+                    Cells[i,j]?.Value.SetPaddings(_columnSizes[j] - Cells[i,j].Value.Width, _rowSizes[i] - Cells[i,j].Value.Height);
                 }
             }
         }
