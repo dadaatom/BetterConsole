@@ -3,6 +3,9 @@
     /*
      * TODO:
      * Command issue event/class/struct? I'd like to incorporate time signatures
+     * Subcommands
+     * help command
+     * command parameters
      */
     public abstract class ConsoleCommand
     {
@@ -17,9 +20,14 @@
             Aliases = aliases;
             _description = description;
         }
+        
         ConsoleCommand(string command, string description) : this(command, new string[0], description) { }
         ConsoleCommand(string command) : this(command, new string[0], "") { }
-
+        
+        /// <summary>
+        /// Called when command signature is detected in input.
+        /// </summary>
+        /// <param name="signature">Signature read from the command line.</param>
         public abstract void Execute(string[] signature);
     }
 }
