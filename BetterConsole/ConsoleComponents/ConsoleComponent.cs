@@ -6,7 +6,6 @@ namespace BetterConsole.ConsoleComponents
      * TODO:
      * Figlet component using figlet .net
      * Style options (i.e. loading bar)
-     * Border component?
      */
     
     public abstract class ConsoleComponent

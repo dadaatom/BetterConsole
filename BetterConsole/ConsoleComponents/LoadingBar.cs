@@ -4,7 +4,7 @@ namespace BetterConsole.ConsoleComponents
 {
     public class LoadingBar : ConsoleComponent
     {
-        private LoadingBarStyle _style;
+        public LoadingBarStyle Style;
         private int _size;
         
         private float _percentage;
@@ -12,7 +12,7 @@ namespace BetterConsole.ConsoleComponents
 
         public LoadingBar(LoadingBarStyle loadingBarStyle, int size)
         {
-            _style = loadingBarStyle;
+            Style = loadingBarStyle;
             _size = size;
             
             _percentage = 0;
@@ -20,27 +20,7 @@ namespace BetterConsole.ConsoleComponents
         }
 
         public LoadingBar(int size) : this(new LoadingBarStyle("#","_"), size) { }
-        
-        public override string ToString()
-        {
-            string toReturn = _style.LeftBorder;
-            
-            for (int i = 1; i <= _size; i++)
-            {
-                if (i <= _count)
-                {
-                    toReturn += _style.Fill;
-                }
-                else
-                {
-                    toReturn += _style.Empty;
-                }
-                //toReturn += ((i <= completed) ? _fillStyle : _emptyStyle);
-            }
 
-            return toReturn + _style.RightBorder;
-        }
-        
         /// <summary>
         /// Sets the percentage of completion for the loading bar.
         /// Values are bounded between 0 and 1.
@@ -68,13 +48,24 @@ namespace BetterConsole.ConsoleComponents
             }
         }
         
-        /// <summary>
-        /// Sets the display style.
-        /// </summary>
-        /// <param name="loadingBarStyle">Style element information.</param>
-        public void SetStyle(LoadingBarStyle loadingBarStyle)
+        public override string ToString()
         {
-            _style = loadingBarStyle;
+            string toReturn = Style.LeftBorder;
+            
+            for (int i = 1; i <= _size; i++)
+            {
+                if (i <= _count)
+                {
+                    toReturn += Style.Fill;
+                }
+                else
+                {
+                    toReturn += Style.Empty;
+                }
+                //toReturn += ((i <= completed) ? _fillStyle : _emptyStyle);
+            }
+
+            return toReturn + Style.RightBorder;
         }
     }
 }

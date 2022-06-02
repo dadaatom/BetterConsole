@@ -7,7 +7,6 @@ namespace BetterConsole.ConsoleComponents
      * TODO:
      * Create max width/heights where the cell will omit some data where it can
      * Add wraparound logic to Cell if max vals are defined.
-     * dynamic row and column sizing instead of resizing all cells.
      * multi cell cells
      */
     
@@ -20,7 +19,7 @@ namespace BetterConsole.ConsoleComponents
         
         //TODO: Loop these variables into a style class.
         private string upper = "_";
-        private string lower = "_";//"\u0305";//"‾";
+        private string lower = "_"; //"\u0305"; //"‾";
         private string seperator = "-";
         private string border = "|";
         
