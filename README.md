@@ -126,5 +126,6 @@ console.BeginCommandHandling();
 - Preset style choices
 - Time component implementation
 - Performance improvements
-- Seperators
 - Default help command
+- Improved command parameter handling
+- Subcommands
