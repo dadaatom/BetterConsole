@@ -1,8 +1,10 @@
 ﻿namespace BetterConsole.ConsoleComponents
 {
-    public class PaddedString
+    public class PaddedComponent
     {
         public string Value { get; private set; }
+
+        public ConsoleComponent Component { get; private set; }
 
         public string[] PaddedValue { get; private set; }
 
@@ -22,18 +24,32 @@
 
         public VerticalAlignment VerticalAlignment { get; private set; } = VerticalAlignment.Center;
 
-        public PaddedString(string value)
+        public PaddedComponent(string value)
         {
             SetValue(value);
+        }
+        
+        public PaddedComponent(ConsoleComponent component)
+        {
+            SetValue(component);
         }
         
         /// <summary>
         /// Sets value of the table cell.
         /// </summary>
-        /// <param name="value">New value for the cell.</param>
+        /// <param name="value">New string value for the cell.</param>
         public void SetValue(string value)
         {
-            Value = value;
+            SetValue(new TextComponent(value));
+        }
+
+        /// <summary>
+        /// Sets value of the table cell.
+        /// </summary>
+        /// <param name="component">New component value for the cell.</param>
+        public void SetValue(ConsoleComponent component)
+        {
+            Component = component;
             string[] list = Value.Split('\n');
 
             int maxWidth = 0;
@@ -46,10 +62,10 @@
 
             Width = maxWidth;
             Height = list.Length;
-
+            
             Compute();
         }
-        
+
         /// <summary>
         /// Sets target size of the cell, will recompute the centered string array.
         /// Target sizes cannot be less than the cell width or height.
@@ -80,20 +96,25 @@
         /// <summary>
         /// Computed the padded value array.
         /// </summary>
+        /// <param name="newValue"></param>
         public void Compute()
         {
-            string toCenter = Value;
+            string newValue = GetComponentString();
+            if (newValue == Value)
+            {
+                return;
+            }
             
             bool upper = VerticalAlignment == VerticalAlignment.Lower;
 
             for (int i = 0; i < VerticalPadding; i++) {
                 if (upper)
                 {
-                    toCenter = "\n" + toCenter;
+                    newValue = "\n" + newValue;
                 }
                 else
                 {
-                    toCenter += "\n";
+                    newValue += "\n";
                 }
 
                 if (VerticalAlignment == VerticalAlignment.Center)
@@ -102,7 +123,7 @@
                 }
             }
             
-            string[] strList = toCenter.Split('\n');
+            string[] strList = newValue.Split('\n');
             
             for (int i = 0; i < strList.Length; i++) {
                 int widthToAdd = HorizontalPadding + (Width == 0 ? 1 : Width) - strList[i].Length;
@@ -128,6 +149,30 @@
             }
 
             PaddedValue = strList;
+            Value = newValue;
+        }
+
+        /// <summary>
+        /// Computes the component string of the Component.
+        /// </summary>
+        /// <returns>Aggregated toString values of all Components.</returns>
+        private string GetComponentString()
+        {
+            if (Component == null)
+            {
+                return "";
+            }
+
+            ConsoleComponent current = Component;
+            string value = "";
+            
+            while (current != null)
+            {
+                value += current.ToString();
+                current = current.Next;
+            }
+
+            return value;
         }
     }
 }

@@ -53,7 +53,7 @@
         <Compile Include="ConsoleComponents\HorizontalAlignment.cs" />
         <Compile Include="ConsoleComponents\LoadingBar.cs" />
         <Compile Include="ConsoleComponents\NumberComponent.cs" />
-        <Compile Include="ConsoleComponents\PaddedString.cs" />
+        <Compile Include="ConsoleComponents\PaddedComponent.cs" />
         <Compile Include="ConsoleComponents\Seperator.cs" />
         <Compile Include="ConsoleComponents\Styles\LoadingBarStyle.cs" />
         <Compile Include="ConsoleComponents\Table.cs" />

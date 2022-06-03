@@ -2,13 +2,19 @@
 {
     public class Cell
     {
-        public PaddedString Value;
+        public PaddedComponent Value;
         
         // TODO: MULTICELL OPTIONS HERE
+        // TODO: CELL WIDTHS / HEIGHTS
         
         public Cell(string value)
         {
-            Value = new PaddedString(value);
+            Value = new PaddedComponent(value);
+        }
+
+        public Cell(ConsoleComponent component)
+        {
+            Value = new PaddedComponent(component);
         }
     }
 }
