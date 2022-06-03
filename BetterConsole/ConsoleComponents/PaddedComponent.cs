@@ -67,11 +67,10 @@
         }
 
         /// <summary>
-        /// Sets target size of the cell, will recompute the centered string array.
-        /// Target sizes cannot be less than the cell width or height.
+        /// Sets the padding sizes for PaddedValue.
         /// </summary>
-        /// <param name="width">New target width of the cell.</param>
-        /// <param name="height">New target height of the cell.</param>
+        /// <param name="horizontal">Padding to be added horizontally.</param>
+        /// <param name="vertical">Padding to be added vertically.</param>
         public void SetPaddings(int horizontal, int vertical)
         {
             HorizontalPadding = horizontal;
@@ -96,7 +95,6 @@
         /// <summary>
         /// Computed the padded value array.
         /// </summary>
-        /// <param name="newValue"></param>
         public void Compute()
         {
             string newValue = GetComponentString();
@@ -155,7 +153,7 @@
         /// <summary>
         /// Computes the component string of the Component.
         /// </summary>
-        /// <returns>Aggregated toString values of all Components.</returns>
+        /// <returns>Aggregate toString values of all Components.</returns>
         private string GetComponentString()
         {
             if (Component == null)
