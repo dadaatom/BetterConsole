@@ -53,7 +53,7 @@ Great, now all we need to do is provide our loading bar with its progress percen
 ```csharp
 for (int i = 0; i <= n; i++) {
     //Do stuff.
-    loadingBar.SetPercentage(i*(1/n));
+    loadingBar.SetPercentage(i*(1f/n));
 }
 ```
 ## Tables
