@@ -7,7 +7,7 @@ namespace BetterConsole.ConsoleComponents
         public LoadingBarStyle Style;
         private int _size;
         
-        private float _percentage;
+        private double _percentage;
         private int _count;
 
         public LoadingBar(LoadingBarStyle loadingBarStyle, int size)
@@ -22,11 +22,20 @@ namespace BetterConsole.ConsoleComponents
         public LoadingBar(int size) : this(new LoadingBarStyle("#","_"), size) { }
 
         /// <summary>
+        /// Gets the current loading bar percentage of completion.
+        /// </summary>
+        /// <returns>Current percentage of completion.</returns>
+        public double GetPercentage()
+        {
+            return _percentage;
+        }
+
+        /// <summary>
         /// Sets the percentage of completion for the loading bar.
         /// Values are bounded between 0 and 1.
         /// </summary>
         /// <param name="percentage">Percentage to be displayed by the loading bar.</param>
-        public void SetPercentage(float percentage)
+        public void SetPercentage(double percentage)
         {
             if (percentage > 1)
             {

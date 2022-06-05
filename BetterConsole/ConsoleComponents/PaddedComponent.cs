@@ -82,11 +82,11 @@
         public void Compute(bool checkValue = true)
         {
             string newValue = GetComponentString();
-            /*
+            
             if (checkValue && newValue == Value)
             {
                 return;
-            }*/
+            }
             
             string[] newValueLines = newValue.Split('\n');
 
