@@ -24,10 +24,7 @@
 
         public VerticalAlignment VerticalAlignment { get; private set; } = VerticalAlignment.Center;
 
-        public PaddedComponent(string value)
-        {
-            SetValue(value);
-        }
+        public PaddedComponent(string value) : this(new TextComponent(value)) { }
         
         public PaddedComponent(ConsoleComponent component)
         {
@@ -50,19 +47,6 @@
         public void SetValue(ConsoleComponent component)
         {
             Component = component;
-            string[] list = Value.Split('\n');
-
-            int maxWidth = 0;
-            for (int i = 0; i < list.Length; i++) {
-                if (list[i].Length > maxWidth)
-                {
-                    maxWidth = list[i].Length;
-                }
-            }
-
-            Width = maxWidth;
-            Height = list.Length;
-            
             Compute();
         }
 
@@ -76,7 +60,7 @@
             HorizontalPadding = horizontal;
             VerticalPadding = vertical;
             
-            Compute();
+            Compute(false);
         }
 
         /// <summary>
@@ -89,19 +73,33 @@
             HorizontalAlignment = horizontalAlignment;
             VerticalAlignment = verticalAlignment;
             
-            Compute();
+            Compute(false);
         }
 
         /// <summary>
         /// Computed the padded value array.
         /// </summary>
-        public void Compute()
+        public void Compute(bool checkValue = true)
         {
             string newValue = GetComponentString();
-            if (newValue == Value)
+            /*
+            if (checkValue && newValue == Value)
             {
                 return;
+            }*/
+            
+            string[] newValueLines = newValue.Split('\n');
+
+            int maxWidth = 0;
+            for (int i = 0; i < newValueLines.Length; i++) {
+                if (newValueLines[i].Length > maxWidth)
+                {
+                    maxWidth = newValueLines[i].Length;
+                }
             }
+
+            Width = maxWidth;
+            Height = newValueLines.Length;
             
             bool upper = VerticalAlignment == VerticalAlignment.Lower;
 
@@ -121,10 +119,10 @@
                 }
             }
             
-            string[] strList = newValue.Split('\n');
+            newValueLines = newValue.Split('\n');
             
-            for (int i = 0; i < strList.Length; i++) {
-                int widthToAdd = HorizontalPadding + (Width == 0 ? 1 : Width) - strList[i].Length;
+            for (int i = 0; i < newValueLines.Length; i++) {
+                int widthToAdd = HorizontalPadding + (Width == 0 ? 1 : Width) - newValueLines[i].Length;
                 
                 bool forward = HorizontalAlignment != HorizontalAlignment.Left;
 
@@ -132,11 +130,11 @@
                 {
                     if (forward)
                     {
-                        strList[i] = " " + strList[i];
+                        newValueLines[i] = " " + newValueLines[i];
                     }
                     else
                     {
-                        strList[i] += " ";
+                        newValueLines[i] += " ";
                     }
 
                     if (HorizontalAlignment == HorizontalAlignment.Center)
@@ -146,7 +144,7 @@
                 }
             }
 
-            PaddedValue = strList;
+            PaddedValue = newValueLines;
             Value = newValue;
         }
 

@@ -41,10 +41,10 @@ namespace BetterConsole.ConsoleComponents
             
             int prevCount = _count;
             _count = (int)(_percentage*_size);
-
+            
             if (prevCount != _count)
             {
-                BetterConsole.Instance.Reload();
+                BetterConsole.Instance?.Reload();
             }
         }
         
