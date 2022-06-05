@@ -57,7 +57,7 @@ for (int i = 0; i <= n; i++) {
 }
 ```
 ## Tables
-Tables are handy for organizing and displaying information. They are able to support multiline strings of varying lengths.
+Tables are handy for organizing and displaying information, they are made of a 2d array of table cells. Cells will accept plain strings or console components. Additionally, table cells are able to resize in order to accomodate varying widths and heights.
 
 Example: two friends want to track how many pets they each saw throughout the day, let's help them display this important information in a table.
 First we will create a 3x3 table and label the columns appropriately.
