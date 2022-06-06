@@ -123,6 +123,7 @@ console.BeginCommandHandling();
 
 # Incoming Features
 - Figlet text
+- Lists
 - Preset style choices
 - Time component implementation
 - Performance improvements
