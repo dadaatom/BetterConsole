@@ -18,7 +18,6 @@ namespace BetterConsole.ConsoleComponents
         {
             Contents = contents;
             PaddedContents = new PaddedComponent(contents.ToString());
-            PaddedContents.SetPaddings(6,1);
         }
 
         /// <summary>
