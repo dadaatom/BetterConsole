@@ -57,14 +57,7 @@ namespace BetterConsole
         /// <param name="component">Console component to be written.</param>
         public void Write(ConsoleComponent component)
         {
-            if (_displayed.Count == 0)
-            {
-                AddToDisplay(component);
-            }
-            else
-            {
-                _displayed[_displayed.Count-1].Next = component;
-            }
+            AppendLine(component);
             component.Write();
         }
         
@@ -74,9 +67,10 @@ namespace BetterConsole
         /// <param name="component">Console component to be written.</param>
         public void WriteLine(ConsoleComponent component) //Enable line break and redirect to write.
         {
-            AddToDisplay(component);
+            AppendLine(component);
+            AddLine(null);
             component.Write();
-            Console.Write("\n");
+            Console.WriteLine("");
         }
         
         /// <summary>
@@ -131,7 +125,7 @@ namespace BetterConsole
         public string ReadLine()
         {
             string val = Console.ReadLine();
-            AddToDisplay(new TextComponent(val)); //todo: revisit when read / read line are updated inline of Console functionality
+            AddLine(new TextComponent(val)); //todo: revisit when read / read line are updated inline of Console functionality
             return val;
         }
         
@@ -164,8 +158,8 @@ namespace BetterConsole
             Console.Clear();
             for (int i = 0; i < _displayed.Count; i++) // Fix the order in which
             {
-                _displayed[i].Write();
-                if (i == _displayed.Count-1)
+                _displayed[i]?.Write();
+                if (i < _displayed.Count-1)
                 {
                     Console.Write("\n");
                 }
@@ -178,14 +172,14 @@ namespace BetterConsole
         public void ReloadLast() //todo: take larger length of previous line into account.
         {
             Console.Write("\r");
-            _displayed[_displayed.Count-1].Write();
+            _displayed[_displayed.Count-1]?.Write();
         }
         
         /// <summary>
-        /// Adds component to the displayed list and will enforce the display limit if enabled.
+        /// Adds a new line to the displayed list and will enforce the display limit if enabled.
         /// </summary>
-        /// <param name="component">Console component to save within the displayed list.</param>
-        private void AddToDisplay(ConsoleComponent component)
+        /// <param name="component">Console component to be saved within the displayed list.</param>
+        private void AddLine(ConsoleComponent component)
         {
             if (_displayed.Count + 1 > _displayLimit)
             {
@@ -201,7 +195,34 @@ namespace BetterConsole
                 _displayed.Add(component);
             }
         }
-        
+
+        /// <summary>
+        /// Appends component to the end of the last line.
+        /// </summary>
+        /// <param name="component">New component to be appended.</param>
+        private void AppendLine(ConsoleComponent component)
+        {
+            if (_displayed.Count == 0)
+            {
+                AddLine(component);
+            }
+            else if(_displayed[_displayed.Count-1] != null)
+            {
+                ConsoleComponent current = _displayed[_displayed.Count - 1];
+
+                while (current.Next != null)
+                {
+                    current = current.Next;
+                }
+
+                current.Next = component;
+            }
+            else
+            {
+                _displayed[_displayed.Count - 1] = component;
+            }
+        }
+
         //====================// Time Handling //====================//
         
         /*
