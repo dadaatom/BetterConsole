@@ -45,7 +45,7 @@ Loading bars are useful for displaying the execution progress of your code.
     <summary>
         <b>Show Code Example</b>
     </summary>
- 
+<br/>
 1. Let's display the current progress of our program. Firstly, whilst completely optional, I am going to define different style options below.
     
 ```csharp
