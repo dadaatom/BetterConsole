@@ -41,7 +41,10 @@ console.WriteLine("This will also appear green!", ConsoleColor.Green);
 ## Loading Bars
 Loading bars are useful for displaying the execution progress of your code. 
 
-<details><summary>Show Code Example</summary>
+<details>
+    <summary>
+        <b>Show Code Example</b>
+    </summary>
 
 Let's create a loading bar to display the execution process of our program. Whilst optional, I am going to select different style options below.
     
@@ -71,18 +74,26 @@ for (int i = 0; i <= n; i++) {
 ## Tables
 Tables are handy for organizing and displaying information, they are made of a 2d array of table cells. Cells will accept plain strings or console components. Additionally, table cells are able to resize in order to accomodate varying widths and heights.
 
-Example: two friends want to track how many pets they each saw throughout the day, let's help them display this important information in a table.
+<details>
+    <summary>
+        <b>Show Code Example:</b>
+    </summary>
+    
+Let's say two friends want to track how many animals they each saw throughout the day, let's help them display this important information in a table.
 First we will create a 3x3 table and label the columns appropriately.
+
 ```csharp
 Table table = new Table(3,3);
-            
+
 table.SetCell(new Cell("Tom"),0,1);
 table.SetCell(new Cell("John"),0,2);
 
 table.SetCell(new Cell("Dogs"),1,0);
 table.SetCell(new Cell("Cats"),2,0);
 ```
+
 Good job, now we can fill the inner cells with their data and have the console write the table.
+
 ```csharp
 table.SetCell(new Cell("10"),1,1);
 table.SetCell(new Cell("2"),1,2);
@@ -91,14 +102,16 @@ table.SetCell(new Cell("9"),2,2);
 
 console.Write(table);
 ```
+
 Let's say one of the friends saw a cool bird, let's resize the table, add the new data, and finally reload the console.
+
 ```csharp
 table.Resize(4,3);
-            
+
 table.SetCell(new Cell("Cool\nBird"),3,0);
 table.SetCell(new Cell("1"),3,1);
 table.SetCell(new Cell("0"),3,2);
-            
+
 console.Reload();
 ```
 
@@ -106,6 +119,7 @@ console.Reload();
 There are several types of time components including countdown and timer components.
 
 Let's create a timer to display the execution time of our program.
+
 ```csharp
 Timer timer = new Timer();
 timer.Start();
@@ -113,6 +127,8 @@ timer.Start();
 console.WriteLine("Current execution duration: ");
 console.Write(timer);
 ```
+
+</details>
 
 ## Custom Commands
 Creating custom console commands is easy, let's make a simple `PingCommand` class below. We just need to extend the `ConsoleCommand` class and to be sure to override the Execute method.
