@@ -39,7 +39,9 @@ Alternatively, for plain text the regular Console methods are implemented to mak
 console.WriteLine("This will also appear green!", ConsoleColor.Green);
 ```
 ## Loading Bars
-Let's now create a loading bar to display the execution process of our program. Whilst optional, I am going to select different style options below.
+Loading bars are useful for displaying the execution progress of your code. 
+<details><summary>Show Code Example</summary>
+Let's create a loading bar to display the execution process of our program. Whilst optional, I am going to select different style options below.
 ```csharp
 LoadingBarStyle style = new LoadingBarStyle("-", "~", "<", ">");
 ```
@@ -56,6 +58,8 @@ for (int i = 0; i <= n; i++) {
     loadingBar.SetPercentage(i*(1f/n));
 }
 ```
+</details>
+
 ## Tables
 Tables are handy for organizing and displaying information, they are made of a 2d array of table cells. Cells will accept plain strings or console components. Additionally, table cells are able to resize in order to accomodate varying widths and heights.
 
