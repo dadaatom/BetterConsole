@@ -41,23 +41,29 @@ console.WriteLine("This will also appear green!", ConsoleColor.Green);
 ## Loading Bars
 Loading bars are useful for displaying the execution progress of your code. 
 <details><summary>Show Code Example</summary>
+
 Let's create a loading bar to display the execution process of our program. Whilst optional, I am going to select different style options below.
 ```csharp
 LoadingBarStyle style = new LoadingBarStyle("-", "~", "<", ">");
 ```
+
 We will now call the loading bar constructor with the style and length, then write the resulting loading bar to the console.
+
 ```csharp
 LoadingBar loadingBar = new LoadingBar(style, 10);
 console.WriteLine("Execution process: ");
 console.Write(loadingBar);
 ```
+
 Great, now all we need to do is provide our loading bar with its progress percentage. Note that input values to the SetPercentage method are automatically bounded between 0 and 1.
+
 ```csharp
 for (int i = 0; i <= n; i++) {
     //Do stuff.
     loadingBar.SetPercentage(i*(1f/n));
 }
 ```
+
 </details>
 
 ## Tables
