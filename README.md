@@ -40,9 +40,11 @@ console.WriteLine("This will also appear green!", ConsoleColor.Green);
 ```
 ## Loading Bars
 Loading bars are useful for displaying the execution progress of your code. 
+
 <details><summary>Show Code Example</summary>
 
 Let's create a loading bar to display the execution process of our program. Whilst optional, I am going to select different style options below.
+    
 ```csharp
 LoadingBarStyle style = new LoadingBarStyle("-", "~", "<", ">");
 ```
