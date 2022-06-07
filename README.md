@@ -120,13 +120,3 @@ Great, now all we need to do is add this command to the console's command regist
 console.AddCommand(new PingCommand()):
 console.BeginCommandHandling();
 ```
-
-# Incoming Features
-- Figlet text
-- Lists
-- Preset style choices
-- Time component implementation
-- Performance improvements
-- Default help command
-- Improved command parameter handling
-- Subcommands
