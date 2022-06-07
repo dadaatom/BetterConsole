@@ -46,9 +46,7 @@ Loading bars are useful for displaying the execution progress of your code.
         <b>Show Code Example</b>
     </summary>
 
-Let's create a loading bar to display the execution process of our program.
-
-1. Whilst optional, I am going to define different style options below.
+1. Let's display the current progress of our program. Firstly, whilst completely optional, I am going to define different style options below.
     
 ```csharp
 LoadingBarStyle style = new LoadingBarStyle("-", "~", "<", ">");
