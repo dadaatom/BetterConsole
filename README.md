@@ -40,12 +40,13 @@ console.Reload();
 
 ## Console Components
 
-Console components can be described as linked lists where each node is a portion of text in a console line. The Write and WriteLine methods also accept console components.
+Console components can be described as linked lists where each node is a portion of text in a console line.
+Most methods like Write and WriteLine accept console components as well as strings.
 
 
 ### <u>Text Components</u>
 
-Text components represent strings stored within the console. For ease of use many methods accept plain strings as well
+Text components represent strings stored within the console. 
 
 <details>
     <summary>
