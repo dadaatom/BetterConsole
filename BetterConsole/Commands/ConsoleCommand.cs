@@ -1,4 +1,6 @@
-﻿namespace BetterConsole.Commands
+﻿using System.Collections.Generic;
+
+namespace BetterConsole.Commands
 {
     /*
      * TODO:
@@ -11,7 +13,9 @@
     {
         public string Command { get; }
         public string[] Aliases { get; }
-        
+
+        public List<ConsoleCommand> SubCommands { get; }
+
         private string _description;
         
         public ConsoleCommand(string command, string[] aliases, string description)

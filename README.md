@@ -1,18 +1,27 @@
-# BetterConsole
+# <u>BetterConsole</u>
+
 Better console with prebuilt functionalities and offers improved display tools. Implements a ConsoleCommand framework so that user defined commands can easily be added and handled.
 
-# Usage
+
 ## Creating the BetterConsole
+
 First, let's create an instance of the `BetterConsole` class. 
+
 ```csharp
 BetterConsole console = new BetterConsole();
 ```
+
 By default the BetterConsole will only reload up to 1000 console lines, as depending on the implmentation reloads may occur frequently and adding a limit may improve preformance. Here's another constructor call where our implementation may contain very frequent reloads.
+
 ```csharp
 BetterConsole console = new BetterConsole(displayLimit = 100);
 ```
-## Simple console commands
+
+
+## Simple Functions
+
 Read, write, and clear functions are all present as before.
+
 ```csharp
 console.WriteLine("This is a line of text.");
 console.Write("Here's some more text.");
@@ -20,25 +29,48 @@ console.Clear();
 console.Write("Enter some text: ");
 string text = console.ReadLine();
 ```
+
 Using the write methods of the console will register them internally so written lines can be modified and updated within the console.
 Call the reload method to clear and redisplay all console lines.
+
 ```csharp
 console.Reload();
 ```
+
+
 ## Console Components
+
 Console components can be described as linked lists where each node is a portion of text in a console line. The Write and WriteLine methods also accept console components.
-## Text Components
+
+
+### <u>Text Components</u>
+
+Text components represent strings stored within the console. For ease of use many methods accept plain strings as well
+
+<details>
+    <summary>
+        <b>Show Code Example</b>
+    </summary>
+<br/>
+
 Let's write a text component in the color green.
+
 ```csharp
 TextComponent text = new TextComponent("This will appear green!");
 text.SetColor(ConsoleColor.Green);
 console.WriteLine(text);
 ```
+
 Alternatively, for plain text the regular Console methods are implemented to make usage easier.
+
 ```csharp
 console.WriteLine("This will also appear green!", ConsoleColor.Green);
 ```
-## Loading Bars
+
+</details>
+
+
+### <u>Loading Bars</u>
 Loading bars are useful for displaying the execution progress of your code. 
 
 <details>
@@ -72,16 +104,19 @@ for (int i = 0; i <= n; i++) {
 
 </details>
 
-## Tables
+
+### <u>Tables</u>
+
 Tables are handy for organizing and displaying information, they are made of a 2d array of table cells. Cells will accept plain strings or console components. Additionally, table cells are able to resize in order to accomodate varying widths and heights.
 
 <details>
     <summary>
         <b>Show Code Example:</b>
     </summary>
+<br/>
     
 Let's say two friends want to track how many animals they each saw throughout the day, let's help them display this important information in a table.
-First we will create a 3x3 table and label the columns appropriately.
+1. Create a 3x3 table and label the outer cells.
 
 ```csharp
 Table table = new Table(3,3);
@@ -93,7 +128,7 @@ table.SetCell(new Cell("Dogs"),1,0);
 table.SetCell(new Cell("Cats"),2,0);
 ```
 
-Good job, now we can fill the inner cells with their data and have the console write the table.
+2. Fill the inner cells with their data and have the console write the table.
 
 ```csharp
 table.SetCell(new Cell("10"),1,1);
@@ -104,7 +139,7 @@ table.SetCell(new Cell("9"),2,2);
 console.Write(table);
 ```
 
-Let's say one of the friends saw a cool bird, let's resize the table, add the new data, and finally reload the console.
+3. Let's now add a new row of data. Resize the table, add the information to the new row, and reload the console.
 
 ```csharp
 table.Resize(4,3);
@@ -116,8 +151,33 @@ table.SetCell(new Cell("0"),3,2);
 console.Reload();
 ```
 
-## Time Components [WIP]
-There are several types of time components including countdown and timer components.
+4. Observe your beautifully displayed table.
+
+```
+ ____ ___ ____
+|    |Tom|John|
+|----|---|----|
+|Dogs| 10|  2 |
+|----|---|----|
+|Cats| 6 |  9 |
+|----|---|----|
+|Cool| 1 |  0 |
+|Bird|   |    |
+|____|___|____|
+```
+
+</details>
+
+
+### <u>Time Components</u> [WIP]
+
+Time components are handy for tracking the runtime of a program. There are several types of time components but the timer and countdown are most prevalent.
+
+<details>
+    <summary>
+        <b>Show Code Example:</b>
+    </summary>
+<br/>
 
 Let's create a timer to display the execution time of our program.
 
@@ -131,8 +191,19 @@ console.Write(timer);
 
 </details>
 
+
 ## Custom Commands
-Creating custom console commands is easy, let's make a simple `PingCommand` class below. We just need to extend the `ConsoleCommand` class and to be sure to override the Execute method.
+
+Console commands provide an easy framework in which to create and handle console inputs.
+
+<details>
+    <summary>
+        <b>Show Code Example:</b>
+    </summary>
+<br/>
+
+1. Create a new class `PingCommand` and extend `ConsoleCommand`. Make sure to override the Execute method with a simple implementation.
+
 ```csharp
 public class PingCommand : ConsoleCommand
 {
@@ -144,8 +215,12 @@ public class PingCommand : ConsoleCommand
     }
 }
 ```
-Great, now all we need to do is add this command to the console's command registry and begin command handling. The `BeginCommandHandling` method creates a new thread to handle incoming user inputs so new content can still be output to the console.
+
+2. Now all we need to do is register an instance of our new command within the BetterConsole. The `BeginCommandHandling` method creates a new thread to handle incoming user inputs so new content can still be output to the console.
+
 ```csharp
 console.AddCommand(new PingCommand()):
 console.BeginCommandHandling();
 ```
+
+</details>

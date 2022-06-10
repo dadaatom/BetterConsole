@@ -33,15 +33,8 @@ namespace BetterConsole
             table.SetCell(new Cell("1"),3,1);
             table.SetCell(new Cell("0"),3,2);
 
-            //console.WriteLine(table);
-            
-            console.WriteLine("TEST");
-            console.Write("test");
-            console.Write("?");
-            console.WriteLine("!");
+            console.WriteLine(table);
 
-            console.Reload();
-            
             //console.WriteLine(table);
             //console.Write(border);
         }

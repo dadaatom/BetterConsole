@@ -11,6 +11,8 @@ namespace BetterConsole
      * TODO:
      * - Create listener paradigm for loading bars so they dont have to be reloaded?
      * - user input threads
+     * - get current displayed
+     * - remove component func
      * - See console component todo.
      * - See Table todo.
      * - See console command todo.
