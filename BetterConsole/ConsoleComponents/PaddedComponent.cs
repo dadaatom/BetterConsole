@@ -77,6 +77,24 @@
         }
 
         /// <summary>
+        /// Sets the horizontal alignment of the string content.
+        /// </summary>
+        /// <param name="horizontalAlignment">Horizontal alignment of the text.</param>
+        public void SetHorizontalAlignment(HorizontalAlignment horizontalAlignment)
+        {
+            SetAlignments(horizontalAlignment, VerticalAlignment);
+        }
+
+        /// <summary>
+        /// Sets the vertical alignment of the string content.
+        /// </summary>
+        /// <param name="verticalAlignment">Vertical alignment of the text.</param>
+        public void SetVerticalAlignment(VerticalAlignment verticalAlignment)
+        {
+            SetAlignments(HorizontalAlignment, verticalAlignment);
+        }
+
+        /// <summary>
         /// Computed the padded value array.
         /// </summary>
         public void Compute(bool checkValue = true)
