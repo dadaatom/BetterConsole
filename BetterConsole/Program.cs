@@ -11,11 +11,30 @@ namespace BetterConsole
         {
             BetterConsole console = new BetterConsole();
 
-            Border border = new Border("Cool animals spotted!");
+            // CREATE GREEN BORDERED WELCOME MESSAGE.
+            TextComponent welcome = new TextComponent("WELCOME");
+            Border border = new Border(welcome);
+            border.SetColor(ConsoleColor.Green);
             border.PaddedContents.SetAlignments(HorizontalAlignment.Center, VerticalAlignment.Lower);
-            border.PaddedContents.SetPaddings(4,1);
-            //Console.WriteLine(border);
-
+            border.PaddedContents.SetPaddings(8,1);
+            console.WriteLine(border);
+            
+            // CREATE LOADING BAR
+            LoadingBar loadingBar = new LoadingBar(10);
+            console.Write("\nLoading Content: ");
+            console.WriteLine(loadingBar);
+            
+            for (int i = 0; i < 500; i++) {
+                loadingBar.SetPercentage(i/500.0);
+                Thread.Sleep(10);
+            }
+            
+            loadingBar.SetPercentage(1.0);
+            
+            console.WriteLine(new Seperator(15));
+            
+            console.WriteLine("Animals Spotted:");
+            
             Table table = new Table(4,3);
 
             table.SetCell(new Cell("Tom"),0,1);
@@ -34,9 +53,6 @@ namespace BetterConsole
             table.SetCell(new Cell("0"),3,2);
 
             console.WriteLine(table);
-
-            //console.WriteLine(table);
-            //console.Write(border);
         }
     }
 }
