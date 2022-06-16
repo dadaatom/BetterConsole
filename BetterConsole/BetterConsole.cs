@@ -21,7 +21,9 @@ namespace BetterConsole
     {
         public static BetterConsole Instance = new BetterConsole();
 
-        public List<ConsoleComponent> DisplayedComponents { get; private set; }
+        //public List<ConsoleComponent> DisplayedComponents { get; private set; }
+
+        public LinkedList<ConsoleComponent> DisplayedComponents;
         
         private List<ConsoleCommand> _commands;
         
@@ -39,8 +41,8 @@ namespace BetterConsole
         {
             Instance = this;
             
+            DisplayedComponents = new LinkedList<ConsoleComponent>();
             _commands = new List<ConsoleCommand>();
-            DisplayedComponents = new List<ConsoleComponent>();
             
             _displayLimit = displayLimit;
         }
@@ -146,7 +148,7 @@ namespace BetterConsole
         /// </summary>
         public void Clear()
         {
-            DisplayedComponents = new List<ConsoleComponent>();
+            DisplayedComponents = new LinkedList<ConsoleComponent>();
             Console.Clear();
         }
         
@@ -158,10 +160,10 @@ namespace BetterConsole
         /// <param name="component">Reloads based on the position of this component within the console.</param>
         public void Reload(ConsoleComponent component)
         {
-            if (false) // IF IS LAST AND IS NOT MULTILINE.
+            if (false) // IF IS IN LAST AND IS NOT MULTILINE.
             {
                 Console.Write("\r");
-                DisplayedComponents[DisplayedComponents.Count-1]?.Write();
+                DisplayedComponents.Last.Value?.Write();
             }
             else
             {
@@ -175,13 +177,18 @@ namespace BetterConsole
         public void Reload()
         {
             Console.Clear();
-            for (int i = 0; i < DisplayedComponents.Count; i++) // Fix the order in which
+
+            LinkedListNode<ConsoleComponent> current = DisplayedComponents.First;
+            while (current != null)
             {
-                DisplayedComponents[i]?.Write();
-                if (i < DisplayedComponents.Count-1)
+                current.Value?.Write();
+                
+                if (current.Next != null)
                 {
                     Console.Write("\n");
                 }
+
+                current = current.Next;
             }
         }
         
@@ -193,8 +200,8 @@ namespace BetterConsole
         {
             if (DisplayedComponents.Count + 1 > _displayLimit)
             {
-                DisplayedComponents.RemoveAt(0);
-                DisplayedComponents.Add(component);
+                DisplayedComponents.RemoveFirst();
+                DisplayedComponents.AddLast(component);
                 if (EnforceLimit)
                 {
                     Reload();
@@ -202,7 +209,7 @@ namespace BetterConsole
             }
             else
             {
-                DisplayedComponents.Add(component);
+                DisplayedComponents.AddLast(component);
             }
         }
 
@@ -216,9 +223,9 @@ namespace BetterConsole
             {
                 AddLine(component);
             }
-            else if(DisplayedComponents[DisplayedComponents.Count-1] != null)
+            else if(DisplayedComponents.Last.Value != null)
             {
-                ConsoleComponent current = DisplayedComponents[DisplayedComponents.Count - 1];
+                ConsoleComponent current = DisplayedComponents.Last.Value;
 
                 while (current.Next != null)
                 {
@@ -229,7 +236,7 @@ namespace BetterConsole
             }
             else
             {
-                DisplayedComponents[DisplayedComponents.Count - 1] = component;
+                DisplayedComponents.Last.Value = component;
             }
         }
 
@@ -254,7 +261,7 @@ namespace BetterConsole
             _timeThread?.Interrupt();
         }
 
-        private void HandleTimedReloads() //Rename this function appropriately?
+        private void HandleTimedReloads() //Rename this function appropriately? Rework this using Current time to handle different update rates.
         {
             long sum = 0;
             
