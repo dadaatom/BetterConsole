@@ -22,7 +22,45 @@ namespace BetterConsole.ConsoleComponents
             Next = null;
             _color = color;
         }
+
+        /// <summary>
+        /// Writes the entire line to the console.
+        /// </summary>
+        public void Write()
+        {
+            ConsoleColor baseColor = Console.ForegroundColor;
+            Console.ForegroundColor = _color;
+            
+            Console.Write(ToString());
+            Next?.Write();
+            
+            Console.ForegroundColor = baseColor;
+        }
         
+        public abstract override string ToString();
+
+        /// <summary>
+        /// Is component
+        /// </summary>
+        /// <param name="component">Console component to search for.</param>
+        /// <returns>Whether the component can be found within this component.</returns>
+        public bool Contains(ConsoleComponent component)
+        {
+            ConsoleComponent current = this;
+
+            while (current != null)
+            {
+                if (current == component)
+                {
+                    return true;
+                }
+
+                current = current.Next;
+            }
+
+            return false;
+        }
+
         /// <summary>
         /// Sets the color for this component and all subsequent components in the line.
         /// </summary>
@@ -45,21 +83,5 @@ namespace BetterConsole.ConsoleComponents
         {
             _color = color;
         }
-        
-        /// <summary>
-        /// Writes the entire line to the console.
-        /// </summary>
-        public void Write()
-        {
-            ConsoleColor baseColor = Console.ForegroundColor;
-            Console.ForegroundColor = _color;
-            
-            Console.Write(ToString());
-            Next?.Write();
-            
-            Console.ForegroundColor = baseColor;
-        }
-        
-        public abstract override string ToString();
     }
 }

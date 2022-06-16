@@ -9,7 +9,7 @@ namespace BetterConsole
     {
         public static void Main(string[] args)
         {
-            BetterConsole console = new BetterConsole();
+            BetterConsole betterConsole = new BetterConsole();
 
             // CREATE GREEN BORDERED WELCOME MESSAGE.
             TextComponent welcome = new TextComponent("WELCOME");
@@ -17,12 +17,12 @@ namespace BetterConsole
             border.SetColor(ConsoleColor.Green);
             border.PaddedContents.SetAlignments(HorizontalAlignment.Center, VerticalAlignment.Lower);
             border.PaddedContents.SetPaddings(8,1);
-            console.WriteLine(border);
+            betterConsole.WriteLine(border);
             
             // CREATE LOADING BAR
             LoadingBar loadingBar = new LoadingBar(10);
-            console.Write("\nLoading Content: ");
-            console.WriteLine(loadingBar);
+            betterConsole.Write("\nLoading Content: ");
+            betterConsole.WriteLine(loadingBar);
             
             for (int i = 0; i < 500; i++) {
                 loadingBar.SetPercentage(i/500.0);
@@ -31,9 +31,9 @@ namespace BetterConsole
             
             loadingBar.SetPercentage(1.0);
             
-            console.WriteLine(new Seperator(15));
+            betterConsole.WriteLine(new Seperator(15));
             
-            console.WriteLine("Animals Spotted:");
+            betterConsole.WriteLine("Animals Spotted:");
             
             Table table = new Table(4,3);
 
@@ -52,7 +52,7 @@ namespace BetterConsole
             table.SetCell(new Cell("1"),3,1);
             table.SetCell(new Cell("0"),3,2);
 
-            console.WriteLine(table);
+            betterConsole.WriteLine(table);
         }
     }
 }

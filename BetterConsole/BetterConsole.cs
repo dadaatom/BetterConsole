@@ -11,7 +11,6 @@ namespace BetterConsole
      * TODO:
      * - Create listener paradigm for loading bars so they dont have to be reloaded?
      * - user input threads
-     * - get current displayed
      * - remove component func
      * - See console component todo.
      * - See Table todo.
@@ -21,9 +20,10 @@ namespace BetterConsole
     public class BetterConsole
     {
         public static BetterConsole Instance = new BetterConsole();
+
+        public List<ConsoleComponent> DisplayedComponents { get; private set; }
         
         private List<ConsoleCommand> _commands;
-        private List<ConsoleComponent> _displayed;
         
         private Thread _commandThread;
         private Thread _timeThread;
@@ -40,7 +40,7 @@ namespace BetterConsole
             Instance = this;
             
             _commands = new List<ConsoleCommand>();
-            _displayed = new List<ConsoleComponent>();
+            DisplayedComponents = new List<ConsoleComponent>();
             
             _displayLimit = displayLimit;
         }
@@ -51,7 +51,7 @@ namespace BetterConsole
             _timeThread?.Interrupt();
         }
         
-        //====================// Simple Methods //====================//
+        //====================// Ported Methods //====================//
         
         /// <summary>
         /// Writes the component within the console.
@@ -146,11 +146,28 @@ namespace BetterConsole
         /// </summary>
         public void Clear()
         {
-            _displayed = new List<ConsoleComponent>();
+            DisplayedComponents = new List<ConsoleComponent>();
             Console.Clear();
         }
         
         //====================// Display //====================//
+        
+        /// <summary>
+        /// Clears the console and reloads either the last line or the entire console.
+        /// </summary>
+        /// <param name="component">Reloads based on the position of this component within the console.</param>
+        public void Reload(ConsoleComponent component)
+        {
+            if (false) // IF IS LAST AND IS NOT MULTILINE.
+            {
+                Console.Write("\r");
+                DisplayedComponents[DisplayedComponents.Count-1]?.Write();
+            }
+            else
+            {
+                Reload();
+            }
+        }
         
         /// <summary>
         /// Clears the console and rewrites all items stored within the displayed list.
@@ -158,23 +175,14 @@ namespace BetterConsole
         public void Reload()
         {
             Console.Clear();
-            for (int i = 0; i < _displayed.Count; i++) // Fix the order in which
+            for (int i = 0; i < DisplayedComponents.Count; i++) // Fix the order in which
             {
-                _displayed[i]?.Write();
-                if (i < _displayed.Count-1)
+                DisplayedComponents[i]?.Write();
+                if (i < DisplayedComponents.Count-1)
                 {
                     Console.Write("\n");
                 }
             }
-        }
-        
-        /// <summary>
-        /// Reloads just the last line of the console.
-        /// </summary>
-        public void ReloadLast() //todo: take larger length of previous line into account.
-        {
-            Console.Write("\r");
-            _displayed[_displayed.Count-1]?.Write();
         }
         
         /// <summary>
@@ -183,10 +191,10 @@ namespace BetterConsole
         /// <param name="component">Console component to be saved within the displayed list.</param>
         private void AddLine(ConsoleComponent component)
         {
-            if (_displayed.Count + 1 > _displayLimit)
+            if (DisplayedComponents.Count + 1 > _displayLimit)
             {
-                _displayed.RemoveAt(0);
-                _displayed.Add(component);
+                DisplayedComponents.RemoveAt(0);
+                DisplayedComponents.Add(component);
                 if (EnforceLimit)
                 {
                     Reload();
@@ -194,7 +202,7 @@ namespace BetterConsole
             }
             else
             {
-                _displayed.Add(component);
+                DisplayedComponents.Add(component);
             }
         }
 
@@ -204,13 +212,13 @@ namespace BetterConsole
         /// <param name="component">New component to be appended.</param>
         private void AppendLine(ConsoleComponent component)
         {
-            if (_displayed.Count == 0)
+            if (DisplayedComponents.Count == 0)
             {
                 AddLine(component);
             }
-            else if(_displayed[_displayed.Count-1] != null)
+            else if(DisplayedComponents[DisplayedComponents.Count-1] != null)
             {
-                ConsoleComponent current = _displayed[_displayed.Count - 1];
+                ConsoleComponent current = DisplayedComponents[DisplayedComponents.Count - 1];
 
                 while (current.Next != null)
                 {
@@ -221,9 +229,10 @@ namespace BetterConsole
             }
             else
             {
-                _displayed[_displayed.Count - 1] = component;
+                DisplayedComponents[DisplayedComponents.Count - 1] = component;
             }
         }
+
 
         //====================// Time Handling //====================//
         
