@@ -1,12 +1,12 @@
 ﻿namespace BetterConsole.ConsoleComponents
 {
-    public class Seperator : ConsoleComponent
+    public class Separator : ConsoleComponent
     {
         public int Length;
         
         private string seperator = "-";
         
-        public Seperator(int length)
+        public Separator(int length)
         {
             Length = length;
         }

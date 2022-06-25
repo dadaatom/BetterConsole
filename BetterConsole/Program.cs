@@ -7,11 +7,13 @@ namespace BetterConsole
 {
     internal class Program
     {
+        // Use example of the better console and built in components.
         public static void Main(string[] args)
         {
+            // CREATE DEFAULT BETTER CONSOLE //
             BetterConsole betterConsole = new BetterConsole();
 
-            // CREATE GREEN BORDERED WELCOME MESSAGE.
+            // CREATE AND WRITE GREEN BORDERED WELCOME MESSAGE //
             TextComponent welcome = new TextComponent("WELCOME");
             Border border = new Border(welcome);
             border.SetColor(ConsoleColor.Green);
@@ -19,11 +21,12 @@ namespace BetterConsole
             border.PaddedContents.SetPaddings(8,1);
             betterConsole.WriteLine(border);
             
-            // CREATE LOADING BAR
+            // CREATE AND WRITE LOADING BAR //
             LoadingBar loadingBar = new LoadingBar(10);
             betterConsole.Write("\nLoading Content: ");
             betterConsole.WriteLine(loadingBar);
             
+            // UPDATE LOADING BAR INCREMENTALLY //
             for (int i = 0; i < 500; i++) {
                 loadingBar.SetPercentage(i/500.0);
                 Thread.Sleep(10);
@@ -31,10 +34,13 @@ namespace BetterConsole
             
             loadingBar.SetPercentage(1.0);
             
-            betterConsole.WriteLine(new Seperator(15));
+            // CREATE AND WRITE SEPARATOR AND LABEL //
+            betterConsole.WriteLine(new Separator(15));
             
             betterConsole.WriteLine("Animals Spotted:");
             
+            
+            // CREATE AND WRITE TABLE //
             Table table = new Table(4,3);
 
             table.SetCell(new Cell("Tom"),0,1);

@@ -88,7 +88,7 @@ namespace BetterConsole
             textComp.SetColor(color);
             Write(textComp);
         }
-        
+
         /// <summary>
         /// Forwards a text component to the Write function.
         /// </summary>
@@ -248,37 +248,7 @@ namespace BetterConsole
          * threaded time reloads.
          */
     
-        public void BeginTimeHandling(long tickFrequency)
-        {
-            _tickFrequency = tickFrequency;
-            
-            _timeThread = new Thread(HandleTimedReloads);
-            _timeThread.Start();
-        }
-
-        public void StopTimeHandling()
-        {
-            _timeThread?.Interrupt();
-        }
-
-        private void HandleTimedReloads() //Rename this function appropriately? Rework this using Current time to handle different update rates.
-        {
-            long sum = 0;
-            
-            DateTime prev = DateTime.Now;
-            while (true)
-            {
-                DateTime current = DateTime.Now;
-                sum += (current - prev).Milliseconds;
-
-                if (sum >= _tickFrequency)
-                {
-                    sum -= _tickFrequency;
-                    Reload();
-                    // ONLY RELOAD LAST IF POSSIBLE.
-                }
-            }
-        }
+        
             
         //====================// Command Handling //====================//
         
