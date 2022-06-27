@@ -2,6 +2,7 @@
 using System.Threading;
 using BetterConsole.Commands;
 using BetterConsole.ConsoleComponents;
+using Timer = BetterConsole.ConsoleComponents.Timer;
 
 namespace BetterConsole
 {
@@ -29,7 +30,6 @@ namespace BetterConsole
             // UPDATE LOADING BAR INCREMENTALLY //
             for (int i = 0; i < 500; i++) {
                 loadingBar.SetPercentage(i/500.0);
-                Thread.Sleep(10);
             }
             
             loadingBar.SetPercentage(1.0);
@@ -38,8 +38,7 @@ namespace BetterConsole
             betterConsole.WriteLine(new Separator(15));
             
             betterConsole.WriteLine("Animals Spotted:");
-            
-            
+
             // CREATE AND WRITE TABLE //
             Table table = new Table(4,3);
 
@@ -59,6 +58,14 @@ namespace BetterConsole
             table.SetCell(new Cell("0"),3,2);
 
             betterConsole.WriteLine(table);
+
+            // CREATE AND WRITE TIMER //
+            Timer timer = new Timer();
+            
+            betterConsole.Write("Content loaded: ");
+            betterConsole.Write(timer);
+            
+            timer.Start();
         }
     }
 }

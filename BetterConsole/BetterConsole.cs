@@ -19,21 +19,20 @@ namespace BetterConsole
 
     public class BetterConsole
     {
-        public static BetterConsole Instance = new BetterConsole();
+        public static BetterConsole Instance;
 
         //public List<ConsoleComponent> DisplayedComponents { get; private set; }
 
         public LinkedList<ConsoleComponent> DisplayedComponents;
-        
+
+        public TimeHandler TimeHandler { get; private set; }
+
         private List<ConsoleCommand> _commands;
         
         private Thread _commandThread;
-        private Thread _timeThread;
 
         public bool EnforceLimit = false;
         private int _displayLimit;
-
-        private long _tickFrequency;
         
         //====================// Constructors //====================//
         
@@ -42,15 +41,17 @@ namespace BetterConsole
             Instance = this;
             
             DisplayedComponents = new LinkedList<ConsoleComponent>();
-            _commands = new List<ConsoleCommand>();
             
+            TimeHandler = new TimeHandler();
+            
+            _commands = new List<ConsoleCommand>();
+
             _displayLimit = displayLimit;
         }
 
         ~BetterConsole()
         {
             _commandThread?.Interrupt();
-            _timeThread?.Interrupt();
         }
         
         //====================// Ported Methods //====================//
@@ -239,15 +240,6 @@ namespace BetterConsole
                 DisplayedComponents.Last.Value = component;
             }
         }
-
-
-        //====================// Time Handling //====================//
-        
-        /*
-         * TODO:
-         * threaded time reloads.
-         */
-    
         
             
         //====================// Command Handling //====================//

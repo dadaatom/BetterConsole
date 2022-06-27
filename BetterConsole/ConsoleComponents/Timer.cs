@@ -4,7 +4,7 @@ namespace BetterConsole.ConsoleComponents
 {
     public class Timer : TimeComponent
     {
-        public Timer() : base() { }
+        public Timer(int updateFrequency = 1000) : base(updateFrequency) { }
 
         public override string ToString()
         {

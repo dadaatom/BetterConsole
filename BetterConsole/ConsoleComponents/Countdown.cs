@@ -6,7 +6,7 @@ namespace BetterConsole.ConsoleComponents
     {
         public DateTime Target;
         
-        public Countdown(DateTime target)
+        public Countdown(DateTime target, int updateFrequency = 1000) : base(updateFrequency)
         {
             Target = target;
         }

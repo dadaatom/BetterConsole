@@ -11,35 +11,52 @@ namespace BetterConsole.ConsoleComponents
     
     public abstract class TimeComponent : ConsoleComponent
     {
-        private bool _active;
         public DateTime Starting;
         public DateTime Current;
+
+        public int UpdateFrequency { get; private set; }
         
-        public TimeComponent() : base()
+        private bool _active;
+        
+        public TimeComponent() : this(1000) { }
+
+        public TimeComponent(int updateFrequency)
         {
             Starting = DateTime.Now;
             Current = DateTime.Now;
+
+            UpdateFrequency = updateFrequency;
         }
 
+        /// <summary>
+        /// Starts the time component.
+        /// </summary>
         public void Start()
         {
             if (!_active)
             {
                 _active = true;
+                BetterConsole.Instance?.TimeHandler?.Subscribe(this);
             }
             // throw error if started?
         }
 
+        /// <summary>
+        /// Stops the time component.
+        /// </summary>
         public void Stop()
         {
             if (_active)
             {
                 _active = false;
-                // remove this component from timed reload.
+                BetterConsole.Instance.TimeHandler.UnSubscribe(this);
             }
             // throw error is not active?
         }
 
+        /// <summary>
+        /// Updates the current time given the timer is active.
+        /// </summary>
         public void Update()
         {
             if (_active)
@@ -47,12 +64,19 @@ namespace BetterConsole.ConsoleComponents
                 Current = DateTime.Now;
             }
         }
-
+         
+        /// <summary>
+        /// Gets whether the time component is active.
+        /// </summary>
+        /// <returns>Is time component active.</returns>
         public bool IsActive()
         {
             return _active;
         }
 
+        /// <summary>
+        /// Resets the component.
+        /// </summary>
         public void Reset()
         {
             Starting = DateTime.Now;
