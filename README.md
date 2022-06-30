@@ -170,9 +170,13 @@ console.Reload();
 </details>
 
 
-### <u>Time Components</u> [WIP]
+### <u>Time Components</u>
 
-Time components are handy for tracking the runtime of a program. There are several types of time components but the timer and countdown are most prevalent.
+Time components are handy for tracking the runtime of a program or conveying other time related information to the user.
+<br/>
+Types of time components:
+- Timer
+- Countdown
 
 <details>
     <summary>
@@ -180,14 +184,25 @@ Time components are handy for tracking the runtime of a program. There are sever
     </summary>
 <br/>
 
-Let's create a timer to display the execution time of our program.
+1. Create timer and write it to the console.
 
 ```csharp
 Timer timer = new Timer();
-timer.Start();
 
-console.WriteLine("Current execution duration: ");
+console.WriteLine("This timer has been running for: ");
 console.Write(timer);
+```
+
+2. Start the timer to begin timed updates.
+
+```csharp
+timer.Start();
+```
+
+3. Stop the timer when ready.
+
+```csharp
+timer.Stop();
 ```
 
 </details>
