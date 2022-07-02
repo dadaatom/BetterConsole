@@ -101,7 +101,9 @@ namespace BetterConsole.ConsoleComponents
             _rowSizes = new int[_rowSizes.Length];
             _columnSizes = new int[_columnSizes.Length];
 
-            for (int i = 0; i < Cells.GetLength(0); i++)
+            int i = 0;
+            
+            for (i = 0; i < Cells.GetLength(0); i++)
             {
                 for (int j = 0; j < Cells.GetLength(1); j++)
                 {
@@ -124,7 +126,7 @@ namespace BetterConsole.ConsoleComponents
             
             string toReturn = " ";
 
-            for (int i = 0; i < Cells.GetLength(1); i++) 
+            for (i = 0; i < Cells.GetLength(1); i++) 
             {
                 for (int w = 0; w < _columnSizes[i]; w++)
                 {
@@ -135,12 +137,15 @@ namespace BetterConsole.ConsoleComponents
 
             toReturn += "\n";
 
-            for (int i = 0; i < Cells.GetLength(0); i++)
+            i = 0;
+            while (i < Cells.GetLength(0))
             {
                 for (int h = 0; h < _rowSizes[i]; h++)
                 {
                     toReturn += border;
-                    for (int j = 0; j < Cells.GetLength(1); j++)
+                    
+                    int j = 0;
+                    while (j < Cells.GetLength(1))
                     {
                         if (Cells[i, j] != null)
                         {
@@ -162,7 +167,8 @@ namespace BetterConsole.ConsoleComponents
                 if (i < Cells.GetLength(0)-1)
                 {
                     toReturn += border;
-                    for (int j = 0; j < Cells.GetLength(1); j++)
+                    int j = 0;
+                    while (j < Cells.GetLength(1))
                     {
                         for (int w = 0; w < _columnSizes[j]; w++)
                         {
@@ -177,7 +183,7 @@ namespace BetterConsole.ConsoleComponents
             }
 
             toReturn += border;
-            for (int i = 0; i < Cells.GetLength(1); i++) 
+            for (i = 0; i < Cells.GetLength(1); i++) 
             {
                 for (int w = 0; w < _columnSizes[i]; w++)
                 {
@@ -198,7 +204,10 @@ namespace BetterConsole.ConsoleComponents
             {
                 for (int j = 0; j < Cells.GetLength(1); j++)
                 {
-                    Cells[i,j]?.Value.SetPaddings(_columnSizes[j] - Cells[i,j].Value.Width, _rowSizes[i] - Cells[i,j].Value.Height);
+                    Cells[i,j]?.Value.SetPaddings((
+                        _columnSizes[j] - Cells[i,j].Value.Width) + ((Cells[i,j].Width - 1) * _columnSizes[j]) + (Cells[i,j].Width - 1),
+                        (_rowSizes[i] - Cells[i,j].Value.Height) + ((Cells[i,j].Height - 1) * _rowSizes[i]) + (Cells[i,j].Height - 1)
+                    );
                 }
             }
         }
