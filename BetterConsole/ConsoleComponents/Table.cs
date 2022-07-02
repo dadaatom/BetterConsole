@@ -100,9 +100,8 @@ namespace BetterConsole.ConsoleComponents
 
             _rowSizes = new int[_rowSizes.Length];
             _columnSizes = new int[_columnSizes.Length];
-
-            int i = 0;
             
+            int i = 0;
             for (i = 0; i < Cells.GetLength(0); i++)
             {
                 for (int j = 0; j < Cells.GetLength(1); j++)
@@ -121,7 +120,7 @@ namespace BetterConsole.ConsoleComponents
                     }
                 }
             }
-
+            
             UpdateTargetSizes();
             
             string toReturn = " ";
@@ -136,7 +135,7 @@ namespace BetterConsole.ConsoleComponents
             }
 
             toReturn += "\n";
-
+            
             i = 0;
             while (i < Cells.GetLength(0))
             {
@@ -160,6 +159,7 @@ namespace BetterConsole.ConsoleComponents
 
                             toReturn += border;
                         }
+                        j += Cells[i, j] != null ? Cells[i,j].Width : 1;
                     }
                     toReturn += "\n";
                 }
@@ -176,12 +176,14 @@ namespace BetterConsole.ConsoleComponents
                         }
 
                         toReturn += border;
+                        j += Cells[i, j] != null ? Cells[i,j].Width : 1;
                     }
 
                     toReturn += "\n";
                 }
+                i += 1;
             }
-
+            
             toReturn += border;
             for (i = 0; i < Cells.GetLength(1); i++) 
             {

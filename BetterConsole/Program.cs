@@ -44,8 +44,8 @@ namespace BetterConsole
             
             // CREATE AND WRITE TABLE //
             Table table = new Table(5,3);
-
-            Cell topCell = new Cell("Animals Spotted", 3, 1);
+            
+            Cell topCell = new Cell("Animals Spotted", 1, 1);
             table.SetCell(topCell, 0, 0);
             
             table.SetCell(new Cell("Tom"),1,1);
@@ -62,18 +62,19 @@ namespace BetterConsole
             table.SetCell(new Cell("Cool\nBird"),4,0);
             table.SetCell(new Cell("1"),4,1);
             table.SetCell(new Cell("0"),4,2);
-
+            
             betterConsole.WriteLine(table);
 
             
             // CREATE AND WRITE TIMER //
+            /*
             Timer timer = new Timer();
             
             betterConsole.Write("Content loaded: ");
             betterConsole.Write(timer);
             
             timer.Start();
-            
+            */
         }
     }
 }
