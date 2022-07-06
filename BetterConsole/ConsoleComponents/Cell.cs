@@ -5,21 +5,26 @@ namespace BetterConsole.ConsoleComponents
     public class Cell
     {
         public PaddedComponent Value;
+
+        private int _height;
+        public int Height
+        {
+            get => _height;
+            set
+            {
+                _height = Math.Max(1, value);
+            }
+        }
         
-        // TODO: MULTICELL OPTIONS HERE
-        // TODO: CELL WIDTHS / HEIGHTS
-
-        public int Height;
-        /*{
-            get => Height;
-            set => Math.Max(1, value);
-        }*/
-
-        public int Width;
-        /*{
-            get => Width;
-            set => Math.Max(1, value);
-        }*/
+        private int _width;
+        public int Width
+        {
+            get => _width;
+            set
+            {
+                _width = Math.Max(1, value);
+            }
+        }
 
         public Cell(string value) : this(new TextComponent(value)) { }
 
