@@ -98,35 +98,11 @@ namespace BetterConsole.ConsoleComponents
                 throw new Exception("Table is empty."); //TODO: Make custom exceptions
             }
 
-            _rowSizes = new int[_rowSizes.Length];
-            _columnSizes = new int[_columnSizes.Length];
-            
-            int i = 0;
-            for (i = 0; i < Cells.GetLength(0); i++)
-            {
-                for (int j = 0; j < Cells.GetLength(1); j++)
-                {
-                    if (Cells[i,j] != null)
-                    {
-                        if (Cells[i, j].Value.Height > _rowSizes[i])
-                        {
-                            _rowSizes[i] = Cells[i, j].Value.Height;
-                        }
-
-                        if (Cells[i, j].Value.Width > _columnSizes[j])
-                        {
-                            _columnSizes[j] = Cells[i, j].Value.Width;
-                        }
-                    }
-                }
-            }
-            
             UpdateTargetSizes();
             
             string toReturn = " ";
-
-            i = 0;
-            while (i < Cells.GetLength(1))
+            
+            for (int i = 0; i < Cells.GetLength(1); i += Cells[0,i] == null ? 1 : Cells[0,i].Width)
             {
                 for (int w = 0; w < (Cells[0,i] == null ? _columnSizes[i] : Cells[0,i].Value.TotalWidth); w++)
                 {
@@ -134,13 +110,11 @@ namespace BetterConsole.ConsoleComponents
                 }
 
                 toReturn += " ";
-                i += Cells[0,i] == null ? 1 : Cells[0,i].Width;
             }
 
             toReturn += "\n";
             
-            i = 0;
-            while (i < Cells.GetLength(0))
+            for (int i = 0; i < Cells.GetLength(0); i++)
             {
                 for (int h = 0; h < _rowSizes[i]; h++)
                 {
@@ -185,11 +159,12 @@ namespace BetterConsole.ConsoleComponents
 
                     toReturn += "\n";
                 }
-                i += 1;
+                
             }
             
             toReturn += border;
-            for (i = 0; i < Cells.GetLength(1); i++) 
+            
+            for (int i = 0; i < Cells.GetLength(1); i++) 
             {
                 for (int w = 0; w < _columnSizes[i]; w++)
                 {
@@ -206,13 +181,39 @@ namespace BetterConsole.ConsoleComponents
         /// </summary>
         private void UpdateTargetSizes()
         {
+            _rowSizes = new int[Cells.GetLength(0)];
+            _columnSizes = new int[Cells.GetLength(1)];
+            
             for (int i = 0; i < Cells.GetLength(0); i++)
             {
                 for (int j = 0; j < Cells.GetLength(1); j++)
                 {
                     if (Cells[i,j] != null)
                     {
-                        int targetWidth = Cells[i,j].Width - 1;
+                        
+                        if (Cells[i, j].Value.Height > _rowSizes[i])
+                        {
+                            _rowSizes[i] = Cells[i, j].Value.Height;
+                        }
+
+                        int columnSize = (int)Math.Ceiling((double)Cells[i, j].Value.Width / Math.Min(Cells[i, j].Width, Cells.GetLength(1)-j));
+                        for (int x = j; x < Math.Min(j+Cells[i,j].Width, Cells.GetLength(1)); x++) {
+                            if (columnSize > _columnSizes[x])
+                            {
+                                _columnSizes[x] = columnSize;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            for (int i = 0; i < Cells.GetLength(0); i++)
+            {
+                for (int j = 0; j < Cells.GetLength(1); j++)
+                {
+                    if (Cells[i,j] != null)
+                    {
+                        int targetWidth = Math.Min(Cells[i,j].Width, Cells.GetLength(1)-j) - 1;
                         for (int x = j; x < Math.Min(_columnSizes.Length, j+Cells[i,j].Width); x++)
                         {
                             targetWidth += _columnSizes[x];

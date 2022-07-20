@@ -44,9 +44,12 @@ namespace BetterConsole
             
             // CREATE AND WRITE TABLE //
             Table table = new Table(5,3);
+
+            Cell testCell = new Cell("Test", 1, 2);
+            table.SetCell(testCell, 0, 0);
             
-            Cell topCell = new Cell("Animals Spotted", 3, 1);
-            table.SetCell(topCell, 0, 0);
+            Cell titleCell = new Cell("Animals Spotted", 3, 1);
+            table.SetCell(titleCell, 0, 1);
             
             table.SetCell(new Cell("Tom"),1,1);
             table.SetCell(new Cell("John"),1,2);
