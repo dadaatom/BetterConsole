@@ -170,10 +170,11 @@ namespace BetterConsole.ConsoleComponents
                 if (i < Cells.GetLength(0)-1)
                 {
                     toReturn += border;
+                    
                     int j = 0;
                     while (j < Cells.GetLength(1))
                     {
-                        for (int w = 0; w < _columnSizes[j]; w++)
+                        for (int w = 0; w < (Cells[i,j] == null ? _columnSizes[j] : Cells[i,j].Value.TotalWidth); w++)
                         {
                             toReturn += seperator;
                         }
