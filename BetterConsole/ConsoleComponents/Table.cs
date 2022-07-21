@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 
 namespace BetterConsole.ConsoleComponents
 {
@@ -7,6 +6,7 @@ namespace BetterConsole.ConsoleComponents
      * TODO:
      * Create max width/heights where the cell will omit some data where it can
      * Add wraparound logic to Cell if max vals are defined.
+     * Fix vertical multi cells
      */
     
     public class Table : ConsoleComponent

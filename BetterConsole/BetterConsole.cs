@@ -20,9 +20,7 @@ namespace BetterConsole
     public class BetterConsole
     {
         public static BetterConsole Instance;
-
-        //public List<ConsoleComponent> DisplayedComponents { get; private set; }
-
+        
         public LinkedList<ConsoleComponent> DisplayedComponents;
 
         public TimeHandler TimeHandler { get; private set; }

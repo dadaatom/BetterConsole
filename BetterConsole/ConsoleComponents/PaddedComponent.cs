@@ -1,4 +1,5 @@
-﻿namespace BetterConsole.ConsoleComponents
+﻿
+namespace BetterConsole.ConsoleComponents
 {
     public class PaddedComponent
     {

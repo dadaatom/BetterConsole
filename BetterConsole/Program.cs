@@ -70,14 +70,12 @@ namespace BetterConsole
 
             
             // CREATE AND WRITE TIMER //
-            /*
             Timer timer = new Timer();
             
             betterConsole.Write("Content loaded: ");
             betterConsole.Write(timer);
             
             timer.Start();
-            */
         }
     }
 }
