@@ -6,7 +6,8 @@ namespace BetterConsole.ConsoleComponents
      * TODO:
      * Sublists shouldn't print with the header.
      * OrderedLists should changes between styles for sublists.
-     * OrderedLists should include alphabetic ordering as well.
+     * Add list header item
+     * Keep spacing consistent with multi sized headers.
      */
     
     public abstract class ListComponent : ConsoleComponent

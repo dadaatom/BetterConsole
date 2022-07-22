@@ -75,10 +75,15 @@ namespace BetterConsole
             Console.WriteLine(unorderedListComponent);
             
             
-            // CREATE AND WRITE ORDERED LIST //
+            // CREATE AND WRITE NUMERICALLY ORDERED LIST //
             Console.WriteLine("\nList of my top 4 favorite numbers:");
-            OrderedListComponent orderedListComponent = new OrderedListComponent(new string[]{"1", "2", "64", "4"});
+            OrderedListComponent orderedListComponent = new OrderedListComponent(new string[]{"1", "2", "64", "4","1","2","3","4","5","6","7","8","9"});
             Console.WriteLine(orderedListComponent);
+            
+            // CREATE AND WRITE ALPHABETICALLY ORDERED LIST //
+            Console.WriteLine("\nLook at this alphabetic list:");
+            OrderedListComponent anotherOrderedListComponent = new OrderedListComponent(new string[]{"Woah","Cool!","Nice","Double Line\nNice"}, OrderedListStyle.Alphabetic);
+            Console.WriteLine(anotherOrderedListComponent);
             
             
             // CREATE AND WRITE TIMER //

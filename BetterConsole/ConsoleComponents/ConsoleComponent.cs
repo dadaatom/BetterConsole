@@ -5,8 +5,9 @@ namespace BetterConsole.ConsoleComponents
     /*
      * TODO:
      * Figlet component using figlet .net
-     * Style options (i.e. loading bar)
-     * Lists (ordered/unordered)
+     * Style options (i.e. loading bar) (exist as a class applied to the console that most things communicate with)
+     * Images?
+     * Buttons?
      */
     
     public abstract class ConsoleComponent

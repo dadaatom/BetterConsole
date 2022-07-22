@@ -58,6 +58,7 @@
         <Compile Include="ConsoleComponents\PaddedComponent.cs" />
         <Compile Include="ConsoleComponents\Separator.cs" />
         <Compile Include="ConsoleComponents\Styles\LoadingBarStyle.cs" />
+        <Compile Include="ConsoleComponents\Styles\OrderedListStyle.cs" />
         <Compile Include="ConsoleComponents\Table.cs" />
         <Compile Include="ConsoleComponents\TextComponent.cs" />
         <Compile Include="ConsoleComponents\TimeComponent.cs" />
