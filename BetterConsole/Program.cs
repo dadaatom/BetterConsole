@@ -67,15 +67,27 @@ namespace BetterConsole
             table.SetCell(new Cell("0"),4,2);
             
             betterConsole.WriteLine(table);
-
+            
+            
+            // CREATE AND WRITE UNORDERED LIST //
+            Console.WriteLine("\nList of things I like:");
+            UnorderedListComponent unorderedListComponent = new UnorderedListComponent(new string[]{"Rainy days", "Multi\nLine\nStrings", "Strawberries"});
+            Console.WriteLine(unorderedListComponent);
+            
+            
+            // CREATE AND WRITE ORDERED LIST //
+            Console.WriteLine("\nList of my top 4 favorite numbers:");
+            OrderedListComponent orderedListComponent = new OrderedListComponent(new string[]{"1", "2", "64", "4"});
+            Console.WriteLine(orderedListComponent);
+            
             
             // CREATE AND WRITE TIMER //
-            Timer timer = new Timer();
+            /*Timer timer = new Timer();
             
             betterConsole.Write("Content loaded: ");
             betterConsole.Write(timer);
             
-            timer.Start();
+            timer.Start();*/
         }
     }
 }

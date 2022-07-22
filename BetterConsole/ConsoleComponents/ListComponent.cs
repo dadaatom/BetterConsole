@@ -32,7 +32,16 @@ namespace BetterConsole.ConsoleComponents
                 List.AddLast(component);
             }
         }
-
+        
+        /// <summary>
+        /// Adds text component to the console component list.
+        /// </summary>
+        /// <param name="str">String to be added to the component list.</param>
+        public void AddText(string str)
+        {
+            List.AddLast(new TextComponent(str));
+        }
+        
         public abstract override string ToString();
 
         /// <summary>
@@ -73,15 +82,6 @@ namespace BetterConsole.ConsoleComponents
             }
 
             return toReturn;
-        }
-
-        /// <summary>
-        /// Adds text component to the console component list.
-        /// </summary>
-        /// <param name="str">String to be added to the component list.</param>
-        public void AddTextToList(string str)
-        {
-            List.AddLast(new TextComponent(str));
         }
     }
 }
