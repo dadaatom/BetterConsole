@@ -208,6 +208,31 @@ timer.Stop();
 </details>
 
 
+### <u>List Components</u>
+
+List components are used to display a collection of components, either in an ordered or unordered fashion.
+<br/>
+Two types of list components:
+- Un-Ordered
+- Ordered
+
+<details>
+    <summary>
+        <b>Show Code Example:</b>
+    </summary>
+<br/>
+
+1. Create ordered list and write it to the console.
+
+```csharp
+Console.WriteLine("\nList of my top 4 favorite numbers:");
+OrderedListComponent orderedListComponent = new OrderedListComponent(new string[]{"1", "2", "64", "4"});
+Console.WriteLine(orderedListComponent);
+```
+
+</details>
+
+
 ## Custom Commands
 
 Console commands provide an easy framework in which to create and handle console inputs.
