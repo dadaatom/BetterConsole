@@ -12,6 +12,7 @@ namespace BetterConsole.ConsoleComponents
     
     public abstract class ListComponent : ConsoleComponent
     {
+        public string Label { get; set; } // Better name than label?
         public LinkedList<ConsoleComponent> List { get; set; }
 
         public ListComponent() : this(new ConsoleComponent[]{}){ }
@@ -38,7 +39,7 @@ namespace BetterConsole.ConsoleComponents
         /// Adds text component to the console component list.
         /// </summary>
         /// <param name="str">String to be added to the component list.</param>
-        public void AddText(string str)
+        public void AddElement(string str) // Feels awkward?
         {
             List.AddLast(new TextComponent(str));
         }

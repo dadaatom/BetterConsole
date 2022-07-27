@@ -14,7 +14,12 @@ namespace BetterConsole.ConsoleComponents
 
         public override string ToString()
         {
-            string toReturn = "";
+            string toReturn = Label;
+
+            if (toReturn.Length > 0)
+            {
+                toReturn += "\n";
+            }
 
             string paddedHeader = "";
             for (int i = 0; i < _itemHeader.Length; i++)
