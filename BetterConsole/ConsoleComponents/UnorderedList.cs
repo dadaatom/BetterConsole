@@ -2,19 +2,19 @@
 
 namespace BetterConsole.ConsoleComponents
 {
-    public class UnorderedListComponent : ListComponent
+    public class UnorderedList : ListComponent
     {
         private string _itemHeader = " - "; // Maybe make an option of dashes vs bullets, e.t.c.
         
-        public UnorderedListComponent(string label = "") : this(label, new ConsoleComponent[]{}) { }
+        public UnorderedList(string label = "") : this(label, new ConsoleComponent[]{}) { }
         
-        public UnorderedListComponent(string[] list) : this("", list) { }
+        public UnorderedList(string[] list) : this("", list) { }
         
-        public UnorderedListComponent(ConsoleComponent[] list) : this("", list) { }
+        public UnorderedList(ConsoleComponent[] list) : this("", list) { }
         
-        public UnorderedListComponent(string label, string[] list) : base(label, list) { }
+        public UnorderedList(string label, string[] list) : base(label, list) { }
 
-        public UnorderedListComponent(string label, ConsoleComponent[] list) : base(label, list) { }
+        public UnorderedList(string label, ConsoleComponent[] list) : base(label, list) { }
 
         /// <summary>
         /// Gets header of unordered list.

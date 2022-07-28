@@ -211,9 +211,10 @@ timer.Stop();
 ### <u>List Components</u>
 
 List components are used to display a collection of components, either in an ordered or unordered fashion.
+Additionally, lists accept an array of ConsoleComponents or an array of strings for ease of use.
 <br/>
 Two types of list components:
-- Un-Ordered
+- UnOrdered
 - Ordered
 
 <details>
@@ -225,9 +226,8 @@ Two types of list components:
 1. Create ordered list and write it to the console.
 
 ```csharp
-Console.WriteLine("\nList of my top 4 favorite numbers:");
-OrderedListComponent orderedListComponent = new OrderedListComponent(new string[]{"1", "2", "64", "4"});
-Console.WriteLine(orderedListComponent);
+OrderedList orderedList = new OrderedListComponent("List of my top 4 favorite numbers:", new string[]{"1", "2", "64", "4"});
+Console.WriteLine(orderedList);
 ```
 
 </details>

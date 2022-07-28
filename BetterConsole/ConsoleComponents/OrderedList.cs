@@ -2,24 +2,24 @@
 
 namespace BetterConsole.ConsoleComponents
 {
-    public class OrderedListComponent : ListComponent
+    public class OrderedList : ListComponent
     {
         public OrderedListStyle OrderedListStyle;
 
         private char[] _alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
         
-        public OrderedListComponent(string label = "", OrderedListStyle style = OrderedListStyle.Numerical) : this(label,new ConsoleComponent[]{}, style){ }
+        public OrderedList(string label = "", OrderedListStyle style = OrderedListStyle.Numerical) : this(label,new ConsoleComponent[]{}, style){ }
         
-        public OrderedListComponent(string[] list, OrderedListStyle style = OrderedListStyle.Numerical) : this("", list, style) { }
+        public OrderedList(string[] list, OrderedListStyle style = OrderedListStyle.Numerical) : this("", list, style) { }
         
-        public OrderedListComponent(ConsoleComponent[] list, OrderedListStyle style = OrderedListStyle.Numerical) : this("", list, style) { }
+        public OrderedList(ConsoleComponent[] list, OrderedListStyle style = OrderedListStyle.Numerical) : this("", list, style) { }
         
-        public OrderedListComponent(string label, string[] list, OrderedListStyle style = OrderedListStyle.Numerical) : base(label, list)
+        public OrderedList(string label, string[] list, OrderedListStyle style = OrderedListStyle.Numerical) : base(label, list)
         {
             OrderedListStyle = style;
         }
 
-        public OrderedListComponent(string label, ConsoleComponent[] list, OrderedListStyle style = OrderedListStyle.Numerical) : base(label, list)
+        public OrderedList(string label, ConsoleComponent[] list, OrderedListStyle style = OrderedListStyle.Numerical) : base(label, list)
         {
             OrderedListStyle = style;
         }

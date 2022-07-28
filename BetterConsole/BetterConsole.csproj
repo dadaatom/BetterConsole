@@ -49,12 +49,12 @@
         <Compile Include="ConsoleComponents\Border.cs" />
         <Compile Include="ConsoleComponents\Cell.cs" />
         <Compile Include="ConsoleComponents\ConsoleComponent.cs" />
-        <Compile Include="ConsoleComponents\Countdown.cs" />
+        <Compile Include="ConsoleComponents\CountdownTimer.cs" />
         <Compile Include="ConsoleComponents\HorizontalAlignment.cs" />
         <Compile Include="ConsoleComponents\ListComponent.cs" />
         <Compile Include="ConsoleComponents\LoadingBar.cs" />
         <Compile Include="ConsoleComponents\NumberComponent.cs" />
-        <Compile Include="ConsoleComponents\OrderedListComponent.cs" />
+        <Compile Include="ConsoleComponents\OrderedList.cs" />
         <Compile Include="ConsoleComponents\PaddedComponent.cs" />
         <Compile Include="ConsoleComponents\Separator.cs" />
         <Compile Include="ConsoleComponents\Styles\LoadingBarStyle.cs" />
@@ -63,7 +63,7 @@
         <Compile Include="ConsoleComponents\TextComponent.cs" />
         <Compile Include="ConsoleComponents\TimeComponent.cs" />
         <Compile Include="ConsoleComponents\Timer.cs" />
-        <Compile Include="ConsoleComponents\UnorderedListComponent.cs" />
+        <Compile Include="ConsoleComponents\UnorderedList.cs" />
         <Compile Include="ConsoleComponents\VerticalAlignment.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />

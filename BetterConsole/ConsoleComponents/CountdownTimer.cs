@@ -2,11 +2,11 @@
 
 namespace BetterConsole.ConsoleComponents
 {
-    public class Countdown : TimeComponent
+    public class CountdownTimer : TimeComponent
     {
         public DateTime Target;
         
-        public Countdown(DateTime target, int updateFrequency = 1000) : base(updateFrequency)
+        public CountdownTimer(DateTime target, int updateFrequency = 1000) : base(updateFrequency)
         {
             Target = target;
         }

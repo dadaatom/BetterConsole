@@ -70,21 +70,21 @@ namespace BetterConsole
 
             
             // CREATE AND WRITE UNORDERED LIST //
-            UnorderedListComponent unorderedListComponent = new UnorderedListComponent("List of things I like:", new string[]{"Rainy days", "Multi\nLine\nStrings", "Strawberries"});
+            UnorderedList unorderedList = new UnorderedList("List of things I like:", new string[]{"Rainy days", "Multi\nLine\nStrings", "Strawberries"});
             betterConsole.WriteLine("");
-            betterConsole.WriteLine(unorderedListComponent);
+            betterConsole.WriteLine(unorderedList);
             
             
             // CREATE AND WRITE NUMERICALLY ORDERED LIST //
-            OrderedListComponent orderedListComponent = new OrderedListComponent("List of my top 4 favorite numbers:",new string[]{"1", "2", "64", "4"});
+            OrderedList orderedList = new OrderedList("List of my top 4 favorite numbers:",new string[]{"1", "2", "64", "4"});
             betterConsole.WriteLine("");
-            betterConsole.WriteLine(orderedListComponent);
+            betterConsole.WriteLine(orderedList);
             
             
             // CREATE AND WRITE ALPHABETICALLY ORDERED LIST //
-            OrderedListComponent anotherOrderedListComponent = new OrderedListComponent("Look at this alphabetic list:", new string[]{"Woah","Cool!","Nice","Double Line\nNice"}, OrderedListStyle.Alphabetic);
+            OrderedList alphabeticallyOrderedList = new OrderedList("Look at this alphabetic list:", new string[]{"Woah","Cool!","Nice","Double Line\nNice"}, OrderedListStyle.Alphabetic);
             betterConsole.WriteLine("");
-            betterConsole.WriteLine(anotherOrderedListComponent);
+            betterConsole.WriteLine(alphabeticallyOrderedList);
             
             
             // CREATE AND WRITE TIMER //
