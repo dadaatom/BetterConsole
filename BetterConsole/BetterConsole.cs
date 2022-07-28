@@ -12,6 +12,7 @@ namespace BetterConsole
      * - Create listener paradigm for loading bars so they dont have to be reloaded?
      * - user input threads
      * - remove component func
+     * - Would this being a static class offer easier use?
      * - See console component todo.
      * - See Table todo.
      * - See console command todo.

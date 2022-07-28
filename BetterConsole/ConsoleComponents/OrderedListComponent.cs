@@ -8,76 +8,44 @@ namespace BetterConsole.ConsoleComponents
 
         private char[] _alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
         
-        public OrderedListComponent() : this(new ConsoleComponent[]{}, OrderedListStyle.Numerical){ }
-
-        public OrderedListComponent(OrderedListStyle style) : this(new ConsoleComponent[]{}){ }
-
-        public OrderedListComponent(string[] list, OrderedListStyle style = OrderedListStyle.Numerical) : base(list)
+        public OrderedListComponent(string label = "", OrderedListStyle style = OrderedListStyle.Numerical) : this(label,new ConsoleComponent[]{}, style){ }
+        
+        public OrderedListComponent(string[] list, OrderedListStyle style = OrderedListStyle.Numerical) : this("", list, style) { }
+        
+        public OrderedListComponent(ConsoleComponent[] list, OrderedListStyle style = OrderedListStyle.Numerical) : this("", list, style) { }
+        
+        public OrderedListComponent(string label, string[] list, OrderedListStyle style = OrderedListStyle.Numerical) : base(label, list)
         {
             OrderedListStyle = style;
         }
 
-        public OrderedListComponent(ConsoleComponent[] list, OrderedListStyle style = OrderedListStyle.Numerical) : base(list)
+        public OrderedListComponent(string label, ConsoleComponent[] list, OrderedListStyle style = OrderedListStyle.Numerical) : base(label, list)
         {
             OrderedListStyle = style;
         }
 
-        public override string ToString()
+        /// <summary>
+        /// Gets header of ordered list whether its numerical or alphabetic.
+        /// </summary>
+        /// <param name="index">Current item element within the list.</param>
+        /// <returns>Item header of ordered list.</returns>
+        public override string GetHeader(int index)
         {
-            string toReturn = Label;
-
-            if (toReturn.Length > 0)
-            {
-                toReturn += "\n";
-            }
-
-            string paddedHeader = "";
-
-            int maxLength = 0;
+            string toReturn = "";
+            
             if (OrderedListStyle == OrderedListStyle.Numerical)
             {
-                maxLength = (int) (Math.Log10(List.Count) + 1) + 3;
+                toReturn = " " + (index + 1) + ". ";
             }
             else if (OrderedListStyle == OrderedListStyle.Alphabetic)
             {
-                maxLength = (int)(Math.Log(List.Count) / Math.Log(_alphabet.Length) + 1) + 3;
-            }
-
-            for (int i = 0; i < maxLength; i++)
-            {
-                paddedHeader += " ";
-            }
-
-            int counter = 0;
-            
-            foreach (ConsoleComponent component in List)
-            {
-                string header = "";
-                
-                if (OrderedListStyle == OrderedListStyle.Numerical)
+                do
                 {
-                    header = " " + (counter + 1) + ". ";
-                }
-                else if (OrderedListStyle == OrderedListStyle.Alphabetic)
-                {
-                    int count = counter;
-                    do
-                    {
-                        header = _alphabet[count % 26] + header;
-                        count /= 26;
-                    } while (count > 0);
+                    toReturn = _alphabet[index % 26] + toReturn;
+                    index /= 26;
+                } while (index > 0);
 
-                    header = " " + header + ". ";
-                }
-
-                toReturn += TabComponent(component, header, paddedHeader);
-                
-                if (counter < List.Count - 1)
-                {
-                    toReturn += "\n";
-                }
-
-                counter++;
+                toReturn = " " + toReturn + ". ";
             }
 
             return toReturn;

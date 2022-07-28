@@ -67,23 +67,24 @@ namespace BetterConsole
             table.SetCell(new Cell("0"),4,2);
             
             betterConsole.WriteLine(table);
-            
+
             
             // CREATE AND WRITE UNORDERED LIST //
-            Console.WriteLine("\nList of things I like:");
-            UnorderedListComponent unorderedListComponent = new UnorderedListComponent(new string[]{"Rainy days", "Multi\nLine\nStrings", "Strawberries"});
-            Console.WriteLine(unorderedListComponent);
+            UnorderedListComponent unorderedListComponent = new UnorderedListComponent("List of things I like:", new string[]{"Rainy days", "Multi\nLine\nStrings", "Strawberries"});
+            betterConsole.WriteLine("");
+            betterConsole.WriteLine(unorderedListComponent);
             
             
             // CREATE AND WRITE NUMERICALLY ORDERED LIST //
-            Console.WriteLine("\nList of my top 4 favorite numbers:");
-            OrderedListComponent orderedListComponent = new OrderedListComponent(new string[]{"1", "2", "64", "4","1","2","3","4","5","6","7","8","9"});
-            Console.WriteLine(orderedListComponent);
+            OrderedListComponent orderedListComponent = new OrderedListComponent("List of my top 4 favorite numbers:",new string[]{"1", "2", "64", "4"});
+            betterConsole.WriteLine("");
+            betterConsole.WriteLine(orderedListComponent);
+            
             
             // CREATE AND WRITE ALPHABETICALLY ORDERED LIST //
-            Console.WriteLine("\nLook at this alphabetic list:");
-            OrderedListComponent anotherOrderedListComponent = new OrderedListComponent(new string[]{"Woah","Cool!","Nice","Double Line\nNice"}, OrderedListStyle.Alphabetic);
-            Console.WriteLine(anotherOrderedListComponent);
+            OrderedListComponent anotherOrderedListComponent = new OrderedListComponent("Look at this alphabetic list:", new string[]{"Woah","Cool!","Nice","Double Line\nNice"}, OrderedListStyle.Alphabetic);
+            betterConsole.WriteLine("");
+            betterConsole.WriteLine(anotherOrderedListComponent);
             
             
             // CREATE AND WRITE TIMER //

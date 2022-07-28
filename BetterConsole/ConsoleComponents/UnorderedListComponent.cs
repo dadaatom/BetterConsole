@@ -4,43 +4,26 @@ namespace BetterConsole.ConsoleComponents
 {
     public class UnorderedListComponent : ListComponent
     {
-        private string _itemHeader = " - ";
+        private string _itemHeader = " - "; // Maybe make an option of dashes vs bullets, e.t.c.
         
-        public UnorderedListComponent() { }
+        public UnorderedListComponent(string label = "") : this(label, new ConsoleComponent[]{}) { }
+        
+        public UnorderedListComponent(string[] list) : this("", list) { }
+        
+        public UnorderedListComponent(ConsoleComponent[] list) : this("", list) { }
+        
+        public UnorderedListComponent(string label, string[] list) : base(label, list) { }
 
-        public UnorderedListComponent(string[] list) : base(list) { }
+        public UnorderedListComponent(string label, ConsoleComponent[] list) : base(label, list) { }
 
-        public UnorderedListComponent(ConsoleComponent[] list) : base(list) { }
-
-        public override string ToString()
+        /// <summary>
+        /// Gets header of unordered list.
+        /// </summary>
+        /// <param name="index">This parameter is not used for unordered lists.</param>
+        /// <returns>Item header of unordered list.</returns>
+        public override string GetHeader(int index)
         {
-            string toReturn = Label;
-
-            if (toReturn.Length > 0)
-            {
-                toReturn += "\n";
-            }
-
-            string paddedHeader = "";
-            for (int i = 0; i < _itemHeader.Length; i++)
-            {
-                paddedHeader += " ";
-            }
-
-            int counter = 0;
-            foreach (ConsoleComponent component in List)
-            {
-                toReturn += TabComponent(component, _itemHeader, paddedHeader);
-                
-                if (counter < List.Count - 1)
-                {
-                    toReturn += "\n";
-                }
-
-                counter++;
-            }
-
-            return toReturn;
+            return _itemHeader;
         }
     }
 }
