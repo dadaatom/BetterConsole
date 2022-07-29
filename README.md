@@ -83,7 +83,7 @@ Loading bars are useful for displaying the execution progress of your code.
 1. Let's display the current progress of our program. Firstly, whilst completely optional, I am going to define different style options below.
     
 ```csharp
-LoadingBarStyle style = new LoadingBarStyle("-", "~", "<", ">");
+LoadingBarStyle style = new LoadingBarStyle("-", " ", "<", ">");
 ```
 
 2. We will now create our loading bar with the our new style options and a defined length. We will also write the loading bar to the console.
@@ -99,7 +99,7 @@ console.Write(loadingBar);
 ```csharp
 for (int i = 0; i <= n; i++) {
     //Do stuff.
-    loadingBar.SetPercentage(i*(1f/n));
+    loadingBar.SetPercentage(i/n);
 }
 ```
 
