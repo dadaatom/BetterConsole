@@ -140,14 +140,13 @@ table.SetCell(new Cell("9"),2,2);
 console.Write(table);
 ```
 
-3. Let's now add a new row of data. Resize the table, add the information to the new row, and reload the console.
+3. Let's now add a header within our table. Resize the table with a lower vertical alignment, add the title cell with a 3 column width, and reload the console.
 
 ```csharp
-table.Resize(4,3);
-
-table.SetCell(new Cell("Cool\nBird"),3,0);
-table.SetCell(new Cell("1"),3,1);
-table.SetCell(new Cell("0"),3,2);
+table.Resize(4,3, verticalAlignment: VerticalAlignment.Lower);
+            
+Cell titleCell = new Cell("Animals Spotted", 3, 1);
+table.SetCell(titleCell, 0, 0);
 
 console.Reload();
 ```
@@ -155,16 +154,16 @@ console.Reload();
 4. Observe your beautifully displayed table.
 
 ```
- ____ ___ ____
-|    |Tom|John|
-|----|---|----|
-|Dogs| 10|  2 |
-|----|---|----|
-|Cats| 6 |  9 |
-|----|---|----|
-|Cool| 1 |  0 |
-|Bird|   |    |
-|____|___|____|
+ _________________
+| Animals Spotted |
+|-----------------|
+|     | Tom | John|
+|-----|-----|-----|
+| Dogs|  10 |  2  |
+|-----|-----|-----|
+| Cats|  6  |  9  |
+|_____|_____|_____|
+
 ```
 
 </details>

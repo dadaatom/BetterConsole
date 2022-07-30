@@ -7,6 +7,7 @@ namespace BetterConsole.ConsoleComponents
      * Create max width/heights where the cell will omit some data where it can
      * Add wraparound logic to Cell if max vals are defined.
      * Fix vertical multi cells
+     * Shift elements func
      */
     
     public class Table : ConsoleComponent
@@ -53,33 +54,70 @@ namespace BetterConsole.ConsoleComponents
 
             Cells[row, column] = cell;
         }
-        
+
         /// <summary>
         /// Resizes table and copies old cells to fit new matrix.
         /// </summary>
         /// <param name="rows">New matrix width.</param>
         /// <param name="columns">New matrix height.</param>
-        public void Resize(int rows, int columns)
+        /// <param name="horizontalAlignment">Horizontal alignment of the resized table, default is left alignment.</param>
+        /// <param name="verticalAlignment">Vertical alignment of the resized table, default is upper alignment.</param>
+        public void Resize(int rows, int columns, HorizontalAlignment horizontalAlignment = HorizontalAlignment.Left, VerticalAlignment verticalAlignment = VerticalAlignment.Upper)
         {
-            Cell[,] newCells = new Cell[rows, columns];
-            
-            for (int i = 0; i < Math.Min(rows, Cells.GetLength(0)); i++) {
-                for (int j = 0; j < Math.Min(columns, Cells.GetLength(1)); j++)
+            int rowShift = 0;
+            int columnShift = 0;
+
+            switch (verticalAlignment)
+            {
+                case VerticalAlignment.Upper:
+                    rowShift = 0;
+                    break;
+                case VerticalAlignment.Center:
                 {
-                    newCells[i, j] = Cells[i, j];
+                    int center = rows / 2;
+                    rowShift = center - Cells.GetLength(0) / 2;
+                    break;
+                }
+                case VerticalAlignment.Lower:
+                    rowShift = rows - Cells.GetLength(0);
+                    break;
+            }
+            
+            switch (horizontalAlignment)
+            {
+                case HorizontalAlignment.Left:
+                    columnShift = 0;
+                    break;
+                case HorizontalAlignment.Center:
+                {
+                    int center = columns / 2;
+                    columnShift = center - Cells.GetLength(1) / 2;
+                    break;
+                }
+                case HorizontalAlignment.Right:
+                    columnShift = columns - Cells.GetLength(1);
+                    break;
+            }
+            
+            Cell[,] newCells = new Cell[rows, columns];
+
+            for (int i = Math.Max(0, -rowShift); i < Math.Min(Cells.GetLength(0), rows-rowShift); i++) {
+                for (int j = Math.Max(0, -columnShift); j < Math.Min(Cells.GetLength(1), columns-columnShift); j++)
+                {
+                    newCells[i + rowShift, j + columnShift] = Cells[i, j];
                 }
             }
 
             int[] newRowSizes = new int[rows];
-            for (int i = 0; i < Math.Min(rows, _rowSizes.Length); i++)
+            for (int i = Math.Max(0, -rowShift); i < Math.Min(Cells.GetLength(0), rows-rowShift); i++)
             {
-                newRowSizes[i] = _rowSizes[i];
+                newRowSizes[i+rowShift] = _rowSizes[i];
             }
             
             int[] newColumnSizes = new int[columns];
-            for (int i = 0; i < Math.Min(columns, _columnSizes.Length); i++)
+            for (int i = Math.Max(0, -columnShift); i < Math.Min(Cells.GetLength(1), columns-columnShift); i++)
             {
-                newColumnSizes[i] = _columnSizes[i];
+                newColumnSizes[i+columnShift] = _columnSizes[i];
             }
 
             Cells = newCells;
