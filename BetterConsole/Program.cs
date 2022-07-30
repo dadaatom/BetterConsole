@@ -60,10 +60,10 @@ namespace BetterConsole
             
             Cell titleCell = new Cell("Animals Spotted", 3, 1);
             table.SetCell(titleCell, 0, 0);
-            
+
             betterConsole.WriteLine(table);
 
-            /*
+            
             // CREATE AND WRITE UNORDERED LIST //
             UnorderedList unorderedList = new UnorderedList("List of things I like:", new string[]{"Rainy days", "Multi\nLine\nStrings", "Strawberries"});
             betterConsole.WriteLine("");
@@ -80,15 +80,15 @@ namespace BetterConsole
             OrderedList alphabeticallyOrderedList = new OrderedList("Look at this alphabetic list:", new string[]{"Woah","Cool!","Nice","Double Line\nNice"}, OrderedListStyle.Alphabetic);
             betterConsole.WriteLine("");
             betterConsole.WriteLine(alphabeticallyOrderedList);
-            */
+            
             
             // CREATE AND WRITE TIMER //
-            /*Timer timer = new Timer();
+            Timer timer = new Timer();
             
             betterConsole.Write("Content loaded: ");
             betterConsole.Write(timer);
             
-            timer.Start();*/
+            timer.Start();
         }
     }
 }

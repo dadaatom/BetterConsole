@@ -8,6 +8,7 @@ namespace BetterConsole.ConsoleComponents
      * Add wraparound logic to Cell if max vals are defined.
      * Fix vertical multi cells
      * Shift elements func
+     * 
      */
     
     public class Table : ConsoleComponent
@@ -221,7 +222,12 @@ namespace BetterConsole.ConsoleComponents
         {
             _rowSizes = new int[Cells.GetLength(0)];
             _columnSizes = new int[Cells.GetLength(1)];
-            
+
+            for (int i = 0; i < _columnSizes.Length; i++) 
+            {
+                _columnSizes[i] = 1;
+            }
+
             for (int i = 0; i < Cells.GetLength(0); i++)
             {
                 for (int j = 0; j < Cells.GetLength(1); j++)
