@@ -53,7 +53,7 @@ namespace BetterConsole
             _commandThread?.Interrupt();
         }
         
-        //====================// Ported Methods //====================//
+        //====================// Reimplemented Methods //====================//
         
         /// <summary>
         /// Writes the component within the console.

@@ -85,8 +85,10 @@ namespace BetterConsole
             // CREATE AND WRITE TIMER //
             Timer timer = new Timer();
             
-            betterConsole.Write("Content loaded: ");
+            betterConsole.WriteLine("");
+            betterConsole.Write("Content loaded ");
             betterConsole.Write(timer);
+            betterConsole.Write(" ago.");
             
             timer.Start();
         }

@@ -143,7 +143,7 @@ console.Write(table);
 3. Let's now add a header within our table. Resize the table with a lower vertical alignment, add the title cell with a 3 column width, and reload the console.
 
 ```csharp
-table.Resize(4,3, verticalAlignment: VerticalAlignment.Lower);
+table.Resize(4, 3, verticalAlignment: VerticalAlignment.Lower);
             
 Cell titleCell = new Cell("Animals Spotted", 3, 1);
 table.SetCell(titleCell, 0, 0);
@@ -213,8 +213,8 @@ List components are used to display a collection of components, either in an ord
 Additionally, lists accept an array of ConsoleComponents or an array of strings for ease of use.
 <br/>
 Two types of list components:
-- UnOrdered
 - Ordered
+- Unordered
 
 <details>
     <summary>
@@ -222,7 +222,7 @@ Two types of list components:
     </summary>
 <br/>
 
-1. Create ordered list and write it to the console.
+1. Create an ordered list and write it to the console.
 
 ```csharp
 OrderedList orderedList = new OrderedListComponent("List of my top 4 favorite numbers:", new string[]{"1", "2", "64", "4"});

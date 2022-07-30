@@ -8,7 +8,6 @@ namespace BetterConsole.ConsoleComponents
      * Add wraparound logic to Cell if max vals are defined.
      * Fix vertical multi cells
      * Shift elements func
-     * 
      */
     
     public class Table : ConsoleComponent

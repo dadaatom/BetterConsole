@@ -8,6 +8,8 @@ namespace BetterConsole.ConsoleComponents
      * Style options (i.e. loading bar) (exist as a class applied to the console that most things communicate with)
      * Images?
      * Buttons?
+     * Pages?
+     * Dropdowns?
      */
     
     public abstract class ConsoleComponent
