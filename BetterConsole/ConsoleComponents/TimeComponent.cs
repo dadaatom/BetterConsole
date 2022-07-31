@@ -36,7 +36,7 @@ namespace BetterConsole.ConsoleComponents
             if (!_active)
             {
                 _active = true;
-                BetterConsole.Instance?.TimeHandler?.Subscribe(this);
+                BetterConsole.TimeHandler?.Subscribe(this);
             }
             // throw error if started?
         }
@@ -49,7 +49,7 @@ namespace BetterConsole.ConsoleComponents
             if (_active)
             {
                 _active = false;
-                BetterConsole.Instance.TimeHandler.UnSubscribe(this);
+                BetterConsole.TimeHandler?.UnSubscribe(this);
             }
             // throw error is not active?
         }

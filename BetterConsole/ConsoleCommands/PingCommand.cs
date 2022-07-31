@@ -8,7 +8,7 @@ namespace BetterConsole.Commands
 
         public override void Execute(string[] signature)
         {
-            Console.WriteLine("pong");
+            BetterConsole.WriteLine("pong");
         }
     }
 }

@@ -91,7 +91,7 @@ namespace BetterConsole
                     Thread.Sleep((int)millis);
                 }
                 
-                BetterConsole.Instance.Reload(timeComponent);
+                BetterConsole.Reload(timeComponent);
             }
         }
     }

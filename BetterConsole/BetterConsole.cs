@@ -12,54 +12,45 @@ namespace BetterConsole
      * - Create listener paradigm for loading bars so they dont have to be reloaded?
      * - user input threads
      * - remove component func
-     * - Would this being a static class offer easier use?
      * - See console component todo.
      * - See Table todo.
      * - See console command todo.
      */
 
-    public class BetterConsole
+    public static class BetterConsole
     {
-        public static BetterConsole Instance;
-        
-        public LinkedList<ConsoleComponent> DisplayedComponents;
+        public static LinkedList<ConsoleComponent> DisplayedComponents;
 
-        public TimeHandler TimeHandler { get; private set; }
+        public static TimeHandler TimeHandler { get; private set; }
 
-        private List<ConsoleCommand> _commands;
+        private static List<ConsoleCommand> _commands;
         
-        private Thread _commandThread;
+        private static Thread _commandThread;
 
-        public bool EnforceLimit = false;
-        private int _displayLimit;
-        
+        public static bool EnforceLimit { get; set; }
+        private static int DisplayLimit { get; set; }
+
         //====================// Constructors //====================//
         
-        public BetterConsole(int displayLimit = 1000)
+        static BetterConsole()
         {
-            Instance = this;
-            
             DisplayedComponents = new LinkedList<ConsoleComponent>();
             
             TimeHandler = new TimeHandler();
             
             _commands = new List<ConsoleCommand>();
 
-            _displayLimit = displayLimit;
+            EnforceLimit = false;
+            DisplayLimit = 1000;
         }
 
-        ~BetterConsole()
-        {
-            _commandThread?.Interrupt();
-        }
-        
         //====================// Reimplemented Methods //====================//
         
         /// <summary>
         /// Writes the component within the console.
         /// </summary>
         /// <param name="component">Console component to be written.</param>
-        public void Write(ConsoleComponent component)
+        public static void Write(ConsoleComponent component)
         {
             AppendLine(component);
             component.Write();
@@ -69,7 +60,7 @@ namespace BetterConsole
         /// Writes the component to the new line within the console.
         /// </summary>
         /// <param name="component">Console component to be written.</param>
-        public void WriteLine(ConsoleComponent component) //Enable line break and redirect to write.
+        public static void WriteLine(ConsoleComponent component) //Enable line break and redirect to write.
         {
             AppendLine(component);
             AddLine(null);
@@ -82,7 +73,7 @@ namespace BetterConsole
         /// </summary>
         /// <param name="text">Text to be written.</param>
         /// <param name="color">Color to display the text.</param>
-        public void Write(string text, ConsoleColor color)
+        public static void Write(string text, ConsoleColor color)
         {
             TextComponent textComp = new TextComponent(text);
             textComp.SetColor(color);
@@ -93,7 +84,7 @@ namespace BetterConsole
         /// Forwards a text component to the Write function.
         /// </summary>
         /// <param name="text">Text to be written.</param>
-        public void Write(string text)
+        public static void Write(string text)
         {
             Write(new TextComponent(text));
         }
@@ -103,7 +94,7 @@ namespace BetterConsole
         /// </summary>
         /// <param name="text">Text to be written.</param>
         /// <param name="color">Color to display the text.</param>
-        public void WriteLine(string text, ConsoleColor color)
+        public static void WriteLine(string text, ConsoleColor color)
         {
             TextComponent textComp = new TextComponent(text);
             textComp.SetColor(color);
@@ -114,19 +105,16 @@ namespace BetterConsole
         /// Forwards a text component to the WriteLine function.
         /// </summary>
         /// <param name="text">Text to be written.</param>
-        public void WriteLine(string text)
+        public static void WriteLine(string text)
         {
             WriteLine(new TextComponent(text));
         }
 
-        //implement some sort of parallel read line?
-        
-        
         /// <summary>
         /// Reads line and adds user input to the consoles displayed list.
         /// </summary>
         /// <returns>User input read from the console.</returns>
-        public string ReadLine()
+        public static string ReadLine()
         {
             string val = Console.ReadLine();
             AddLine(new TextComponent(val)); //todo: revisit when read / read line are updated inline of Console functionality
@@ -138,7 +126,7 @@ namespace BetterConsole
         /// </summary>
         /// <returns>User input read from the console.</returns>
         /// <exception cref="NotImplementedException"></exception>
-        public string Read()
+        public static string Read()
         {
             throw new NotImplementedException();
         }
@@ -146,7 +134,7 @@ namespace BetterConsole
         /// <summary>
         /// Clears the console and list of displayed items.
         /// </summary>
-        public void Clear()
+        public static void Clear()
         {
             DisplayedComponents = new LinkedList<ConsoleComponent>();
             Console.Clear();
@@ -158,7 +146,7 @@ namespace BetterConsole
         /// Clears the console and reloads either the last line or the entire console.
         /// </summary>
         /// <param name="component">Reloads based on the position of this component within the console.</param>
-        public void Reload(ConsoleComponent component)
+        public static void Reload(ConsoleComponent component)
         {
             if (false) // IF IS IN LAST AND IS NOT MULTILINE.
             {
@@ -174,7 +162,7 @@ namespace BetterConsole
         /// <summary>
         /// Clears the console and rewrites all items stored within the displayed list.
         /// </summary>
-        public void Reload()
+        public static void Reload()
         {
             Console.Clear();
 
@@ -196,9 +184,9 @@ namespace BetterConsole
         /// Adds a new line to the displayed list and will enforce the display limit if enabled.
         /// </summary>
         /// <param name="component">Console component to be saved within the displayed list.</param>
-        private void AddLine(ConsoleComponent component)
+        private static void AddLine(ConsoleComponent component)
         {
-            if (DisplayedComponents.Count + 1 > _displayLimit)
+            if (DisplayedComponents.Count + 1 > DisplayLimit)
             {
                 DisplayedComponents.RemoveFirst();
                 DisplayedComponents.AddLast(component);
@@ -217,7 +205,7 @@ namespace BetterConsole
         /// Appends component to the end of the last line.
         /// </summary>
         /// <param name="component">New component to be appended.</param>
-        private void AppendLine(ConsoleComponent component)
+        private static void AppendLine(ConsoleComponent component)
         {
             if (DisplayedComponents.Count == 0)
             {
@@ -243,18 +231,18 @@ namespace BetterConsole
             
         //====================// Command Handling //====================//
         
-        public void BeginCommandHandling()
+        public static void BeginCommandHandling()
         {
             _commandThread = new Thread(HandleCommands);
             _commandThread.Start();
         }
 
-        public void StopCommandHandling()
+        public static void StopCommandHandling()
         {
             _commandThread?.Interrupt();
         }
 
-        private void HandleCommands() //Rename this function appropriately?
+        private static void HandleCommands() //Rename this function appropriately?
         {
             while (true)
             {
@@ -276,12 +264,12 @@ namespace BetterConsole
 
         //====================// Commands //====================//
         
-        public List<ConsoleCommand> GetCommands()
+        public static List<ConsoleCommand> GetCommands()
         {
             return _commands;
         }
         
-        public void AddCommand(ConsoleCommand command)
+        public static void AddCommand(ConsoleCommand command)
         {
             bool exists = false;
 

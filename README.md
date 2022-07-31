@@ -11,7 +11,7 @@ First, let's create an instance of the `BetterConsole` class.
 BetterConsole console = new BetterConsole();
 ```
 
-By default the BetterConsole will only reload up to 1000 console lines, as depending on the implmentation reloads may occur frequently and adding a limit may improve preformance. Here's another constructor call where our implementation may contain very frequent reloads.
+By default the BetterConsole will only reload up to 1000 console lines, as depending on the implementation reloads may occur frequently and adding a limit may improve preformance. Here's another constructor call where our implementation may contain very frequent reloads.
 
 ```csharp
 BetterConsole console = new BetterConsole(displayLimit = 100);
@@ -23,10 +23,10 @@ BetterConsole console = new BetterConsole(displayLimit = 100);
 Read, write, and clear functions are all present as before.
 
 ```csharp
-console.WriteLine("This is a line of text.");
-console.Write("Here's some more text.");
-console.Clear();
-console.Write("Enter some text: ");
+BetterConsole.WriteLine("This is a line of text.");
+BetterConsole.Write("Here's some more text.");
+BetterConsole.Clear();
+BetterConsole.Write("Enter some text: ");
 string text = console.ReadLine();
 ```
 
@@ -34,7 +34,7 @@ Using the write methods of the console will register them internally so written 
 Call the reload method to clear and redisplay all console lines.
 
 ```csharp
-console.Reload();
+BetterConsole.Reload();
 ```
 
 
@@ -59,13 +59,13 @@ Let's write a text component in the color green.
 ```csharp
 TextComponent text = new TextComponent("This will appear green!");
 text.SetColor(ConsoleColor.Green);
-console.WriteLine(text);
+BetterConsole.WriteLine(text);
 ```
 
 Alternatively, for plain text the regular Console methods are implemented to make usage easier.
 
 ```csharp
-console.WriteLine("This will also appear green!", ConsoleColor.Green);
+BetterConsole.WriteLine("This will also appear green!", ConsoleColor.Green);
 ```
 
 </details>
@@ -90,8 +90,8 @@ LoadingBarStyle style = new LoadingBarStyle("-", " ", "<", ">");
 
 ```csharp
 LoadingBar loadingBar = new LoadingBar(style, 10);
-console.WriteLine("Execution process: ");
-console.Write(loadingBar);
+BetterConsole.WriteLine("Execution process: ");
+BetterConsole.Write(loadingBar);
 ```
 
 3. Great, now all we need to do is provide our loading bar with its the current program progress. Note that input values to the SetPercentage method are automatically bounded between 0 and 1.
@@ -137,7 +137,7 @@ table.SetCell(new Cell("2"),1,2);
 table.SetCell(new Cell("6"),2,1);
 table.SetCell(new Cell("9"),2,2);
 
-console.Write(table);
+BetterConsole.Write(table);
 ```
 
 3. Let's now add a header within our table. Resize the table with a lower vertical alignment, add the title cell with a 3 column width, and reload the console.
@@ -148,7 +148,7 @@ table.Resize(4, 3, verticalAlignment: VerticalAlignment.Lower);
 Cell titleCell = new Cell("Animals Spotted", 3, 1);
 table.SetCell(titleCell, 0, 0);
 
-console.Reload();
+BetterConsole.Reload();
 ```
 
 4. Observe your beautifully displayed table.
@@ -188,8 +188,8 @@ Types of time components:
 ```csharp
 Timer timer = new Timer();
 
-console.WriteLine("This timer has been running for: ");
-console.Write(timer);
+BetterConsole.WriteLine("This timer has been running for: ");
+BetterConsole.Write(timer);
 ```
 
 2. Start the timer to begin timed updates.
@@ -226,7 +226,7 @@ Two types of list components:
 
 ```csharp
 OrderedList orderedList = new OrderedListComponent("List of my top 4 favorite numbers:", new string[]{"1", "2", "64", "4"});
-Console.WriteLine(orderedList);
+BetterConsole.WriteLine(orderedList);
 ```
 
 </details>
@@ -251,7 +251,7 @@ public class PingCommand : ConsoleCommand
 
     public override void Execute(string[] signature)
     {
-        BetterConsole.Instance.WriteLine("pong");
+        BetterConsole.WriteLine("pong");
     }
 }
 ```
@@ -259,8 +259,8 @@ public class PingCommand : ConsoleCommand
 2. Now all we need to do is register an instance of our new command within the BetterConsole. The `BeginCommandHandling` method creates a new thread to handle incoming user inputs so new content can still be output to the console.
 
 ```csharp
-console.AddCommand(new PingCommand()):
-console.BeginCommandHandling();
+BetterConsole.AddCommand(new PingCommand()):
+BetterConsole.BeginCommandHandling();
 ```
 
 </details>
