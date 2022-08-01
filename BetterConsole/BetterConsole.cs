@@ -9,7 +9,6 @@ namespace BetterConsole
 {
     /*
      * TODO:
-     * - Create listener paradigm for loading bars so they dont have to be reloaded?
      * - user input threads
      * - remove component func
      * - See console component todo.
@@ -28,7 +27,7 @@ namespace BetterConsole
         private static Thread _commandThread;
 
         public static bool EnforceLimit { get; set; }
-        private static int DisplayLimit { get; set; }
+        public static int DisplayLimit { get; set; }
 
         //====================// Constructors //====================//
         

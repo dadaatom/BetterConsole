@@ -1,20 +1,17 @@
 # <u>BetterConsole</u>
 
-Better console with prebuilt functionalities and offers improved display tools. Implements a ConsoleCommand framework so that user defined commands can easily be added and handled.
+## Why use BetterConsole?
+
+BetterConsole offers common display tools and quality of life features for developing console applications.
+Additionally, features like the ability to edit and refresh the command line is very handy when trying to maintain a clean console output.
 
 
-## Creating the BetterConsole
-
-First, let's create an instance of the `BetterConsole` class. 
-
-```csharp
-BetterConsole console = new BetterConsole();
-```
+## BetterConsole Parameters
 
 By default the BetterConsole will only reload up to 1000 console lines, as depending on the implementation reloads may occur frequently and adding a limit may improve preformance. Here's another constructor call where our implementation may contain very frequent reloads.
 
 ```csharp
-BetterConsole console = new BetterConsole(displayLimit = 100);
+BetterConsole.DisplayLimit = 100;
 ```
 
 

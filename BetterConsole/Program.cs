@@ -77,7 +77,7 @@ namespace BetterConsole
             BetterConsole.WriteLine("");
             BetterConsole.WriteLine(alphabeticallyOrderedList);
             
-            
+
             // CREATE AND WRITE TIMER //
             Timer timer = new Timer();
             
