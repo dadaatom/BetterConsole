@@ -183,7 +183,7 @@ namespace BetterConsole.ConsoleComponents
             
             while (current != null)
             {
-                value += current.ToString();
+                value += current.Generate();
                 current = current.Next;
             }
 

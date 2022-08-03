@@ -1,4 +1,7 @@
 ﻿using System;
+using System.CodeDom;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BetterConsole.ConsoleComponents
 {
@@ -34,12 +37,16 @@ namespace BetterConsole.ConsoleComponents
         /// <summary>
         /// Writes the entire line to the console.
         /// </summary>
-        public void Write()
+        /// <param name="generate">Updates inner string with newest toString iteration.</param>
+        public void Write(bool generate = true)
         {
             ConsoleColor baseColor = Console.ForegroundColor;
             Console.ForegroundColor = _color;
-
-            _lines = ToString().Split('\n');
+            
+            if (generate)
+            {
+                _lines = Generate().Split('\n');
+            }
 
             for (int i = 0; i < _lines.Length; i++) {
                 Console.Write(_lines[i]);
@@ -57,6 +64,10 @@ namespace BetterConsole.ConsoleComponents
 
         public abstract override string ToString();
         
+        /// <summary>
+        /// Updates inner string with newest toString.
+        /// </summary>
+        /// <returns>Returns newest generation of the toString method.</returns>
         public string Generate()
         {
             string toReturn = ToString();

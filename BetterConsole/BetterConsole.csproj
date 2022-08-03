@@ -48,6 +48,7 @@
         <Compile Include="ConsoleCommands\PingCommand.cs" />
         <Compile Include="ConsoleComponents\Border.cs" />
         <Compile Include="ConsoleComponents\Cell.cs" />
+        <Compile Include="ConsoleComponents\ComponentColor.cs" />
         <Compile Include="ConsoleComponents\ConsoleComponent.cs" />
         <Compile Include="ConsoleComponents\CountdownTimer.cs" />
         <Compile Include="ConsoleComponents\HorizontalAlignment.cs" />
