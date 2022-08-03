@@ -16,8 +16,10 @@ namespace BetterConsole.ConsoleComponents
     public abstract class ConsoleComponent
     {
         public ConsoleComponent Next { get; set; }
-        
-        private ConsoleColor _color;
+
+        private ConsoleColor _color; // Replace with component color
+
+        private string[] _lines;
 
         public ConsoleComponent() : this(ConsoleColor.Gray) { }
 
@@ -25,6 +27,8 @@ namespace BetterConsole.ConsoleComponents
         {
             Next = null;
             _color = color;
+
+            _lines = new string[0];
         }
 
         /// <summary>
@@ -34,17 +38,58 @@ namespace BetterConsole.ConsoleComponents
         {
             ConsoleColor baseColor = Console.ForegroundColor;
             Console.ForegroundColor = _color;
-            
-            Console.Write(ToString());
+
+            _lines = ToString().Split('\n');
+
+            for (int i = 0; i < _lines.Length; i++) {
+                Console.Write(_lines[i]);
+                if (i < _lines.Length - 1)
+                {
+                    Console.Write('\n');
+                }
+            }
+
+            //Console.Write(ToString());
             Next?.Write();
             
             Console.ForegroundColor = baseColor;
         }
-        
+
         public abstract override string ToString();
+        
+        public string Generate()
+        {
+            string toReturn = ToString();
+            _lines = toReturn.Split('\n');
+            return toReturn;
+        }
 
         /// <summary>
-        /// Is component
+        /// Gets the number of lines in the Console Component.
+        /// </summary>
+        /// <returns>Line count of the component.</returns>
+        public int GetLineCount()
+        {
+            return _lines.Length;
+        }
+
+        /// <summary>
+        /// Gets the length of all characters in the Console Component.
+        /// </summary>
+        /// <returns>Length of the string.</returns>
+        public int Length()
+        {
+            int count = 0;
+            foreach (string str in _lines)
+            {
+                count += str.Length;
+            }
+
+            return count;
+        }
+
+        /// <summary>
+        /// Checks whether the component is in the line.
         /// </summary>
         /// <param name="component">Console component to search for.</param>
         /// <returns>Whether the component can be found within this component.</returns>
