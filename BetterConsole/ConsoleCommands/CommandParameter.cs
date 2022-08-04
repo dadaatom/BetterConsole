@@ -5,6 +5,6 @@ namespace BetterConsole.Commands
     public class CommandParameter
     {
         public bool Required;
-        //public ValidationStrategy[] ValidationStrategies;
+        public ValidationStrategy[] ValidationStrategies;
     }
 }
