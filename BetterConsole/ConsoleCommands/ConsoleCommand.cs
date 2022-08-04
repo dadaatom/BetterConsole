@@ -14,7 +14,9 @@ namespace BetterConsole.Commands
         public string Command { get; }
         public string[] Aliases { get; }
 
-        public List<ConsoleCommand> SubCommands { get; }
+        public CommandParameter[] Parameters { get; }
+
+        public ConsoleCommand[] SubCommands { get; }
 
         private string _description;
         

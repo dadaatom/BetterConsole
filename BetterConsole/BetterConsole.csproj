@@ -44,8 +44,13 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="BetterConsole.cs" />
+        <Compile Include="ConsoleCommands\CommandParameter.cs" />
         <Compile Include="ConsoleCommands\ConsoleCommand.cs" />
         <Compile Include="ConsoleCommands\PingCommand.cs" />
+        <Compile Include="ConsoleCommands\ValidationStrategies\BlacklistValidation.cs" />
+        <Compile Include="ConsoleCommands\ValidationStrategies\RegexValidation.cs" />
+        <Compile Include="ConsoleCommands\ValidationStrategies\ValidationStrategy.cs" />
+        <Compile Include="ConsoleCommands\ValidationStrategies\WhitelistValidation.cs" />
         <Compile Include="ConsoleComponents\Border.cs" />
         <Compile Include="ConsoleComponents\Cell.cs" />
         <Compile Include="ConsoleComponents\ConsoleComponent.cs" />
