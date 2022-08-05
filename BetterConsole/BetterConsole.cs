@@ -147,8 +147,21 @@ namespace BetterConsole
         /// <param name="component">Reloads based on the position of this component within the console.</param>
         public static void Reload(ConsoleComponent component)
         {
-            if (false) // IF IS IN LAST AND IS NOT MULTILINE.
+            if (DisplayedComponents.Last.Value.Contains(component) && false) // Need to create spaces to cover rest of string, maybe multline okay if there's a clear sep between components?
             {
+                ConsoleComponent current = DisplayedComponents.Last.Value;
+
+                while(current != null)
+                {
+                    if (current.GetLineCount() <= 1)
+                    {
+                        Reload();
+                        return;
+                    }
+
+                    current = current.Next;
+                }
+                
                 Console.Write("\r");
                 DisplayedComponents.Last.Value?.Write();
             }
