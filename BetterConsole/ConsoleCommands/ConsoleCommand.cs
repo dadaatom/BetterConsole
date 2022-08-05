@@ -29,7 +29,7 @@ namespace BetterConsole.Commands
         
         ConsoleCommand(string command, string description) : this(command, new string[0], description) { }
         ConsoleCommand(string command) : this(command, new string[0], "") { }
-        
+
         /// <summary>
         /// Called when command signature is detected in input.
         /// </summary>

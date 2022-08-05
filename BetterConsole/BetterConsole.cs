@@ -22,9 +22,7 @@ namespace BetterConsole
 
         public static TimeHandler TimeHandler { get; private set; }
 
-        private static List<ConsoleCommand> _commands;
-        
-        private static Thread _commandThread;
+        public static CommandHandler CommandHandler { get; private set; }
 
         public static bool EnforceLimit { get; set; }
         public static int DisplayLimit { get; set; }
@@ -36,8 +34,7 @@ namespace BetterConsole
             DisplayedComponents = new LinkedList<ConsoleComponent>();
             
             TimeHandler = new TimeHandler();
-            
-            _commands = new List<ConsoleCommand>();
+            CommandHandler = new CommandHandler();
 
             EnforceLimit = false;
             DisplayLimit = 1000;
@@ -224,66 +221,6 @@ namespace BetterConsole
             else
             {
                 DisplayedComponents.Last.Value = component;
-            }
-        }
-        
-            
-        //====================// Command Handling //====================//
-        
-        public static void BeginCommandHandling()
-        {
-            _commandThread = new Thread(HandleCommands);
-            _commandThread.Start();
-        }
-
-        public static void StopCommandHandling()
-        {
-            _commandThread?.Interrupt();
-        }
-
-        private static void HandleCommands() //Rename this function appropriately?
-        {
-            while (true)
-            {
-                string line = Console.ReadLine();
-                if (!string.IsNullOrEmpty(line))
-                {
-                    string[] signature = line.Split(' ');
-
-                    foreach (ConsoleCommand command in _commands) {
-                        if (command.Command.Equals(signature[0]) || command.Aliases.Contains(signature[0]))
-                        {
-                            command.Execute(signature);
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-
-        //====================// Commands //====================//
-        
-        public static List<ConsoleCommand> GetCommands()
-        {
-            return _commands;
-        }
-        
-        public static void AddCommand(ConsoleCommand command)
-        {
-            bool exists = false;
-
-            foreach (ConsoleCommand c in _commands)
-            {
-                if (c.Command.Equals(command.Command))
-                {
-                    //throw new Exception(); // Throw some sort of duplicate command exception?
-                    exists = true;
-                }
-            }
-
-            if (!exists)
-            {
-                _commands.Add(command);
             }
         }
     }
