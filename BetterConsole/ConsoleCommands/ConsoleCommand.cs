@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace BetterConsole.Commands
+﻿namespace BetterConsole.ConsoleCommands
 {
     /*
      * TODO:

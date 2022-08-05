@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BetterConsole.Commands
+﻿namespace BetterConsole.ConsoleCommands
 {
     public class PingCommand : ConsoleCommand
     {

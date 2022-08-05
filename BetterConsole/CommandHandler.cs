@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading;
 using System.Linq;
-using BetterConsole.Commands;
 using System.Collections.Generic;
+using BetterConsole.ConsoleCommands;
 
 namespace BetterConsole
 {

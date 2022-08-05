@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace BetterConsole.Commands
+namespace BetterConsole.ConsoleCommands
 {
     public class BlacklistValidation : ValidationStrategy
     {

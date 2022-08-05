@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using BetterConsole.Commands;
 using BetterConsole.ConsoleComponents;
 
 namespace BetterConsole

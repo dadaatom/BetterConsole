@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-using BetterConsole.Commands;
 using BetterConsole.ConsoleComponents;
 using Timer = BetterConsole.ConsoleComponents.Timer;
 

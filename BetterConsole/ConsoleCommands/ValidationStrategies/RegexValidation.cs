@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace BetterConsole.Commands
+namespace BetterConsole.ConsoleCommands
 {
     public class RegexValidation : ValidationStrategy
     {
@@ -15,7 +15,6 @@ namespace BetterConsole.Commands
         {
             Regex regex = new Regex(Regex);
             Match match = regex.Match(input);
-
             return match.Success;
         }
     }

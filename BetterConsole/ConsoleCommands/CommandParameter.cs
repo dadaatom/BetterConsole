@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-namespace BetterConsole.Commands
+﻿namespace BetterConsole.ConsoleCommands
 {
     public class CommandParameter
     {
