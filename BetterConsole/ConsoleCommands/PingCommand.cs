@@ -2,7 +2,7 @@
 {
     public class PingCommand : ConsoleCommand
     {
-        public PingCommand() : base("ping", new string[]{"p"}, "Pings the console for a response.") { }
+        public PingCommand() : base("ping", new string[]{"p"}) { }
 
         public override void Execute(string[] signature)
         {

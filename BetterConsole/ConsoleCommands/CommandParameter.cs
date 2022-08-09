@@ -3,6 +3,6 @@
     public class CommandParameter
     {
         public bool Required;
-        public ValidationStrategy[] ValidationStrategies;
+        public ValidationStrategy ValidationStrategy;
     }
 }

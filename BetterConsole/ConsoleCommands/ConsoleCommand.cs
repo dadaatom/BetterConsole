@@ -1,4 +1,6 @@
-﻿namespace BetterConsole.ConsoleCommands
+﻿using System.Linq;
+
+namespace BetterConsole.ConsoleCommands
 {
     /*
      * TODO:
@@ -16,22 +18,45 @@
         
         public CommandParameter[] Parameters { get; }
 
-        private string _description;
-        
-        public ConsoleCommand(string command, string[] aliases, string description)
+        public string Description { get; set; }
+
+        public ConsoleCommand(string command, string[] aliases)
         {
             Command = command;
             Aliases = aliases;
-            _description = description;
         }
         
-        ConsoleCommand(string command, string description) : this(command, new string[0], description) { }
-        ConsoleCommand(string command) : this(command, new string[0], "") { }
+        ConsoleCommand(string command) : this(command, new string[0]) { }
 
         /// <summary>
         /// Called when command signature is detected in input.
         /// </summary>
         /// <param name="signature">Signature read from the command line.</param>
         public abstract void Execute(string[] signature);
+
+        public bool Matches(string[] signature)
+        {
+            if (signature.Length > 0 && (Command == signature[0] || Aliases.Contains(signature[0])))
+            {
+                foreach (ConsoleCommand command in SubCommands)
+                {
+                    if (Command == signature[0] || Aliases.Contains(signature[0]))
+                    {
+                        return true;
+                    }
+                }
+
+                for (int i = 0; i < Parameters.Length; i++) {
+                    if (!Parameters[i].ValidationStrategy.Validate(signature[i+1]))
+                    {
+                        return false;
+                    }
+                }
+                
+                return true;
+            }
+
+            return false;
+        }
     }
 }
