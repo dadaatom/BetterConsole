@@ -96,6 +96,29 @@ namespace BetterConsole.ConsoleComponents
         }
 
         /// <summary>
+        /// Computes the component string of the Component.
+        /// </summary>
+        /// <returns>Aggregate toString values of all Components.</returns>
+        private string GetComponentString()
+        {
+            if (Component == null)
+            {
+                return "";
+            }
+
+            ConsoleComponent current = Component;
+            string value = "";
+            
+            while (current != null)
+            {
+                value += current.Generate();
+                current = current.Next;
+            }
+
+            return value;
+        }
+        
+        /// <summary>
         /// Computed the padded value array.
         /// </summary>
         public void Compute(bool checkValue = true)
@@ -165,29 +188,6 @@ namespace BetterConsole.ConsoleComponents
 
             PaddedValue = newValueLines;
             Value = newValue;
-        }
-
-        /// <summary>
-        /// Computes the component string of the Component.
-        /// </summary>
-        /// <returns>Aggregate toString values of all Components.</returns>
-        private string GetComponentString()
-        {
-            if (Component == null)
-            {
-                return "";
-            }
-
-            ConsoleComponent current = Component;
-            string value = "";
-            
-            while (current != null)
-            {
-                value += current.Generate();
-                current = current.Next;
-            }
-
-            return value;
         }
     }
 }
