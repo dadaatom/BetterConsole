@@ -11,10 +11,10 @@
     {
         public string Command { get; }
         public string[] Aliases { get; }
-
-        public CommandParameter[] Parameters { get; }
-
+        
         public ConsoleCommand[] SubCommands { get; }
+        
+        public CommandParameter[] Parameters { get; }
 
         private string _description;
         
