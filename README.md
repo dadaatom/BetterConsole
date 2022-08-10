@@ -243,14 +243,14 @@ Console commands provide an easy framework in which to create and handle console
 
 ```csharp
 public class PingCommand : ConsoleCommand
-{
-    public PingCommand() : base("ping", new string[]{"p"}, "Pings the console for a response.") { }
-
-    public override void Execute(string[] signature)
     {
-        BetterConsole.WriteLine("pong");
+        public PingCommand() : base("ping") { }
+
+        public override void Execute(CommandSignature signature)
+        {
+            BetterConsole.WriteLine("pong");
+        }
     }
-}
 ```
 
 2. Now all we need to do is register an instance of our new command within the BetterConsole. The `BeginCommandHandling` method creates a new thread to handle incoming user inputs so new content can still be output to the console.
