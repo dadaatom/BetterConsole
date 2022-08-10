@@ -6,6 +6,10 @@ using BetterConsole.ConsoleCommands;
 
 namespace BetterConsole
 {
+    /*
+     * TODO:
+     * Reasons why commands failed.
+     */
     public class CommandHandler
     {
         public List<ConsoleCommand> RegisteredCommands { get; private set; }
@@ -52,7 +56,7 @@ namespace BetterConsole
         /// Removes command from registered commands.
         /// </summary>
         /// <param name="command">Existing command to unregister.</param>
-        public void UnRegister(ConsoleCommand command)
+        public void Remove(ConsoleCommand command)
         {
             RegisteredCommands.Remove(command);
             if (RegisteredCommands.Count <= 0)
@@ -90,15 +94,14 @@ namespace BetterConsole
                     continue;
                 }
                 
-                string line = Console.ReadLine();
+                string line = BetterConsole.ReadLine();
                 if (!string.IsNullOrEmpty(line))
                 {
                     string[] signature = line.Split(' ');
 
                     foreach (ConsoleCommand command in RegisteredCommands) {
-                        if (command.Command.Equals(signature[0]) || command.Aliases.Contains(signature[0]))
+                        if (command.AttemptExecute(signature))
                         {
-                            command.Execute(new CommandSignature(signature));
                             break;
                         }
                     }
