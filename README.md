@@ -24,7 +24,7 @@ BetterConsole.WriteLine("This is a line of text.");
 BetterConsole.Write("Here's some more text.");
 BetterConsole.Clear();
 BetterConsole.Write("Enter some text: ");
-string text = console.ReadLine();
+string text = BetterConsole.ReadLine();
 ```
 
 Using the write methods of the console will register them internally so written lines can be modified and updated within the console.
