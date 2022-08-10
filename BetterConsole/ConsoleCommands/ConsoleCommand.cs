@@ -32,8 +32,8 @@ namespace BetterConsole.ConsoleCommands
         /// Called when command signature is detected in input.
         /// </summary>
         /// <param name="signature">Signature read from the command line.</param>
-        public abstract void Execute(string[] signature);
-
+        public abstract void Execute(CommandSignature signature);
+        
         public bool Matches(string[] signature)
         {
             if (signature.Length > 0 && (Command == signature[0] || Aliases.Contains(signature[0])))

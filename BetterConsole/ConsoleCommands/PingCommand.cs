@@ -4,7 +4,7 @@
     {
         public PingCommand() : base("ping", new string[]{"p"}) { }
 
-        public override void Execute(string[] signature)
+        public override void Execute(CommandSignature signature)
         {
             BetterConsole.WriteLine("pong");
         }

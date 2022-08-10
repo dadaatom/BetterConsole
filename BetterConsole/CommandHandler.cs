@@ -98,7 +98,7 @@ namespace BetterConsole
                     foreach (ConsoleCommand command in RegisteredCommands) {
                         if (command.Command.Equals(signature[0]) || command.Aliases.Contains(signature[0]))
                         {
-                            command.Execute(signature);
+                            command.Execute(new CommandSignature(signature));
                             break;
                         }
                     }
