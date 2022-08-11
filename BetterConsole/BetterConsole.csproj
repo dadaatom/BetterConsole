@@ -47,11 +47,15 @@
         <Compile Include="CommandHandler.cs" />
         <Compile Include="ConsoleCommands\CommandParameter.cs" />
         <Compile Include="ConsoleCommands\CommandSignature.cs" />
+        <Compile Include="ConsoleCommands\Commands\PingCommand.cs" />
+        <Compile Include="ConsoleCommands\Commands\ExampleCommand.cs" />
         <Compile Include="ConsoleCommands\ConsoleCommand.cs" />
         <Compile Include="ConsoleCommands\Exceptions\DuplicateCommandException.cs" />
         <Compile Include="ConsoleCommands\Exceptions\ParameterOrderMismatchException.cs" />
-        <Compile Include="ConsoleCommands\PingCommand.cs" />
         <Compile Include="ConsoleCommands\ValidationStrategies\BlacklistValidation.cs" />
+        <Compile Include="ConsoleCommands\ValidationStrategies\BoolValidation.cs" />
+        <Compile Include="ConsoleCommands\ValidationStrategies\DoubleValidation.cs" />
+        <Compile Include="ConsoleCommands\ValidationStrategies\IntegerValidation.cs" />
         <Compile Include="ConsoleCommands\ValidationStrategies\RegexValidation.cs" />
         <Compile Include="ConsoleCommands\ValidationStrategies\ValidationStrategy.cs" />
         <Compile Include="ConsoleCommands\ValidationStrategies\WhitelistValidation.cs" />
@@ -75,7 +79,7 @@
         <Compile Include="ConsoleComponents\Timer.cs" />
         <Compile Include="ConsoleComponents\UnorderedList.cs" />
         <Compile Include="ConsoleComponents\VerticalAlignment.cs" />
-        <Compile Include="Program.cs" />
+        <Compile Include="ExampleProgram.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="TimeHandler.cs" />
     </ItemGroup>

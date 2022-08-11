@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using BetterConsole.ConsoleCommands.Exceptions;
 
 namespace BetterConsole.ConsoleCommands
@@ -10,14 +8,15 @@ namespace BetterConsole.ConsoleCommands
      * help command
      * aliases
      * array validation strategy
+     * return const list of parameters in signature.
      */
     public abstract class ConsoleCommand
     {
         public string Command { get; }
         
-        public ConsoleCommand[] SubCommands { get; }
+        public ConsoleCommand[] SubCommands { get; private set; }
         
-        public CommandParameter[] Parameters { get; }
+        public CommandParameter[] Parameters { get; private set; }
 
         public string Description { get; set; }
 
@@ -26,33 +25,8 @@ namespace BetterConsole.ConsoleCommands
         public ConsoleCommand(string command, ConsoleCommand[] subCommands, CommandParameter[] parameters)
         {
             Command = command;
-            SubCommands = subCommands;
-            Parameters = parameters;
-
-            List<string> list = new List<string>();
-            foreach (ConsoleCommand comm in SubCommands) {
-                if (list.Contains(comm.Command))
-                {
-                    throw new DuplicateCommandException();
-                }
-                list.Add(comm.Command);
-            }
-            
-            //CHECK ORDER OF REQUIRED PARAMS
-            bool flag = false;
-            foreach (CommandParameter param in Parameters) {
-                if (param.Required)
-                {
-                    if (flag)
-                    {
-                        throw new ParameterOrderMismatchException("Required parameter cannot follow an optional parameter.");
-                    }
-                }
-                else
-                {
-                    flag = true;
-                }
-            }
+            SetSubCommands(subCommands);
+            SetParameters(parameters);
         }
 
         /// <summary>
@@ -79,9 +53,8 @@ namespace BetterConsole.ConsoleCommands
 
                 foreach (ConsoleCommand command in SubCommands)
                 {
-                    if (Command == signature[0])
+                    if (command.AttemptExecute(subSignature))
                     {
-                        command.AttemptExecute(subSignature);
                         return true;
                     }
                 }
@@ -116,13 +89,53 @@ namespace BetterConsole.ConsoleCommands
                     return false;
                 }
                 
-                if (Parameters[i].ValidationStrategy != null && !Parameters[i].ValidationStrategy.Validate(parameters[i]))
+                if (i < parameters.Length && Parameters[i].ValidationStrategy != null && !Parameters[i].ValidationStrategy.Validate(parameters[i]))
                 {
                     return false;
                 }
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Sets the command parameters.
+        /// </summary>
+        /// <param name="parameters">Array of new parameters to set.</param>
+        /// <exception cref="ParameterOrderMismatchException">Thrown when an optional parameter is found before a required parameter.</exception>
+        public void SetParameters(CommandParameter[] parameters)
+        {
+            bool flag = false;
+            foreach (CommandParameter param in parameters) {
+                if (param.Required)
+                {
+                    if (flag)
+                    {
+                        throw new ParameterOrderMismatchException("Required parameter cannot follow an optional parameter.");
+                    }
+                }
+                else
+                {
+                    flag = true;
+                }
+            }
+
+            Parameters = parameters;
+        }
+
+
+        public void SetSubCommands(ConsoleCommand[] commands)
+        {
+            List<string> list = new List<string>();
+            foreach (ConsoleCommand command in commands) {
+                if (list.Contains(command.Command))
+                {
+                    throw new DuplicateCommandException();
+                }
+                list.Add(command.Command);
+            }
+
+            SubCommands = commands;
         }
     }
 }

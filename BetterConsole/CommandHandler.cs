@@ -45,7 +45,20 @@ namespace BetterConsole
                 Start();
             }
         }
-        
+
+        /// <summary>
+        /// Registers a list of commands to be handled.
+        /// </summary>
+        /// <param name="commands">New commands to be registered.</param>
+        /// <param name="startThread">When true, starts the handling thread if not already started.</param>
+        public void Register(ConsoleCommand[] commands, bool startThread = false)
+        {
+            foreach (ConsoleCommand command in commands)
+            {
+                Register(command, startThread);
+            }
+        }
+
         /// <summary>
         /// Removes command from registered commands.
         /// </summary>

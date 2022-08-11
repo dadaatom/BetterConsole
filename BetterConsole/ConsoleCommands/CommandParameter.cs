@@ -2,7 +2,15 @@
 {
     public class CommandParameter
     {
-        public bool Required;
         public ValidationStrategy ValidationStrategy;
+        public bool Required;
+
+        public CommandParameter() : this(null, false) { }
+
+        public CommandParameter(ValidationStrategy validationStrategy, bool required)
+        {
+            ValidationStrategy = validationStrategy;
+            Required = required;
+        }
     }
 }
