@@ -48,6 +48,8 @@
         <Compile Include="ConsoleCommands\CommandParameter.cs" />
         <Compile Include="ConsoleCommands\CommandSignature.cs" />
         <Compile Include="ConsoleCommands\ConsoleCommand.cs" />
+        <Compile Include="ConsoleCommands\Exceptions\DuplicateCommandException.cs" />
+        <Compile Include="ConsoleCommands\Exceptions\ParameterOutOfOrderException.cs" />
         <Compile Include="ConsoleCommands\PingCommand.cs" />
         <Compile Include="ConsoleCommands\ValidationStrategies\BlacklistValidation.cs" />
         <Compile Include="ConsoleCommands\ValidationStrategies\RegexValidation.cs" />

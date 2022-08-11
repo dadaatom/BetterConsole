@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using BetterConsole.ConsoleCommands.Exceptions;
 
 namespace BetterConsole.ConsoleCommands
 {
@@ -8,7 +9,7 @@ namespace BetterConsole.ConsoleCommands
      * TODO:
      * help command
      * aliases
-     * errors
+     * array validation strategy
      */
     public abstract class ConsoleCommand
     {
@@ -27,6 +28,17 @@ namespace BetterConsole.ConsoleCommands
             Command = command;
             SubCommands = subCommands;
             Parameters = parameters;
+
+            List<string> list = new List<string>();
+            foreach (ConsoleCommand comm in SubCommands) {
+                if (list.Contains(comm.Command))
+                {
+                    throw new DuplicateCommandException();
+                }
+                list.Add(comm.Command);
+            }
+            
+            //CHECK ORDER OF REQUIRED PARAMS
         }
 
         /// <summary>

@@ -3,6 +3,7 @@ using System.Threading;
 using System.Linq;
 using System.Collections.Generic;
 using BetterConsole.ConsoleCommands;
+using BetterConsole.ConsoleCommands.Exceptions;
 
 namespace BetterConsole
 {
@@ -21,29 +22,22 @@ namespace BetterConsole
             RegisteredCommands = new List<ConsoleCommand>();
             _thread = null;
         }
-        
+
         /// <summary>
         /// Registers command to be handled.
         /// </summary>
         /// <param name="command">New command to be registered.</param>
+        /// <param name="startThread">When true, starts the handling thread if not already started.</param>
         public void Register(ConsoleCommand command, bool startThread = false)
         {
-            bool exists = false;
-
             foreach (ConsoleCommand c in RegisteredCommands)
             {
                 if (c.Command.Equals(command.Command))
                 {
-                    //throw new Exception(); // Throw some sort of duplicate command exception?
-                    exists = true;
+                    throw new DuplicateCommandException();
                 }
             }
 
-            if (exists)
-            {
-                return;
-            }
-            
             RegisteredCommands.Add(command);
 
             if (startThread && (_thread == null || !_thread.IsAlive))
