@@ -6,7 +6,7 @@ using Timer = BetterConsole.ConsoleComponents.Timer;
 
 namespace BetterConsole
 {
-    internal class Program
+    internal class ExampleProgram
     {
         // Use example of the better console and built in components.
         public static void Main(string[] args)
@@ -72,7 +72,7 @@ namespace BetterConsole
             
             
             // CREATE AND WRITE ALPHABETICALLY ORDERED LIST //
-            OrderedList alphabeticallyOrderedList = new OrderedList("Look at this alphabetic list:", new string[]{"Woah","Cool!","Nice","Double Line\nNice"}, OrderedListStyle.Alphabetic);
+            OrderedList alphabeticallyOrderedList = new OrderedList("Look at this alphabetic list:", new string[]{"Woah","Cool!","Nice"}, OrderedListStyle.Alphabetic);
             BetterConsole.WriteLine("");
             BetterConsole.WriteLine(alphabeticallyOrderedList);
             
@@ -90,10 +90,9 @@ namespace BetterConsole
             */
             
             // REGISTER COMMANDS AND BEGIN HANDLING //
-            
-            BetterConsole.WriteLine("1");
-            BetterConsole.CommandHandler.Register(new PingCommand());
-            BetterConsole.WriteLine("2");
+
+            ConsoleCommand[] commands = new ConsoleCommand[]{new PingCommand(), new ExampleCommand()};
+            BetterConsole.CommandHandler.Register(commands);
             BetterConsole.CommandHandler.Start();
         }
     }
