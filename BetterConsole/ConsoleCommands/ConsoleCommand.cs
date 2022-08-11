@@ -39,6 +39,20 @@ namespace BetterConsole.ConsoleCommands
             }
             
             //CHECK ORDER OF REQUIRED PARAMS
+            bool flag = false;
+            foreach (CommandParameter param in Parameters) {
+                if (param.Required)
+                {
+                    if (flag)
+                    {
+                        throw new ParameterOrderMismatchException("Required parameter cannot follow an optional parameter.");
+                    }
+                }
+                else
+                {
+                    flag = true;
+                }
+            }
         }
 
         /// <summary>
