@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using BetterConsole.ConsoleCommands;
 using BetterConsole.ConsoleComponents;
 using Timer = BetterConsole.ConsoleComponents.Timer;
 
@@ -17,7 +18,6 @@ namespace BetterConsole
             border.PaddedContents.SetAlignments(HorizontalAlignment.Center, VerticalAlignment.Lower);
             border.PaddedContents.SetPaddings(8,1);
             BetterConsole.WriteLine(border);
-            
             
             // CREATE AND WRITE LOADING BAR //
             LoadingBar loadingBar = new LoadingBar(10);
@@ -78,6 +78,7 @@ namespace BetterConsole
             
 
             // CREATE AND WRITE TIMER //
+            /*
             Timer timer = new Timer();
             
             BetterConsole.WriteLine("");
@@ -85,7 +86,15 @@ namespace BetterConsole
             BetterConsole.Write(timer);
             BetterConsole.Write(" ago.");
             
-            timer.Start();
+            //timer.Start();
+            */
+            
+            // REGISTER COMMANDS AND BEGIN HANDLING //
+            
+            BetterConsole.WriteLine("1");
+            BetterConsole.CommandHandler.Register(new PingCommand());
+            BetterConsole.WriteLine("2");
+            BetterConsole.CommandHandler.Start();
         }
     }
 }

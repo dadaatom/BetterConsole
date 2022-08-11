@@ -26,7 +26,7 @@ namespace BetterConsole
         /// Registers command to be handled.
         /// </summary>
         /// <param name="command">New command to be registered.</param>
-        public void Register(ConsoleCommand command)
+        public void Register(ConsoleCommand command, bool startThread = false)
         {
             bool exists = false;
 
@@ -46,7 +46,7 @@ namespace BetterConsole
             
             RegisteredCommands.Add(command);
 
-            if (_thread == null || !_thread.IsAlive)
+            if (startThread && (_thread == null || !_thread.IsAlive))
             {
                 Start();
             }
@@ -68,7 +68,7 @@ namespace BetterConsole
         /// <summary>
         /// Starts command handling thread.
         /// </summary>
-        private void Start()
+        public void Start()
         {
             _thread = new Thread(HandleCommands);
             _thread.Start();
@@ -77,7 +77,7 @@ namespace BetterConsole
         /// <summary>
         /// Stops command handling thread.
         /// </summary>
-        private void Stop()
+        public void Stop()
         {
             _thread?.Interrupt();
         }

@@ -19,9 +19,9 @@ namespace BetterConsole
     {
         public static LinkedList<ConsoleComponent> DisplayedComponents;
 
-        public static TimeHandler TimeHandler { get; private set; }
+        public static TimeHandler TimeHandler { get; }
 
-        public static CommandHandler CommandHandler { get; private set; }
+        public static CommandHandler CommandHandler { get; }
 
         public static bool EnforceLimit { get; set; }
         public static int DisplayLimit { get; set; }

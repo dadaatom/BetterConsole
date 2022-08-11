@@ -16,33 +16,11 @@ namespace BetterConsole.ConsoleCommands
         
         public ConsoleCommand[] SubCommands { get; }
         
-        public CommandParameter[] Parameters
-        {
-            get
-            {
-                return Parameters;
-            }
-            set
-            {
-                bool flag = false;
-                for (int i = 0; i < value.Length; i++) {
-                    if (!value[i].Required)
-                    {
-                        flag = true;
-                    }
-                    else if(flag)
-                    {
-                        throw new Exception("CommandParameterOrderException: Required parameters must be sorted before non-required fields.");
-                    }
-                }
-
-                Parameters = value;
-            }
-        }
+        public CommandParameter[] Parameters { get; }
 
         public string Description { get; set; }
 
-        public ConsoleCommand(string command) : this(command, new ConsoleCommand[0], new CommandParameter[0]) { }
+        public ConsoleCommand(string command) : this(command, new ConsoleCommand[]{}, new CommandParameter[]{}) { }
         
         public ConsoleCommand(string command, ConsoleCommand[] subCommands, CommandParameter[] parameters)
         {
