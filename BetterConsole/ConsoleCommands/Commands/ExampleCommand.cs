@@ -4,10 +4,10 @@ namespace BetterConsole.ConsoleCommands
 {
     public class ExampleCommand : ConsoleCommand
     {
-        public ExampleCommand() : base("test")
+        public ExampleCommand() : base("Multiply")
         {
-            CommandParameter param1 = new CommandParameter(new WhitelistValidation(new []{"A","B","C"}), true);
-            CommandParameter param2 = new CommandParameter(new IntegerValidation(), true);
+            CommandParameter param1 = new CommandParameter("Letter", new WhitelistValidation(new []{"A","B","C"}), true);
+            CommandParameter param2 = new CommandParameter("Count", new IntegerValidation(), true);
             SetParameters(new CommandParameter[] {param1, param2});
 
             //ConsoleCommand command = new PingCommand();
