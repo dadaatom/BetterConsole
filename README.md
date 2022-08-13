@@ -3,8 +3,8 @@
 ## Why use BetterConsole?
 
 BetterConsole offers common display tools and quality of life features for developing console applications.
-Additionally, features like the ability to edit and refresh the command line is very handy when trying to maintain a clean console output.
-
+Features that offer ability to edit and refresh the console is very handy when maintaining a clean console output.
+Additionally, the console command structure makes creating, validating, and using console commands very easy.
 
 ## BetterConsole Parameters
 
@@ -242,15 +242,17 @@ Console commands provide an easy framework in which to create and handle console
 1. Create a new class `PingCommand` and extend `ConsoleCommand`. Make sure to override the Execute method with a simple implementation.
 
 ```csharp
-public class PingCommand : ConsoleCommand
+public class PingCommand : ConsoleCommand {
+    public PingCommand() : base("ping")
     {
-        public PingCommand() : base("ping") { }
-
-        public override void Execute(CommandSignature signature)
-        {
-            BetterConsole.WriteLine("pong");
-        }
+        Description = "Pings the console for a response.";
     }
+
+    public override void Execute(CommandSignature signature)
+    {
+        BetterConsole.WriteLine("pong");
+    }
+}
 ```
 
 2. Now all we need to do is register an instance of our new command within the BetterConsole. The `BeginCommandHandling` method creates a new thread to handle incoming user inputs so new content can still be output to the console.

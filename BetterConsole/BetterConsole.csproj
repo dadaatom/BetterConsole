@@ -47,6 +47,7 @@
         <Compile Include="CommandHandler.cs" />
         <Compile Include="ConsoleCommands\CommandParameter.cs" />
         <Compile Include="ConsoleCommands\CommandSignature.cs" />
+        <Compile Include="ConsoleCommands\Commands\HelpCommand.cs" />
         <Compile Include="ConsoleCommands\Commands\PingCommand.cs" />
         <Compile Include="ConsoleCommands\Commands\ExampleCommand.cs" />
         <Compile Include="ConsoleCommands\ConsoleCommand.cs" />

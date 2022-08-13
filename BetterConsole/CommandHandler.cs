@@ -32,7 +32,7 @@ namespace BetterConsole
         {
             foreach (ConsoleCommand c in RegisteredCommands)
             {
-                if (c.Command.Equals(command.Command))
+                if (c.Header.Equals(command.Header))
                 {
                     throw new DuplicateCommandException();
                 }

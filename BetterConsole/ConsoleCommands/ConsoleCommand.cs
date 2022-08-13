@@ -12,7 +12,7 @@ namespace BetterConsole.ConsoleCommands
      */
     public abstract class ConsoleCommand
     {
-        public string Command { get; }
+        public string Header { get; }
         
         public ConsoleCommand[] SubCommands { get; private set; }
         
@@ -20,11 +20,11 @@ namespace BetterConsole.ConsoleCommands
 
         public string Description { get; set; }
 
-        public ConsoleCommand(string command) : this(command, new ConsoleCommand[]{}, new CommandParameter[]{}) { }
+        public ConsoleCommand(string header) : this(header, new ConsoleCommand[]{}, new CommandParameter[]{}) { }
         
-        public ConsoleCommand(string command, ConsoleCommand[] subCommands, CommandParameter[] parameters)
+        public ConsoleCommand(string header, ConsoleCommand[] subCommands, CommandParameter[] parameters)
         {
-            Command = command;
+            Header = header;
             SetSubCommands(subCommands);
             SetParameters(parameters);
         }
@@ -42,7 +42,7 @@ namespace BetterConsole.ConsoleCommands
         /// <returns>Boolean of parameters validity.</returns>
         public bool AttemptExecute(string[] signature)
         {
-            if (signature.Length > 0 && Command == signature[0])
+            if (signature.Length > 0 && Header == signature[0])
             {
                 string[] subSignature = new string[signature.Length - 1];
 
@@ -124,15 +124,20 @@ namespace BetterConsole.ConsoleCommands
         }
 
 
+        /// <summary>
+        /// Sets the subcommands.
+        /// </summary>
+        /// <param name="commands">Array of new commands to set.</param>
+        /// <exception cref="DuplicateCommandException">Thrown when another command already exists with the same header.</exception>
         public void SetSubCommands(ConsoleCommand[] commands)
         {
             List<string> list = new List<string>();
             foreach (ConsoleCommand command in commands) {
-                if (list.Contains(command.Command))
+                if (list.Contains(command.Header))
                 {
                     throw new DuplicateCommandException();
                 }
-                list.Add(command.Command);
+                list.Add(command.Header);
             }
 
             SubCommands = commands;

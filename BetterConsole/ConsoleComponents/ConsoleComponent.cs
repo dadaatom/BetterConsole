@@ -34,6 +34,8 @@ namespace BetterConsole.ConsoleComponents
             _lines = new string[0];
         }
 
+        public abstract override string ToString();
+        
         /// <summary>
         /// Writes the entire line to the console.
         /// </summary>
@@ -61,8 +63,6 @@ namespace BetterConsole.ConsoleComponents
             
             Console.ForegroundColor = baseColor;
         }
-
-        public abstract override string ToString();
         
         /// <summary>
         /// Updates inner string with newest toString.
