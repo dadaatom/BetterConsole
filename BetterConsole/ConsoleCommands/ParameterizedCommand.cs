@@ -6,10 +6,10 @@ namespace BetterConsole.ConsoleCommands
     {
         public CommandParameter[] Parameters { get; private set; }
         
-        public ParameterizedCommand(string header) : this(header, new ConsoleCommand[0], new CommandParameter[0]) { }
+        public ParameterizedCommand(string header, string description = "") : this(header, new ConsoleCommand[0], new CommandParameter[0], description) { }
 
-        public ParameterizedCommand(string header, ConsoleCommand[] subCommands, CommandParameter[] parameters) : base(
-            header, subCommands)
+        public ParameterizedCommand(string header, ConsoleCommand[] subCommands, CommandParameter[] parameters, string description = "") : base(
+            header, subCommands, description)
         {
             SetParameters(parameters);
         }

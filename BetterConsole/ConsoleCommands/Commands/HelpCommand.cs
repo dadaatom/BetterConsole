@@ -5,7 +5,7 @@ namespace BetterConsole.ConsoleCommands
 {
     public class HelpCommand : ConsoleCommand
     {
-        public HelpCommand() : base("help") { }
+        public HelpCommand() : base("help", "The help command offers information registered commands.") { }
 
         public override void Execute(CommandSignature signature)
         {

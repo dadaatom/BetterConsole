@@ -232,6 +232,7 @@ BetterConsole.WriteLine(orderedList);
 ## Custom Commands
 
 Console commands provide an easy framework in which to create and handle console inputs.
+Both `ConsoleCommand` and `ParameterizedCommand` can be extended, the latter includes a parameter list and an implementation of the `ValidateSignature` virtual method from `ConsoleCommand.cs`.
 
 <details>
     <summary>
@@ -239,10 +240,11 @@ Console commands provide an easy framework in which to create and handle console
     </summary>
 <br/>
 
-1. Create a new class `PingCommand` and extend `ConsoleCommand`. Make sure to override the Execute method with a simple implementation.
+1. Create a new class `PingCommand` and extend `ParameterizedCommand` to include default signature validation. 
+Make sure to override the Execute method with a simple implementation.
 
 ```csharp
-public class PingCommand : ConsoleCommand {
+public class PingCommand : ParameterizedCommand {
     public PingCommand() : base("ping")
     {
         Description = "Pings the console for a response.";
@@ -258,7 +260,7 @@ public class PingCommand : ConsoleCommand {
 2. Now all we need to do is register an instance of our new command within the BetterConsole. The `BeginCommandHandling` method creates a new thread to handle incoming user inputs so new content can still be output to the console.
 
 ```csharp
-BetterConsole.AddCommand(new PingCommand()):
+BetterConsole.Register(new PingCommand()):
 BetterConsole.BeginCommandHandling();
 ```
 
