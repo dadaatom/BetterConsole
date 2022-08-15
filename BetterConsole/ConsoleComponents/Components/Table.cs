@@ -268,7 +268,7 @@ namespace BetterConsole.ConsoleComponents
                             targetHeight += _rowSizes[x];
                         }
                         
-                        Cells[i,j]?.Value.SetPaddings(targetWidth - Cells[i,j].Value.Width, targetHeight - Cells[i,j].Value.Height);
+                        Cells[i,j]?.Value.SetPaddings(targetWidth - (Cells[i,j].Value.Width == 0 ? 1 : Cells[i,j].Value.Width), targetHeight - Cells[i,j].Value.Height);
                     }
                 }
             }
