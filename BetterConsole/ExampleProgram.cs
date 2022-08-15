@@ -34,7 +34,7 @@ namespace BetterConsole
             
             
             // CREATE AND WRITE SEPARATOR AND LABEL //
-            BetterConsole.WriteLine(new Separator(15));
+            BetterConsole.WriteLine(new Separator(30));
 
             
             // CREATE AND WRITE TABLE //
@@ -78,7 +78,7 @@ namespace BetterConsole
             
 
             // CREATE AND WRITE TIMER //
-            /*
+            
             Timer timer = new Timer();
             
             BetterConsole.WriteLine("");
@@ -87,11 +87,12 @@ namespace BetterConsole
             BetterConsole.Write(" ago.");
             
             //timer.Start();
-            */
+            
+            
+            BetterConsole.Write("\n");
             
             // REGISTER COMMANDS AND BEGIN HANDLING //
-
-            ConsoleCommand[] commands = new ConsoleCommand[]{new PingCommand(), new ExampleCommand()};
+            ConsoleCommand[] commands = new ConsoleCommand[]{new PingCommand(), new ExampleCommand(), new HelpCommand()};
             BetterConsole.CommandHandler.Register(commands);
             BetterConsole.CommandHandler.Start();
         }

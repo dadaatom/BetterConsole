@@ -13,8 +13,7 @@ namespace BetterConsole.ConsoleCommands
         {
             SetParameters(parameters);
         }
-
-
+        
         /// <summary>
         /// Validates the sub-signature in reference to the command parameters.
         /// </summary>

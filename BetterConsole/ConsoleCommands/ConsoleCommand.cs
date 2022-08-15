@@ -18,12 +18,13 @@ namespace BetterConsole.ConsoleCommands
 
         public string Description { get; set; } = "";
 
-        public ConsoleCommand(string header) : this(header, new ConsoleCommand[]{}) { }
+        public ConsoleCommand(string header, string description = "") : this(header, new ConsoleCommand[]{}, description) { }
         
-        public ConsoleCommand(string header, ConsoleCommand[] subCommands)
+        public ConsoleCommand(string header, ConsoleCommand[] subCommands, string description = "")
         {
             Header = header;
             SetSubCommands(subCommands);
+            Description = description;
         }
 
         /// <summary>
@@ -66,6 +67,11 @@ namespace BetterConsole.ConsoleCommands
             return new CommandMatch(false, this, subSignature);
         }
         
+        /// <summary>
+        /// Overrideable function that validates the parameters passed to the function.
+        /// </summary>
+        /// <param name="signature">Array of parameters to be passed to the function.</param>
+        /// <returns>Validity of the signature, default is true.</returns>
         public virtual bool ValidateSignature(string[] signature)
         {
             return true;

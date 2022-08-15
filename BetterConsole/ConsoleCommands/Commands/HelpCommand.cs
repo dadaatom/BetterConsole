@@ -5,7 +5,7 @@ namespace BetterConsole.ConsoleCommands
 {
     public class HelpCommand : ConsoleCommand
     {
-        public HelpCommand(string header) : base(header) { }
+        public HelpCommand() : base("help") { }
 
         public override void Execute(CommandSignature signature)
         {
@@ -19,7 +19,12 @@ namespace BetterConsole.ConsoleCommands
                 for (int i = 0; i < signature.Parameters.Length; i++)
                 {
                     string parameter = signature.Parameters[i];
-                    
+
+                    if (commands.Length == 0)
+                    {
+                        break;
+                    }
+
                     bool found = false;
                     foreach (ConsoleCommand consoleCommand in commands)
                     {
@@ -73,22 +78,36 @@ namespace BetterConsole.ConsoleCommands
         /// <param name="command">Command to display information.</param>
         private void DisplayHelp(ConsoleCommand command)
         {
-            UnorderedList list1 = new UnorderedList();
-            list1.Label = "Subcommands:";
-            foreach (ConsoleCommand c in command.SubCommands)
+            if (command.SubCommands.Length > 0)
             {
-                list1.List.AddLast(new TextComponent(c.Header + ": " + c.Description));
+                UnorderedList list1 = new UnorderedList();
+                list1.Label = "Subcommands:";
+            
+                foreach (ConsoleCommand c in command.SubCommands)
+                {
+                    list1.List.AddLast(new TextComponent(c.Header + ": " + c.Description));
+                }
+
+                BetterConsole.WriteLine(list1);
             }
             
-            UnorderedList list2 = new UnorderedList();
-            list2.Label = "Parameters:";
-            foreach (CommandParameter parameter in command.Parameters)
+            if (command is ParameterizedCommand)
             {
-                list2.List.AddLast(new TextComponent(parameter.Label + " (" + (parameter.Required ? "required" : "optional") + ")"));
+                ParameterizedCommand parameterizedCommand = (ParameterizedCommand) command;
+
+                if (parameterizedCommand.Parameters.Length > 0)
+                {
+                    UnorderedList list2 = new UnorderedList();
+                    list2.Label = "Parameters:";
+                
+                    foreach (CommandParameter parameter in parameterizedCommand.Parameters)
+                    {
+                        list2.List.AddLast(new TextComponent(parameter.Label + " (" + (parameter.Required ? "required" : "optional") + ")"));
+                    }
+                    
+                    BetterConsole.WriteLine(list2);
+                }
             }
-            
-            BetterConsole.WriteLine(list1);
-            BetterConsole.WriteLine(list2);
         }
     }
 }
