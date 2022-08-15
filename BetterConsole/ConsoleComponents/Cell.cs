@@ -30,9 +30,9 @@ namespace BetterConsole.ConsoleComponents
 
         public Cell(string value, int width, int height) : this(new TextComponent(value), width, height) { }
         
-        public Cell(ConsoleComponent component, int width = 1, int height = 1)
+        public Cell(ConsoleComponent component, int width = 1, int height = 1, HorizontalAlignment horizontalAlignment = HorizontalAlignment.Center, VerticalAlignment verticalAlignment = VerticalAlignment.Center)
         {
-            Value = new PaddedComponent(component);
+            Value = new PaddedComponent(component, horizontalAlignment, verticalAlignment);
             Height = height;
             Width = width;
         }

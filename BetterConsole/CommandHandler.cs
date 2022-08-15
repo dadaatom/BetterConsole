@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Collections.Generic;
 using BetterConsole.ConsoleCommands;
 using BetterConsole.ConsoleCommands.Exceptions;
@@ -13,11 +14,14 @@ namespace BetterConsole
     {
         public List<ConsoleCommand> RegisteredCommands { get; private set; }
 
+        public HelpCommand HelpCommand;
+        
         private Thread _thread;
 
         public CommandHandler()
         {
             RegisteredCommands = new List<ConsoleCommand>();
+            HelpCommand = new HelpCommand();
             _thread = null;
         }
 
@@ -100,17 +104,39 @@ namespace BetterConsole
                 }
                 
                 string line = BetterConsole.ReadLine();
-                if (!string.IsNullOrEmpty(line))
-                {
-                    string[] signature = line.Split(' ');
 
+                if (string.IsNullOrEmpty(line))
+                {
+                    continue;
+                }
+                
+                string[] signature = line.Split(' ');
+
+                CommandMatch match = null;
+
+                if (HelpCommand != null)
+                {
+                    match = HelpCommand.MatchSignature(signature);
+                    if (match.Success)
+                    {
+                        match.Matched.Execute(new CommandSignature(match.Parameters));
+                    }
+                }
+
+                if (match == null || !match.Success)
+                {
                     foreach (ConsoleCommand command in RegisteredCommands)
                     {
-                        CommandMatch match = command.MatchSignature(signature);
+                        match = command.MatchSignature(signature);
                         if (match.Success)
                         {
                             match.Matched.Execute(new CommandSignature(match.Parameters));
                         }
+                    }
+
+                    if ((match == null || !match.Success) && HelpCommand != null)
+                    {
+                        BetterConsole.WriteLine("Type 'help' for command descriptions and help.\n");
                     }
                 }
             }

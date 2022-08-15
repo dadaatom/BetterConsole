@@ -5,7 +5,6 @@ namespace BetterConsole.ConsoleCommands
 {
     /*
      * TODO:
-     * help command
      * aliases
      * array validation strategy
      * return const list of parameters in signature.

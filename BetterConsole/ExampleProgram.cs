@@ -84,7 +84,7 @@ namespace BetterConsole
             BetterConsole.WriteLine("");
             BetterConsole.Write("Content loaded ");
             BetterConsole.Write(timer);
-            BetterConsole.Write(" ago.");
+            BetterConsole.WriteLine(" ago.");
             
             //timer.Start();
             
@@ -92,7 +92,7 @@ namespace BetterConsole
             BetterConsole.Write("\n");
             
             // REGISTER COMMANDS AND BEGIN HANDLING //
-            ConsoleCommand[] commands = new ConsoleCommand[]{new PingCommand(), new ExampleCommand(), new HelpCommand()};
+            ConsoleCommand[] commands = new ConsoleCommand[]{new PingCommand(), new ExampleCommand()};
             BetterConsole.CommandHandler.Register(commands);
             BetterConsole.CommandHandler.Start();
         }

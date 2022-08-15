@@ -6,7 +6,7 @@
         public ConsoleCommand Matched { get; private set; }
         public string[] Parameters { get; private set; }
 
-        public int MatchHeuristic { get; private set; }
+        //public int MatchHeuristic { get; private set; }
 
         public CommandMatch() : this(false, null, new string[0]) { }
         

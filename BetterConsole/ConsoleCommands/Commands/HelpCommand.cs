@@ -20,11 +20,6 @@ namespace BetterConsole.ConsoleCommands
                 {
                     string parameter = signature.Parameters[i];
 
-                    if (commands.Length == 0)
-                    {
-                        break;
-                    }
-
                     bool found = false;
                     foreach (ConsoleCommand consoleCommand in commands)
                     {
@@ -35,20 +30,29 @@ namespace BetterConsole.ConsoleCommands
                                 DisplayHelp(consoleCommand);
                                 return;
                             }
-                            else
-                            {
-                                commands = consoleCommand.SubCommands;
+                            
+                            commands = consoleCommand.SubCommands;
 
-                                found = true;
-                                break;
-                            }
+                            found = true;
+                            break;
                         }
                     }
 
                     if (!found)
                     {
-                        // PARAMETER NOT FOUND
-                        break;
+                        string toDisplay = "";
+
+                        for (int j = 0; j < signature.Parameters.Length; j++)
+                        {
+                            toDisplay += signature.Parameters[j];
+                            if (j < signature.Parameters.Length - 1)
+                            {
+                                toDisplay += " ";
+                            }
+                        }
+                        
+                        BetterConsole.WriteLine("'" + parameter + "' not recognized in signature '" + toDisplay + "'.");
+                        return;
                     }
                 }
             }

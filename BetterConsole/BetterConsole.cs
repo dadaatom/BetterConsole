@@ -8,8 +8,7 @@ namespace BetterConsole
 {
     /*
      * TODO:
-     * - user input threads
-     * - remove component func
+     * - user input threads?
      * - See console component todo.
      * - See Table todo.
      * - See console command todo.

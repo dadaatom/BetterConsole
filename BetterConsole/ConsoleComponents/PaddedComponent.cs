@@ -25,13 +25,16 @@ namespace BetterConsole.ConsoleComponents
 
         public VerticalAlignment VerticalAlignment { get; private set; } = VerticalAlignment.Center;
 
-        public PaddedComponent(string value) : this(new TextComponent(value)) { }
+        public PaddedComponent(string value, HorizontalAlignment horizontalAlignment = HorizontalAlignment.Center, VerticalAlignment verticalAlignment = VerticalAlignment.Center) : this(new TextComponent(value), horizontalAlignment, verticalAlignment) { }
         
-        public PaddedComponent(ConsoleComponent component)
+        public PaddedComponent(ConsoleComponent component, HorizontalAlignment horizontalAlignment = HorizontalAlignment.Center, VerticalAlignment verticalAlignment = VerticalAlignment.Center)
         {
+            HorizontalAlignment = horizontalAlignment;
+            VerticalAlignment = verticalAlignment;
+            
             SetValue(component);
         }
-        
+
         /// <summary>
         /// Sets value of the table cell.
         /// </summary>
