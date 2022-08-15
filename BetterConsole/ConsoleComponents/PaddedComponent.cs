@@ -13,7 +13,7 @@ namespace BetterConsole.ConsoleComponents
 
         public int Height { get; private set; }
 
-        public int TotalWidth => Width + HorizontalPadding;
+        public int TotalWidth => (Width == 0 ? 1 : Width) + HorizontalPadding;
 
         public int TotalHeight => Height + VerticalPadding;
 
