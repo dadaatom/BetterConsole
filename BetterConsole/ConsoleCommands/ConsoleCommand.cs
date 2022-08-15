@@ -15,18 +15,15 @@ namespace BetterConsole.ConsoleCommands
         public string Header { get; }
         
         public ConsoleCommand[] SubCommands { get; private set; }
-        
-        public CommandParameter[] Parameters { get; private set; }
 
-        public string Description { get; set; }
+        public string Description { get; set; } = "";
 
-        public ConsoleCommand(string header) : this(header, new ConsoleCommand[]{}, new CommandParameter[]{}) { }
+        public ConsoleCommand(string header) : this(header, new ConsoleCommand[]{}) { }
         
-        public ConsoleCommand(string header, ConsoleCommand[] subCommands, CommandParameter[] parameters)
+        public ConsoleCommand(string header, ConsoleCommand[] subCommands)
         {
             Header = header;
             SetSubCommands(subCommands);
-            SetParameters(parameters);
         }
 
         /// <summary>
@@ -34,95 +31,45 @@ namespace BetterConsole.ConsoleCommands
         /// </summary>
         /// <param name="signature">Signature read from the command line.</param>
         public abstract void Execute(CommandSignature signature);
-        
+
         /// <summary>
-        /// Attempts to execute the function given the complete command signature.
+        /// Matches signature to the console command and returns the .
         /// </summary>
-        /// <param name="signature">Command signature in the form of a string array.</param>
-        /// <returns>Boolean of parameters validity.</returns>
-        public bool AttemptExecute(string[] signature)
+        /// <param name="signature">Signature to match command with</param>
+        /// <returns>A command match containing all the information concerning the match.</returns>
+        public CommandMatch MatchSignature(string[] signature)
         {
+            string[] subSignature = new string[signature.Length - 1];
+
+            for (int i = 0; i < subSignature.Length; i++)
+            {
+                subSignature[i] = signature[i+1];
+            }
+            
             if (signature.Length > 0 && Header == signature[0])
             {
-                string[] subSignature = new string[signature.Length - 1];
-
-                for (int i = 0; i < subSignature.Length; i++)
-                {
-                    subSignature[i] = signature[i+1];
-                }
-
                 foreach (ConsoleCommand command in SubCommands)
                 {
-                    if (command.AttemptExecute(subSignature))
+                    CommandMatch match = MatchSignature(subSignature);
+                    if (match.Success)
                     {
-                        return true;
+                        return match;
                     }
                 }
 
-                if (!ValidateParameters(subSignature))
+                if (ValidateSignature(subSignature))
                 {
-                    return false;
+                    return new CommandMatch(true, this, subSignature);
                 }
-
-                Execute(new CommandSignature(subSignature));
-                return true;
             }
 
-            return false;
+            return new CommandMatch(false, this, subSignature);
         }
-
-        /// <summary>
-        /// Validates the sub-signature in reference to the command parameters.
-        /// </summary>
-        /// <param name="parameters">Command parameters to be validated.</param>
-        /// <returns>Boolean of parameters validity.</returns>
-        public bool ValidateParameters(string[] parameters)
+        
+        public virtual bool ValidateSignature(string[] signature)
         {
-            if (parameters.Length > Parameters.Length)
-            {
-                return false;
-            }
-
-            for (int i = 0; i < Parameters.Length; i++) {
-                if (Parameters[i].Required && i >= parameters.Length)
-                {
-                    return false;
-                }
-                
-                if (i < parameters.Length && Parameters[i].ValidationStrategy != null && !Parameters[i].ValidationStrategy.Validate(parameters[i]))
-                {
-                    return false;
-                }
-            }
-
             return true;
         }
-
-        /// <summary>
-        /// Sets the command parameters.
-        /// </summary>
-        /// <param name="parameters">Array of new parameters to set.</param>
-        /// <exception cref="ParameterOrderMismatchException">Thrown when an optional parameter is found before a required parameter.</exception>
-        public void SetParameters(CommandParameter[] parameters)
-        {
-            bool flag = false;
-            foreach (CommandParameter param in parameters) {
-                if (param.Required)
-                {
-                    if (flag)
-                    {
-                        throw new ParameterOrderMismatchException("Required parameter cannot follow an optional parameter.");
-                    }
-                }
-                else
-                {
-                    flag = true;
-                }
-            }
-
-            Parameters = parameters;
-        }
-
 
         /// <summary>
         /// Sets the subcommands.

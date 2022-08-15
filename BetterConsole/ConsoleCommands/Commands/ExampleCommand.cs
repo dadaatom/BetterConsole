@@ -2,7 +2,7 @@
 
 namespace BetterConsole.ConsoleCommands
 {
-    public class ExampleCommand : ConsoleCommand
+    public class ExampleCommand : ParameterizedCommand
     {
         public ExampleCommand() : base("Multiply")
         {
@@ -17,9 +17,9 @@ namespace BetterConsole.ConsoleCommands
         public override void Execute(CommandSignature signature)
         {
             string toDisplay = "";
-            for (int i = 0; i < Int32.Parse(signature.Parameters[0]); i++)
+            for (int i = 0; i < Int32.Parse(signature.Parameters[1]); i++)
             {
-                toDisplay += signature.Parameters[1];
+                toDisplay += signature.Parameters[0];
             }
 
             BetterConsole.WriteLine("Success: " + toDisplay);

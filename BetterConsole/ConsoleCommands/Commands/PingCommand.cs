@@ -1,6 +1,6 @@
 ﻿namespace BetterConsole.ConsoleCommands
 {
-    public class PingCommand : ConsoleCommand
+    public class PingCommand : ParameterizedCommand
     {
         public PingCommand() : base("ping")
         {

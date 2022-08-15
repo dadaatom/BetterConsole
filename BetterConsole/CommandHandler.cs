@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Linq;
+﻿using System.Threading;
 using System.Collections.Generic;
 using BetterConsole.ConsoleCommands;
 using BetterConsole.ConsoleCommands.Exceptions;
@@ -106,10 +104,12 @@ namespace BetterConsole
                 {
                     string[] signature = line.Split(' ');
 
-                    foreach (ConsoleCommand command in RegisteredCommands) {
-                        if (command.AttemptExecute(signature))
+                    foreach (ConsoleCommand command in RegisteredCommands)
+                    {
+                        CommandMatch match = command.MatchSignature(signature);
+                        if (match.Success)
                         {
-                            break;
+                            match.Matched.Execute(new CommandSignature(match.Parameters));
                         }
                     }
                 }
