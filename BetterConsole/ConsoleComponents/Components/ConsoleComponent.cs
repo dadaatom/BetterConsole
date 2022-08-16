@@ -10,9 +10,9 @@ namespace BetterConsole.ConsoleComponents
      * Color strategy pattern
      * Figlet component using figlet .net
      * Style options (i.e. loading bar) (exist as a class applied to the console that most things communicate with)
+     * Pages?
      * Images?
      * Buttons?
-     * Pages?
      * Dropdowns?
      */
     
@@ -20,16 +20,16 @@ namespace BetterConsole.ConsoleComponents
     {
         public ConsoleComponent Next { get; set; }
 
-        private ConsoleColor _color; // Replace with component color
-
+        public ComponentColor Color { get; set; }
+        
         private string[] _lines;
 
-        public ConsoleComponent() : this(ConsoleColor.Gray) { }
+        public ConsoleComponent() : this(new StaticColor(ConsoleColor.Gray)) { }
 
-        public ConsoleComponent(ConsoleColor color)
+        public ConsoleComponent(ComponentColor color)
         {
             Next = null;
-            _color = color;
+            Color = color;
 
             _lines = new string[0];
         }
@@ -43,19 +43,26 @@ namespace BetterConsole.ConsoleComponents
         public void Write(bool generate = true)
         {
             ConsoleColor baseColor = Console.ForegroundColor;
-            Console.ForegroundColor = _color;
+            //Console.ForegroundColor = Color;
             
             if (generate)
             {
                 _lines = Generate().Split('\n');
             }
 
+            string toDisplay = ""; // Loop this data into an input var.
             for (int i = 0; i < _lines.Length; i++) {
-                Console.Write(_lines[i]);
+                toDisplay += _lines[i];
                 if (i < _lines.Length - 1)
                 {
-                    Console.Write('\n');
+                    toDisplay += '\n';
                 }
+            }
+
+            foreach (ComponentColor.ColoredOutput output in Color.GetColors(toDisplay))
+            {
+                Console.ForegroundColor = output.Color;
+                Console.Write(output.Text);
             }
 
             //Console.Write(ToString());
@@ -125,23 +132,14 @@ namespace BetterConsole.ConsoleComponents
         /// Sets the color for this component and all subsequent components in the line.
         /// </summary>
         /// <param name="color">New text color.</param>
-        public void SetAllColors(ConsoleColor color)
+        public void SetAllColors(ComponentColor color)
         {
             ConsoleComponent current = this;
             while (current != null)
             {
-                current.SetColor(color);
+                current.Color = color;
                 current = current.Next;
             }
-        }
-        
-        /// <summary>
-        /// Sets the color for just this component.
-        /// </summary>
-        /// <param name="color">New text color.</param>
-        public void SetColor(ConsoleColor color)
-        {
-            _color = color;
         }
     }
 }

@@ -64,7 +64,9 @@
         <Compile Include="ConsoleCommands\ValidationStrategies\WhitelistValidation.cs" />
         <Compile Include="ConsoleComponents\Border.cs" />
         <Compile Include="ConsoleComponents\Cell.cs" />
-        <Compile Include="ConsoleComponents\ComponentColor.cs" />
+        <Compile Include="ConsoleComponents\Colors\ComponentColor.cs" />
+        <Compile Include="ConsoleComponents\Colors\CycledColor.cs" />
+        <Compile Include="ConsoleComponents\Colors\StaticColor.cs" />
         <Compile Include="ConsoleComponents\Components\ConsoleComponent.cs" />
         <Compile Include="ConsoleComponents\Components\CountdownTimer.cs" />
         <Compile Include="ConsoleComponents\Components\ListComponent.cs" />
@@ -79,6 +81,7 @@
         <Compile Include="ConsoleComponents\Components\UnorderedList.cs" />
         <Compile Include="ConsoleComponents\HorizontalAlignment.cs" />
         <Compile Include="ConsoleComponents\PaddedComponent.cs" />
+        <Compile Include="ConsoleComponents\Styles\ConsoleStyle.cs" />
         <Compile Include="ConsoleComponents\Styles\LoadingBarStyle.cs" />
         <Compile Include="ConsoleComponents\Styles\OrderedListStyle.cs" />
         <Compile Include="ConsoleComponents\VerticalAlignment.cs" />

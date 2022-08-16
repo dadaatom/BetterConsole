@@ -67,10 +67,10 @@ namespace BetterConsole
         /// </summary>
         /// <param name="text">Text to be written.</param>
         /// <param name="color">Color to display the text.</param>
-        public static void Write(string text, ConsoleColor color)
+        public static void Write(string text, ComponentColor color)
         {
             TextComponent textComp = new TextComponent(text);
-            textComp.SetColor(color);
+            textComp.Color = color;
             Write(textComp);
         }
 
@@ -88,10 +88,10 @@ namespace BetterConsole
         /// </summary>
         /// <param name="text">Text to be written.</param>
         /// <param name="color">Color to display the text.</param>
-        public static void WriteLine(string text, ConsoleColor color)
+        public static void WriteLine(string text, ComponentColor color)
         {
             TextComponent textComp = new TextComponent(text);
-            textComp.SetColor(color);
+            textComp.Color = color;
             WriteLine(textComp);
         }
         

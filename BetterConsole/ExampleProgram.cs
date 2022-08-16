@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Threading;
 using BetterConsole.ConsoleCommands;
 using BetterConsole.ConsoleComponents;
-using Timer = BetterConsole.ConsoleComponents.Timer;
 
 namespace BetterConsole
 {
@@ -14,7 +12,7 @@ namespace BetterConsole
             // CREATE AND WRITE GREEN BORDERED WELCOME MESSAGE //
             TextComponent welcome = new TextComponent("WELCOME");
             Border border = new Border(welcome);
-            border.SetColor(ConsoleColor.Green);
+            border.Color = new StaticColor(ConsoleColor.Green);
             border.PaddedContents.SetAlignments(HorizontalAlignment.Center, VerticalAlignment.Lower);
             border.PaddedContents.SetPaddings(8,1);
             BetterConsole.WriteLine(border);
@@ -55,7 +53,6 @@ namespace BetterConsole
             
             Cell titleCell = new Cell("Animals Spotted", 3, 1);
             table.SetCell(titleCell, 0, 0);
-
             BetterConsole.WriteLine(table);
 
             
@@ -91,10 +88,11 @@ namespace BetterConsole
             
             BetterConsole.Write("\n");
             
+            
             // REGISTER COMMANDS AND BEGIN HANDLING //
             ConsoleCommand[] commands = new ConsoleCommand[]{new PingCommand(), new ExampleCommand()};
             BetterConsole.CommandHandler.Register(commands);
-            BetterConsole.CommandHandler.Start();
+            //BetterConsole.CommandHandler.Start();
         }
     }
 }

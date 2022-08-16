@@ -82,6 +82,8 @@ namespace BetterConsole.ConsoleCommands
         /// <param name="command">Command to display information.</param>
         private void DisplayHelp(ConsoleCommand command)
         {
+            BetterConsole.WriteLine(command.Header + " - " + command.Description);
+            
             if (command.SubCommands.Length > 0)
             {
                 UnorderedList list1 = new UnorderedList();

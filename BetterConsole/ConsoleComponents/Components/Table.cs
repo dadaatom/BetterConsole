@@ -124,7 +124,33 @@ namespace BetterConsole.ConsoleComponents
             _rowSizes = newRowSizes;
             _columnSizes = newColumnSizes;
         }
-        
+
+
+        /// <summary>
+        /// Shifts cells within the table.
+        /// </summary>
+        /// <param name="rows">Row amount to shift.</param>
+        /// <param name="columns">Column amount to shift.</param>
+        public void ShiftCells(int rows, int columns)
+        {
+            if(rows == 0 && columns == 0)
+            {
+                return;
+            }
+
+            Cell[,] newCells = new Cell[Cells.GetLength(0), Cells.GetLength(1)];
+
+            for (int i = 0; i < Cells.GetLength(0); i++) {
+                for (int j = 0; j < Cells.GetLength(1); j++)
+                {
+                    newCells[(i + rows) % Cells.GetLength(0), (j + columns) % Cells.GetLength(1)] = Cells[i, j];
+                }
+            }
+
+            Cells = newCells;
+        }
+
+
         /// <summary>
         /// Creates the entire matrix of cells into a table.
         /// </summary>
