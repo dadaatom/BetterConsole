@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Collections.Generic;
 using BetterConsole.ConsoleCommands;
-using BetterConsole.ConsoleCommands.Exceptions;
+using BetterConsole.ConsoleCommands.Exception;
 
 namespace BetterConsole
 {

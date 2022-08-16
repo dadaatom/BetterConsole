@@ -75,7 +75,6 @@ namespace BetterConsole
             
 
             // CREATE AND WRITE TIMER //
-            
             Timer timer = new Timer();
             
             BetterConsole.WriteLine("");

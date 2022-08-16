@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace BetterConsole.ConsoleCommands.Exceptions
+namespace BetterConsole.ConsoleCommands.Exception
 {
-    public class DuplicateCommandException : Exception
+    public class DuplicateCommandException : System.Exception
     {
         public DuplicateCommandException(string msg) : base(msg) { }
 

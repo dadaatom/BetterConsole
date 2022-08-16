@@ -44,56 +44,56 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="BetterConsole.cs" />
-        <Compile Include="CommandHandler.cs" />
+        <Compile Include="ConsoleCommands\CommandHandler.cs" />
         <Compile Include="ConsoleCommands\CommandMatch.cs" />
         <Compile Include="ConsoleCommands\CommandParameter.cs" />
         <Compile Include="ConsoleCommands\CommandSignature.cs" />
-        <Compile Include="ConsoleCommands\Commands\HelpCommand.cs" />
-        <Compile Include="ConsoleCommands\Commands\PingCommand.cs" />
-        <Compile Include="ConsoleCommands\Commands\ExampleCommand.cs" />
+        <Compile Include="ConsoleCommands\Command\HelpCommand.cs" />
+        <Compile Include="ConsoleCommands\Command\PingCommand.cs" />
+        <Compile Include="ConsoleCommands\Command\ExampleCommand.cs" />
         <Compile Include="ConsoleCommands\ConsoleCommand.cs" />
-        <Compile Include="ConsoleCommands\Exceptions\DuplicateCommandException.cs" />
-        <Compile Include="ConsoleCommands\Exceptions\ParameterOrderMismatchException.cs" />
+        <Compile Include="ConsoleCommands\Exception\DuplicateCommandException.cs" />
+        <Compile Include="ConsoleCommands\Exception\ParameterOrderMismatchException.cs" />
         <Compile Include="ConsoleCommands\ParameterizedCommand.cs" />
-        <Compile Include="ConsoleCommands\ValidationStrategies\BlacklistValidation.cs" />
-        <Compile Include="ConsoleCommands\ValidationStrategies\BoolValidation.cs" />
-        <Compile Include="ConsoleCommands\ValidationStrategies\DoubleValidation.cs" />
-        <Compile Include="ConsoleCommands\ValidationStrategies\IntegerValidation.cs" />
-        <Compile Include="ConsoleCommands\ValidationStrategies\RegexValidation.cs" />
-        <Compile Include="ConsoleCommands\ValidationStrategies\ValidationStrategy.cs" />
-        <Compile Include="ConsoleCommands\ValidationStrategies\WhitelistValidation.cs" />
-        <Compile Include="ConsoleComponents\Cell.cs" />
+        <Compile Include="ConsoleCommands\ValidationStrategy\BlacklistValidation.cs" />
+        <Compile Include="ConsoleCommands\ValidationStrategy\BoolValidation.cs" />
+        <Compile Include="ConsoleCommands\ValidationStrategy\DoubleValidation.cs" />
+        <Compile Include="ConsoleCommands\ValidationStrategy\IntegerValidation.cs" />
+        <Compile Include="ConsoleCommands\ValidationStrategy\RegexValidation.cs" />
+        <Compile Include="ConsoleCommands\ValidationStrategy\ValidationStrategy.cs" />
+        <Compile Include="ConsoleCommands\ValidationStrategy\WhitelistValidation.cs" />
         <Compile Include="ConsoleComponents\Colors\ComponentColor.cs" />
         <Compile Include="ConsoleComponents\Colors\CycledColor.cs" />
         <Compile Include="ConsoleComponents\Colors\StaticColor.cs" />
         <Compile Include="ConsoleComponents\Components\Border.cs" />
         <Compile Include="ConsoleComponents\Components\ConsoleComponent.cs" />
-        <Compile Include="ConsoleComponents\Components\CountdownTimer.cs" />
-        <Compile Include="ConsoleComponents\Components\ListComponent.cs" />
+        <Compile Include="ConsoleComponents\Components\ListComponent\ListComponent.cs" />
+        <Compile Include="ConsoleComponents\Components\ListComponent\OrderedList.cs" />
+        <Compile Include="ConsoleComponents\Components\ListComponent\UnorderedList.cs" />
         <Compile Include="ConsoleComponents\Components\LoadingBar.cs" />
         <Compile Include="ConsoleComponents\Components\NumberComponent.cs" />
-        <Compile Include="ConsoleComponents\Components\OrderedList.cs" />
         <Compile Include="ConsoleComponents\Components\Separator.cs" />
-        <Compile Include="ConsoleComponents\Components\Table.cs" />
+        <Compile Include="ConsoleComponents\Components\Table\Cell.cs" />
+        <Compile Include="ConsoleComponents\Components\Table\Table.cs" />
         <Compile Include="ConsoleComponents\Components\TextComponent.cs" />
-        <Compile Include="ConsoleComponents\Components\TimeComponent.cs" />
-        <Compile Include="ConsoleComponents\Components\Timer.cs" />
-        <Compile Include="ConsoleComponents\Components\UnorderedList.cs" />
-        <Compile Include="ConsoleComponents\HorizontalAlignment.cs" />
-        <Compile Include="ConsoleComponents\PaddedComponent.cs" />
-        <Compile Include="ConsoleComponents\Styles\ConsoleStyle.cs" />
-        <Compile Include="ConsoleComponents\Styles\LoadingBarStyle.cs" />
-        <Compile Include="ConsoleComponents\Styles\OrderedListStyle.cs" />
-        <Compile Include="ConsoleComponents\VerticalAlignment.cs" />
+        <Compile Include="ConsoleComponents\Components\TimeComponent\CountdownTimer.cs" />
+        <Compile Include="ConsoleComponents\Components\TimeComponent\TimeComponent.cs" />
+        <Compile Include="ConsoleComponents\Components\TimeComponent\Timer.cs" />
+        <Compile Include="ConsoleComponents\Style\ConsoleStyle.cs" />
+        <Compile Include="ConsoleComponents\Style\LoadingBarStyle.cs" />
+        <Compile Include="ConsoleComponents\Style\OrderedListStyle.cs" />
+        <Compile Include="ConsoleComponents\TimeHandler.cs" />
+        <Compile Include="ConsoleComponents\Util\HorizontalAlignment.cs" />
+        <Compile Include="ConsoleComponents\Util\PaddedComponent.cs" />
+        <Compile Include="ConsoleComponents\Util\VerticalAlignment.cs" />
         <Compile Include="ExampleProgram.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="TimeHandler.cs" />
     </ItemGroup>
     <ItemGroup>
       <None Include="packages.config" />
     </ItemGroup>
     <ItemGroup>
-      <Content Include="ConsoleComponents\Styles\StyleTest.txt" />
+      <Content Include="ConsoleComponents\Style\StyleTest.txt" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
