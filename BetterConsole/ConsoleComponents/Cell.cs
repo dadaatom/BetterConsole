@@ -6,6 +6,8 @@ namespace BetterConsole.ConsoleComponents
     {
         public PaddedComponent Value;
 
+        public ConsoleComponent Component => Value?.Component;
+
         private int _height;
         public int Height
         {

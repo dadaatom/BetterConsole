@@ -4,14 +4,19 @@ namespace BetterConsole.ConsoleComponents
 {
     public abstract class ComponentColor
     {
-        public abstract ColoredOutput[] GetColors(string toDisplay);
+        /// <summary>
+        /// Gets the color segmentation of a string.
+        /// </summary>
+        /// <param name="toDisplay">String to be color segmented.</param>
+        /// <returns>Pairs of text and colors.</returns>
+        public abstract ColorSegment[] GetColors(string toDisplay);
 
-        public class ColoredOutput
+        public class ColorSegment
         {
             public string Text { get; }
             public ConsoleColor Color { get; }
 
-            public ColoredOutput(string text, ConsoleColor color)
+            public ColorSegment(string text, ConsoleColor color)
             {
                 Text = text;
                 Color = color;

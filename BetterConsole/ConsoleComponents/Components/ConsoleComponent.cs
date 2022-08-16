@@ -59,7 +59,7 @@ namespace BetterConsole.ConsoleComponents
                 }
             }
 
-            foreach (ComponentColor.ColoredOutput output in Color.GetColors(toDisplay))
+            foreach (ComponentColor.ColorSegment output in Color.GetColors(toDisplay))
             {
                 Console.ForegroundColor = output.Color;
                 Console.Write(output.Text);

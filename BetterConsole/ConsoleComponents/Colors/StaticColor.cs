@@ -11,9 +11,14 @@ namespace BetterConsole.ConsoleComponents
             Color = color;
         }
 
-        public override ColoredOutput[] GetColors(string toDisplay)
+        /// <summary>
+        /// Colors a string with a single color.
+        /// </summary>
+        /// <param name="toDisplay">String to be color segmented.</param>
+        /// <returns>Pairs of text and colors.</returns>
+        public override ColorSegment[] GetColors(string toDisplay)
         {
-            return new[] {new ColoredOutput(toDisplay, Color)};
+            return new[] {new ColorSegment(toDisplay, Color)};
         }
     }
 }

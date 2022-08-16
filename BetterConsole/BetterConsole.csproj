@@ -62,11 +62,11 @@
         <Compile Include="ConsoleCommands\ValidationStrategies\RegexValidation.cs" />
         <Compile Include="ConsoleCommands\ValidationStrategies\ValidationStrategy.cs" />
         <Compile Include="ConsoleCommands\ValidationStrategies\WhitelistValidation.cs" />
-        <Compile Include="ConsoleComponents\Border.cs" />
         <Compile Include="ConsoleComponents\Cell.cs" />
         <Compile Include="ConsoleComponents\Colors\ComponentColor.cs" />
         <Compile Include="ConsoleComponents\Colors\CycledColor.cs" />
         <Compile Include="ConsoleComponents\Colors\StaticColor.cs" />
+        <Compile Include="ConsoleComponents\Components\Border.cs" />
         <Compile Include="ConsoleComponents\Components\ConsoleComponent.cs" />
         <Compile Include="ConsoleComponents\Components\CountdownTimer.cs" />
         <Compile Include="ConsoleComponents\Components\ListComponent.cs" />

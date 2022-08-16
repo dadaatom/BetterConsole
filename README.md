@@ -55,14 +55,14 @@ Let's write a text component in the color green.
 
 ```csharp
 TextComponent text = new TextComponent("This will appear green!");
-text.SetColor(ConsoleColor.Green);
+text.SetColor(new StaticColor(ConsoleColor.Green));
 BetterConsole.WriteLine(text);
 ```
 
 Alternatively, for plain text the regular Console methods are implemented to make usage easier.
 
 ```csharp
-BetterConsole.WriteLine("This will also appear green!", ConsoleColor.Green);
+BetterConsole.WriteLine("This will also appear green!", new StaticColor(ConsoleColor.Green));
 ```
 
 </details>
@@ -224,6 +224,55 @@ Two types of list components:
 ```csharp
 OrderedList orderedList = new OrderedListComponent("List of my top 4 favorite numbers:", new string[]{"1", "2", "64", "4"});
 BetterConsole.WriteLine(orderedList);
+```
+
+</details>
+
+
+## Console Colors
+
+Console colors offer different types of color schemes than simple static colors.
+
+<details>
+    <summary>
+        <b>Show Code Example:</b>
+    </summary>
+<br/>
+
+The following example will implement an example color that alternates colors every word.
+
+1. Create a class and extend `ComponentColor`, make sure to implement the `GetColors` function.
+
+```csharp
+public class ExampleColor : ComponentColor
+{
+    public ConsoleColor[] Colors { get; }
+
+    public ExampleColor(ConsoleColor[] colors)
+    {
+        Colors = colors;
+    }
+
+    public override ColorSegment[] GetColors(string toDisplay)
+    {
+        string[] list = toDisplay.Split(new[] {' ', '\n'});
+        ColorSegment[] toReturn = new ColorSegment[list.Length];
+    
+        for(int i = 0; i < list.Length; i++){
+            toReturn[i] = new ColorSegment(list[i], Colors[i % Colors.Length]);
+        }
+
+        return toReturn;
+    }
+}
+```
+
+2. Apply this color and output text.
+
+```csharp
+TextComponent text = new TextComponent("Hello folks,\nIt's nice to meet you!");
+text.Color = new ExampleColor(new ConsoleColor[]{ConsoleColor.Red, ConsoleColor.Green});
+BetterConsole.WriteLine(text);
 ```
 
 </details>
