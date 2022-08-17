@@ -16,6 +16,8 @@ namespace BetterConsole
     {
         public static LinkedList<ConsoleComponent> DisplayedComponents;
 
+        public static ConsoleStyle ConsoleStyle;
+        
         public static TimeHandler TimeHandler { get; }
 
         public static CommandHandler CommandHandler { get; }
@@ -28,6 +30,8 @@ namespace BetterConsole
         static BetterConsole()
         {
             DisplayedComponents = new LinkedList<ConsoleComponent>();
+
+            ConsoleStyle = new ConsoleStyle(new StaticColor(ConsoleColor.Gray));
             
             TimeHandler = new TimeHandler();
             CommandHandler = new CommandHandler();

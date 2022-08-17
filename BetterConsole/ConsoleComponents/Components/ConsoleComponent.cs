@@ -24,7 +24,7 @@ namespace BetterConsole.ConsoleComponents
         
         private string[] _lines;
 
-        public ConsoleComponent() : this(new StaticColor(ConsoleColor.Gray)) { }
+        public ConsoleComponent() : this(BetterConsole.ConsoleStyle.DefaultColor) { }
 
         public ConsoleComponent(ComponentColor color)
         {
