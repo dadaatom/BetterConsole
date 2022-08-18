@@ -75,10 +75,16 @@ namespace BetterConsole.ConsoleComponents
         /// Updates inner string with newest toString.
         /// </summary>
         /// <returns>Returns newest generation of the toString method.</returns>
-        public string Generate()
+        public string Generate(bool generateAll = false)
         {
             string toReturn = ToString();
             _lines = toReturn.Split('\n');
+
+            if (generateAll && Next != null)
+            {
+                toReturn += Next.Generate(true);
+            }
+
             return toReturn;
         }
 

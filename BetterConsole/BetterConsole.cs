@@ -10,6 +10,7 @@ namespace BetterConsole
      * - See console component todo.
      * - See Table todo.
      * - See console command todo.
+     * - Make displayed componenets a linked list of linked lists?
      */
 
     public static class BetterConsole
