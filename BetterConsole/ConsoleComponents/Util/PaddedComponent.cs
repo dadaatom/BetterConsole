@@ -109,16 +109,7 @@ namespace BetterConsole.ConsoleComponents
                 return "";
             }
 
-            ConsoleComponent current = Component;
-            string value = "";
-            
-            while (current != null)
-            {
-                value += current.Generate();
-                current = current.Next;
-            }
-
-            return value;
+            return Component.Generate();
         }
         
         /// <summary>

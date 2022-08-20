@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using BetterConsole.ConsoleComponents;
 
 namespace BetterConsole
@@ -10,12 +11,14 @@ namespace BetterConsole
      * - See console component todo.
      * - See Table todo.
      * - See console command todo.
+     * - Memoisation for longer computations.
      * - Make displayed componenets a linked list of linked lists?
      */
 
     public static class BetterConsole
     {
-        public static LinkedList<ConsoleComponent> DisplayedComponents;
+        //public static LinkedList<ConsoleComponent> DisplayedComponents;
+        public static LinkedList<LinkedList<ConsoleComponent>> DisplayedComponents { get; private set; }
 
         public static ConsoleStyle ConsoleStyle;
         
@@ -30,7 +33,7 @@ namespace BetterConsole
         
         static BetterConsole()
         {
-            DisplayedComponents = new LinkedList<ConsoleComponent>();
+            DisplayedComponents = new LinkedList<LinkedList<ConsoleComponent>>();
 
             ConsoleStyle = new ConsoleStyle(new StaticColor(ConsoleColor.Gray));
             
@@ -133,7 +136,7 @@ namespace BetterConsole
         /// </summary>
         public static void Clear()
         {
-            DisplayedComponents = new LinkedList<ConsoleComponent>();
+            DisplayedComponents = new LinkedList<LinkedList<ConsoleComponent>>();
             Console.Clear();
         }
         
@@ -145,28 +148,14 @@ namespace BetterConsole
         /// <param name="component">Reloads based on the position of this component within the console.</param>
         public static void Reload(ConsoleComponent component)
         {
-            if (DisplayedComponents.Last.Value.Contains(component) && false) // Need to create spaces to cover rest of string, maybe multiline okay if there's a clear sep between components?
+            if (DisplayedComponents.Last.Value.Contains(component))// && false) // Need to create spaces to cover rest of string, maybe multiline okay if there's a clear sep between components?
             {
-                ConsoleComponent current = DisplayedComponents.Last.Value;
-
-                while(current != null)
-                {
-                    if (current.GetLineCount() <= 1)
-                    {
-                        Reload();
-                        return;
-                    }
-
-                    current = current.Next;
-                }
+                //DO THIS
                 
-                Console.Write("\r");
-                DisplayedComponents.Last.Value?.Write();
+                return;
             }
-            else
-            {
-                Reload();
-            }
+            
+            Reload();
         }
         
         /// <summary>
@@ -176,17 +165,15 @@ namespace BetterConsole
         {
             Console.Clear();
 
-            LinkedListNode<ConsoleComponent> current = DisplayedComponents.First;
-            while (current != null)
+            LinkedListNode<LinkedList<ConsoleComponent>> current = DisplayedComponents.First;
+            foreach (LinkedList<ConsoleComponent> lines in DisplayedComponents)
             {
-                current.Value?.Write();
-                
-                if (current.Next != null)
+                foreach (ConsoleComponent component in lines)
                 {
-                    Console.Write("\n");
+                    component?.Write();
                 }
-
-                current = current.Next;
+                
+                Console.Write("\n");
             }
         }
         
@@ -199,7 +186,7 @@ namespace BetterConsole
             if (DisplayedComponents.Count + 1 > DisplayLimit)
             {
                 DisplayedComponents.RemoveFirst();
-                DisplayedComponents.AddLast(component);
+                DisplayedComponents.AddLast(new LinkedList<ConsoleComponent>(new []{component}));
                 if (EnforceLimit)
                 {
                     Reload();
@@ -207,7 +194,7 @@ namespace BetterConsole
             }
             else
             {
-                DisplayedComponents.AddLast(component);
+                DisplayedComponents.AddLast(new LinkedList<ConsoleComponent>(new []{component}));
             }
         }
 
@@ -221,20 +208,13 @@ namespace BetterConsole
             {
                 AddLine(component);
             }
-            else if(DisplayedComponents.Last.Value != null)
+            else if(DisplayedComponents.Last.Value.Last.Value != null)
             {
-                ConsoleComponent current = DisplayedComponents.Last.Value;
-
-                while (current.Next != null)
-                {
-                    current = current.Next;
-                }
-
-                current.Next = component;
+                DisplayedComponents.Last.Value.AddLast(component);
             }
             else
             {
-                DisplayedComponents.Last.Value = component;
+                DisplayedComponents.Last.Value = new LinkedList<ConsoleComponent>(new []{component});
             }
         }
     }

@@ -13,13 +13,10 @@ namespace BetterConsole.ConsoleComponents
      * Pages?
      * Images?
      * Buttons?
-     * Dropdowns?
      */
     
     public abstract class ConsoleComponent
     {
-        public ConsoleComponent Next { get; set; }
-
         public ComponentColor Color { get; set; }
         
         private string[] _lines;
@@ -28,7 +25,7 @@ namespace BetterConsole.ConsoleComponents
 
         public ConsoleComponent(ComponentColor color)
         {
-            Next = null;
+            //Next = null;
             Color = color;
 
             _lines = new string[0];
@@ -65,9 +62,6 @@ namespace BetterConsole.ConsoleComponents
                 Console.Write(output.Text);
             }
 
-            //Console.Write(ToString());
-            Next?.Write();
-            
             Console.ForegroundColor = baseColor;
         }
         
@@ -75,16 +69,10 @@ namespace BetterConsole.ConsoleComponents
         /// Updates inner string with newest toString.
         /// </summary>
         /// <returns>Returns newest generation of the toString method.</returns>
-        public string Generate(bool generateAll = false)
+        public string Generate()
         {
             string toReturn = ToString();
             _lines = toReturn.Split('\n');
-
-            if (generateAll && Next != null)
-            {
-                toReturn += Next.Generate(true);
-            }
-
             return toReturn;
         }
 
@@ -110,42 +98,6 @@ namespace BetterConsole.ConsoleComponents
             }
 
             return count;
-        }
-
-        /// <summary>
-        /// Checks whether the component is in the line.
-        /// </summary>
-        /// <param name="component">Console component to search for.</param>
-        /// <returns>Whether the component can be found within this component.</returns>
-        public bool Contains(ConsoleComponent component)
-        {
-            ConsoleComponent current = this;
-
-            while (current != null)
-            {
-                if (current == component)
-                {
-                    return true;
-                }
-
-                current = current.Next;
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// Sets the color for this component and all subsequent components in the line.
-        /// </summary>
-        /// <param name="color">New text color.</param>
-        public void SetAllColors(ComponentColor color)
-        {
-            ConsoleComponent current = this;
-            while (current != null)
-            {
-                current.Color = color;
-                current = current.Next;
-            }
         }
     }
 }
