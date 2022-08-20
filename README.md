@@ -222,7 +222,8 @@ Two types of list components:
 1. Create an ordered list and write it to the console.
 
 ```csharp
-OrderedList orderedList = new OrderedListComponent("List of my top 4 favorite numbers:", new string[]{"1", "2", "64", "4"});
+string[] nums = new string[]{"1", "2", "64", "4"};
+OrderedList orderedList = new OrderedListComponent("List of my top 4 favorite numbers:", nums);
 BetterConsole.WriteLine(orderedList);
 ```
 

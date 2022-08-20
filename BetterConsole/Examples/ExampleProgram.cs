@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Threading;
 using BetterConsole.ConsoleCommands;
 using BetterConsole.ConsoleComponents;
+using Timer = BetterConsole.ConsoleComponents.Timer;
 
 namespace BetterConsole
 {
@@ -90,12 +92,18 @@ namespace BetterConsole
             BetterConsole.WriteLine("");
             BetterConsole.Write("Content loaded ");
             BetterConsole.Write(timer);
-            BetterConsole.WriteLine(" ago.");
+            BetterConsole.WriteLine(" ago.\n");
             
             //timer.Start();
             
             
-            BetterConsole.Write("\n");
+            // CREATE AND WRITE DROPDOWN //
+            Dropdown dropdown = new Dropdown("Show code example:", new TextComponent("CODE"));
+            BetterConsole.WriteLine(dropdown);
+            dropdown.ToggleDropped();
+            
+            Thread.Sleep(1000);
+            BetterConsole.Reload(dropdown);
             
             
             // REGISTER COMMANDS AND BEGIN HANDLING //
