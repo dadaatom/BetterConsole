@@ -64,6 +64,7 @@
         <Compile Include="ConsoleCommands\ValidationStrategy\WhitelistValidation.cs" />
         <Compile Include="ConsoleComponents\Colors\ComponentColor.cs" />
         <Compile Include="ConsoleComponents\Colors\CycledColor.cs" />
+        <Compile Include="ConsoleComponents\Colors\RainbowColor.cs" />
         <Compile Include="ConsoleComponents\Colors\StaticColor.cs" />
         <Compile Include="ConsoleComponents\Components\Border.cs" />
         <Compile Include="ConsoleComponents\Components\ConsoleComponent.cs" />

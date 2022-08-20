@@ -9,6 +9,8 @@ namespace BetterConsole
         // Use example of the better console and built in components.
         public static void Main(string[] args)
         {
+            Console.SetWindowSize(40,40);
+            
             // CREATE AND WRITE GREEN BORDERED WELCOME MESSAGE //
             TextComponent welcome = new TextComponent("WELCOME");
             Border border = new Border(welcome);
@@ -16,6 +18,14 @@ namespace BetterConsole
             border.PaddedContents.SetAlignments(HorizontalAlignment.Center, VerticalAlignment.Lower);
             border.PaddedContents.SetPaddings(8,1);
             BetterConsole.WriteLine(border);
+            
+            
+            // CREATE A COOL RAINBOW TEXT //
+            TextComponent rainbowText = new TextComponent("RAINBOW");
+            rainbowText.Color = new RainbowColor();
+            BetterConsole.WriteLine("");
+            BetterConsole.WriteLine(rainbowText);
+            
             
             // CREATE AND WRITE LOADING BAR //
             LoadingBar loadingBar = new LoadingBar(10);
