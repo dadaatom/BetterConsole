@@ -10,7 +10,7 @@ Additionally, the console command structure makes creating, validating, and usin
 
 By default the BetterConsole will only reload up to 1000 console lines, as depending on the implementation reloads may occur frequently and adding a limit may improve preformance. Here's another constructor call where our implementation may contain very frequent reloads.
 
-```csharp
+```c#
 BetterConsole.DisplayLimit = 100;
 ```
 
@@ -19,7 +19,7 @@ BetterConsole.DisplayLimit = 100;
 
 Read, write, and clear functions are all present as before.
 
-```csharp
+```c#
 BetterConsole.WriteLine("This is a line of text.");
 BetterConsole.Write("Here's some more text.");
 BetterConsole.Clear();
@@ -30,10 +30,13 @@ string text = BetterConsole.ReadLine();
 Using the write methods of the console will register them internally so written lines can be modified and updated within the console.
 Call the reload method to clear and redisplay all console lines.
 
-```csharp
+```c#
 BetterConsole.Reload();
 ```
-
+Reloading individual components can also be done is the component exists on the last line and is not multiline.
+```c#
+BetterConsole.Reload(component);
+```
 
 ## Console Components
 
@@ -53,7 +56,7 @@ Text components represent strings stored within the console.
 
 Let's write a text component in the color green.
 
-```csharp
+```c#
 TextComponent text = new TextComponent("This will appear green!");
 text.SetColor(new StaticColor(ConsoleColor.Green));
 BetterConsole.WriteLine(text);
@@ -61,7 +64,7 @@ BetterConsole.WriteLine(text);
 
 Alternatively, for plain text the regular Console methods are implemented to make usage easier.
 
-```csharp
+```c#
 BetterConsole.WriteLine("This will also appear green!", new StaticColor(ConsoleColor.Green));
 ```
 
@@ -79,13 +82,13 @@ Loading bars are useful for displaying the execution progress of your code.
 
 1. Let's display the current progress of our program. Firstly, whilst completely optional, I am going to define different style options below.
     
-```csharp
+```c#
 LoadingBarStyle style = new LoadingBarStyle("-", " ", "<", ">");
 ```
 
 2. We will now create our loading bar with the our new style options and a defined length. We will also write the loading bar to the console.
 
-```csharp
+```c#
 LoadingBar loadingBar = new LoadingBar(style, 10);
 BetterConsole.WriteLine("Execution process: ");
 BetterConsole.Write(loadingBar);
@@ -93,7 +96,7 @@ BetterConsole.Write(loadingBar);
 
 3. Great, now all we need to do is provide our loading bar with its the current program progress. Note that input values to the SetPercentage method are automatically bounded between 0 and 1.
 
-```csharp
+```c#
 for (int i = 0; i <= n; i++) {
     //Do stuff.
     loadingBar.SetPercentage(i/n);
@@ -116,7 +119,7 @@ Tables are handy for organizing and displaying information, they are made of a 2
 Let's say two friends want to track how many animals they each saw throughout the day, let's help them display this important information in a table.
 1. Create a 3x3 table and label the outer cells.
 
-```csharp
+```c#
 Table table = new Table(3,3);
 
 table.SetCell(new Cell("Tom"),0,1);
@@ -128,7 +131,7 @@ table.SetCell(new Cell("Cats"),2,0);
 
 2. Fill the inner cells with their data and have the console write the table.
 
-```csharp
+```c#
 table.SetCell(new Cell("10"),1,1);
 table.SetCell(new Cell("2"),1,2);
 table.SetCell(new Cell("6"),2,1);
@@ -139,7 +142,7 @@ BetterConsole.Write(table);
 
 3. Let's now add a header within our table. Resize the table with a lower vertical alignment, add the title cell with a 3 column width, and reload the console.
 
-```csharp
+```c#
 table.Resize(4, 3, verticalAlignment: VerticalAlignment.Lower);
             
 Cell titleCell = new Cell("Animals Spotted", 3, 1);
@@ -182,7 +185,7 @@ Types of time components:
 
 1. Create timer and write it to the console.
 
-```csharp
+```c#
 Timer timer = new Timer();
 
 BetterConsole.WriteLine("This timer has been running for: ");
@@ -191,13 +194,13 @@ BetterConsole.Write(timer);
 
 2. Start the timer to begin timed updates.
 
-```csharp
+```c#
 timer.Start();
 ```
 
 3. Stop the timer when ready.
 
-```csharp
+```c#
 timer.Stop();
 ```
 
@@ -221,7 +224,7 @@ Two types of list components:
 
 1. Create an ordered list and write it to the console.
 
-```csharp
+```c#
 string[] nums = new string[]{"1", "2", "64", "4"};
 OrderedList orderedList = new OrderedListComponent("List of my top 4 favorite numbers:", nums);
 BetterConsole.WriteLine(orderedList);
@@ -244,7 +247,7 @@ The following example will implement an example color that alternates colors eve
 
 1. Create a class and extend `ComponentColor`, make sure to implement the `GetColors` function.
 
-```csharp
+```c#
 public class ExampleColor : ComponentColor
 {
     public ConsoleColor[] Colors { get; }
@@ -270,7 +273,7 @@ public class ExampleColor : ComponentColor
 
 2. Apply this color and output text.
 
-```csharp
+```c#
 TextComponent text = new TextComponent("Hello folks,\nIt's nice to meet you!");
 text.Color = new ExampleColor(new ConsoleColor[]{ConsoleColor.Red, ConsoleColor.Green});
 BetterConsole.WriteLine(text);
@@ -293,7 +296,7 @@ Both `ConsoleCommand` and `ParameterizedCommand` can be extended, the latter inc
 1. Create a new class `PingCommand` and extend `ParameterizedCommand` to include default signature validation. 
 Make sure to override the Execute method with a simple implementation.
 
-```csharp
+```c#
 public class PingCommand : ParameterizedCommand {
     public PingCommand() : base("ping")
     {
@@ -309,7 +312,7 @@ public class PingCommand : ParameterizedCommand {
 
 2. Now all we need to do is register an instance of our new command within the BetterConsole. The `BeginCommandHandling` method creates a new thread to handle incoming user inputs so new content can still be output to the console.
 
-```csharp
+```c#
 BetterConsole.Register(new PingCommand()):
 BetterConsole.BeginCommandHandling();
 ```
