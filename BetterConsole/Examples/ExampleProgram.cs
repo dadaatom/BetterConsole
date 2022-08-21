@@ -92,11 +92,11 @@ namespace BetterConsole
             BetterConsole.WriteLine("");
             BetterConsole.Write("Content loaded ");
             BetterConsole.Write(timer);
-            BetterConsole.WriteLine(" ago.\n");
+            BetterConsole.Write(" ago.");
             
-            //timer.Start();
+            timer.Start();
             
-            
+            /*
             // CREATE AND WRITE DROPDOWN //
             Dropdown dropdown = new Dropdown("Show code example:", new TextComponent("CODE"));
             BetterConsole.WriteLine(dropdown);
@@ -110,6 +110,7 @@ namespace BetterConsole
             ConsoleCommand[] commands = new ConsoleCommand[]{new PingCommand(), new ExampleCommand()};
             BetterConsole.CommandHandler.Register(commands);
             //BetterConsole.CommandHandler.Start();
+            */
         }
     }
 }

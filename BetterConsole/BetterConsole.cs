@@ -148,9 +148,59 @@ namespace BetterConsole
         /// <param name="component">Reloads based on the position of this component within the console.</param>
         public static void Reload(ConsoleComponent component)
         {
-            if (DisplayedComponents.Last.Value.Contains(component))// && false) // Need to create spaces to cover rest of string, maybe multiline okay if there's a clear sep between components?
+            LinkedListNode<ConsoleComponent> node = DisplayedComponents.Last.Value.Find(component);
+
+            if (node != null)
             {
-                //DO THIS
+                int totalLength = 0;
+                /*LinkedListNode<ConsoleComponent> current = node;
+                while (current != null)
+                {
+                    if (current.Value.Height > 1)
+                    {
+                        Reload();
+                        return;
+                    }
+                    
+                    totalLength += current.Value.Length;
+                    current = current.Next;
+                }*/
+
+                foreach (ConsoleComponent consoleComponent in DisplayedComponents.Last.Value)
+                {
+                    if (consoleComponent.Height > 1)
+                    {
+                        Reload();
+                        return;
+                    }
+                    
+                    totalLength += consoleComponent.Length;
+                }
+
+                Console.Write("\r");
+
+                string toPrint = "";
+                for (int i = 0; i < totalLength; i++)
+                {
+                    toPrint += ' ';
+                }
+                
+                Console.Write(toPrint);
+
+                Console.Write("\r");
+                
+                foreach (ConsoleComponent consoleComponent in DisplayedComponents.Last.Value)
+                {
+                    consoleComponent?.Write();
+                }
+                
+                /*
+                current = node;
+                while (current != null)
+                {
+                    current.Value?.Write();
+                    current = current.Next;
+                }*/
                 
                 return;
             }

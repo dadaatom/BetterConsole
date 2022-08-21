@@ -18,7 +18,23 @@ namespace BetterConsole.ConsoleComponents
     public abstract class ConsoleComponent
     {
         public ComponentColor Color { get; set; }
-        
+
+        public int Height => _lines.Length;
+
+        public int Length
+        {
+            get
+            {
+                int count = 0;
+                foreach (string str in _lines)
+                {
+                    count += str.Length;
+                }
+
+                return count;
+            }
+        }
+
         private string[] _lines;
 
         public ConsoleComponent() : this(BetterConsole.ConsoleStyle.DefaultColor) { }
@@ -74,30 +90,6 @@ namespace BetterConsole.ConsoleComponents
             string toReturn = ToString();
             _lines = toReturn.Split('\n');
             return toReturn;
-        }
-
-        /// <summary>
-        /// Gets the number of lines in the Console Component.
-        /// </summary>
-        /// <returns>Line count of the component.</returns>
-        public int GetLineCount()
-        {
-            return _lines.Length;
-        }
-
-        /// <summary>
-        /// Gets the length of all characters in the Console Component.
-        /// </summary>
-        /// <returns>Length of the string.</returns>
-        public int Length()
-        {
-            int count = 0;
-            foreach (string str in _lines)
-            {
-                count += str.Length;
-            }
-
-            return count;
         }
     }
 }
