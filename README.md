@@ -8,7 +8,8 @@ Additionally, the console command structure makes creating, validating, and usin
 
 ## BetterConsole Parameters
 
-By default the BetterConsole will only reload up to 1000 console lines, as depending on the implementation reloads may occur frequently and adding a limit may improve preformance. Here's another constructor call where our implementation may contain very frequent reloads.
+By default the BetterConsole will only reload up to 1000 console lines, as depending on the implementation reloads may occur frequently and adding a limit may improve preformance.
+Here I am expecting more regular reloads so I will define a limit of 100.l
 
 ```c#
 BetterConsole.DisplayLimit = 100;

@@ -153,19 +153,7 @@ namespace BetterConsole
             if (component != null && node != null)
             {
                 int totalLength = 0;
-                /*LinkedListNode<ConsoleComponent> current = node;
-                while (current != null)
-                {
-                    if (current.Value.Height > 1)
-                    {
-                        Reload();
-                        return;
-                    }
-                    
-                    totalLength += current.Value.Length;
-                    current = current.Next;
-                }*/
-
+                
                 foreach (ConsoleComponent consoleComponent in DisplayedComponents.Last.Value)
                 {
                     if (consoleComponent.Height > 1)
@@ -193,15 +181,7 @@ namespace BetterConsole
                 {
                     consoleComponent?.Write();
                 }
-                
-                /*
-                current = node;
-                while (current != null)
-                {
-                    current.Value?.Write();
-                    current = current.Next;
-                }*/
-                
+
                 return;
             }
             

@@ -51,6 +51,7 @@
         <Compile Include="ConsoleCommands\Command\HelpCommand.cs" />
         <Compile Include="ConsoleCommands\Command\PingCommand.cs" />
         <Compile Include="ConsoleCommands\Command\ExampleCommand.cs" />
+        <Compile Include="ConsoleCommands\Command\TestCommand.cs" />
         <Compile Include="ConsoleCommands\ConsoleCommand.cs" />
         <Compile Include="ConsoleCommands\Exception\DuplicateCommandException.cs" />
         <Compile Include="ConsoleCommands\Exception\ParameterOrderMismatchException.cs" />

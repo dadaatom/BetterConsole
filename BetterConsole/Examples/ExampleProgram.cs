@@ -90,9 +90,10 @@ namespace BetterConsole
             // CREATE AND WRITE DROPDOWN //
             Dropdown dropdown = new Dropdown("Show code example:", new TextComponent("COOL CODE HERE"));
             BetterConsole.WriteLine(dropdown);
-            dropdown.ToggleDropped();
             
             Thread.Sleep(1000);
+            
+            dropdown.ToggleDropped();
             BetterConsole.Reload(dropdown);
 
 
@@ -104,8 +105,9 @@ namespace BetterConsole
             BetterConsole.Write(timer);
             BetterConsole.Write(" ago!");
             
-            timer.Start();
-
+            //timer.Start();
+            
+            BetterConsole.Write("\n");
 
             // REGISTER COMMANDS AND BEGIN HANDLING //
             ConsoleCommand[] commands = new ConsoleCommand[]{new PingCommand(), new ExampleCommand()};

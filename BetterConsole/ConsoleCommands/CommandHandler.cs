@@ -7,8 +7,8 @@ using BetterConsole.ConsoleCommands.Exception;
 namespace BetterConsole
 {
     /*
-     * TODO:
-     * Reasons why commands failed.
+     * TODO Reasons why commands failed.
+     * TODO Create shortcut for help with last failed command.
      */
     public class CommandHandler
     {
@@ -114,44 +114,74 @@ namespace BetterConsole
                 
                 string[] signature = line.Split(' ');
 
-                CommandMatch bestMatch = null;
-                CommandMatch match = null;
+                CommandMatch match = HandleSignature(signature);
 
-                if (HelpCommand != null)
+                if (!match.Success)
                 {
-                    match = HelpCommand.MatchSignature(signature);
-
-                    bestMatch = match;
-
-                    if (match.Success)
+                    if (match.Heuristic > 0)
                     {
-                        match.Matched.Execute(new CommandSignature(match.Parameters));
-                        return;
+                        BetterConsole.Write("Signature validation failed on command '" + match.Matched.Header + "'");
                     }
-                }
-
-                
-                foreach (ConsoleCommand command in RegisteredCommands)
-                {
-                    match = command.MatchSignature(signature);
-                    
-                    if (bestMatch == null || match.Heuristic > bestMatch.Heuristic)
+                    else
                     {
-                        bestMatch = match;
+                        BetterConsole.Write("Command not recognised");
                     }
                     
-                    if (match.Success)
+                    if (HelpCommand != null)
                     {
-                        match.Matched.Execute(new CommandSignature(match.Parameters));
-                        return;
+                        BetterConsole.Write(", ");
+                        BetterConsole.WriteLine("type 'help' for command descriptions and help.\n");
                     }
-                }
-
-                if ((match == null || !match.Success) && HelpCommand != null)
-                {
-                    BetterConsole.WriteLine("Type 'help' for command descriptions and help.\n"); // TODO: use bestmatch to recommend.
+                    else
+                    {
+                        BetterConsole.WriteLine(".");
+                    }
                 }
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="signature"></param>
+        /// <returns></returns>
+        private CommandMatch HandleSignature(string[] signature)
+        {
+            CommandMatch bestMatch = null;
+
+            for (int i = 0; i <= RegisteredCommands.Count; i++)
+            {
+                ConsoleCommand command;
+
+                if (i == 0)
+                {
+                    command = HelpCommand;
+                }
+                else
+                {
+                    command = RegisteredCommands[i-1];
+                }
+
+                if (command == null)
+                {
+                    continue;
+                }
+
+                CommandMatch match = command.MatchSignature(signature);
+                    
+                if (bestMatch == null || match.Heuristic > bestMatch.Heuristic)
+                {
+                    bestMatch = match;
+                }
+                    
+                if (match.Success)
+                {
+                    match.Matched.Execute(new CommandSignature(match.Parameters));
+                    return match;
+                }
+            }
+
+            return bestMatch;
         }
     }
 }

@@ -9,9 +9,6 @@ namespace BetterConsole.ConsoleCommands
             CommandParameter param1 = new CommandParameter("Letter", new WhitelistValidation(new []{"A","B","C"}), true);
             CommandParameter param2 = new CommandParameter("Count", new IntegerValidation(), true);
             SetParameters(new CommandParameter[] {param1, param2});
-
-            //ConsoleCommand command = new PingCommand();
-            //SetSubCommands(new []{command});
         }
 
         public override void Execute(CommandSignature signature)
