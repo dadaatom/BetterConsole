@@ -150,7 +150,7 @@ namespace BetterConsole
         {
             LinkedListNode<ConsoleComponent> node = DisplayedComponents.Last.Value.Find(component);
 
-            if (node != null)
+            if (component != null && node != null)
             {
                 int totalLength = 0;
                 /*LinkedListNode<ConsoleComponent> current = node;

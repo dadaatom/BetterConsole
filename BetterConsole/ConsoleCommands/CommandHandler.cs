@@ -110,34 +110,46 @@ namespace BetterConsole
                     continue;
                 }
                 
+                Console.Write("\n");
+                
                 string[] signature = line.Split(' ');
 
+                CommandMatch bestMatch = null;
                 CommandMatch match = null;
 
                 if (HelpCommand != null)
                 {
                     match = HelpCommand.MatchSignature(signature);
+
+                    bestMatch = match;
+
                     if (match.Success)
                     {
                         match.Matched.Execute(new CommandSignature(match.Parameters));
+                        return;
                     }
                 }
 
-                if (match == null || !match.Success)
+                
+                foreach (ConsoleCommand command in RegisteredCommands)
                 {
-                    foreach (ConsoleCommand command in RegisteredCommands)
+                    match = command.MatchSignature(signature);
+                    
+                    if (bestMatch == null || match.Heuristic > bestMatch.Heuristic)
                     {
-                        match = command.MatchSignature(signature);
-                        if (match.Success)
-                        {
-                            match.Matched.Execute(new CommandSignature(match.Parameters));
-                        }
+                        bestMatch = match;
                     }
+                    
+                    if (match.Success)
+                    {
+                        match.Matched.Execute(new CommandSignature(match.Parameters));
+                        return;
+                    }
+                }
 
-                    if ((match == null || !match.Success) && HelpCommand != null)
-                    {
-                        BetterConsole.WriteLine("Type 'help' for command descriptions and help.\n");
-                    }
+                if ((match == null || !match.Success) && HelpCommand != null)
+                {
+                    BetterConsole.WriteLine("Type 'help' for command descriptions and help.\n"); // TODO: use bestmatch to recommend.
                 }
             }
         }

@@ -84,7 +84,17 @@ namespace BetterConsole
             OrderedList alphabeticallyOrderedList = new OrderedList("Look at this alphabetic list:", new string[]{"Woah","Cool!","Nice"}, OrderedListStyle.Alphabetic);
             BetterConsole.WriteLine("");
             BetterConsole.WriteLine(alphabeticallyOrderedList);
+            BetterConsole.WriteLine("");
             
+            
+            // CREATE AND WRITE DROPDOWN //
+            Dropdown dropdown = new Dropdown("Show code example:", new TextComponent("COOL CODE HERE"));
+            BetterConsole.WriteLine(dropdown);
+            dropdown.ToggleDropped();
+            
+            Thread.Sleep(1000);
+            BetterConsole.Reload(dropdown);
+
 
             // CREATE AND WRITE TIMER //
             Timer timer = new Timer();
@@ -92,25 +102,15 @@ namespace BetterConsole
             BetterConsole.WriteLine("");
             BetterConsole.Write("Content loaded ");
             BetterConsole.Write(timer);
-            BetterConsole.Write(" ago.");
+            BetterConsole.Write(" ago!");
             
             timer.Start();
-            
-            /*
-            // CREATE AND WRITE DROPDOWN //
-            Dropdown dropdown = new Dropdown("Show code example:", new TextComponent("CODE"));
-            BetterConsole.WriteLine(dropdown);
-            dropdown.ToggleDropped();
-            
-            Thread.Sleep(1000);
-            BetterConsole.Reload(dropdown);
-            
-            
+
+
             // REGISTER COMMANDS AND BEGIN HANDLING //
             ConsoleCommand[] commands = new ConsoleCommand[]{new PingCommand(), new ExampleCommand()};
             BetterConsole.CommandHandler.Register(commands);
-            //BetterConsole.CommandHandler.Start();
-            */
+            BetterConsole.CommandHandler.Start();
         }
     }
 }

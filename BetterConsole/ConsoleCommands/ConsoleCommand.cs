@@ -53,19 +53,23 @@ namespace BetterConsole.ConsoleCommands
                     CommandMatch match = MatchSignature(subSignature);
                     if (match.Success)
                     {
+                        match.Heuristic += 1;
                         return match;
                     }
                 }
 
                 if (ValidateSignature(subSignature))
                 {
-                    return new CommandMatch(true, this, subSignature);
+                    /*
+                     * Create get heuristic func that generatures the heuristic of the command match, sort most pertinent match by heuristic value.
+                     */
+                    return new CommandMatch(true, this, subSignature, 1);
                 }
             }
 
             return new CommandMatch(false, this, subSignature);
         }
-        
+
         /// <summary>
         /// Overrideable function that validates the parameters passed to the function.
         /// </summary>

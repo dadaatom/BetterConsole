@@ -30,5 +30,13 @@ namespace BetterConsole.ConsoleComponents
 
             return toReturn;
         }
+        
+        public enum CycleType
+        {
+            Unrestricted,
+            ByCharacter,
+            ByWord,
+            Positional
+        }
     }
 }
