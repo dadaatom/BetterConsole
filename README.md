@@ -3,13 +3,13 @@
 ## Why use BetterConsole?
 
 BetterConsole offers common display tools and quality of life features for developing console applications.
-Features that offer ability to edit and refresh the console is very handy when maintaining a clean console output.
+The ability to edit and refresh the console elements is very handy when maintaining a clean console output.
 Additionally, the console command structure makes creating, validating, and using console commands very easy.
 
 ## BetterConsole Parameters
 
 By default the BetterConsole will only reload up to 1000 console lines, as depending on the implementation reloads may occur frequently and adding a limit may improve preformance.
-Here I am expecting more regular reloads so I will define a limit of 100.l
+Here I am expecting more regular reloads so I will define a limit of 100.
 
 ```c#
 BetterConsole.DisplayLimit = 100;
@@ -34,7 +34,8 @@ Call the reload method to clear and redisplay all console lines.
 ```c#
 BetterConsole.Reload();
 ```
-Reloading individual components can also be done is the component exists on the last line and is not multiline.
+Reloading individual components can also be done if the component exists on the last line and is not multiline.
+This strategy is effective when you expect to reload a component very regularly (like a timer or loading bar).
 ```c#
 BetterConsole.Reload(component);
 ```

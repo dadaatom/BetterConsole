@@ -7,7 +7,6 @@ namespace BetterConsole.ConsoleComponents
 {
     /*
      * TODO:
-     * Color strategy pattern
      * Figlet component using figlet .net
      * Style options (i.e. loading bar) (exist as a class applied to the console that most things communicate with)
      * Pages?
