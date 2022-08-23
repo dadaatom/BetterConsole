@@ -40,6 +40,7 @@
         <Reference Include="System" />
         <Reference Include="System.Core" />
         <Reference Include="System.Data" />
+        <Reference Include="System.Drawing" />
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
@@ -63,14 +64,17 @@
         <Compile Include="ConsoleCommands\ValidationStrategy\RegexValidation.cs" />
         <Compile Include="ConsoleCommands\ValidationStrategy\ValidationStrategy.cs" />
         <Compile Include="ConsoleCommands\ValidationStrategy\WhitelistValidation.cs" />
-        <Compile Include="ConsoleComponents\Colors\ComponentColor.cs" />
-        <Compile Include="ConsoleComponents\Colors\CycledColor.cs" />
-        <Compile Include="ConsoleComponents\Colors\RainbowColor.cs" />
-        <Compile Include="ConsoleComponents\Colors\StaticColor.cs" />
+        <Compile Include="ConsoleComponents\ComponentColor\BetterColor.cs" />
+        <Compile Include="ConsoleComponents\ComponentColor\ColorPalette.cs" />
+        <Compile Include="ConsoleComponents\ComponentColor\ComponentColor.cs" />
+        <Compile Include="ConsoleComponents\ComponentColor\CycledColor.cs" />
+        <Compile Include="ConsoleComponents\ComponentColor\RainbowColor.cs" />
+        <Compile Include="ConsoleComponents\ComponentColor\StaticColor.cs" />
         <Compile Include="ConsoleComponents\Components\AggregateComponent.cs" />
         <Compile Include="ConsoleComponents\Components\Border.cs" />
         <Compile Include="ConsoleComponents\Components\ConsoleComponent.cs" />
         <Compile Include="ConsoleComponents\Components\Dropdown.cs" />
+        <Compile Include="ConsoleComponents\Components\Image\Image.cs" />
         <Compile Include="ConsoleComponents\Components\ListComponent\ListComponent.cs" />
         <Compile Include="ConsoleComponents\Components\ListComponent\OrderedList.cs" />
         <Compile Include="ConsoleComponents\Components\ListComponent\UnorderedList.cs" />
