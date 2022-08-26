@@ -4,10 +4,8 @@ namespace BetterConsole.ConsoleComponents
 {
     /*
      * TODO:
-     * Create max width/heights where the cell will omit some data where it can
      * Add wraparound logic to Cell if max vals are defined.
-     * Fix vertical multi cells
-     * Shift elements func
+     * Fix multi row / col lower sep
      */
     
     public class Table : ConsoleComponent
@@ -177,55 +175,78 @@ namespace BetterConsole.ConsoleComponents
             }
 
             toReturn += "\n";
-            
+
+            ColumnElement[] toDisplay = new ColumnElement[Cells.GetLength(1)];
+
             for (int i = 0; i < Cells.GetLength(0); i++)
             {
                 for (int h = 0; h < _rowSizes[i]; h++)
                 {
                     toReturn += border;
-                    
-                    int j = 0;
-                    while (j < Cells.GetLength(1))
+
+                    int num;
+                    for (int j = 0; j < Cells.GetLength(1); j += num) // Make this use the toDisplay item from that iteration.
                     {
-                        if (Cells[i, j] != null)
+                        num = 1;
+                        if (toDisplay[j] == null)
                         {
-                            toReturn += Cells[i, j].Value.PaddedValue[h] + border;
+                            if (Cells[i, j] != null)
+                            {
+                                toDisplay[j] = new ColumnElement(Cells[i, j]);
+                            }
                         }
-                        else
+
+                        if (toDisplay[j] == null)
                         {
                             for (int w = 0; w < _columnSizes[j]; w++)
                             {
                                 toReturn += " ";
                             }
-
-                            toReturn += border;
                         }
-                        j += Cells[i, j] != null ? Cells[i,j].Width : 1;
-                    }
-                    toReturn += "\n";
-                }
-
-                if (i < Cells.GetLength(0)-1)
-                {
-                    toReturn += border;
-                    
-                    int j = 0;
-                    while (j < Cells.GetLength(1))
-                    {
-                        for (int w = 0; w < (Cells[i,j] == null ? _columnSizes[j] : Cells[i,j].Value.TotalWidth); w++)
+                        else
                         {
-                            toReturn += seperator;
+                            toReturn += toDisplay[j].NextLine();
+                            num = toDisplay[j] != null ? toDisplay[j].Cell.Width : 1;
+                            
+                            if (toDisplay[j].RemainingLines <= 0)
+                            {
+                                toDisplay[j] = null;
+                            }
                         }
-
+                        
                         toReturn += border;
-                        j += Cells[i, j] != null ? Cells[i,j].Width : 1;
                     }
-
                     toReturn += "\n";
                 }
                 
+                if (i < Cells.GetLength(0) - 1)
+                {
+                    toReturn += border;
+                    
+                    for (int j = 0; j < Cells.GetLength(1); j += Cells[i, j] != null ? Cells[i,j].Width : 1)
+                    {
+                        if (toDisplay[j] != null)
+                        {
+                            toReturn += toDisplay[j].NextLine();
+                            if (toDisplay[j].RemainingLines <= 0)
+                            {
+                                toDisplay[j] = null;
+                            }
+                        }
+                        else{
+                            for (int w = 0; w < (Cells[i,j] == null ? _columnSizes[j] : Cells[i,j].Value.TotalWidth); w++)
+                            {
+                                toReturn += seperator;
+                            }
+                        }
+                        
+                        toReturn += border;
+                    }
+
+                    toReturn += "\n";
+                }
             }
-            
+
             toReturn += border;
             
             for (int i = 0; i < Cells.GetLength(1); i++) 
@@ -259,10 +280,17 @@ namespace BetterConsole.ConsoleComponents
                 {
                     if (Cells[i,j] != null)
                     {
-                        
                         if (Cells[i, j].Value.Height > _rowSizes[i])
                         {
                             _rowSizes[i] = Cells[i, j].Value.Height;
+                        }
+
+                        int rowSize = (int)Math.Ceiling((double)Cells[i, j].Value.Height / Math.Min(Cells[i, j].Height, Cells.GetLength(0)-i));
+                        for (int y = j; y < Math.Min(j+Cells[i,j].Height, Cells.GetLength(0)); y++) {
+                            if (rowSize > _rowSizes[y])
+                            {
+                                _rowSizes[y] = rowSize;
+                            }
                         }
 
                         int columnSize = (int)Math.Ceiling((double)Cells[i, j].Value.Width / Math.Min(Cells[i, j].Width, Cells.GetLength(1)-j));
@@ -280,23 +308,47 @@ namespace BetterConsole.ConsoleComponents
             {
                 for (int j = 0; j < Cells.GetLength(1); j++)
                 {
-                    if (Cells[i,j] != null)
+                    if (Cells[i, j] == null) continue;
+                    
+                    int targetWidth = Math.Min(Cells[i,j].Width, Cells.GetLength(1)-j) - 1;
+                    for (int x = j; x < Math.Min(_columnSizes.Length, j+Cells[i,j].Width); x++)
                     {
-                        int targetWidth = Math.Min(Cells[i,j].Width, Cells.GetLength(1)-j) - 1;
-                        for (int x = j; x < Math.Min(_columnSizes.Length, j+Cells[i,j].Width); x++)
-                        {
-                            targetWidth += _columnSizes[x];
-                        }
-
-                        int targetHeight = Cells[i,j].Height - 1;
-                        for (int x = i; x < Math.Min(_rowSizes.Length, i+Cells[i,j].Height); x++)
-                        {
-                            targetHeight += _rowSizes[x];
-                        }
-                        
-                        Cells[i,j]?.Value.SetPaddings(targetWidth - (Cells[i,j].Value.Width == 0 ? 1 : Cells[i,j].Value.Width), targetHeight - Cells[i,j].Value.Height);
+                        targetWidth += _columnSizes[x];
                     }
+
+                    int targetHeight = Cells[i,j].Height - 1;
+                    for (int x = i; x < Math.Min(_rowSizes.Length, i+Cells[i,j].Height); x++)
+                    {
+                        targetHeight += _rowSizes[x];
+                    }
+                        
+                    Cells[i,j]?.Value.SetPaddings(targetWidth - (Cells[i,j].Value.Width == 0 ? 1 : Cells[i,j].Value.Width), targetHeight - Cells[i,j].Value.Height);
                 }
+            }
+        }
+
+        private class ColumnElement
+        {
+            public Cell Cell { get; private set; }
+            public int RemainingLines { get; private set; }
+            
+            public ColumnElement(Cell cell)
+            {
+                Cell = cell;
+                RemainingLines = Cell.Value.PaddedValue.Length;
+            }
+
+            /// <summary>
+            /// Gets next line of the cell to display.
+            /// </summary>
+            /// <returns>Current line in the element display.</returns>
+            public string NextLine()
+            {
+                int index = Cell.Value.PaddedValue.Length - RemainingLines;
+
+                RemainingLines--;
+                
+                return Cell.Value.PaddedValue[index];
             }
         }
     }
