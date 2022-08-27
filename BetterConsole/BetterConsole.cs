@@ -157,6 +157,11 @@ namespace BetterConsole
                 
                 foreach (ConsoleComponent consoleComponent in DisplayedComponents.Last.Value)
                 {
+                    if (consoleComponent == null)
+                    {
+                        continue;
+                    }
+
                     if (consoleComponent.Height > 1)
                     {
                         Reload();
@@ -185,7 +190,7 @@ namespace BetterConsole
 
                 return;
             }
-            
+
             Reload();
         }
         
@@ -196,10 +201,9 @@ namespace BetterConsole
         {
             Console.Clear();
 
-            LinkedListNode<LinkedList<ConsoleComponent>> current = DisplayedComponents.First;
-            foreach (LinkedList<ConsoleComponent> lines in DisplayedComponents)
+            foreach (LinkedList<ConsoleComponent> line in DisplayedComponents)
             {
-                foreach (ConsoleComponent component in lines)
+                foreach (ConsoleComponent component in line)
                 {
                     component?.Write();
                 }
@@ -239,7 +243,7 @@ namespace BetterConsole
             {
                 AddLine(component);
             }
-            else if(DisplayedComponents.Last.Value.Last.Value != null)
+            else if(DisplayedComponents.Last.Value != null)
             {
                 DisplayedComponents.Last.Value.AddLast(component);
             }

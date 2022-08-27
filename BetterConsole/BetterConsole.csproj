@@ -52,7 +52,6 @@
         <Compile Include="ConsoleCommands\Command\HelpCommand.cs" />
         <Compile Include="ConsoleCommands\Command\PingCommand.cs" />
         <Compile Include="ConsoleCommands\Command\ExampleCommand.cs" />
-        <Compile Include="ConsoleCommands\Command\TestCommand.cs" />
         <Compile Include="ConsoleCommands\ConsoleCommand.cs" />
         <Compile Include="ConsoleCommands\Exception\DuplicateCommandException.cs" />
         <Compile Include="ConsoleCommands\Exception\ParameterOrderMismatchException.cs" />
@@ -96,9 +95,6 @@
         <Compile Include="ConsoleComponents\Util\VerticalAlignment.cs" />
         <Compile Include="Examples\ExampleProgram.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-    </ItemGroup>
-    <ItemGroup>
-      <None Include="packages.config" />
     </ItemGroup>
     <ItemGroup>
       <Content Include="ConsoleComponents\Style\StyleTest.txt" />

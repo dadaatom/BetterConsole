@@ -18,7 +18,17 @@ namespace BetterConsole.ConsoleComponents
     {
         public ComponentColor Color { get; set; }
 
-        public int Height => _lines.Length;
+        public int Height {
+            get
+            {
+                if (_lines == null ||_lines.Length == 0)
+                {
+                    Generate();
+                }
+
+                return _lines.Length;
+            }
+        }
 
         public int Length
         {
@@ -62,7 +72,7 @@ namespace BetterConsole.ConsoleComponents
                 _lines = Generate().Split('\n');
             }
 
-            string toDisplay = ""; // Loop this data into an input var.
+            string toDisplay = "";
             for (int i = 0; i < _lines.Length; i++) {
                 toDisplay += _lines[i];
                 if (i < _lines.Length - 1)

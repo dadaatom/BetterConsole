@@ -45,8 +45,8 @@ namespace BetterConsole
             
             // CREATE AND WRITE SEPARATOR AND LABEL //
             BetterConsole.WriteLine(new Separator(30));
-
             
+
             // CREATE AND WRITE TABLE //
             Table table = new Table(3,3);
 
@@ -92,8 +92,8 @@ namespace BetterConsole
             BetterConsole.WriteLine(dropdown);
             dropdown.ToggleDropped();
             BetterConsole.Reload(dropdown);
-
-
+            
+            
             // CREATE AND WRITE TIMER //
             Timer timer = new Timer();
             
@@ -104,12 +104,13 @@ namespace BetterConsole
             
             timer.Start();
             
-            BetterConsole.WriteLine("");
-
+            
             // REGISTER COMMANDS AND BEGIN HANDLING //
+            /*
             ConsoleCommand[] commands = new ConsoleCommand[]{new PingCommand(), new ExampleCommand()};
             BetterConsole.CommandHandler.Register(commands);
             BetterConsole.CommandHandler.Start();
+            */
         }
     }
 }
