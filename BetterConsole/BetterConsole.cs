@@ -12,7 +12,6 @@ namespace BetterConsole
      * - See Table todo.
      * - See console command todo.
      * - Memoisation for longer computations.
-     * - Make displayed componenets a linked list of linked lists?
      * - bug when verifying line count of component reload.
      */
 

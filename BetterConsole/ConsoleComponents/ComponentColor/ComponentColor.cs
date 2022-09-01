@@ -14,12 +14,15 @@ namespace BetterConsole.ConsoleComponents
         public class ColorSegment
         {
             public string Text { get; }
-            public ConsoleColor Color { get; }
+            public ConsoleColor TextColor { get; }
 
-            public ColorSegment(string text, ConsoleColor color)
+            public ConsoleColor BackgroundColor { get; }
+            
+            public ColorSegment(string text, ConsoleColor textColor, ConsoleColor backgroundColor = ConsoleColor.Black)
             {
                 Text = text;
-                Color = color;
+                TextColor = textColor;
+                BackgroundColor = backgroundColor;
             }
         }
     }

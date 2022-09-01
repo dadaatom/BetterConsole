@@ -63,7 +63,7 @@
         <Compile Include="ConsoleCommands\ValidationStrategy\RegexValidation.cs" />
         <Compile Include="ConsoleCommands\ValidationStrategy\ValidationStrategy.cs" />
         <Compile Include="ConsoleCommands\ValidationStrategy\WhitelistValidation.cs" />
-        <Compile Include="ConsoleComponents\ComponentColor\BetterColor.cs" />
+        <Compile Include="ConsoleComponents\ComponentColor\ColorInfo.cs" />
         <Compile Include="ConsoleComponents\ComponentColor\ColorPalette.cs" />
         <Compile Include="ConsoleComponents\ComponentColor\ComponentColor.cs" />
         <Compile Include="ConsoleComponents\ComponentColor\CycledColor.cs" />

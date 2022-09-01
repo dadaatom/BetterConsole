@@ -46,7 +46,7 @@ namespace BetterConsole.ConsoleComponents
 
         private string[] _lines;
 
-        public ConsoleComponent() : this(BetterConsole.ConsoleStyle.DefaultColor) { }
+        public ConsoleComponent() : this(null) { }
 
         public ConsoleComponent(ComponentColor color)
         {
@@ -64,8 +64,8 @@ namespace BetterConsole.ConsoleComponents
         /// <param name="generate">Updates inner string with newest toString iteration.</param>
         public void Write(bool generate = true)
         {
-            ConsoleColor baseColor = Console.ForegroundColor;
-            //Console.ForegroundColor = Color;
+            ConsoleColor baseTextColor = Console.ForegroundColor;
+            ConsoleColor baseBackgroundColor = Console.BackgroundColor;
             
             if (generate)
             {
@@ -81,13 +81,22 @@ namespace BetterConsole.ConsoleComponents
                 }
             }
 
-            foreach (ComponentColor.ColorSegment output in Color.GetColors(toDisplay))
+            ComponentColor color = Color;
+
+            if (color == null)
             {
-                Console.ForegroundColor = output.Color;
+                color = BetterConsole.ConsoleStyle.DefaulColor;
+            }
+
+            foreach (ComponentColor.ColorSegment output in color.GetColors(toDisplay))
+            {
+                Console.ForegroundColor = output.TextColor;
+                Console.BackgroundColor = output.BackgroundColor;
                 Console.Write(output.Text);
             }
 
-            Console.ForegroundColor = baseColor;
+            Console.ForegroundColor = baseTextColor;
+            Console.BackgroundColor = baseBackgroundColor;
         }
         
         /// <summary>

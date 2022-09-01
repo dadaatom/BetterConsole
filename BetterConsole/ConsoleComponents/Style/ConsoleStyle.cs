@@ -4,11 +4,11 @@ namespace BetterConsole.ConsoleComponents
 {
     public class ConsoleStyle
     {
-        public ComponentColor DefaultColor { get; set; }
+        public ComponentColor DefaulColor { get; set; }
 
         public ConsoleStyle(ComponentColor color)
         {
-            DefaultColor = color;
+            DefaulColor = color;
         }
     }
 }
