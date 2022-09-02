@@ -1,7 +1,4 @@
 ﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace BetterConsole.ConsoleComponents
 {
@@ -18,75 +15,42 @@ namespace BetterConsole.ConsoleComponents
     {
         public ComponentColor Color { get; set; }
 
-        public int Height {
-            get
-            {
-                if (_lines == null ||_lines.Length == 0)
-                {
-                    Generate();
-                }
+        public int Height { get; private set; }
 
-                return _lines.Length;
-            }
-        }
-
-        public int Length
-        {
-            get
-            {
-                int count = 0;
-                foreach (string str in _lines)
-                {
-                    count += str.Length;
-                }
-
-                return count;
-            }
-        }
-
-        private string[] _lines;
-
+        public int Length { get; private set; }
+        
         public ConsoleComponent() : this(null) { }
 
         public ConsoleComponent(ComponentColor color)
         {
             //Next = null;
             Color = color;
-
-            _lines = new string[0];
         }
 
         public abstract override string ToString();
         
         /// <summary>
-        /// Writes the entire line to the console.
+        /// Writes the component to the console, and handles pre/post conditions.
         /// </summary>
-        /// <param name="generate">Updates inner string with newest toString iteration.</param>
-        public void Write(bool generate = true)
+        public void Write()
         {
             ConsoleColor baseTextColor = Console.ForegroundColor;
             ConsoleColor baseBackgroundColor = Console.BackgroundColor;
             
-            if (generate)
-            {
-                _lines = Generate().Split('\n');
-            }
+            DisplayText();
 
-            string toDisplay = "";
-            for (int i = 0; i < _lines.Length; i++) {
-                toDisplay += _lines[i];
-                if (i < _lines.Length - 1)
-                {
-                    toDisplay += '\n';
-                }
-            }
+            Console.ForegroundColor = baseTextColor;
+            Console.BackgroundColor = baseBackgroundColor;
+        }
 
-            ComponentColor color = Color;
+        /// <summary>
+        /// Displays the component text.
+        /// </summary>
+        protected virtual void DisplayText()
+        {
+            string toDisplay = Generate();
 
-            if (color == null)
-            {
-                color = BetterConsole.ConsoleStyle.DefaulColor;
-            }
+            ComponentColor color = Color ?? BetterConsole.ConsoleStyle.DefaulColor;
 
             foreach (ComponentColor.ColorSegment output in color.GetColors(toDisplay))
             {
@@ -94,11 +58,8 @@ namespace BetterConsole.ConsoleComponents
                 Console.BackgroundColor = output.BackgroundColor;
                 Console.Write(output.Text);
             }
-
-            Console.ForegroundColor = baseTextColor;
-            Console.BackgroundColor = baseBackgroundColor;
         }
-        
+
         /// <summary>
         /// Updates inner string with newest toString.
         /// </summary>
@@ -106,8 +67,29 @@ namespace BetterConsole.ConsoleComponents
         public string Generate()
         {
             string toReturn = ToString();
-            _lines = toReturn.Split('\n');
+            UpdateSizes(toReturn);
             return toReturn;
+        }
+
+        /// <summary>
+        /// Updates height and length variables of the component.
+        /// </summary>
+        /// <param name="str">New display string to parse for information.</param>
+        private void UpdateSizes(string str)
+        {
+            string[] lines = str.Split('\n');
+
+            int max = 0;
+            foreach (string line in lines)
+            {
+                if (line.Length > max)
+                {
+                    max = line.Length;
+                }
+            }
+
+            Length = max;
+            Height = lines.Length;
         }
     }
 }

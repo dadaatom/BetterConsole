@@ -1,12 +1,13 @@
 # <u>BetterConsole</u>
 
-## Why use BetterConsole?
+# Why use BetterConsole?
 
 BetterConsole offers common display tools and quality of life features for developing console applications.
 The ability to edit and refresh the console elements is very handy when maintaining a clean console output.
+Prebuilt console components include tables, loading bars, timers, and unique coloring.
 Additionally, the console command structure makes creating, validating, and using console commands very easy.
 
-## BetterConsole Parameters
+# BetterConsole Parameters
 
 By default the BetterConsole will only reload up to 1000 console lines, as depending on the implementation reloads may occur frequently and adding a limit may improve preformance.
 Here I am expecting more regular reloads so I will define a limit of 100.
@@ -16,7 +17,7 @@ BetterConsole.DisplayLimit = 100;
 ```
 
 
-## Simple Functions
+# Simple Functions
 
 Read, write, and clear functions are all present as before.
 
@@ -40,13 +41,13 @@ This strategy is effective when you expect to reload a component very regularly 
 BetterConsole.Reload(component);
 ```
 
-## Console Components
+# Console Components
 
 Console components are elements that within a console display.
 Most methods like Write and WriteLine accept console components as well as strings.
 
 
-### <u>Text Components</u>
+## <u>Text Components</u>
 
 Text components represent strings stored within the console. 
 
@@ -73,7 +74,7 @@ BetterConsole.WriteLine("This will also appear green!", new StaticColor(ConsoleC
 </details>
 
 
-### <u>Loading Bars</u>
+## <u>Loading Bars</u>
 Loading bars are useful for displaying the execution progress of your code. 
 
 <details>
@@ -108,7 +109,7 @@ for (int i = 0; i <= n; i++) {
 </details>
 
 
-### <u>Tables</u>
+## <u>Tables</u>
 
 Tables are handy for organizing and displaying information, they are made of a 2d array of table cells. Cells will accept plain strings or console components. Additionally, table cells are able to resize in order to accomodate varying widths and heights. Cells may also span multiple rows and columns within the table in order to create larger spaces for them.
 
@@ -171,7 +172,7 @@ BetterConsole.Reload();
 </details>
 
 
-### <u>Time Components</u>
+## <u>Time Components</u>
 
 Time components are handy for tracking the runtime of a program or conveying other time related information to the user.
 <br/>
@@ -209,7 +210,7 @@ timer.Stop();
 </details>
 
 
-### <u>List Components</u>
+## <u>List Components</u>
 
 List components are used to display a collection of components, either in an ordered or unordered fashion.
 Additionally, lists accept an array of ConsoleComponents or an array of strings for ease of use.
@@ -235,7 +236,7 @@ BetterConsole.WriteLine(orderedList);
 </details>
 
 
-## Console Colors
+# Console Colors
 
 Console colors offer different types of color schemes than simple static colors.
 
@@ -284,7 +285,7 @@ BetterConsole.WriteLine(text);
 </details>
 
 
-## Custom Commands
+# Custom Commands
 
 Console commands provide an easy framework in which to create and handle console inputs.
 Both `ConsoleCommand` and `ParameterizedCommand` can be extended, the latter includes a parameter list and an implementation of the `ValidateSignature` virtual method from `ConsoleCommand.cs`.

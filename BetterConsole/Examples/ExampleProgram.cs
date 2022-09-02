@@ -102,15 +102,16 @@ namespace BetterConsole
             BetterConsole.Write(timer);
             BetterConsole.Write(" ago!");
             
-            timer.Start();
+            //timer.Start();
             
             
             // REGISTER COMMANDS AND BEGIN HANDLING //
-            /*
+            
+            BetterConsole.WriteLine("");
             ConsoleCommand[] commands = new ConsoleCommand[]{new PingCommand(), new ExampleCommand()};
             BetterConsole.CommandHandler.Register(commands);
             BetterConsole.CommandHandler.Start();
-            */
+            
         }
     }
 }

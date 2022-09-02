@@ -110,8 +110,6 @@ namespace BetterConsole
                     continue;
                 }
                 
-                Console.Write("\n");
-                
                 string[] signature = line.Split(' ');
 
                 CommandMatch match = HandleSignature(signature);
@@ -137,6 +135,7 @@ namespace BetterConsole
                         BetterConsole.WriteLine(".");
                     }
                 }
+                BetterConsole.WriteLine("");
             }
         }
 
