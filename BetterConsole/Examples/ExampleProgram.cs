@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Threading;
 using BetterConsole.ConsoleCommands;
 using BetterConsole.ConsoleComponents;
@@ -16,8 +17,7 @@ namespace BetterConsole
             Thread.Sleep(100);
             
             // CREATE IMAGE //
-            
-            Image image = new Image(new Bitmap("C:\\Users\\Max\\RiderProjects\\BetterConsole\\BetterConsole\\Examples\\Images\\Welcome.png"));
+            Image image = new Image(new Bitmap(Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()))+"\\Examples\\Images\\Welcome.png"));
             BetterConsole.WriteLine(image);
 
 
