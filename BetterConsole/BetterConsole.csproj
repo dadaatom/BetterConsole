@@ -63,12 +63,11 @@
         <Compile Include="ConsoleCommands\ValidationStrategy\RegexValidation.cs" />
         <Compile Include="ConsoleCommands\ValidationStrategy\ValidationStrategy.cs" />
         <Compile Include="ConsoleCommands\ValidationStrategy\WhitelistValidation.cs" />
-        <Compile Include="ConsoleComponents\ComponentColor\ColorInfo.cs" />
-        <Compile Include="ConsoleComponents\ComponentColor\ColorPalette.cs" />
-        <Compile Include="ConsoleComponents\ComponentColor\ComponentColor.cs" />
-        <Compile Include="ConsoleComponents\ComponentColor\CycledColor.cs" />
-        <Compile Include="ConsoleComponents\ComponentColor\RainbowColor.cs" />
-        <Compile Include="ConsoleComponents\ComponentColor\StaticColor.cs" />
+        <Compile Include="ConsoleComponents\Color\ColorUtil.cs" />
+        <Compile Include="ConsoleComponents\Color\ComponentColor.cs" />
+        <Compile Include="ConsoleComponents\Color\CycledColor.cs" />
+        <Compile Include="ConsoleComponents\Color\RainbowColor.cs" />
+        <Compile Include="ConsoleComponents\Color\StaticColor.cs" />
         <Compile Include="ConsoleComponents\Components\AggregateComponent.cs" />
         <Compile Include="ConsoleComponents\Components\Border.cs" />
         <Compile Include="ConsoleComponents\Components\ConsoleComponent.cs" />
@@ -98,6 +97,8 @@
     </ItemGroup>
     <ItemGroup>
       <Content Include="ConsoleComponents\Style\StyleTest.txt" />
+      <Content Include="Examples\Images\Save.png" />
+      <Content Include="Examples\Images\Welcome.png" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Drawing;
 using System.Threading;
 using BetterConsole.ConsoleCommands;
 using BetterConsole.ConsoleComponents;
+using Image = BetterConsole.ConsoleComponents.Image;
 using Timer = BetterConsole.ConsoleComponents.Timer;
 
 namespace BetterConsole
@@ -11,18 +13,16 @@ namespace BetterConsole
         // Use example of the better console and built in components.
         public static void Main(string[] args)
         {
-            Console.SetWindowSize(40,40);
+            Thread.Sleep(100);
             
-            // CREATE AND WRITE GREEN BORDERED WELCOME MESSAGE //
-            TextComponent welcome = new TextComponent("WELCOME");
-            Border border = new Border(welcome);
-            border.Color = new StaticColor(ConsoleColor.Green);
-            border.PaddedContents.SetAlignments(HorizontalAlignment.Center, VerticalAlignment.Lower);
-            border.PaddedContents.SetPaddings(8,1);
-            BetterConsole.WriteLine(border);
+            // CREATE IMAGE //
             
-            
+            Image image = new Image(new Bitmap("C:\\Users\\Max\\RiderProjects\\BetterConsole\\BetterConsole\\Examples\\Images\\Welcome.png"));
+            BetterConsole.WriteLine(image);
+
+
             // CREATE A COOL RAINBOW TEXT //
+            
             TextComponent rainbowText = new TextComponent("RAINBOW");
             rainbowText.Color = new RainbowColor();
             BetterConsole.WriteLine("");
@@ -30,24 +30,29 @@ namespace BetterConsole
             
             
             // CREATE AND WRITE LOADING BAR //
+            
             LoadingBar loadingBar = new LoadingBar(10);
             BetterConsole.Write("\nLoading Content: ");
-            BetterConsole.WriteLine(loadingBar);
+            BetterConsole.Write(loadingBar);
             
             
             // UPDATE LOADING BAR INCREMENTALLY //
-            for (int i = 0; i < 500; i++) {
-                loadingBar.SetPercentage(i/500.0);
+            
+            for (int i = 0; i < 5; i++) {
+                //loadingBar.SetPercentage(i/5.0);
             }
             
-            loadingBar.SetPercentage(1.0);
+            //loadingBar.SetPercentage(1.0);
             
             
             // CREATE AND WRITE SEPARATOR AND LABEL //
+
+            BetterConsole.WriteLine("");
             BetterConsole.WriteLine(new Separator(30));
             
 
             // CREATE AND WRITE TABLE //
+            
             Table table = new Table(3,3);
 
             table.SetCell(new Cell("Tom"),0,1);
@@ -69,18 +74,21 @@ namespace BetterConsole
 
             
             // CREATE AND WRITE UNORDERED LIST //
+            
             UnorderedList unorderedList = new UnorderedList("List of things I like:", new string[]{"Rainy days", "Multi\nLine\nStrings", "Strawberries"});
             BetterConsole.WriteLine("");
             BetterConsole.WriteLine(unorderedList);
             
             
             // CREATE AND WRITE NUMERICALLY ORDERED LIST //
+            
             OrderedList orderedList = new OrderedList("List of my top 4 favorite numbers:",new string[]{"1", "2", "64", "4"});
             BetterConsole.WriteLine("");
             BetterConsole.WriteLine(orderedList);
             
             
             // CREATE AND WRITE ALPHABETICALLY ORDERED LIST //
+            
             OrderedList alphabeticallyOrderedList = new OrderedList("Look at this alphabetic list:", new string[]{"Woah","Cool!","Nice"}, OrderedListStyle.Alphabetic);
             BetterConsole.WriteLine("");
             BetterConsole.WriteLine(alphabeticallyOrderedList);
@@ -88,13 +96,15 @@ namespace BetterConsole
             
             
             // CREATE AND WRITE DROPDOWN //
-            Dropdown dropdown = new Dropdown("Show code example:", new TextComponent("COOL CODE HERE"));
-            BetterConsole.WriteLine(dropdown);
+            
+            Dropdown dropdown = new Dropdown("Show code example:", new TextComponent("    COOL CODE HERE"));
             dropdown.ToggleDropped();
-            BetterConsole.Reload(dropdown);
+            BetterConsole.WriteLine(dropdown);
+            //BetterConsole.Reload(dropdown);
             
             
             // CREATE AND WRITE TIMER //
+            
             Timer timer = new Timer();
             
             BetterConsole.WriteLine("");
@@ -104,13 +114,14 @@ namespace BetterConsole
             
             //timer.Start();
             
+            BetterConsole.WriteLine("");
             
             // REGISTER COMMANDS AND BEGIN HANDLING //
             
             BetterConsole.WriteLine("");
             ConsoleCommand[] commands = new ConsoleCommand[]{new PingCommand(), new ExampleCommand()};
             BetterConsole.CommandHandler.Register(commands);
-            BetterConsole.CommandHandler.Start();
+            //BetterConsole.CommandHandler.Start();
             
         }
     }

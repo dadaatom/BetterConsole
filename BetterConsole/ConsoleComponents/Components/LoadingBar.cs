@@ -53,7 +53,7 @@ namespace BetterConsole.ConsoleComponents
             
             if (prevCount != _count)
             {
-                BetterConsole.Reload();
+                BetterConsole.Reload(this);
             }
         }
         
