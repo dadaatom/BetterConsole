@@ -12,7 +12,7 @@ namespace BetterConsole
      * - See Table todo.
      * - See console command todo.
      * - Memoisation for longer computations.
-     * - bug when verifying line count of component reload.
+     * - bug Console.Clear() on reload.
      */
 
     public static class BetterConsole

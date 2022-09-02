@@ -16,12 +16,22 @@ namespace BetterConsole.ConsoleComponents
 
         protected override void DisplayText()
         {
+            ConsoleColor background = Console.BackgroundColor;
+            
             for (int i = 0; i < ImageMap.Height; i++) {
                 for (int j = 0; j < ImageMap.Width; j++)
                 {
                     Color pixel = ImageMap.GetPixel(j, i);
                     //ColorInfo colorInfo = ColorPalette.BestMatch(pixel.R, pixel.G, pixel.B);
-                    Console.BackgroundColor = ColorUtil.ClosestConsoleColor(pixel.R, pixel.G, pixel.B);
+                    if (pixel.A < 128)
+                    {
+                        Console.BackgroundColor = background;
+                    }
+                    else
+                    {
+                        Console.BackgroundColor = ColorUtil.ClosestConsoleColor(pixel.R, pixel.G, pixel.B);
+                    }
+                    
                     Console.Write("   ");
                 }
 

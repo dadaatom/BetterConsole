@@ -17,8 +17,10 @@ namespace BetterConsole.ConsoleComponents
             public ConsoleColor TextColor { get; }
 
             public ConsoleColor BackgroundColor { get; }
-            
-            public ColorSegment(string text, ConsoleColor textColor, ConsoleColor backgroundColor = ConsoleColor.Black)
+
+            public ColorSegment(string text, ConsoleColor textColor) : this(text, textColor, Console.BackgroundColor) { }
+
+            public ColorSegment(string text, ConsoleColor textColor, ConsoleColor backgroundColor)
             {
                 Text = text;
                 TextColor = textColor;

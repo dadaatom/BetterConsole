@@ -7,7 +7,7 @@ using BetterConsole.ConsoleComponents;
 using Image = BetterConsole.ConsoleComponents.Image;
 using Timer = BetterConsole.ConsoleComponents.Timer;
 
-namespace BetterConsole
+namespace BetterConsole.Examples
 {
     internal class ExampleProgram
     {
