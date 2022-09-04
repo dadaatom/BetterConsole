@@ -72,7 +72,7 @@
         <Compile Include="ConsoleComponents\Components\Border.cs" />
         <Compile Include="ConsoleComponents\Components\ConsoleComponent.cs" />
         <Compile Include="ConsoleComponents\Components\Dropdown.cs" />
-        <Compile Include="ConsoleComponents\Components\Image\Image.cs" />
+        <Compile Include="ConsoleComponents\Components\Image.cs" />
         <Compile Include="ConsoleComponents\Components\ListComponent\ListComponent.cs" />
         <Compile Include="ConsoleComponents\Components\ListComponent\OrderedList.cs" />
         <Compile Include="ConsoleComponents\Components\ListComponent\UnorderedList.cs" />

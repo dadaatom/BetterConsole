@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Threading;
 using BetterConsole.ConsoleCommands;
@@ -13,7 +14,7 @@ namespace BetterConsole.Examples
         // Use example of the better console and built in components.
         public static void Main(string[] args)
         {
-            Thread.Sleep(100);
+            //Thread.Sleep(100);
             
             // CREATE IMAGE //
             
@@ -71,7 +72,7 @@ namespace BetterConsole.Examples
             Cell titleCell = new Cell("Animals Spotted", 3, 1);
             table.SetCell(titleCell, 0, 0);
             BetterConsole.WriteLine(table);
-            
+
             
             // CREATE AND WRITE UNORDERED LIST //
             
@@ -85,6 +86,7 @@ namespace BetterConsole.Examples
             OrderedList orderedList = new OrderedList("List of my top 4 favorite numbers:",new string[]{"1", "2", "64", "4"});
             BetterConsole.WriteLine("");
             BetterConsole.WriteLine(orderedList);
+            BetterConsole.WriteLine("");
             
             
             // CREATE AND WRITE ALPHABETICALLY ORDERED LIST //
@@ -93,8 +95,7 @@ namespace BetterConsole.Examples
             BetterConsole.WriteLine("");
             BetterConsole.WriteLine(alphabeticallyOrderedList);
             BetterConsole.WriteLine("");
-            
-            
+
             // CREATE AND WRITE DROPDOWN //
             
             Dropdown dropdown = new Dropdown("Show code example:", new TextComponent("    COOL CODE HERE"));
@@ -122,7 +123,6 @@ namespace BetterConsole.Examples
             ConsoleCommand[] commands = new ConsoleCommand[]{new PingCommand(), new ExampleCommand()};
             BetterConsole.CommandHandler.Register(commands);
             //BetterConsole.CommandHandler.Start();
-            
         }
     }
 }

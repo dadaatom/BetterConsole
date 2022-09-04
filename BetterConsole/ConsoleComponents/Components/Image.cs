@@ -14,6 +14,13 @@ namespace BetterConsole.ConsoleComponents
             ImageMap = imageMap;
         }
 
+        public void Resize(int width, int height)
+        {
+            Bitmap bitmap = new Bitmap(width, height);
+
+            throw new NotImplementedException();
+        }
+
         protected override void DisplayText()
         {
             ConsoleColor background = Console.BackgroundColor;
@@ -22,7 +29,7 @@ namespace BetterConsole.ConsoleComponents
                 for (int j = 0; j < ImageMap.Width; j++)
                 {
                     Color pixel = ImageMap.GetPixel(j, i);
-                    //ColorInfo colorInfo = ColorPalette.BestMatch(pixel.R, pixel.G, pixel.B);
+
                     if (pixel.A < 128)
                     {
                         Console.BackgroundColor = background;
