@@ -4,7 +4,7 @@
 
 BetterConsole offers common display tools and quality of life features for developing console applications.
 The ability to edit and refresh the console elements is very handy when maintaining a clean console output.
-Prebuilt console components include tables, loading bars, timers, and unique coloring.
+Prebuilt console components include tables, images, loading bars, and timers.
 Additionally, the console command structure makes creating, validating, and using console commands very easy.
 
 # Simple Functions
