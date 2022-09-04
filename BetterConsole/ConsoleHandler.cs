@@ -188,7 +188,16 @@ namespace BetterConsole
                 Console.Write("\n");
             }
         }
+
         
+        /// <summary>
+        /// Creates a line break.
+        /// </summary>
+        public void BreakLine()
+        {
+            AddLine(null);
+        }
+
         /// <summary>
         /// Adds a new line to the displayed list and will enforce the display limit if enabled.
         /// </summary>
