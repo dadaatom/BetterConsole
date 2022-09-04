@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.IO;
 using System.Threading;
 using BetterConsole.ConsoleCommands;
@@ -17,9 +16,9 @@ namespace BetterConsole.Examples
             Thread.Sleep(100);
             
             // CREATE IMAGE //
-            Image image = new Image(new Bitmap(Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()))+"\\Examples\\Images\\Welcome.png"));
+            
+            Image image = new Image(Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()))+"\\Examples\\Images\\Welcome.png");
             BetterConsole.WriteLine(image);
-
 
             // CREATE A COOL RAINBOW TEXT //
             
@@ -39,10 +38,11 @@ namespace BetterConsole.Examples
             // UPDATE LOADING BAR INCREMENTALLY //
             
             for (int i = 0; i < 5; i++) {
-                //loadingBar.SetPercentage(i/5.0);
+                //DO STUFF
+                loadingBar.SetPercentage(i/5.0);
             }
             
-            //loadingBar.SetPercentage(1.0);
+            loadingBar.SetPercentage(1.0);
             
             
             // CREATE AND WRITE SEPARATOR AND LABEL //
@@ -71,7 +71,7 @@ namespace BetterConsole.Examples
             Cell titleCell = new Cell("Animals Spotted", 3, 1);
             table.SetCell(titleCell, 0, 0);
             BetterConsole.WriteLine(table);
-
+            
             
             // CREATE AND WRITE UNORDERED LIST //
             

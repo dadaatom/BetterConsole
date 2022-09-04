@@ -7,16 +7,6 @@ The ability to edit and refresh the console elements is very handy when maintain
 Prebuilt console components include tables, loading bars, timers, and unique coloring.
 Additionally, the console command structure makes creating, validating, and using console commands very easy.
 
-# BetterConsole Parameters
-
-By default the BetterConsole will only reload up to 1000 console lines, as depending on the implementation reloads may occur frequently and adding a limit may improve preformance.
-Here I am expecting more regular reloads so I will define a limit of 100.
-
-```c#
-BetterConsole.DisplayLimit = 100;
-```
-
-
 # Simple Functions
 
 Read, write, and clear functions are all present as before.
@@ -39,6 +29,15 @@ Reloading individual components can also be done if the component exists on the 
 This strategy is effective when you expect to reload a component very regularly (like a timer or loading bar).
 ```c#
 BetterConsole.Reload(component);
+```
+
+# BetterConsole Parameters
+
+By default the BetterConsole will only reload up to 1000 console lines, as depending on the implementation reloads may occur frequently and adding a limit may improve preformance.
+Here I am expecting more regular reloads so I will define a limit of 100.
+
+```c#
+BetterConsole.DisplayLimit = 100;
 ```
 
 # Console Components
@@ -167,6 +166,32 @@ BetterConsole.Reload();
 | Cats|  6  |  9  |
 |_____|_____|_____|
 
+```
+
+</details>
+
+
+## <u>Images</u>
+
+Images are helpful for displaying specific graphics within the console.
+When creating an image its important to note the size of the input image as pixels displayed here are quite large.
+Additionally, many images are limited by the short selection of available ConsoleColors available within the console.
+
+<details>
+    <summary>
+        <b>Show Code Example:</b>
+    </summary>
+<br/>
+
+1. Get the complete image path.
+```c#
+string imagePath = Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()))+"\\Images\\MyImage.png"));
+```
+
+2. Create and write the image to the console.
+```c#
+Image image = new Image(imagePath);
+BetterConsole.WriteLine(image);
 ```
 
 </details>
