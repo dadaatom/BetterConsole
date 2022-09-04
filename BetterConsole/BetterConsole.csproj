@@ -5,7 +5,7 @@
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
         <ProjectGuid>{BDB792E1-F582-4989-BA5D-256CDD99EC54}</ProjectGuid>
-        <OutputType>Exe</OutputType>
+        <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
         <RootNamespace>BetterConsole</RootNamespace>
         <AssemblyName>BetterConsole</AssemblyName>
@@ -45,24 +45,6 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="BetterConsole.cs" />
-        <Compile Include="ConsoleCommands\CommandHandler.cs" />
-        <Compile Include="ConsoleCommands\CommandMatch.cs" />
-        <Compile Include="ConsoleCommands\CommandParameter.cs" />
-        <Compile Include="ConsoleCommands\CommandSignature.cs" />
-        <Compile Include="ConsoleCommands\Command\HelpCommand.cs" />
-        <Compile Include="ConsoleCommands\Command\PingCommand.cs" />
-        <Compile Include="ConsoleCommands\Command\ExampleCommand.cs" />
-        <Compile Include="ConsoleCommands\ConsoleCommand.cs" />
-        <Compile Include="ConsoleCommands\Exception\DuplicateCommandException.cs" />
-        <Compile Include="ConsoleCommands\Exception\ParameterOrderMismatchException.cs" />
-        <Compile Include="ConsoleCommands\ParameterizedCommand.cs" />
-        <Compile Include="ConsoleCommands\ValidationStrategy\BlacklistValidation.cs" />
-        <Compile Include="ConsoleCommands\ValidationStrategy\BoolValidation.cs" />
-        <Compile Include="ConsoleCommands\ValidationStrategy\DoubleValidation.cs" />
-        <Compile Include="ConsoleCommands\ValidationStrategy\IntegerValidation.cs" />
-        <Compile Include="ConsoleCommands\ValidationStrategy\RegexValidation.cs" />
-        <Compile Include="ConsoleCommands\ValidationStrategy\ValidationStrategy.cs" />
-        <Compile Include="ConsoleCommands\ValidationStrategy\WhitelistValidation.cs" />
         <Compile Include="ConsoleComponents\Color\ColorUtil.cs" />
         <Compile Include="ConsoleComponents\Color\ComponentColor.cs" />
         <Compile Include="ConsoleComponents\Color\CycledColor.cs" />
@@ -92,13 +74,11 @@
         <Compile Include="ConsoleComponents\Util\HorizontalAlignment.cs" />
         <Compile Include="ConsoleComponents\Util\PaddedComponent.cs" />
         <Compile Include="ConsoleComponents\Util\VerticalAlignment.cs" />
-        <Compile Include="Examples\ExampleProgram.cs" />
+        <Compile Include="ConsoleHandler.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
       <Content Include="ConsoleComponents\Style\StyleTest.txt" />
-      <Content Include="Examples\Images\Save.png" />
-      <Content Include="Examples\Images\Welcome.png" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading;
 using System.Collections.Generic;
-using BetterConsole.ConsoleCommands;
+using System.Diagnostics;
 using BetterConsole.ConsoleCommands.Exception;
 
-namespace BetterConsole
+namespace BetterConsole.ConsoleCommands
 {
     /*
      * TODO Reasons why commands failed.
@@ -12,6 +12,8 @@ namespace BetterConsole
      */
     public class CommandHandler
     {
+        public static CommandHandler Instance;
+        
         public List<ConsoleCommand> RegisteredCommands { get; private set; }
 
         public HelpCommand HelpCommand;
@@ -20,6 +22,8 @@ namespace BetterConsole
 
         public CommandHandler()
         {
+            Instance = this;
+            
             RegisteredCommands = new List<ConsoleCommand>();
             HelpCommand = new HelpCommand();
             _thread = null;

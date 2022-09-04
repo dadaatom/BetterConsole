@@ -1,4 +1,4 @@
-﻿using BetterConsole.ConsoleCommands.Exceptions;
+﻿using BetterConsole.ConsoleCommands.Exception;
 
 namespace BetterConsole.ConsoleCommands
 {

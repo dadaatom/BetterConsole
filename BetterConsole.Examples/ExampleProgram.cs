@@ -18,7 +18,7 @@ namespace BetterConsole.Examples
             
             // CREATE IMAGE //
             
-            Image image = new Image(Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()))+"\\Examples\\Images\\Welcome.png");
+            Image image = new Image(Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()))+"\\Images\\Welcome.png");
             BetterConsole.WriteLine(image);
 
             // CREATE A COOL RAINBOW TEXT //
@@ -98,7 +98,7 @@ namespace BetterConsole.Examples
 
             // CREATE AND WRITE DROPDOWN //
             
-            Dropdown dropdown = new Dropdown("Show code example:", new TextComponent("    COOL CODE HERE"));
+            Dropdown dropdown = new Dropdown("Show code example:", new TextComponent("    "+"COOL CODE HERE"));
             dropdown.ToggleDropped();
             BetterConsole.WriteLine(dropdown);
             //BetterConsole.Reload(dropdown);
@@ -118,11 +118,9 @@ namespace BetterConsole.Examples
             BetterConsole.WriteLine("");
             
             // REGISTER COMMANDS AND BEGIN HANDLING //
-            
+            CommandHandler handler = new CommandHandler();
+            handler.Register(new ConsoleCommand[]{new PingCommand(), new ExampleCommand()});
             BetterConsole.WriteLine("");
-            ConsoleCommand[] commands = new ConsoleCommand[]{new PingCommand(), new ExampleCommand()};
-            BetterConsole.CommandHandler.Register(commands);
-            //BetterConsole.CommandHandler.Start();
         }
     }
 }

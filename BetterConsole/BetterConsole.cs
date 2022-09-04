@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using BetterConsole.ConsoleComponents;
 
 namespace BetterConsole
@@ -11,245 +10,44 @@ namespace BetterConsole
      * - See console component todo.
      * - See Table todo.
      * - See console command todo.
-     * - Memoisation for longer computations.
+     * - Memoization for longer computations.
      * - bug Console.Clear() on reload.
      */
 
     public static class BetterConsole
     {
-        //public static LinkedList<ConsoleComponent> DisplayedComponents;
-        public static LinkedList<LinkedList<ConsoleComponent>> DisplayedComponents { get; private set; }
+        public static ConsoleStyle ConsoleStyle = new ConsoleStyle(new StaticColor(ConsoleColor.Gray));
 
-        public static ConsoleStyle ConsoleStyle;
-        
-        public static TimeHandler TimeHandler { get; }
+        public static ConsoleHandler ConsoleHandler { get; private set; }
 
-        public static CommandHandler CommandHandler { get; }
-
-        public static bool EnforceLimit { get; set; }
-        public static int DisplayLimit { get; set; }
-
-        //====================// Constructors //====================//
+        public static TimeHandler TimeHandler { get; private set; }
         
         static BetterConsole()
         {
-            DisplayedComponents = new LinkedList<LinkedList<ConsoleComponent>>();
-
-            ConsoleStyle = new ConsoleStyle(new StaticColor(ConsoleColor.Gray));
-            
+            ConsoleHandler = new ConsoleHandler();
             TimeHandler = new TimeHandler();
-            CommandHandler = new CommandHandler();
-
-            EnforceLimit = false;
-            DisplayLimit = 1000;
         }
 
-        //====================// Reimplemented Methods //====================//
+        public static void WriteLine(ConsoleComponent component) => ConsoleHandler.WriteLine(component);
         
-        /// <summary>
-        /// Writes the component within the console.
-        /// </summary>
-        /// <param name="component">Console component to be written.</param>
-        public static void Write(ConsoleComponent component)
-        {
-            AppendLine(component);
-            component.Write();
-        }
+        public static void WriteLine(string str) => ConsoleHandler.WriteLine(str);
         
-        /// <summary>
-        /// Writes the component to the new line within the console.
-        /// </summary>
-        /// <param name="component">Console component to be written.</param>
-        public static void WriteLine(ConsoleComponent component) //Enable line break and redirect to write.
-        {
-            AppendLine(component);
-            AddLine(null);
-            component.Write();
-            Console.WriteLine("");
-        }
+        public static void WriteLine(string str, ComponentColor color) => ConsoleHandler.WriteLine(str, color);
         
-        /// <summary>
-        /// Forwards a colored text component to the Write function.
-        /// </summary>
-        /// <param name="text">Text to be written.</param>
-        /// <param name="color">Color to display the text.</param>
-        public static void Write(string text, ComponentColor color)
-        {
-            TextComponent textComp = new TextComponent(text);
-            textComp.Color = color;
-            Write(textComp);
-        }
-
-        /// <summary>
-        /// Forwards a text component to the Write function.
-        /// </summary>
-        /// <param name="text">Text to be written.</param>
-        public static void Write(string text)
-        {
-            Write(new TextComponent(text));
-        }
+        public static void Write(ConsoleComponent component) => ConsoleHandler.Write(component);
         
-        /// <summary>
-        /// Forwards a colored text component to the WriteLine function.
-        /// </summary>
-        /// <param name="text">Text to be written.</param>
-        /// <param name="color">Color to display the text.</param>
-        public static void WriteLine(string text, ComponentColor color)
-        {
-            TextComponent textComp = new TextComponent(text);
-            textComp.Color = color;
-            WriteLine(textComp);
-        }
+        public static void Write(string str) => ConsoleHandler.Write(str);
         
-        /// <summary>
-        /// Forwards a text component to the WriteLine function.
-        /// </summary>
-        /// <param name="text">Text to be written.</param>
-        public static void WriteLine(string text)
-        {
-            WriteLine(new TextComponent(text));
-        }
+        public static void Write(string str, ComponentColor color) => ConsoleHandler.Write(str, color);
 
-        /// <summary>
-        /// Reads line and adds user input to the consoles displayed list.
-        /// </summary>
-        /// <returns>User input read from the console.</returns>
-        public static string ReadLine()
-        {
-            string val = Console.ReadLine();
-            AddLine(new TextComponent(val)); //todo: revisit when read / read line are updated inline of Console functionality
-            return val;
-        }
+        public static string ReadLine() => ConsoleHandler.ReadLine();
         
-        /// <summary>
-        /// Reads and adds user input to the consoles displayed list.
-        /// </summary>
-        /// <returns>User input read from the console.</returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public static string Read()
-        {
-            throw new NotImplementedException();
-        }
+        public static string Read() => ConsoleHandler.Read();
         
-        /// <summary>
-        /// Clears the console and list of displayed items.
-        /// </summary>
-        public static void Clear()
-        {
-            DisplayedComponents = new LinkedList<LinkedList<ConsoleComponent>>();
-            Console.Clear();
-        }
+        public static void Clear() => ConsoleHandler.Clear();
         
-        //====================// Display //====================//
+        public static void Reload() => ConsoleHandler.Reload();
         
-        /// <summary>
-        /// Clears the console and reloads either the last line or the entire console.
-        /// </summary>
-        /// <param name="component">Reloads based on the position of this component within the console.</param>
-        public static void Reload(ConsoleComponent component)
-        {
-            LinkedListNode<ConsoleComponent> node = DisplayedComponents.Last.Value.Find(component);
-
-            if (component != null && node != null)
-            {
-                int totalLength = 0;
-                
-                foreach (ConsoleComponent consoleComponent in DisplayedComponents.Last.Value)
-                {
-                    if (consoleComponent == null)
-                    {
-                        continue;
-                    }
-
-                    if (consoleComponent.Height > 1)
-                    {
-                        Reload();
-                        return;
-                    }
-                    
-                    totalLength += consoleComponent.Length;
-                }
-
-                Console.Write("\r");
-
-                string toPrint = "";
-                for (int i = 0; i < totalLength; i++)
-                {
-                    toPrint += ' ';
-                }
-                
-                Console.Write(toPrint);
-
-                Console.Write("\r");
-                
-                foreach (ConsoleComponent consoleComponent in DisplayedComponents.Last.Value)
-                {
-                    consoleComponent?.Write();
-                }
-
-                return;
-            }
-
-            Reload();
-        }
-        
-        /// <summary>
-        /// Clears the console and rewrites all items stored within the displayed list.
-        /// </summary>
-        public static void Reload()
-        {
-            Console.Clear();
-
-            foreach (LinkedList<ConsoleComponent> line in DisplayedComponents)
-            {
-                foreach (ConsoleComponent component in line)
-                {
-                    component?.Write();
-                }
-                
-                Console.Write("\n");
-            }
-        }
-        
-        /// <summary>
-        /// Adds a new line to the displayed list and will enforce the display limit if enabled.
-        /// </summary>
-        /// <param name="component">Console component to be saved within the displayed list.</param>
-        private static void AddLine(ConsoleComponent component)
-        {
-            if (DisplayedComponents.Count + 1 > DisplayLimit)
-            {
-                DisplayedComponents.RemoveFirst();
-                DisplayedComponents.AddLast(new LinkedList<ConsoleComponent>(new []{component}));
-                if (EnforceLimit)
-                {
-                    Reload();
-                }
-            }
-            else
-            {
-                DisplayedComponents.AddLast(new LinkedList<ConsoleComponent>(new []{component}));
-            }
-        }
-
-        /// <summary>
-        /// Appends component to the end of the last line.
-        /// </summary>
-        /// <param name="component">New component to be appended.</param>
-        private static void AppendLine(ConsoleComponent component)
-        {
-            if (DisplayedComponents.Count == 0)
-            {
-                AddLine(component);
-            }
-            else if(DisplayedComponents.Last.Value != null)
-            {
-                DisplayedComponents.Last.Value.AddLast(component);
-            }
-            else
-            {
-                DisplayedComponents.Last.Value = new LinkedList<ConsoleComponent>(new []{component});
-            }
-        }
+        public static void Reload(ConsoleComponent component) => ConsoleHandler.Reload(component);
     }
 }

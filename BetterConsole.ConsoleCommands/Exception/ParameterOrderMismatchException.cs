@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BetterConsole.ConsoleCommands.Exceptions
+namespace BetterConsole.ConsoleCommands.Exception
 {
     public class ParameterOrderMismatchException : System.Exception
     {

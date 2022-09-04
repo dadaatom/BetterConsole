@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterConsole", "BetterConsole\BetterConsole.csproj", "{BDB792E1-F582-4989-BA5D-256CDD99EC54}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterConsole.ConsoleCommands", "BetterConsole.ConsoleCommands\BetterConsole.ConsoleCommands.csproj", "{FD4AA2F0-8C0B-4A07-AC23-DA3DF02B1764}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterConsole.Examples", "BetterConsole.Examples\BetterConsole.Examples.csproj", "{F945CE9C-61CF-45E4-9C15-E7765C3BC4FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +16,13 @@ Global
 		{BDB792E1-F582-4989-BA5D-256CDD99EC54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDB792E1-F582-4989-BA5D-256CDD99EC54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDB792E1-F582-4989-BA5D-256CDD99EC54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD4AA2F0-8C0B-4A07-AC23-DA3DF02B1764}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD4AA2F0-8C0B-4A07-AC23-DA3DF02B1764}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD4AA2F0-8C0B-4A07-AC23-DA3DF02B1764}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD4AA2F0-8C0B-4A07-AC23-DA3DF02B1764}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F945CE9C-61CF-45E4-9C15-E7765C3BC4FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F945CE9C-61CF-45E4-9C15-E7765C3BC4FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F945CE9C-61CF-45E4-9C15-E7765C3BC4FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F945CE9C-61CF-45E4-9C15-E7765C3BC4FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

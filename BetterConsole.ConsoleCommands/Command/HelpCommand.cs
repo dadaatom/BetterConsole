@@ -1,5 +1,4 @@
-﻿using System;
-using BetterConsole.ConsoleComponents;
+﻿using BetterConsole.ConsoleComponents;
 
 namespace BetterConsole.ConsoleCommands
 {
@@ -9,7 +8,12 @@ namespace BetterConsole.ConsoleCommands
 
         public override void Execute(CommandSignature signature)
         {
-            ConsoleCommand[] commands = BetterConsole.CommandHandler.RegisteredCommands.ToArray();
+            if (CommandHandler.Instance == null)
+            {
+                throw new System.Exception("Command handler has not yet been instantiated.");
+            }
+
+            ConsoleCommand[] commands = CommandHandler.Instance.RegisteredCommands.ToArray();
             if (signature.Parameters.Length == 0)
             {
                 ListCommands(commands);
