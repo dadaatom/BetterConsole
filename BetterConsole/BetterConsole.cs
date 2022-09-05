@@ -16,7 +16,7 @@ namespace BetterConsole
 
     public static class BetterConsole
     {
-        public static ConsoleStyle ConsoleStyle = new ConsoleStyle(new StaticColor(ConsoleColor.Gray));
+        public static ConsoleStyle ConsoleStyle { get; private set; }
 
         public static ConsoleHandler ConsoleHandler { get; private set; }
 
@@ -24,7 +24,10 @@ namespace BetterConsole
         
         static BetterConsole()
         {
-            ConsoleHandler = new ConsoleHandler();
+            ConsoleTheme theme = new ConsoleTheme(new StaticColor(ConsoleColor.Blue), new StaticColor(ConsoleColor.Cyan), new StaticColor(ConsoleColor.Yellow));
+            ConsoleStyle = new ConsoleStyle(new StaticColor(ConsoleColor.Gray), theme);
+            
+            ConsoleHandler = new ConsoleHandler(100);
             TimeHandler = new TimeHandler();
         }
 

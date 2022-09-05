@@ -11,12 +11,12 @@ namespace BetterConsole
         public bool EnforceLimit { get; set; }
         public int DisplayLimit { get; set; }
 
-        public ConsoleHandler()
+        public ConsoleHandler(int displayLimit, bool enforceLimit = false)
         {
-            DisplayedComponents = new LinkedList<LinkedList<ConsoleComponent>>();
+            DisplayLimit = displayLimit;
+            EnforceLimit = enforceLimit;
 
-            EnforceLimit = false;
-            DisplayLimit = 1000;
+            DisplayedComponents = new LinkedList<LinkedList<ConsoleComponent>>();
         }
 
         //====================// Reimplemented Methods //====================//

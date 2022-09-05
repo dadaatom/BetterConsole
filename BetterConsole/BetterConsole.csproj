@@ -68,6 +68,7 @@
         <Compile Include="ConsoleComponents\Components\TimeComponent\TimeComponent.cs" />
         <Compile Include="ConsoleComponents\Components\TimeComponent\Timer.cs" />
         <Compile Include="ConsoleComponents\Style\ConsoleStyle.cs" />
+        <Compile Include="ConsoleComponents\Style\ConsoleTheme.cs" />
         <Compile Include="ConsoleComponents\Style\LoadingBarStyle.cs" />
         <Compile Include="ConsoleComponents\Style\OrderedListStyle.cs" />
         <Compile Include="ConsoleComponents\TimeHandler.cs" />
