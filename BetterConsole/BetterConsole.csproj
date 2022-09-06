@@ -50,9 +50,9 @@
         <Compile Include="ConsoleComponents\Color\CycledColor.cs" />
         <Compile Include="ConsoleComponents\Color\RainbowColor.cs" />
         <Compile Include="ConsoleComponents\Color\StaticColor.cs" />
+        <Compile Include="ConsoleComponents\ComponentRenderer.cs" />
         <Compile Include="ConsoleComponents\Components\AggregateComponent.cs" />
         <Compile Include="ConsoleComponents\Components\Border.cs" />
-        <Compile Include="ConsoleComponents\Components\ConsoleComponent.cs" />
         <Compile Include="ConsoleComponents\Components\Dropdown.cs" />
         <Compile Include="ConsoleComponents\Components\Image.cs" />
         <Compile Include="ConsoleComponents\Components\ListComponent\ListComponent.cs" />
@@ -67,6 +67,8 @@
         <Compile Include="ConsoleComponents\Components\TimeComponent\CountdownTimer.cs" />
         <Compile Include="ConsoleComponents\Components\TimeComponent\TimeComponent.cs" />
         <Compile Include="ConsoleComponents\Components\TimeComponent\Timer.cs" />
+        <Compile Include="ConsoleComponents\ConsoleComponent.cs" />
+        <Compile Include="ConsoleComponents\StringBuilder.cs" />
         <Compile Include="ConsoleComponents\Style\ConsoleStyle.cs" />
         <Compile Include="ConsoleComponents\Style\ConsoleTheme.cs" />
         <Compile Include="ConsoleComponents\Style\LoadingBarStyle.cs" />
