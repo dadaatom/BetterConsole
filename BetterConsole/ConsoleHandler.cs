@@ -44,48 +44,6 @@ namespace BetterConsole
         }
 
         /// <summary>
-        /// Forwards a colored text component to the Write function.
-        /// </summary>
-        /// <param name="text">Text to be written.</param>
-        /// <param name="color">Color to display the text.</param>
-        public void Write(string text, ComponentColor color)
-        {
-            TextComponent textComp = new TextComponent(text);
-            textComp.Color = color;
-            Write(textComp);
-        }
-
-        /// <summary>
-        /// Forwards a text component to the Write function.
-        /// </summary>
-        /// <param name="text">Text to be written.</param>
-        public void Write(string text)
-        {
-            Write(new TextComponent(text));
-        }
-        
-        /// <summary>
-        /// Forwards a colored text component to the WriteLine function.
-        /// </summary>
-        /// <param name="text">Text to be written.</param>
-        /// <param name="color">Color to display the text.</param>
-        public void WriteLine(string text, ComponentColor color)
-        {
-            TextComponent textComp = new TextComponent(text);
-            textComp.Color = color;
-            WriteLine(textComp);
-        }
-        
-        /// <summary>
-        /// Forwards a text component to the WriteLine function.
-        /// </summary>
-        /// <param name="text">Text to be written.</param>
-        public void WriteLine(string text)
-        {
-            WriteLine(new TextComponent(text));
-        }
-
-        /// <summary>
         /// Reads line and adds user input to the consoles displayed list.
         /// </summary>
         /// <returns>User input read from the console.</returns>
@@ -103,7 +61,7 @@ namespace BetterConsole
         /// <exception cref="NotImplementedException"></exception>
         public string Read()
         {
-            Console.WriteLine();
+            //Console.WriteLine();
             int val = Console.Read();
             AppendLine(new TextComponent(val.ToString()));
             return val.ToString();
@@ -189,13 +147,13 @@ namespace BetterConsole
             }
         }
 
-        
         /// <summary>
         /// Creates a line break.
         /// </summary>
         public void BreakLine()
         {
             AddLine(null);
+            Console.WriteLine();
         }
 
         /// <summary>

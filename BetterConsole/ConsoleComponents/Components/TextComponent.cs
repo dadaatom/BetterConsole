@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Mime;
 
 namespace BetterConsole.ConsoleComponents
 {
@@ -10,7 +11,12 @@ namespace BetterConsole.ConsoleComponents
         {
             _content = content;
         }
-        
+
+        public TextComponent(string content, ComponentColor color) : base(color)
+        {
+            _content = content;
+        }
+
         public override string ToString()
         {
             return _content;

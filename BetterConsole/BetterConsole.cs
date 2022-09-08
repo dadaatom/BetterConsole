@@ -48,13 +48,13 @@ namespace BetterConsole
         /// </summary>
         /// <param name="text">Text to be written.</param>
         /// <param name="color">Color to display the text.</param>
-        public static void Write(string str, ComponentColor color) => ConsoleHandler.Write(str, color);
+        public static void Write(string text, ComponentColor color) => ConsoleHandler.Write(new TextComponent(text, color));
         
         /// <summary>
         /// Forwards a text component to the Write function.
         /// </summary>
         /// <param name="text">Text to be written.</param>
-        public static void Write(string str) => ConsoleHandler.Write(str);
+        public static void Write(string text) => ConsoleHandler.Write(new TextComponent(text));
         
         
         /// <summary>
@@ -62,14 +62,14 @@ namespace BetterConsole
         /// </summary>
         /// <param name="text">Text to be written.</param>
         /// <param name="color">Color to display the text.</param>
-        public static void WriteLine(string str, ComponentColor color) => ConsoleHandler.WriteLine(str, color);
+        public static void WriteLine(string text, ComponentColor color) => ConsoleHandler.WriteLine(new TextComponent(text, color));
         
         
         /// <summary>
         /// Forwards a text component to the WriteLine function.
         /// </summary>
         /// <param name="text">Text to be written.</param>
-        public static void WriteLine(string str) => ConsoleHandler.WriteLine(str);
+        public static void WriteLine(string text) => ConsoleHandler.WriteLine(new TextComponent(text));
 
         /// <summary>
         /// Reads line and adds user input to the consoles displayed list.

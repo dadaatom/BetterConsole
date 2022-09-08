@@ -14,10 +14,9 @@ namespace BetterConsole.Examples
         // Use example of the better console and built in components.
         public static void Main(string[] args)
         {
-            //Thread.Sleep(100);
             
             // CREATE IMAGE //
-            
+
             Image image = new Image(Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()))+"\\Images\\Welcome.png");
             BetterConsole.WriteLine(image);
 
@@ -25,7 +24,7 @@ namespace BetterConsole.Examples
             
             TextComponent rainbowText = new TextComponent("RAINBOW");
             rainbowText.Color = new RainbowColor();
-            BetterConsole.WriteLine("");
+            BetterConsole.BreakLine();
             BetterConsole.WriteLine(rainbowText);
             
             
@@ -48,7 +47,7 @@ namespace BetterConsole.Examples
             
             // CREATE AND WRITE SEPARATOR AND LABEL //
 
-            BetterConsole.WriteLine("");
+            BetterConsole.BreakLine();
             BetterConsole.WriteLine(new Separator(30));
             
 
@@ -77,25 +76,26 @@ namespace BetterConsole.Examples
             // CREATE AND WRITE UNORDERED LIST //
             
             UnorderedList unorderedList = new UnorderedList("List of things I like:", new string[]{"Rainy days", "Multi\nLine\nStrings", "Strawberries"});
-            BetterConsole.WriteLine("");
+            BetterConsole.BreakLine();
             BetterConsole.WriteLine(unorderedList);
             
             
             // CREATE AND WRITE NUMERICALLY ORDERED LIST //
             
             OrderedList orderedList = new OrderedList("List of my top 4 favorite numbers:",new string[]{"1", "2", "64", "4"});
-            BetterConsole.WriteLine("");
+            BetterConsole.BreakLine();
             BetterConsole.WriteLine(orderedList);
-            BetterConsole.WriteLine("");
+            BetterConsole.BreakLine();
             
             
             // CREATE AND WRITE ALPHABETICALLY ORDERED LIST //
             
             OrderedList alphabeticallyOrderedList = new OrderedList("Look at this alphabetic list:", new string[]{"Woah","Cool!","Nice"}, OrderedListStyle.Alphabetic);
-            BetterConsole.WriteLine("");
+            BetterConsole.BreakLine();            
             BetterConsole.WriteLine(alphabeticallyOrderedList);
-            BetterConsole.WriteLine("");
-
+            BetterConsole.BreakLine();
+            
+            
             // CREATE AND WRITE DROPDOWN //
             
             Dropdown dropdown = new Dropdown("Show code example:", new TextComponent("    "+"COOL CODE HERE"));
@@ -108,19 +108,19 @@ namespace BetterConsole.Examples
             
             Timer timer = new Timer();
             
-            BetterConsole.WriteLine("");
+            BetterConsole.BreakLine();
             BetterConsole.Write("Content loaded ");
             BetterConsole.Write(timer);
             BetterConsole.Write(" ago!");
             
             //timer.Start();
             
-            BetterConsole.WriteLine("");
+            BetterConsole.BreakLine();
             
             // REGISTER COMMANDS AND BEGIN HANDLING //
             CommandHandler handler = new CommandHandler();
             handler.Register(new ConsoleCommand[]{new PingCommand(), new ExampleCommand()});
-            BetterConsole.WriteLine("");
+            BetterConsole.BreakLine();
         }
     }
 }

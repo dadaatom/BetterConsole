@@ -14,6 +14,8 @@ namespace BetterConsole.ConsoleComponents
     {
         public ComponentColor Color { get; set; }
 
+        public ComponentRenderer Renderer { get; set; }
+
         public int Height { get; private set; }
 
         public int Length { get; private set; }
@@ -22,7 +24,6 @@ namespace BetterConsole.ConsoleComponents
 
         public ConsoleComponent(ComponentColor color)
         {
-            //Next = null;
             Color = color;
         }
 
