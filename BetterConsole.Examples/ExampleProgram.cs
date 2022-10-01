@@ -15,7 +15,7 @@ namespace BetterConsole.Examples
         public static void Main(string[] args)
         {
             //Thread.Sleep(100);
-            
+
             // CREATE IMAGE //
             
             Image image = new Image(Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()))+"\\Images\\Welcome.png");

@@ -16,16 +16,21 @@ namespace BetterConsole.ConsoleCommands
         
         public List<ConsoleCommand> RegisteredCommands { get; private set; }
 
+        public string Delimiter;
+        
         public HelpCommand HelpCommand;
         
         private Thread _thread;
 
-        public CommandHandler()
+        public CommandHandler(string delimiter = "")
         {
             Instance = this;
+
+            Delimiter = delimiter;
             
             RegisteredCommands = new List<ConsoleCommand>();
             HelpCommand = new HelpCommand();
+            
             _thread = null;
         }
 
@@ -109,7 +114,7 @@ namespace BetterConsole.ConsoleCommands
                 
                 string line = BetterConsole.ReadLine();
 
-                if (string.IsNullOrEmpty(line))
+                if (string.IsNullOrEmpty(line) || line.IndexOf(Delimiter, StringComparison.Ordinal) != 0)
                 {
                     continue;
                 }
@@ -139,7 +144,7 @@ namespace BetterConsole.ConsoleCommands
                         BetterConsole.WriteLine(".");
                     }
                 }
-                BetterConsole.WriteLine("");
+                BetterConsole.BreakLine();
             }
         }
 

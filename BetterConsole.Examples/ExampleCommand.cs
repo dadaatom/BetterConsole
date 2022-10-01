@@ -4,10 +4,11 @@ namespace BetterConsole.ConsoleCommands
 {
     public class ExampleCommand : ParameterizedCommand
     {
+        CommandParameter param1 = new CommandParameter("Letter", new WhitelistValidation(new []{"A","B","C"}), true);
+        CommandParameter param2 = new CommandParameter("Count", new IntegerValidation(), true);
+        
         public ExampleCommand() : base("Multiply", "Creates copies of the letter A, B, or C.")
         {
-            CommandParameter param1 = new CommandParameter("Letter", new WhitelistValidation(new []{"A","B","C"}), true);
-            CommandParameter param2 = new CommandParameter("Count", new IntegerValidation(), true);
             SetParameters(new CommandParameter[] {param1, param2});
         }
 
@@ -18,7 +19,7 @@ namespace BetterConsole.ConsoleCommands
             {
                 toDisplay += signature.Parameters[0];
             }
-
+            
             BetterConsole.WriteLine(toDisplay);
         }
     }

@@ -1,4 +1,6 @@
-﻿namespace BetterConsole.ConsoleCommands
+﻿using System;
+
+namespace BetterConsole.ConsoleCommands
 {
     public abstract class ValidationStrategy
     {
