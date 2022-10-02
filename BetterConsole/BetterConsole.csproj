@@ -68,7 +68,7 @@
         <Compile Include="ConsoleComponents\Components\TimeComponent\TimeComponent.cs" />
         <Compile Include="ConsoleComponents\Components\TimeComponent\Timer.cs" />
         <Compile Include="ConsoleComponents\ConsoleComponent.cs" />
-        <Compile Include="ConsoleComponents\StringBuilder.cs" />
+        <Compile Include="ConsoleComponents\ComponentBuilder.cs" />
         <Compile Include="ConsoleComponents\Style\ConsoleStyle.cs" />
         <Compile Include="ConsoleComponents\Style\ConsoleTheme.cs" />
         <Compile Include="ConsoleComponents\Style\LoadingBarStyle.cs" />
