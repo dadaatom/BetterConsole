@@ -12,17 +12,36 @@ namespace BetterConsole.ConsoleComponents
         {
             Segments = new List<ComponentSegment>();
         }
-
-        public ComponentBuilder(string str) : this(str, ColorUtil.ConvertToColor(ConsoleColor.Gray)) { }
         
-        public ComponentBuilder(string str, Color color)
+        public ComponentBuilder(ComponentSegment segment)
         {
-            Segments = new List<ComponentSegment>(new ComponentSegment[] { new ComponentSegment(str, color) });
+            Segments = new List<ComponentSegment>(new ComponentSegment[] { segment });
         }
 
+        /// <summary>
+        /// Appends component builder with a new segment.
+        /// </summary>
+        /// <param name="segment">New component segment.</param>
         public void Append(ComponentSegment segment) => Segments.Add(segment);
 
+        /// <summary>
+        /// Inserts component segment at index.
+        /// </summary>
+        /// <param name="index">Insert position.</param>
+        /// <param name="segment">New segment to insert.</param>
         public void Insert(int index, ComponentSegment segment) => Segments.Insert(index, segment);
+
+        /// <summary>
+        /// Merges this component builder with another.
+        /// </summary>
+        /// <param name="builder">Second component builder.</param>
+        public void Merge(ComponentBuilder builder)
+        {
+            foreach (ComponentSegment componentSegment in builder.Segments)
+            {
+                Append(componentSegment);
+            }
+        }
 
         public class ComponentSegment
         {

@@ -7,6 +7,43 @@ namespace BetterConsole.ConsoleComponents
     public static class ColorUtil
     {
         /// <summary>
+        /// Converts color to console color.
+        /// </summary>
+        /// <param name="color">Color to be converted.</param>
+        /// <returns>Closest fitting console color.</returns>
+        public static ConsoleColor ConvertToConsoleColor(Color color)
+        {
+            return ClosestConsoleColor(color.R, color.G, color.B);
+        }
+
+        /// <summary>
+        /// Converts console color to color.
+        /// </summary>
+        /// <param name="color">Console color to be converted.</param>
+        /// <returns>Color representing console color.</returns>
+        public static Color ConvertToColor(ConsoleColor color)
+        {
+            string name = Enum.GetName(typeof(ConsoleColor), color);
+            return Color.FromName(name == "DarkYellow" ? "Orange" : name);
+        }
+        
+        /// <summary>
+        /// Converts console color to color.
+        /// </summary>
+        /// <param name="color">Console color to be converted.</param>
+        /// <returns>Color representing console color.</returns>
+        public static Color[] ConvertColors(ConsoleColor[] colors)
+        {
+            Color[] toReturn = new Color[colors.Length];
+            for (int i = 0; i < colors.Length; i++)
+            {
+                toReturn[i] = ConvertToColor(colors[i]);
+            }
+
+            return toReturn;
+        }
+        
+        /// <summary>
         /// Finds closest console color to RGB values.
         /// </summary>
         /// <param name="r">Red byte.</param>
