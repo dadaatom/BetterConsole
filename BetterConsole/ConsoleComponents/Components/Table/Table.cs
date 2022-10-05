@@ -12,21 +12,137 @@ namespace BetterConsole.ConsoleComponents
     {
         public Cell[,] Cells { get; private set; }
 
-        private int[] _rowSizes;
-        private int[] _columnSizes;
-        
+        public int[] RowSizes { get; private set; }
+        public int[] ColumnSizes { get; private set; }
+
         //TODO: Loop these variables into a style class.
-        private string upper = "_";
-        private string lower = "_"; //"\u0305"; //"‾";
-        private string seperator = "-";
-        private string border = "|";
+        
         
         public Table (int rows, int columns)
         {
             Cells = new Cell[rows, columns];
 
-            _rowSizes = new int[rows];
-            _columnSizes = new int[columns];
+            RowSizes = new int[rows];
+            ColumnSizes = new int[columns];
+
+            //Renderer = new TableRenderer(this);
+        }
+        
+        protected override ComponentBuilder Build()
+        {
+            if (Cells.GetLength(0) == 0 || Cells.GetLength(1) == 0)
+                {
+                    throw new Exception("Table is empty."); //TODO: Make custom exceptions
+                }
+
+                UpdateTargetSizes();
+                
+                string upper = "_";
+                string lower = "_";
+                string seperator = "-";
+                string border = "|";
+
+                ComponentBuilder toReturn = new ComponentBuilder();
+                
+                string segment = " ";
+                
+                for (int i = 0; i < Cells.GetLength(1); i += Cells[0,i] == null ? 1 : Cells[0,i].Width)
+                {
+                    for (int w = 0; w < (Cells[0,i] == null ? ColumnSizes[i] : Cells[0,i].Value.TotalWidth); w++)
+                    {
+                        segment += upper;
+                    }
+
+                    segment += " ";
+                }
+
+                segment += "\n";
+                
+                toReturn.Merge(Color.ApplyTo(segment));
+
+                ColumnElement[] toDisplay = new ColumnElement[Cells.GetLength(1)];
+
+                for (int i = 0; i < Cells.GetLength(0); i++)
+                {
+                    for (int h = 0; h < RowSizes[i]; h++)
+                    {
+                        toReturn.Merge(Color.ApplyTo(border));
+
+                        int num;
+                        for (int j = 0; j < Cells.GetLength(1); j += num) // Make this use the toDisplay item from that iteration.
+                        {
+                            num = 1;
+                            if (toDisplay[j] == null)
+                            {
+                                if (Cells[i, j] != null)
+                                {
+                                    toDisplay[j] = new ColumnElement(Cells[i, j]);
+                                }
+                            }
+
+                            if (toDisplay[j] == null)
+                            {
+                                for (int w = 0; w < ColumnSizes[j]; w++)
+                                {
+                                    toReturn.Merge(Color.ApplyTo(" "));
+                                }
+                            }
+                            else
+                            {
+                                toReturn.Merge(toDisplay[j].Cell.Component.Color.ApplyTo(toDisplay[j].NextLine()));
+                                num = toDisplay[j] != null ? toDisplay[j].Cell.Width : 1;
+                                
+                                if (toDisplay[j].RemainingLines <= 0)
+                                {
+                                    toDisplay[j] = null;
+                                }
+                            }
+                            
+                            toReturn.Merge(Color.ApplyTo(border));
+                        }
+                        toReturn.Merge(Color.ApplyTo("\n"));
+                    }
+                    
+                    if (i < Cells.GetLength(0) - 1)
+                    {
+                        toReturn.Merge(Color.ApplyTo(border));
+                        
+                        for (int j = 0; j < Cells.GetLength(1); j += Cells[i, j] != null ? Cells[i,j].Width : 1)
+                        {
+                            if (toDisplay[j] != null)
+                            {
+                                toReturn.Merge(toDisplay[j].Cell.Component.Color.ApplyTo(toDisplay[j].NextLine()));
+                                if (toDisplay[j].RemainingLines <= 0)
+                                {
+                                    toDisplay[j] = null;
+                                }
+                            }
+                            else{
+                                for (int w = 0; w < (Cells[i,j] == null ? ColumnSizes[j] : Cells[i,j].Value.TotalWidth); w++)
+                                {
+                                    toReturn.Merge(Color.ApplyTo(seperator));
+                                }
+                            }
+                            
+                            toReturn.Merge(Color.ApplyTo(border));
+                        }
+
+                        toReturn.Merge(Color.ApplyTo("\n"));
+                    }
+                }
+
+                toReturn.Merge(Color.ApplyTo(border));
+                
+                for (int i = 0; i < Cells.GetLength(1); i++) 
+                {
+                    for (int w = 0; w < ColumnSizes[i]; w++)
+                    {
+                        toReturn.Merge(Color.ApplyTo(lower));
+                    }
+                    toReturn.Merge(Color.ApplyTo(border));
+                }
+
+                return toReturn;
         }
         
         /// <summary>
@@ -39,14 +155,14 @@ namespace BetterConsole.ConsoleComponents
         {
             if (cell != null)
             {
-                if (cell.Value.Width > _columnSizes[column])
+                if (cell.Value.Width > ColumnSizes[column])
                 {
-                    _columnSizes[column] = cell.Value.Width;
+                    ColumnSizes[column] = cell.Value.Width;
                 }
 
-                if (cell.Value.Height > _rowSizes[row])
+                if (cell.Value.Height > RowSizes[row])
                 {
-                    _rowSizes[row] = cell.Value.Height;
+                    RowSizes[row] = cell.Value.Height;
                 }
             }
 
@@ -109,18 +225,18 @@ namespace BetterConsole.ConsoleComponents
             int[] newRowSizes = new int[rows];
             for (int i = Math.Max(0, -rowShift); i < Math.Min(Cells.GetLength(0), rows-rowShift); i++)
             {
-                newRowSizes[i+rowShift] = _rowSizes[i];
+                newRowSizes[i+rowShift] = RowSizes[i];
             }
             
             int[] newColumnSizes = new int[columns];
             for (int i = Math.Max(0, -columnShift); i < Math.Min(Cells.GetLength(1), columns-columnShift); i++)
             {
-                newColumnSizes[i+columnShift] = _columnSizes[i];
+                newColumnSizes[i+columnShift] = ColumnSizes[i];
             }
 
             Cells = newCells;
-            _rowSizes = newRowSizes;
-            _columnSizes = newColumnSizes;
+            RowSizes = newRowSizes;
+            ColumnSizes = newColumnSizes;
         }
 
 
@@ -148,130 +264,17 @@ namespace BetterConsole.ConsoleComponents
             Cells = newCells;
         }
 
-
-        /// <summary>
-        /// Creates the entire matrix of cells into a table.
-        /// </summary>
-        /// <returns>The table formatted as a string.</returns>
-        public override string ToString()
-        {
-            if (Cells.GetLength(0) == 0 || Cells.GetLength(1) == 0)
-            {
-                throw new Exception("Table is empty."); //TODO: Make custom exceptions
-            }
-
-            UpdateTargetSizes();
-            
-            string toReturn = " ";
-            
-            for (int i = 0; i < Cells.GetLength(1); i += Cells[0,i] == null ? 1 : Cells[0,i].Width)
-            {
-                for (int w = 0; w < (Cells[0,i] == null ? _columnSizes[i] : Cells[0,i].Value.TotalWidth); w++)
-                {
-                    toReturn += upper;
-                }
-
-                toReturn += " ";
-            }
-
-            toReturn += "\n";
-
-            ColumnElement[] toDisplay = new ColumnElement[Cells.GetLength(1)];
-
-            for (int i = 0; i < Cells.GetLength(0); i++)
-            {
-                for (int h = 0; h < _rowSizes[i]; h++)
-                {
-                    toReturn += border;
-
-                    int num;
-                    for (int j = 0; j < Cells.GetLength(1); j += num) // Make this use the toDisplay item from that iteration.
-                    {
-                        num = 1;
-                        if (toDisplay[j] == null)
-                        {
-                            if (Cells[i, j] != null)
-                            {
-                                toDisplay[j] = new ColumnElement(Cells[i, j]);
-                            }
-                        }
-
-                        if (toDisplay[j] == null)
-                        {
-                            for (int w = 0; w < _columnSizes[j]; w++)
-                            {
-                                toReturn += " ";
-                            }
-                        }
-                        else
-                        {
-                            toReturn += toDisplay[j].NextLine();
-                            num = toDisplay[j] != null ? toDisplay[j].Cell.Width : 1;
-                            
-                            if (toDisplay[j].RemainingLines <= 0)
-                            {
-                                toDisplay[j] = null;
-                            }
-                        }
-                        
-                        toReturn += border;
-                    }
-                    toReturn += "\n";
-                }
-                
-                if (i < Cells.GetLength(0) - 1)
-                {
-                    toReturn += border;
-                    
-                    for (int j = 0; j < Cells.GetLength(1); j += Cells[i, j] != null ? Cells[i,j].Width : 1)
-                    {
-                        if (toDisplay[j] != null)
-                        {
-                            toReturn += toDisplay[j].NextLine();
-                            if (toDisplay[j].RemainingLines <= 0)
-                            {
-                                toDisplay[j] = null;
-                            }
-                        }
-                        else{
-                            for (int w = 0; w < (Cells[i,j] == null ? _columnSizes[j] : Cells[i,j].Value.TotalWidth); w++)
-                            {
-                                toReturn += seperator;
-                            }
-                        }
-                        
-                        toReturn += border;
-                    }
-
-                    toReturn += "\n";
-                }
-            }
-
-            toReturn += border;
-            
-            for (int i = 0; i < Cells.GetLength(1); i++) 
-            {
-                for (int w = 0; w < _columnSizes[i]; w++)
-                {
-                    toReturn += lower;
-                }
-                toReturn += border;
-            }
-
-            return toReturn;
-        }
-        
         /// <summary>
         /// Update target size of all cells within the cells matrix.
         /// </summary>
-        private void UpdateTargetSizes()
+        public void UpdateTargetSizes()
         {
-            _rowSizes = new int[Cells.GetLength(0)];
-            _columnSizes = new int[Cells.GetLength(1)];
+            RowSizes = new int[Cells.GetLength(0)];
+            ColumnSizes = new int[Cells.GetLength(1)];
 
-            for (int i = 0; i < _columnSizes.Length; i++) 
+            for (int i = 0; i < ColumnSizes.Length; i++) 
             {
-                _columnSizes[i] = 1;
+                ColumnSizes[i] = 1;
             }
 
             for (int i = 0; i < Cells.GetLength(0); i++)
@@ -280,24 +283,24 @@ namespace BetterConsole.ConsoleComponents
                 {
                     if (Cells[i,j] != null)
                     {
-                        if (Cells[i, j].Value.Height > _rowSizes[i])
+                        if (Cells[i, j].Value.Height > RowSizes[i])
                         {
-                            _rowSizes[i] = Cells[i, j].Value.Height;
+                            RowSizes[i] = Cells[i, j].Value.Height;
                         }
 
                         int rowSize = (int)Math.Ceiling((double)Cells[i, j].Value.Height / Math.Min(Cells[i, j].Height, Cells.GetLength(0)-i));
                         for (int y = j; y < Math.Min(j+Cells[i,j].Height, Cells.GetLength(0)); y++) {
-                            if (rowSize > _rowSizes[y])
+                            if (rowSize > RowSizes[y])
                             {
-                                _rowSizes[y] = rowSize;
+                                RowSizes[y] = rowSize;
                             }
                         }
 
                         int columnSize = (int)Math.Ceiling((double)Cells[i, j].Value.Width / Math.Min(Cells[i, j].Width, Cells.GetLength(1)-j));
                         for (int x = j; x < Math.Min(j+Cells[i,j].Width, Cells.GetLength(1)); x++) {
-                            if (columnSize > _columnSizes[x])
+                            if (columnSize > ColumnSizes[x])
                             {
-                                _columnSizes[x] = columnSize;
+                                ColumnSizes[x] = columnSize;
                             }
                         }
                     }
@@ -311,22 +314,23 @@ namespace BetterConsole.ConsoleComponents
                     if (Cells[i, j] == null) continue;
                     
                     int targetWidth = Math.Min(Cells[i,j].Width, Cells.GetLength(1)-j) - 1;
-                    for (int x = j; x < Math.Min(_columnSizes.Length, j+Cells[i,j].Width); x++)
+                    for (int x = j; x < Math.Min(ColumnSizes.Length, j+Cells[i,j].Width); x++)
                     {
-                        targetWidth += _columnSizes[x];
+                        targetWidth += ColumnSizes[x];
                     }
 
                     int targetHeight = Cells[i,j].Height - 1;
-                    for (int x = i; x < Math.Min(_rowSizes.Length, i+Cells[i,j].Height); x++)
+                    for (int x = i; x < Math.Min(RowSizes.Length, i+Cells[i,j].Height); x++)
                     {
-                        targetHeight += _rowSizes[x];
+                        targetHeight += RowSizes[x];
                     }
                         
                     Cells[i,j]?.Value.SetPaddings(targetWidth - (Cells[i,j].Value.Width == 0 ? 1 : Cells[i,j].Value.Width), targetHeight - Cells[i,j].Value.Height);
                 }
             }
         }
-
+        
+        
         private class ColumnElement
         {
             public Cell Cell { get; private set; }

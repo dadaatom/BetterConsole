@@ -2,12 +2,12 @@
 {
     public class ConsoleStyle
     {
-        public ComponentColor DefaulColor { get; set; }
+        public ComponentColor DefaultColor { get; set; }
         public ConsoleTheme Theme { get; private set; }
 
         public ConsoleStyle(ComponentColor color, ConsoleTheme theme)
         {
-            DefaulColor = color;
+            DefaultColor = color;
             Theme = theme;
         }
 

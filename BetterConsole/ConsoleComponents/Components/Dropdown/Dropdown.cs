@@ -13,21 +13,25 @@
             Header = header;
             Component = component;
             Dropped = false;
+
+            //Renderer = new DropdownRenderer(this);
         }
 
-        public override string ToString()
+        protected override ComponentBuilder Build()
         {
-            string toReturn = "[" + (Dropped ? 'v' : '>') + "] " + Header;
+            ComponentBuilder builder = new ComponentBuilder();
+            
+            builder.Append(new ComponentBuilder.ComponentSegment("[" + (Dropped ? 'v' : '>') + "] " + Header, System.Drawing.Color.White)); //todo: use theme color here.
             
             if (Dropped)
             {
-                toReturn += '\n';
-                toReturn += Component.ToString();
+                builder.Merge(BetterConsole.ConsoleStyle.DefaultColor.ApplyTo("\n"));
+                builder.Merge(Component.Render());
             }
 
-            return toReturn;
+            return builder;
         }
-
+        
         /// <summary>
         /// Toggle the dropdown component.
         /// </summary>

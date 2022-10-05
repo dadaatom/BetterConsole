@@ -102,14 +102,22 @@ namespace BetterConsole.ConsoleComponents
         /// Computes the component string of the Component.
         /// </summary>
         /// <returns>Aggregate toString values of all Components.</returns>
-        private string GetComponentString()
+        private string GetComponentString() //todo: make a cell render that uses the ComponentBuilder.
         {
             if (Component == null)
             {
                 return "";
             }
 
-            return Component.Generate();
+            ComponentBuilder builder = Component.Render();
+            string toReturn = "";
+
+            foreach (ComponentBuilder.ComponentSegment segment in builder.Segments)
+            {
+                toReturn += segment.Text;
+            }
+
+            return toReturn;
         }
         
         /// <summary>

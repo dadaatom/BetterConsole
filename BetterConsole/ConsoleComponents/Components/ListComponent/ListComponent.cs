@@ -17,8 +17,6 @@ namespace BetterConsole.ConsoleComponents
         
         public LinkedList<ConsoleComponent> List { get; set; }
         
-        public ListComponent(string label = "") : this(label, new ConsoleComponent[]{}) { }
-
         public ListComponent(string[] list) : this("", list) { }
         
         public ListComponent(ConsoleComponent[] list) : this("", list) { }
@@ -32,6 +30,8 @@ namespace BetterConsole.ConsoleComponents
             {
                 List.AddLast(new TextComponent(str));
             }
+            
+            //Renderer = new ListRenderer(this);
         }
 
         public ListComponent(string label, ConsoleComponent[] list)
@@ -43,22 +43,26 @@ namespace BetterConsole.ConsoleComponents
             {
                 List.AddLast(component);
             }
+            
+            //Renderer = new ListRenderer(this);
         }
-        
+
         /// <summary>
         /// Gets list headers to generate list
         /// </summary>
         /// <param name="index">List index of header.</param>
         /// <returns>Item header within list</returns>
         public abstract string GetHeader(int index);
-        
-        public override string ToString()
-        {
-            string toReturn = Label;
 
-            if (toReturn.Length > 0)
+        protected override ComponentBuilder Build()
+        {
+            ComponentBuilder builder = new ComponentBuilder();
+
+            builder.Merge(Color.ApplyTo(Label)); // todo: Use theme settings here.
+
+            if (builder.Segments.Count > 0)
             {
-                toReturn += "\n";
+                builder.Merge(Color.ApplyTo("\n"));
             }
 
             string paddedHeader = "";
@@ -73,17 +77,17 @@ namespace BetterConsole.ConsoleComponents
                     paddedHeader = GetPaddedHeader(header.Length);
                 }
 
-                toReturn += TabComponent(component, header, paddedHeader);
+                builder.Merge(Color.ApplyTo(TabComponent(component, header, paddedHeader)));
 
                 if (counter < List.Count - 1)
                 {
-                    toReturn += "\n";
+                    builder.Merge(Color.ApplyTo("\n"));
                 }
 
                 counter++;
             }
 
-            return toReturn;
+            return builder;
         }
         
         /// <summary>
@@ -102,7 +106,7 @@ namespace BetterConsole.ConsoleComponents
         /// <param name="header">Header added in front of component.</param>
         /// <param name="paddedHeader">Padded header added in front of multiline component strings.</param>
         /// <returns>Tabbed component with a header in front of the first line.</returns>
-        private string TabComponent(ConsoleComponent component, string header, string paddedHeader = null)
+        public string TabComponent(ConsoleComponent component, string header, string paddedHeader = null)
         {
             string toReturn = "";
 
@@ -111,7 +115,13 @@ namespace BetterConsole.ConsoleComponents
                 paddedHeader = GetPaddedHeader(header.Length);
             }
 
-            string componentString = component.ToString();
+            string componentString = "";
+            
+            foreach (ComponentBuilder.ComponentSegment segment in component.Render().Segments)
+            {
+                componentString += segment.Text; //todo: use component render colors.
+            }
+            
             if (component is ListComponent && ((ListComponent)component).Label.Length == 0)
             {
                 componentString = "\n" + componentString;
@@ -137,8 +147,12 @@ namespace BetterConsole.ConsoleComponents
             return toReturn;
         }
         
-        
-        private string GetPaddedHeader(int length)
+        /// <summary>
+        /// Gets the padded header of the list.
+        /// </summary>
+        /// <param name="length">Length of the padded header.</param>
+        /// <returns>Spaced header of length.</returns>
+        public string GetPaddedHeader(int length)
         {
             string toReturn = "";
             for (int i = 0; i < length; i++)

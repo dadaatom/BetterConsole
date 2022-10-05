@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Drawing;
 
 namespace BetterConsole.ConsoleComponents
 {
     public class CycledColor : ComponentColor
     {
-        public ConsoleColor[] Colors { get; }
+        public Color[] Colors { get; }
         public int SegmentLength { get; }
 
-        public CycledColor(ConsoleColor[] colors, int segmentLength = 1)
+        public CycledColor(Color[] colors, int segmentLength = 1)
         {
             Colors = colors;
             SegmentLength = Math.Max(1, segmentLength);
@@ -18,14 +19,13 @@ namespace BetterConsole.ConsoleComponents
         /// </summary>
         /// <param name="toDisplay">String to be color segmented.</param>
         /// <returns>Pairs of text and colors.</returns>
-        public override ColorSegment[] GetColors(string toDisplay)
+        public override ComponentBuilder ApplyTo(string toDisplay)
         {
-            int length = (int)Math.Ceiling((double)toDisplay.Length / SegmentLength);
-            ColorSegment[] toReturn = new ColorSegment[length];
-
-            for (int i = 0; i < toReturn.Length; i++)
+            ComponentBuilder toReturn = new ComponentBuilder();
+            
+            for (int i = 0; i < (int)Math.Ceiling((double)toDisplay.Length / SegmentLength); i++)
             {
-                toReturn[i] = new ColorSegment(toDisplay.Substring(i*SegmentLength, Math.Min(SegmentLength, toDisplay.Length - i*SegmentLength)), Colors[i % Colors.Length]);
+                toReturn.Append(new ComponentBuilder.ComponentSegment(toDisplay.Substring(i*SegmentLength, Math.Min(SegmentLength, toDisplay.Length - i*SegmentLength)), Colors[i % Colors.Length]));
             }
 
             return toReturn;

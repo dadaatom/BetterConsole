@@ -2,11 +2,18 @@
 
 namespace BetterConsole.ConsoleComponents
 {
-    public class ComponentRenderer
+    public abstract class ComponentRenderer
     {
-        public void Render()
+        public abstract ComponentBuilder Render();
+    }
+
+    public abstract class ComponentRenderer<T> : ComponentRenderer
+    {
+        protected T Object;
+
+        public ComponentRenderer(T obj)
         {
-            throw new NotImplementedException();
+            Object = obj;
         }
     }
 }

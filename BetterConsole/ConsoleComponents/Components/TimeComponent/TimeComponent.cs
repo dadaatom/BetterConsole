@@ -26,6 +26,15 @@ namespace BetterConsole.ConsoleComponents
             Current = DateTime.Now;
 
             UpdateFrequency = updateFrequency;
+            
+            //Renderer = new TimeComponentRenderer(this);
+        }
+
+        public abstract TimeSpan GetCurrentTimeSpan();
+
+        protected override ComponentBuilder Build()
+        {
+            return Color.ApplyTo(GetCurrentTimeSpan().ToString());
         }
 
         /// <summary>

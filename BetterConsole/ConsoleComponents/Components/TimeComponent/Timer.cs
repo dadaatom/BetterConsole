@@ -7,13 +7,11 @@ namespace BetterConsole.ConsoleComponents
     public class Timer : TimeComponent
     {
         public Timer(int updateFrequency = 1000) : base(updateFrequency) { }
-
-        public override string ToString()
+        
+        public override TimeSpan GetCurrentTimeSpan()
         {
             Update();
-
-            TimeSpan toDisplay = Current - Starting;
-            return toDisplay.ToString();
+            return Current - Starting;
         }
     }
 }

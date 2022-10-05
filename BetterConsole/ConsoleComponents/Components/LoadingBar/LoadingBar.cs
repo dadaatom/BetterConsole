@@ -4,23 +4,41 @@ namespace BetterConsole.ConsoleComponents
 {
     public class LoadingBar : ConsoleComponent
     {
-        public LoadingBarStyle Style;
-        private int _size;
+        public int Size { get; private set; }
+        public int Count { get; private set; }
         
         private double _percentage;
-        private int _count;
-
-        public LoadingBar(LoadingBarStyle loadingBarStyle, int size)
+        
+        public LoadingBar(int size)
         {
-            Style = loadingBarStyle;
-            _size = size;
+            Size = size;
+            Count = 0;
             
             _percentage = 0;
-            _count = 0;
+
+            //Renderer = new LoadingBarRenderer(this);
         }
-
-        public LoadingBar(int size) : this(new LoadingBarStyle("#","_"), size) { }
-
+        
+        protected override ComponentBuilder Build()
+        {
+            string toReturn = "[";
+            
+            for (int i = 1; i <= Size; i++)
+            {
+                if (i <= Count)
+                {
+                    toReturn += "=";
+                }
+                else
+                {
+                    toReturn += " ";
+                }
+            }
+            
+            toReturn += "]";
+            
+            return (Color != null ? Color.ApplyTo(toReturn) : BetterConsole.ConsoleStyle.DefaultColor.ApplyTo(toReturn));        }
+        
         /// <summary>
         /// Gets the current loading bar percentage of completion.
         /// </summary>
@@ -45,36 +63,16 @@ namespace BetterConsole.ConsoleComponents
             {
                 percentage = 0;
             }
-
+            
             _percentage = percentage;
             
-            int prevCount = _count;
-            _count = (int)(_percentage*_size);
+            int prevCount = Count;
+            Count = (int)(_percentage*Size);
             
-            if (prevCount != _count)
+            if (prevCount != Count)
             {
                 BetterConsole.Reload(this);
             }
-        }
-        
-        public override string ToString()
-        {
-            string toReturn = Style.LeftBorder;
-            
-            for (int i = 1; i <= _size; i++)
-            {
-                if (i <= _count)
-                {
-                    toReturn += Style.Fill;
-                }
-                else
-                {
-                    toReturn += Style.Empty;
-                }
-                //toReturn += ((i <= completed) ? _fillStyle : _emptyStyle);
-            }
-
-            return toReturn + Style.RightBorder;
         }
     }
 }

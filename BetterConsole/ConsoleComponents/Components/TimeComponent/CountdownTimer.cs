@@ -11,12 +11,10 @@ namespace BetterConsole.ConsoleComponents
             Target = target;
         }
 
-        public override string ToString()
+        public override TimeSpan GetCurrentTimeSpan()
         {
             Update();
-            
-            TimeSpan toDisplay = Target - Current;
-            return toDisplay.ToString();
+            return Target - Current;
         }
     }
 }

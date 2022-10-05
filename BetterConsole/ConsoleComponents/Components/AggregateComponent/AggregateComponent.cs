@@ -7,16 +7,19 @@
         public AggregateComponent(ConsoleComponent[] components)
         {
             Components = components;
+            //Renderer = new AggregateComponentRenderer(this);
         }
 
-        public override string ToString()
+        protected override ComponentBuilder Build()
         {
-            string toReturn = "";
+            ComponentBuilder builder = new ComponentBuilder();
+
             foreach (ConsoleComponent component in Components)
             {
-                toReturn += component.ToString();
+                builder.Merge(component.Render());
             }
-            return toReturn;
+
+            return builder;
         }
     }
 }

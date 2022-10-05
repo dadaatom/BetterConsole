@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Drawing;
 
 namespace BetterConsole.ConsoleComponents
 {
     public class StaticColor : ComponentColor
     {
-        public ConsoleColor TextColor { get; }
+        public Color TextColor { get; }
         
-        public StaticColor(ConsoleColor textColor)
+        public StaticColor(Color textColor)
         {
             TextColor = textColor;
         }
@@ -16,9 +17,9 @@ namespace BetterConsole.ConsoleComponents
         /// </summary>
         /// <param name="toDisplay">String to be color segmented.</param>
         /// <returns>Pairs of text and colors.</returns>
-        public override ColorSegment[] GetColors(string toDisplay)
+        public override ComponentBuilder ApplyTo(string toDisplay)
         {
-            return new[] {new ColorSegment(toDisplay, TextColor)};
+            return new ComponentBuilder(new ComponentBuilder.ComponentSegment(toDisplay, TextColor));
         }
     }
 }

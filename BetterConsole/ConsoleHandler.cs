@@ -25,21 +25,21 @@ namespace BetterConsole
         /// Writes the component within the console.
         /// </summary>
         /// <param name="component">Console component to be written.</param>
-        public void Write(ConsoleComponent component)
+        public virtual void Write(ConsoleComponent component)
         {
             AppendLine(component);
-            component.Write();
+            Display(component.Render());
         }
         
         /// <summary>
         /// Writes the component to the new line within the console.
         /// </summary>
         /// <param name="component">Console component to be written.</param>
-        public void WriteLine(ConsoleComponent component) //Enable line break and redirect to write.
+        public virtual void WriteLine(ConsoleComponent component) //Enable line break and redirect to write.
         {
             AppendLine(component);
             AddLine(null);
-            component.Write();
+            Display(component.Render());
             Console.WriteLine("");
         }
 
@@ -47,7 +47,7 @@ namespace BetterConsole
         /// Reads line and adds user input to the consoles displayed list.
         /// </summary>
         /// <returns>User input read from the console.</returns>
-        public string ReadLine()
+        public virtual string ReadLine()
         {
             string val = Console.ReadLine();
             AddLine(new TextComponent(val));
@@ -59,7 +59,7 @@ namespace BetterConsole
         /// </summary>
         /// <returns>User input read from the console.</returns>
         /// <exception cref="NotImplementedException"></exception>
-        public string Read()
+        public virtual string Read()
         {
             //Console.WriteLine();
             int val = Console.Read();
@@ -70,7 +70,7 @@ namespace BetterConsole
         /// <summary>
         /// Clears the console and list of displayed items.
         /// </summary>
-        public void Clear()
+        public virtual void Clear()
         {
             DisplayedComponents = new LinkedList<LinkedList<ConsoleComponent>>();
             Console.Clear();
@@ -82,7 +82,7 @@ namespace BetterConsole
         /// Clears the console and reloads either the last line or the entire console.
         /// </summary>
         /// <param name="component">Reloads based on the position of this component within the console.</param>
-        public void Reload(ConsoleComponent component)
+        public virtual void Reload(ConsoleComponent component) //todo: take color into account when preforming clear line portion of successful component reload
         {
             LinkedListNode<ConsoleComponent> node = DisplayedComponents.Last.Value.Find(component);
 
@@ -120,7 +120,12 @@ namespace BetterConsole
                 
                 foreach (ConsoleComponent consoleComponent in DisplayedComponents.Last.Value)
                 {
-                    consoleComponent?.Write();
+                    if (consoleComponent == null)
+                    {
+                        continue;
+                    }
+
+                    Display(consoleComponent.Render());
                 }
 
                 return;
@@ -132,7 +137,7 @@ namespace BetterConsole
         /// <summary>
         /// Clears the console and rewrites all items stored within the displayed list.
         /// </summary>
-        public void Reload()
+        public virtual void Reload()
         {
             Console.Clear();
 
@@ -140,7 +145,12 @@ namespace BetterConsole
             {
                 foreach (ConsoleComponent component in line)
                 {
-                    component?.Write();
+                    if (component == null)
+                    {
+                        continue;
+                    }
+
+                    Display(component.Render());
                 }
                 
                 Console.Write("\n");
@@ -150,10 +160,46 @@ namespace BetterConsole
         /// <summary>
         /// Creates a line break.
         /// </summary>
-        public void BreakLine()
+        public virtual void BreakLine()
         {
             AddLine(null);
             Console.WriteLine();
+        }
+        
+        /// <summary>
+        /// Displays the component builder.
+        /// </summary>
+        /// <param name="builder">Builder to be displayed.</param>
+        public virtual void Display(ComponentBuilder builder)
+        {
+            ConsoleColor foreground = Console.ForegroundColor;
+            ConsoleColor background = Console.BackgroundColor;
+            
+            foreach (ComponentBuilder.ComponentSegment segment in builder.Segments)
+            {
+                if (segment.TextColor.A <= 128 || segment.BackgroundColor.A <= 128)
+                {
+                    Console.ForegroundColor = foreground;
+                    Console.BackgroundColor = background;
+                    
+                    string spaces = "";
+                    for (int i = 0; i < segment.Text.Length; i++)
+                    {
+                        spaces += ' ';
+                    }
+                    
+                    Console.Write(spaces);
+                    continue;
+                }
+
+                Console.ForegroundColor = ColorUtil.ConvertToConsoleColor(segment.TextColor);
+                Console.BackgroundColor = ColorUtil.ConvertToConsoleColor(segment.BackgroundColor);
+                
+                Console.Write(segment.Text);
+            }
+
+            Console.ForegroundColor = foreground;
+            Console.BackgroundColor = background;
         }
 
         /// <summary>

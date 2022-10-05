@@ -22,10 +22,10 @@ namespace BetterConsole
 
         public static TimeHandler TimeHandler { get; private set; }
         
-        static BetterConsole()
+        static BetterConsole() // todo: Start or Instantiate method instead of static constructor?
         {
-            ConsoleTheme theme = new ConsoleTheme(new StaticColor(ConsoleColor.Blue), new StaticColor(ConsoleColor.Cyan), new StaticColor(ConsoleColor.Yellow));
-            ConsoleStyle = new ConsoleStyle(new StaticColor(ConsoleColor.Gray), theme);
+            ConsoleTheme theme = new ConsoleTheme(new StaticColor(ColorUtil.ConvertToColor(ConsoleColor.Blue)), new StaticColor(ColorUtil.ConvertToColor(ConsoleColor.Cyan)), new StaticColor(ColorUtil.ConvertToColor(ConsoleColor.Yellow)));
+            ConsoleStyle = new ConsoleStyle(new StaticColor(ColorUtil.ConvertToColor(ConsoleColor.Gray)), theme);
             
             ConsoleHandler = new ConsoleHandler(100);
             TimeHandler = new TimeHandler();

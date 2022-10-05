@@ -4,24 +4,24 @@ namespace BetterConsole.ConsoleComponents
 {
     public class OrderedList : ListComponent
     {
-        public OrderedListStyle OrderedListStyle;
+        public OrderedListType OrderedListType;
 
         private char[] _alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
         
-        public OrderedList(string label = "", OrderedListStyle style = OrderedListStyle.Numerical) : this(label,new ConsoleComponent[]{}, style){ }
+        public OrderedList(string label = "", OrderedListType type = OrderedListType.Numerical) : this(label,new ConsoleComponent[]{}, type){ }
         
-        public OrderedList(string[] list, OrderedListStyle style = OrderedListStyle.Numerical) : this("", list, style) { }
+        public OrderedList(string[] list, OrderedListType type = OrderedListType.Numerical) : this("", list, type) { }
         
-        public OrderedList(ConsoleComponent[] list, OrderedListStyle style = OrderedListStyle.Numerical) : this("", list, style) { }
+        public OrderedList(ConsoleComponent[] list, OrderedListType type = OrderedListType.Numerical) : this("", list, type) { }
         
-        public OrderedList(string label, string[] list, OrderedListStyle style = OrderedListStyle.Numerical) : base(label, list)
+        public OrderedList(string label, string[] list, OrderedListType type = OrderedListType.Numerical) : base(label, list)
         {
-            OrderedListStyle = style;
+            OrderedListType = type;
         }
 
-        public OrderedList(string label, ConsoleComponent[] list, OrderedListStyle style = OrderedListStyle.Numerical) : base(label, list)
+        public OrderedList(string label, ConsoleComponent[] list, OrderedListType type = OrderedListType.Numerical) : base(label, list)
         {
-            OrderedListStyle = style;
+            OrderedListType = type;
         }
 
         /// <summary>
@@ -33,11 +33,11 @@ namespace BetterConsole.ConsoleComponents
         {
             string toReturn = "";
             
-            if (OrderedListStyle == OrderedListStyle.Numerical)
+            if (OrderedListType == OrderedListType.Numerical)
             {
                 toReturn = " " + (index + 1) + ". ";
             }
-            else if (OrderedListStyle == OrderedListStyle.Alphabetic)
+            else if (OrderedListType == OrderedListType.Alphabetic)
             {
                 do
                 {

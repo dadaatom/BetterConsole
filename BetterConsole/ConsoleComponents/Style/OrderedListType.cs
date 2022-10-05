@@ -1,6 +1,6 @@
 ﻿namespace BetterConsole.ConsoleComponents
 {
-    public enum OrderedListStyle
+    public enum OrderedListType
     {
         Numerical,
         Alphabetic
