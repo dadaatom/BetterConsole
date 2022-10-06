@@ -60,14 +60,14 @@ Let's write a text component in the color green.
 
 ```c#
 TextComponent text = new TextComponent("This will appear green!");
-text.SetColor(new StaticColor(ConsoleColor.Green));
+text.SetColor(new StaticColor(Color.Green));
 BetterConsole.WriteLine(text);
 ```
 
 Alternatively, for plain text the regular Console methods are implemented to make usage easier.
 
 ```c#
-BetterConsole.WriteLine("This will also appear green!", new StaticColor(ConsoleColor.Green));
+BetterConsole.WriteLine("This will also appear green!", new StaticColor(Color.Green));
 ```
 
 </details>
@@ -82,13 +82,7 @@ Loading bars are useful for displaying the execution progress of your code.
     </summary>
 <br/>
 
-1. Let's display the current progress of our program. Firstly, whilst completely optional, I am going to define different style options below.
-    
-```c#
-LoadingBarStyle style = new LoadingBarStyle("-", " ", "<", ">");
-```
-
-2. We will now create our loading bar with the our new style options and a defined length. We will also write the loading bar to the console.
+1. Let's create a loading bar with a defined length of 10 units. We will also write the loading bar to the console.
 
 ```c#
 LoadingBar loadingBar = new LoadingBar(style, 10);
@@ -96,7 +90,7 @@ BetterConsole.WriteLine("Execution process: ");
 BetterConsole.Write(loadingBar);
 ```
 
-3. Great, now all we need to do is provide our loading bar with its the current program progress. Note that input values to the SetPercentage method are automatically bounded between 0 and 1.
+2. Great, now all we need to do is provide our loading bar with its the current program progress. Note that input values to the SetPercentage method are automatically bounded between 0 and 1.
 
 ```c#
 for (int i = 0; i <= n; i++) {
@@ -175,7 +169,7 @@ BetterConsole.Reload();
 
 Images are helpful for displaying specific graphics within the console.
 When creating an image its important to note the size of the input image as pixels displayed here are quite large.
-Additionally, many images are limited by the short selection of available ConsoleColors available within the console.
+It's important to note when displaying images in the console many images are limited by the short selection of available ConsoleColors available.
 
 <details>
     <summary>
@@ -273,25 +267,28 @@ Console colors offer different types of color schemes than simple static colors.
 
 The following example will implement an example color that alternates colors every word.
 
-1. Create a class and extend `ComponentColor`, make sure to implement the `GetColors` function.
+1. Create a class and extend `ComponentColor`, make sure to implement the `ApplyTo` function.
 
 ```c#
+using System.Drawing;
+
 public class ExampleColor : ComponentColor
 {
-    public ConsoleColor[] Colors { get; }
-
-    public ExampleColor(ConsoleColor[] colors)
+    public Color[] Colors { get; }
+            
+    public ExampleColor(Color[] colors)
     {
         Colors = colors;
     }
 
-    public override ColorSegment[] GetColors(string toDisplay)
+    public override ComponentBuilder ApplyTo(string toDisplay)
     {
+        ComponentBuilder toReturn = new ComponentBuilder();
         string[] list = toDisplay.Split(new[] {' ', '\n'});
-        ColorSegment[] toReturn = new ColorSegment[list.Length];
-    
-        for(int i = 0; i < list.Length; i++){
-            toReturn[i] = new ColorSegment(list[i], Colors[i % Colors.Length]);
+
+        for(int i = 0; i < list.Length; i++)
+        {
+            toReturn.Append(new ComponentBuilder.ComponentSegment(list[i], Colors[i % Colors.Length]));
         }
 
         return toReturn;
@@ -302,8 +299,8 @@ public class ExampleColor : ComponentColor
 2. Apply this color and output text.
 
 ```c#
-TextComponent text = new TextComponent("Hello folks,\nIt's nice to meet you!");
-text.Color = new ExampleColor(new ConsoleColor[]{ConsoleColor.Red, ConsoleColor.Green});
+TextComponent text = new TextComponent("Hello folks,\nLook at these cool colors!");
+text.Color = new ExampleColor(new Color[]{Color.Red, Color.Green});
 BetterConsole.WriteLine(text);
 ```
 
