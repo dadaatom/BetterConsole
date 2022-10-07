@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 
 namespace BetterConsole.ConsoleComponents
 {
@@ -8,6 +9,8 @@ namespace BetterConsole.ConsoleComponents
         public ComponentColor SecondaryColor;
 
         public ComponentColor AlertColor;
+
+        public ConsoleTheme() : this(new StaticColor(Color.White), new StaticColor(Color.Gray), new StaticColor(Color.Red)) { }
 
         public ConsoleTheme(ComponentColor primaryColor, ComponentColor secondaryColor, ComponentColor alertColor)
         {

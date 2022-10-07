@@ -4,8 +4,28 @@
 
 BetterConsole offers common display tools and quality of life features for developing console applications.
 The ability to edit and refresh the console elements is very handy when maintaining a clean console output.
-Prebuilt console components include tables, images, loading bars, and timers.
+Prebuilt console components include tables, images, loading bars, timers, and much more.
 Additionally, the console command structure makes creating, validating, and using console commands very easy.
+
+
+# Instantiating The BetterConsole
+
+Before the BetterConsole can be used its main components need to be instantiated.
+The BetterConsole can be instantiated with default values or with parameters in order to define custom functionality.
+
+Default initialisation:
+```c#
+BetterConsole.Instantiate();
+```
+
+With a unique theme and console style:
+```c#
+ConsoleTheme theme = new ConsoleTheme(new StaticColor(ColorUtil.ConvertToColor(ConsoleColor.Blue)), new StaticColor(ColorUtil.ConvertToColor(ConsoleColor.Cyan)), new StaticColor(ColorUtil.ConvertToColor(ConsoleColor.Yellow)));
+ConsoleStyle consoleStyle = new ConsoleStyle(new StaticColor(ColorUtil.ConvertToColor(ConsoleColor.Red)), theme);
+
+BetterConsole.Instantiate(new ConsoleHandler(100), new TimeHandler(), consoleStyle);
+```
+
 
 # Simple Functions
 
@@ -31,14 +51,6 @@ This strategy is effective when you expect to reload a component very regularly 
 BetterConsole.Reload(component);
 ```
 
-# BetterConsole Parameters
-
-By default the BetterConsole will only reload up to 1000 console lines, as depending on the implementation reloads may occur frequently and adding a limit may improve preformance.
-Here I am expecting more regular reloads so I will define a limit of 100.
-
-```c#
-BetterConsole.DisplayLimit = 100;
-```
 
 # Console Components
 

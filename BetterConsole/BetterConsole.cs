@@ -21,14 +21,41 @@ namespace BetterConsole
         public static ConsoleHandler ConsoleHandler { get; private set; }
 
         public static TimeHandler TimeHandler { get; private set; }
-        
-        static BetterConsole() // todo: Start or Instantiate method instead of static constructor?
+
+        /// <summary>
+        /// Instantiates the BetterConsole attributes.
+        /// </summary>
+        public static void Instantiate()
         {
-            ConsoleTheme theme = new ConsoleTheme(new StaticColor(ColorUtil.ConvertToColor(ConsoleColor.Blue)), new StaticColor(ColorUtil.ConvertToColor(ConsoleColor.Cyan)), new StaticColor(ColorUtil.ConvertToColor(ConsoleColor.Yellow)));
-            ConsoleStyle = new ConsoleStyle(new StaticColor(ColorUtil.ConvertToColor(ConsoleColor.Gray)), theme);
+            ConsoleHandler handler = new ConsoleHandler(100);
+            TimeHandler timeHandler = new TimeHandler();
+            ConsoleStyle consoleStyle = new ConsoleStyle(new StaticColor(ColorUtil.ConvertToColor(ConsoleColor.Gray)), new ConsoleTheme());
             
-            ConsoleHandler = new ConsoleHandler(100);
-            TimeHandler = new TimeHandler();
+            Instantiate(handler, timeHandler, consoleStyle);
+        }
+        
+        /// <summary>
+        /// Instantiates the BetterConsole attributes.
+        /// </summary>
+        /// <param name="handler">New console handler.</param>
+        /// <param name="timeHandler">New time handler.</param>
+        public static void Instantiate(ConsoleHandler handler, TimeHandler timeHandler)
+        {
+            ConsoleStyle consoleStyle = new ConsoleStyle(new StaticColor(ColorUtil.ConvertToColor(ConsoleColor.Gray)), new ConsoleTheme());
+            Instantiate(handler, timeHandler, consoleStyle);
+        }
+
+        /// <summary>
+        /// Instantiates the BetterConsole attributes.
+        /// </summary>
+        /// <param name="handler">New console handler.</param>
+        /// <param name="timeHandler">New time handler.</param>
+        /// <param name="style">New console style.</param>
+        public static void Instantiate(ConsoleHandler handler, TimeHandler timeHandler, ConsoleStyle style)
+        {
+            ConsoleHandler = handler;
+            TimeHandler = timeHandler;
+            ConsoleStyle = style;
         }
 
         /// <summary>

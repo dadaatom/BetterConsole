@@ -15,6 +15,11 @@ namespace BetterConsole.Examples
         public static void Main(string[] args)
         {
             
+            // INSTANTIATE THE BETTERCONSOLE //
+            
+            BetterConsole.Instantiate();
+            
+            
             // CREATE IMAGE //
 
             Image image = new Image(Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()))+"\\Images\\Welcome.png");
