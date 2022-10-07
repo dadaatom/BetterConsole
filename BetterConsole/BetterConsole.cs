@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BetterConsole.ConsoleComponents;
+using BetterConsole.Exception;
 
 namespace BetterConsole
 {
@@ -62,74 +63,132 @@ namespace BetterConsole
         /// Writes the component within the console.
         /// </summary>
         /// <param name="component">Console component to be written.</param>
-        public static void Write(ConsoleComponent component) => ConsoleHandler.Write(component);
-        
+        public static void Write(ConsoleComponent component)
+        {
+            CheckInstantiationStatus();
+            ConsoleHandler.Write(component);
+        }
+
         /// <summary>
         /// Writes the component to the new line within the console.
         /// </summary>
         /// <param name="component">Console component to be written.</param>
-        public static void WriteLine(ConsoleComponent component) => ConsoleHandler.WriteLine(component);
-        
+        public static void WriteLine(ConsoleComponent component)
+        {
+            CheckInstantiationStatus();
+            ConsoleHandler.WriteLine(component);
+        }
+
         /// <summary>
         /// Forwards a colored text component to the Write function.
         /// </summary>
         /// <param name="text">Text to be written.</param>
         /// <param name="color">Color to display the text.</param>
-        public static void Write(string text, ComponentColor color) => ConsoleHandler.Write(new TextComponent(text, color));
-        
+        public static void Write(string text, ComponentColor color)
+        {
+            CheckInstantiationStatus();
+            ConsoleHandler.Write(new TextComponent(text, color));
+        }
+
         /// <summary>
         /// Forwards a text component to the Write function.
         /// </summary>
         /// <param name="text">Text to be written.</param>
-        public static void Write(string text) => ConsoleHandler.Write(new TextComponent(text));
-        
-        
+        public static void Write(string text)
+        {
+            CheckInstantiationStatus();
+            ConsoleHandler.Write(new TextComponent(text));
+        }
+
         /// <summary>
         /// Forwards a colored text component to the WriteLine function.
         /// </summary>
         /// <param name="text">Text to be written.</param>
         /// <param name="color">Color to display the text.</param>
-        public static void WriteLine(string text, ComponentColor color) => ConsoleHandler.WriteLine(new TextComponent(text, color));
-        
-        
+        public static void WriteLine(string text, ComponentColor color)
+        {
+            CheckInstantiationStatus();
+            ConsoleHandler.WriteLine(new TextComponent(text, color));
+        }
+
         /// <summary>
         /// Forwards a text component to the WriteLine function.
         /// </summary>
         /// <param name="text">Text to be written.</param>
-        public static void WriteLine(string text) => ConsoleHandler.WriteLine(new TextComponent(text));
+        public static void WriteLine(string text)
+        {
+            CheckInstantiationStatus();
+            ConsoleHandler.WriteLine(new TextComponent(text));
+        }
 
         /// <summary>
         /// Reads line and adds user input to the consoles displayed list.
         /// </summary>
         /// <returns>User input read from the console.</returns>
-        public static string ReadLine() => ConsoleHandler.ReadLine();
-        
+        public static string ReadLine()
+        {
+            CheckInstantiationStatus();
+            return ConsoleHandler.ReadLine();
+        }
+
         /// <summary>
         /// Reads and adds user input to the consoles displayed list.
         /// </summary>
         /// <returns>User input read from the console.</returns>
         /// <exception cref="NotImplementedException"></exception>
-        public static string Read() => ConsoleHandler.Read();
-        
+        public static string Read()
+        {
+            CheckInstantiationStatus();
+            return ConsoleHandler.Read();
+        }
+
         /// <summary>
         /// Clears the console and list of displayed items.
         /// </summary>
-        public static void Clear() => ConsoleHandler.Clear();
-        
+        public static void Clear()
+        {
+            CheckInstantiationStatus();
+            ConsoleHandler.Clear();
+        }
+
         /// <summary>
         /// Clears the console and reloads either the last line or the entire console.
         /// </summary>
         /// <param name="component">Reloads based on the position of this component within the console.</param>
-        public static void Reload(ConsoleComponent component) => ConsoleHandler.Reload(component);
-        
+        public static void Reload(ConsoleComponent component)
+        {
+            CheckInstantiationStatus();
+            ConsoleHandler.Reload(component);
+        }
+
         /// <summary>
         /// Clears the console and rewrites all items stored within the displayed list.
         /// </summary>
-        public static void Reload() => ConsoleHandler.Reload();
-        
+        public static void Reload()
+        {
+            CheckInstantiationStatus();
+            ConsoleHandler.Reload();
+        }
+
         /// <summary>
         /// Creates a line break.
         /// </summary>
-        public static void BreakLine() => ConsoleHandler.BreakLine();
+        public static void BreakLine()
+        {
+            CheckInstantiationStatus();
+            ConsoleHandler.BreakLine();
+        }
+
+        /// <summary>
+        /// Checks if BetterConsole has been started.
+        /// </summary>
+        /// <exception cref="NotInstantiatedException">Thrown if server not instantiated.</exception>
+        public static void CheckInstantiationStatus()
+        {
+            if (ConsoleHandler == null || ConsoleStyle == null)
+            {
+                throw new NotInstantiatedException();
+            }
+        }
     }
 }

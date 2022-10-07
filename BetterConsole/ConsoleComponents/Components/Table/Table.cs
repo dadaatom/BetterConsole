@@ -32,7 +32,7 @@ namespace BetterConsole.ConsoleComponents
         {
             if (Cells.GetLength(0) == 0 || Cells.GetLength(1) == 0)
                 {
-                    throw new Exception("Table is empty."); //TODO: Make custom exceptions
+                    throw new System.Exception("Table is empty."); //TODO: Make custom exceptions
                 }
 
                 UpdateTargetSizes();

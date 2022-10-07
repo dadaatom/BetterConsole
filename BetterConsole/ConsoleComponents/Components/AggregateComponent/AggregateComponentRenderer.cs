@@ -12,7 +12,7 @@ namespace BetterConsole.ConsoleComponents
 
             foreach (ConsoleComponent component in Object.Components)
             {
-                throw new Exception("UNCOMMENT THIS");
+                throw new System.Exception("UNCOMMENT THIS");
                 //builder.Merge(component.Renderer.Render());
             }
 

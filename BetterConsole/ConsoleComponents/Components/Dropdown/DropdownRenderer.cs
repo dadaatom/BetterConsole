@@ -16,7 +16,7 @@ namespace BetterConsole.ConsoleComponents
             if (Object.Dropped)
             {
                 builder.Merge(BetterConsole.ConsoleStyle.DefaultColor.ApplyTo("\n"));
-                throw new Exception("UNCOMMENT THIS");
+                throw new System.Exception("UNCOMMENT THIS");
                 //builder.Merge(Object.Component.Renderer.Render());
             }
 

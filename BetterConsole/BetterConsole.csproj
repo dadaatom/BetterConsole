@@ -86,6 +86,7 @@
         <Compile Include="ConsoleComponents\Util\PaddedComponent.cs" />
         <Compile Include="ConsoleComponents\Util\VerticalAlignment.cs" />
         <Compile Include="ConsoleHandler.cs" />
+        <Compile Include="Exception\NotInstantiatedException.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
