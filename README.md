@@ -270,6 +270,7 @@ BetterConsole.WriteLine(orderedList);
 # Console Colors
 
 Console colors offer different types of color schemes than simple static colors.
+Custom colors are easy to implement, see the code example for more information.
 
 <details>
     <summary>
