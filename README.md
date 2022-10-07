@@ -18,9 +18,9 @@ Default initialisation:
 BetterConsole.Instantiate();
 ```
 
-With a unique theme and console style:
+Custom console style with default red color:
 ```c#
-ConsoleTheme theme = new ConsoleTheme(new StaticColor(ColorUtil.ConvertToColor(ConsoleColor.Blue)), new StaticColor(ColorUtil.ConvertToColor(ConsoleColor.Cyan)), new StaticColor(ColorUtil.ConvertToColor(ConsoleColor.Yellow)));
+ConsoleTheme theme = new ConsoleTheme();
 ConsoleStyle consoleStyle = new ConsoleStyle(new StaticColor(ColorUtil.ConvertToColor(ConsoleColor.Red)), theme);
 
 BetterConsole.Instantiate(new ConsoleHandler(100), new TimeHandler(), consoleStyle);
