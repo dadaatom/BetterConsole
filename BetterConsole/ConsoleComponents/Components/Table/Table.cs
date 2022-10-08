@@ -267,7 +267,7 @@ namespace BetterConsole.ConsoleComponents
         /// <summary>
         /// Update target size of all cells within the cells matrix.
         /// </summary>
-        public void UpdateTargetSizes()
+        private void UpdateTargetSizes()
         {
             RowSizes = new int[Cells.GetLength(0)];
             ColumnSizes = new int[Cells.GetLength(1)];

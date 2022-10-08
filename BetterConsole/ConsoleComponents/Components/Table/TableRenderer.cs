@@ -13,7 +13,8 @@ namespace BetterConsole.ConsoleComponents
                     throw new System.Exception("Table is empty."); //TODO: Make custom exceptions
                 }
 
-                Object.UpdateTargetSizes();
+                throw new System.Exception("UNCOMMENT THIS");
+                //Object.UpdateTargetSizes();
                 
                 string upper = "_";
                 string lower = "_";
