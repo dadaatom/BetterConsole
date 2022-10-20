@@ -57,6 +57,10 @@
         <Compile Include="ConsoleComponents\Components\Border\BorderRenderer.cs" />
         <Compile Include="ConsoleComponents\Components\Dropdown\Dropdown.cs" />
         <Compile Include="ConsoleComponents\Components\Dropdown\DropdownRenderer.cs" />
+        <Compile Include="ConsoleComponents\Components\Graph\GraphAxisSettings.cs" />
+        <Compile Include="ConsoleComponents\Components\Graph\HistoBar.cs" />
+        <Compile Include="ConsoleComponents\Components\Graph\Histogram.cs" />
+        <Compile Include="ConsoleComponents\Components\Graph\Graph.cs" />
         <Compile Include="ConsoleComponents\Components\Image\Image.cs" />
         <Compile Include="ConsoleComponents\Components\Image\ImageRenderer.cs" />
         <Compile Include="ConsoleComponents\Components\ListComponent\ListComponent.cs" />
