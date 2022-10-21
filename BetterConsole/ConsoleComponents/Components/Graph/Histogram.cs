@@ -25,8 +25,9 @@ namespace BetterConsole.ConsoleComponents.Components.Graph
 
             double max = Bars.Count > 0 ? Bars[0].Value : 5;
             double min = Bars.Count > 0 ? Bars[0].Value : 5;
-            
-            for (int i = 1; i < Bars.Count; i++) {
+
+            for (int i = 1; i < Bars.Count; i++)
+            {
                 if (Bars[i].Value < min)
                 {
                     min = Bars[i].Value;
@@ -37,14 +38,28 @@ namespace BetterConsole.ConsoleComponents.Components.Graph
                     max = Bars[i].Value;
                 }
             }
-            
-            double perTick = max / (height-1);
-            
-            
+
+            double perTick = max / (height - 1);
+
+            int barWidth = (width - Bars.Count * 4 - 1) / Bars.Count;
+
+            int remainder = (width - Bars.Count * 4 - 1) % Bars.Count;
+
+
+            // REMAINDER STRING //
+
+            string remainderStr = "";
+
+            for (int i = 0; i < remainder; i++)
+            {
+                remainderStr += ' ';
+            }
+
+
             // CREATE X LABEL BORDER //
             
             PaddedComponent xBorder = new PaddedComponent(new TextComponent(XAxis.Label));
-            xBorder.SetPaddings(Math.Min(XAxis.Label.Length, width-2), 1);
+            xBorder.SetPaddings(width-XAxis.Label.Length, 1);
             
             
             // CREATE Y LABEL BORDER //
@@ -63,7 +78,7 @@ namespace BetterConsole.ConsoleComponents.Components.Graph
             }
             
             PaddedComponent yBorder = new PaddedComponent(new TextComponent(newYLabel), HorizontalAlignment.Left, VerticalAlignment.Center);
-            yBorder.SetPaddings(2, Math.Max(YAxis.Label.Length, height));
+            yBorder.SetPaddings(2, height - YAxis.Label.Length);
             
             
             // BUILD GRAPH //
@@ -87,12 +102,12 @@ namespace BetterConsole.ConsoleComponents.Components.Graph
                 //DRAW BARS
                 for (int j = 0; j < Bars.Count; j++) {
                     string inner = "";
-                    for (int k = 0; k < (int)((width - Bars.Count*4 - 1)/Bars.Count); k++)
+                    for (int k = 0; k < barWidth; k++)
                     {
                         inner += ' ';
                     }
                     
-                    if(Bars[j].Value >= (height - i)*perTick)
+                    if(Bars[j].Value >= (height - i) * perTick)
                     {
                         toReturn.Append(new ComponentBuilder.ComponentSegment(" |", System.Drawing.Color.Black));
                         toReturn.Append(new ComponentBuilder.ComponentSegment(inner, System.Drawing.Color.White, System.Drawing.Color.Red));
@@ -101,7 +116,7 @@ namespace BetterConsole.ConsoleComponents.Components.Graph
                     else if (Bars[j].Value >= (height - (i+1))*perTick)
                     {
                         string upper = "";
-                        for (int k = 0; k < (int)((width - Bars.Count*4 - 1)/Bars.Count); k++)
+                        for (int k = 0; k < barWidth; k++)
                         {
                             upper += '_';
                         }
@@ -116,7 +131,7 @@ namespace BetterConsole.ConsoleComponents.Components.Graph
                     }
                 }
 
-                toReturn.Append(new ComponentBuilder.ComponentSegment("\n", System.Drawing.Color.Black));
+                toReturn.Append(new ComponentBuilder.ComponentSegment(remainderStr+"\n", System.Drawing.Color.Black));
             }
 
             string xAxis = "";
@@ -134,7 +149,7 @@ namespace BetterConsole.ConsoleComponents.Components.Graph
                 }
                 else if (i == width - 1)
                 {
-                    xAxis += '>';
+                    xAxis += ">\n";
                 }
                 else
                 {
@@ -144,14 +159,14 @@ namespace BetterConsole.ConsoleComponents.Components.Graph
 
             toReturn.Merge(Color.ApplyTo(xAxis));
 
+            string temp = "";
+            for (int j = 0; j < yBorder.TotalWidth; j++)
+            {
+                temp += ' ';
+            }
+            
             for (int i = 0; i < xBorder.PaddedValue.Length; i++)
             {
-                string temp = "";
-                for (int j = 0; j < yBorder.TotalWidth; j++)
-                {
-                    temp += ' ';
-                }
-                
                 toReturn.Merge(Color.ApplyTo(temp));
                 toReturn.Merge(Color.ApplyTo(xBorder.PaddedValue[i]));
             }
