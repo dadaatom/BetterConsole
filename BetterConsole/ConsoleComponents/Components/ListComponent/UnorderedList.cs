@@ -4,7 +4,7 @@ namespace BetterConsole.ConsoleComponents
 {
     public class UnorderedList : ListComponent
     {
-        private string _itemHeader = " - "; // Maybe make an option of dashes vs bullets, e.t.c.
+        private readonly string _itemHeader = " - "; // Maybe make an option of dashes vs bullets, e.t.c.
         
         public UnorderedList(string label = "") : this(label, new ConsoleComponent[]{}) { }
         

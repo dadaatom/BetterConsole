@@ -97,13 +97,13 @@ namespace BetterConsole
                         continue;
                     }
 
-                    if (consoleComponent.Height > 1)
+                    if (consoleComponent.ComponentHeight > 1)
                     {
                         Reload();
                         return;
                     }
                     
-                    totalLength += consoleComponent.Length;
+                    totalLength += consoleComponent.ComponentWidth;
                 }
 
                 Console.Write("\r");

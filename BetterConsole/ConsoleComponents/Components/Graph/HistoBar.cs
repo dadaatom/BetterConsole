@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Drawing.Imaging;
 
-namespace BetterConsole.ConsoleComponents.Components.Graph
+namespace BetterConsole.ConsoleComponents.Graph
 {
     public class HistoBar
     {

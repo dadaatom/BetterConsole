@@ -1,14 +1,14 @@
-﻿namespace BetterConsole.ConsoleComponents.Components.Graph
+﻿namespace BetterConsole.ConsoleComponents.Graph
 {
-    public class GraphAxisSettings
+    public struct GraphAxisSettings
     {
         public string Label { get; set; }
         public double TickFrequency { get; set; }
 
-        public GraphAxisSettings()
+        public GraphAxisSettings(string label = "", double tickFrequency = 1)
         {
-            Label = "";
-            TickFrequency = 1;
+            Label = label;
+            TickFrequency = tickFrequency;
         }
     }
 }
