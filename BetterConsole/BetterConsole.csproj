@@ -61,6 +61,8 @@
         <Compile Include="ConsoleComponents\Components\Graph\HistoBar.cs" />
         <Compile Include="ConsoleComponents\Components\Graph\Histogram.cs" />
         <Compile Include="ConsoleComponents\Components\Graph\Graph.cs" />
+        <Compile Include="ConsoleComponents\Components\Graph\Point.cs" />
+        <Compile Include="ConsoleComponents\Components\Graph\ScatterPlot.cs" />
         <Compile Include="ConsoleComponents\Components\Image\Image.cs" />
         <Compile Include="ConsoleComponents\Components\Image\ImageRenderer.cs" />
         <Compile Include="ConsoleComponents\Components\ListComponent\ListComponent.cs" />
