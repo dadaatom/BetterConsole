@@ -8,7 +8,7 @@ namespace BetterConsole.Examples
     internal class ExampleProgram
     {
         // Use example of the better console and built in components.
-        public static void Main(string[] args)
+        public static void Run(string[] args)
         {
             
             // INSTANTIATE THE BETTERCONSOLE //

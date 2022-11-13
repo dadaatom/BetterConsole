@@ -84,6 +84,82 @@ namespace BetterConsole
         /// <param name="component">Reloads based on the position of this component within the console.</param>
         public virtual void Reload(ConsoleComponent component) //todo: take color into account when preforming clear line portion of successful component reload
         {
+            Reload();
+            return;
+            
+            int preLines = 0;
+            int postLines = 0;
+
+            bool found = false;
+
+            LinkedListNode<LinkedList<ConsoleComponent>> nextList = null;
+            LinkedListNode<ConsoleComponent> foundNode = null;
+
+            LinkedListNode<LinkedList<ConsoleComponent>> listNode = DisplayedComponents.First;
+            while (listNode != null)
+            {
+                LinkedListNode<ConsoleComponent> node = listNode.Value.First;
+                while (node != null)
+                {
+                    if (node.Value == component)
+                    {
+                        nextList = listNode;
+                        
+                        foundNode = node;
+
+                        found = true;
+                    }
+                    
+                    int lines = (postLines == 0 && node.Value.ComponentHeight >= 1) ?
+                        node.Value.ComponentHeight : node.Value.ComponentHeight - 1;
+                    
+                    if (found)
+                    {
+                        postLines += lines;
+                    }
+                    else
+                    {
+                        preLines += lines;
+                    }
+                    
+                    node = node.Next;
+                }
+                listNode = listNode.Next;
+            }
+
+
+            if (found)
+            {
+                if (preLines > 0 && postLines < Console.BufferHeight)
+                {
+                    Console.SetCursorPosition(0,preLines);
+
+                    // Write some spaces
+                    
+                    Console.SetCursorPosition(0,preLines);
+                    
+                    LinkedListNode<ConsoleComponent> node = foundNode;
+                    while (node != null)
+                    {
+                        //Write nodes
+                        Display(node.Value.Render());
+                        
+                        node = node.Next;
+                        if (node == null && nextList != null)
+                        {
+                            node = nextList.Value.First;
+                            nextList = nextList.Next;
+                        }
+                    }
+
+                    return;
+                }
+            }
+            
+            Reload();
+
+            /*
+            
             LinkedListNode<ConsoleComponent> node = DisplayedComponents.Last.Value.Find(component);
 
             if (component != null && node != null)
@@ -132,6 +208,7 @@ namespace BetterConsole
             }
 
             Reload();
+            */
         }
         
         /// <summary>
