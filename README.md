@@ -21,7 +21,8 @@ BetterConsole.Instantiate();
 Custom console style with default red color:
 ```c#
 ConsoleTheme theme = new ConsoleTheme();
-ConsoleStyle consoleStyle = new ConsoleStyle(new StaticColor(ColorUtil.ConvertToColor(ConsoleColor.Red)), theme);
+StaticColor staticRed = new StaticColor(ColorUtil.ConvertToColor(ConsoleColor.Red));
+ConsoleStyle consoleStyle = new ConsoleStyle(staticRed, theme);
 
 BetterConsole.Instantiate(new ConsoleHandler(100), new TimeHandler(), consoleStyle);
 ```
