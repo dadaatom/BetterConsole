@@ -17,7 +17,7 @@ namespace BetterConsole.ConsoleComponents
         {
             Segments = new List<ComponentSegment>(new ComponentSegment[] { segment });
         }
-
+        
         /// <summary>
         /// Appends component builder with a new segment.
         /// </summary>

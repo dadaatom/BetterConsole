@@ -30,9 +30,9 @@ namespace BetterConsole.ConsoleComponents
 
         //public ComponentRenderer Renderer { get; set; }
 
-        public int Height { get; private set; }
+        public int ComponentHeight { get; private set; }
 
-        public int Length { get; private set; }
+        public int ComponentWidth { get; private set; }
         
         public ConsoleComponent() : this(null) { }
 
@@ -94,8 +94,8 @@ namespace BetterConsole.ConsoleComponents
 
             }
 
-            Length = maxLength;
-            Height = height;
+            ComponentWidth = maxLength;
+            ComponentHeight = height;
         }
     }
 }

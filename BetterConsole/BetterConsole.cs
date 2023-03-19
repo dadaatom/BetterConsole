@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using BetterConsole.ConsoleComponents;
 using BetterConsole.Exception;
 
@@ -7,11 +6,10 @@ namespace BetterConsole
 {
     /*
      * TODO:
-     * - user input threads?
      * - See console component todo.
      * - See Table todo.
      * - See console command todo.
-     * - Memoization for longer computations.
+     * - Memoization for longer computations?
      * - bug Console.Clear() on reload.
      */
 

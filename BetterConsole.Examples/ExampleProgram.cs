@@ -1,11 +1,7 @@
-﻿using System;
-using System.Drawing;
-using System.IO;
-using System.Threading;
+﻿using System.IO;
 using BetterConsole.ConsoleCommands;
 using BetterConsole.ConsoleComponents;
-using Image = BetterConsole.ConsoleComponents.Image;
-using Timer = BetterConsole.ConsoleComponents.Timer;
+using BetterConsole.ConsoleComponents.Graph;
 
 namespace BetterConsole.Examples
 {
@@ -77,7 +73,7 @@ namespace BetterConsole.Examples
             
             // CREATE AND WRITE UNORDERED LIST //
             
-            UnorderedList unorderedList = new UnorderedList("List of things I like:", new string[]{"Rainy days", "Multi\nLine\nStrings", "Strawberries"});
+            UnorderedList unorderedList = new UnorderedList("List of things I like:", new[]{"Rainy days", "Multi\nLine\nStrings", "Strawberries"});
             BetterConsole.WriteLine(unorderedList);
             
             BetterConsole.BreakLine();
@@ -85,7 +81,7 @@ namespace BetterConsole.Examples
             
             // CREATE AND WRITE NUMERICALLY ORDERED LIST //
             
-            OrderedList orderedList = new OrderedList("List of my top 4 favorite numbers:",new string[]{"1", "2", "64", "4"});
+            OrderedList orderedList = new OrderedList("List of my top 4 favorite numbers:",new[]{"1", "2", "64", "4"});
             BetterConsole.WriteLine(orderedList);
             
             BetterConsole.BreakLine();
@@ -93,7 +89,7 @@ namespace BetterConsole.Examples
             
             // CREATE AND WRITE ALPHABETICALLY ORDERED LIST //
             
-            OrderedList alphabeticallyOrderedList = new OrderedList("Look at this alphabetic list:", new string[]{"Woah","Cool!","Nice"}, OrderedListType.Alphabetic);
+            OrderedList alphabeticallyOrderedList = new OrderedList("Look at this alphabetic list:", new[]{"Woah","Cool!","Nice"}, OrderedListType.Alphabetic);
             BetterConsole.WriteLine(alphabeticallyOrderedList);
             
             BetterConsole.BreakLine();
@@ -123,12 +119,32 @@ namespace BetterConsole.Examples
             BetterConsole.BreakLine();
             
             
+            // CREATE HISTOGRAM //
+
+            Histogram histo = new Histogram(new[]{new HistoBar("A", 3.2), new HistoBar("B", 4.05), new HistoBar("C", 1.7)});
+            histo.XAxis.Label = "Bars";
+            histo.YAxis.Label = "Cost";
+            BetterConsole.WriteLine(histo);
+            BetterConsole.BreakLine();
+            
+            
+            // CREATE SCATTERPLOT //
+            
+            Point[] points = { new Point(0, 3), new Point(3.2, 6), new Point(17,8)};
+            ScatterPlot scatterPlot = new ScatterPlot(points);
+            scatterPlot.XAxis.Label = "Volume";
+            scatterPlot.YAxis.Label = "Price";
+            BetterConsole.WriteLine(scatterPlot);
+            BetterConsole.BreakLine();
+            
+            
             // REGISTER COMMANDS AND BEGIN HANDLING //
             
             CommandHandler handler = new CommandHandler();
             handler.Register(new ConsoleCommand[]{new PingCommand(), new ExampleCommand()});
             
             BetterConsole.BreakLine();
+            
         }
     }
 }

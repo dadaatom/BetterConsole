@@ -17,7 +17,7 @@ namespace BetterConsole.ConsoleComponents
         public Border(ConsoleComponent contents)
         {
             Contents = contents;
-            PaddedContents = new PaddedComponent(contents.ToString());
+            PaddedContents = new PaddedComponent(new TextComponent(contents.ToString()));
 
             //Renderer = new BorderRenderer(this);
         }
