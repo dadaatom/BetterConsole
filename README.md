@@ -55,7 +55,7 @@ BetterConsole.Reload(component);
 
 # Console Components
 
-Console components are elements that within a console display.
+Console components are elements within a console display.
 Most methods like Write and WriteLine accept console components as well as strings.
 
 
