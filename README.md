@@ -268,6 +268,41 @@ BetterConsole.WriteLine(orderedList);
 </details>
 
 
+## <u>Graph Components</u>
+
+Graphs are another helpful tool to organise data for users.
+Additionally, lists accept an array of ConsoleComponents or an array of strings for ease of use.
+<br/>
+Currently there are two types of graph components:
+- Histograms
+- Scatter plots
+
+<details>
+    <summary>
+        <b>Show Code Example:</b>
+    </summary>
+<br/>
+
+1. First create a list of the HistoBars to display.
+
+```c#
+HistoBar histoBars = new HistoBar[]{
+                        new HistoBar("A", 3.2), 
+                        new HistoBar("B", 4.05), 
+                        new HistoBar("C", 1.7)};
+```
+
+2. Create a HistoGram, set the Axis labels, and write the graph.
+
+```c#
+Histogram histo = new Histogram(histoBars);
+histo.XAxis.Label = "X Axis";
+histo.YAxis.Label = "Y Axis";
+BetterConsole.WriteLine(histo);
+```
+
+</details>
+
 # Console Colors
 
 Console colors offer different types of color schemes than simple static colors.
