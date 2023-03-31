@@ -301,23 +301,6 @@ histo.YAxis.Label = "Y Axis";
 BetterConsole.WriteLine(histo);
 ```
 
-3. Observe and enjoy your well organised data.
-
-```c#
-  ^        __         
-  |       |  |        
-  |  __   |  |        
-C | |  |  |  |        
-o | |  |  |  |        
-s | |  |  |  |        
-t | |  |  |  |   __   
-  | |  |  |  |  |  |  
-  | |  |  |  |  |  |  
-  | |  |  |  |  |  |  
-  '------------------>
-          Bars
-```
-
 </details>
 
 # Console Colors
