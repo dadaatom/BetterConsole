@@ -37,7 +37,7 @@ namespace BetterConsole.ConsoleComponents
             
             toReturn += "]";
             
-            return (Color != null ? Color.ApplyTo(toReturn) : BetterConsole.ConsoleStyle.DefaultColor.ApplyTo(toReturn));        }
+            return Color.ApplyTo(toReturn);        }
         
         /// <summary>
         /// Gets the current loading bar percentage of completion.

@@ -19,7 +19,7 @@ namespace BetterConsole.ConsoleComponents
 
                 if (i < Object.ImageMap.Height - 1)
                 {
-                    builder.Append(new ComponentBuilder.ComponentSegment("\n", System.Drawing.Color.Black));
+                    builder.Append(new ComponentBuilder.ComponentSegment("\n", Color.Black));
                 }
             }
             

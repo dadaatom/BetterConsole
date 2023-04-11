@@ -17,19 +17,58 @@ namespace BetterConsole.ConsoleComponents
         {
             Segments = new List<ComponentSegment>(new ComponentSegment[] { segment });
         }
-        
+
         /// <summary>
         /// Appends component builder with a new segment.
         /// </summary>
         /// <param name="segment">New component segment.</param>
-        public void Append(ComponentSegment segment) => Segments.Add(segment);
+        /// <param name="merge">Merges segment with previous if coloring matches</param>
+        public void Append(ComponentSegment segment, bool merge = false)
+        {
+            bool completed = false;
+            
+            if (merge)
+            {
+                int index = Segments.Count - 1;
+                ComponentSegment seg = Segments[index];
+                if (seg.TextColor == segment.TextColor && seg.BackgroundColor == segment.BackgroundColor)
+                {
+                    Segments[index] = new ComponentSegment(seg.Text + segment.Text, segment.TextColor, segment.BackgroundColor);
+                    completed = true;
+                }
+            }
+            
+            if (!completed)
+            {
+                Segments.Add(segment);
+            }
+        }
 
         /// <summary>
         /// Inserts component segment at index.
         /// </summary>
         /// <param name="index">Insert position.</param>
         /// <param name="segment">New segment to insert.</param>
-        public void Insert(int index, ComponentSegment segment) => Segments.Insert(index, segment);
+        public void Insert(int index, ComponentSegment segment, bool merge = false)
+        {
+            bool completed = false;
+            
+            if (merge)
+            {
+                ComponentSegment seg = Segments[index];
+                if (seg.TextColor == segment.TextColor && seg.BackgroundColor == segment.BackgroundColor)
+                {
+                    Segments[index] = new ComponentSegment(segment.Text + seg.Text, segment.TextColor, segment.BackgroundColor);
+                    completed = true;
+                }
+            }
+            
+            
+            if (!completed)
+            {
+                Segments.Insert(index, segment);
+            }
+        }
 
         /// <summary>
         /// Merges this component builder with another.

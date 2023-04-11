@@ -72,9 +72,7 @@ namespace BetterConsole.ConsoleComponents.Graph
                     
                     if(Bars[j].Value >= (Height - i) * perTick)
                     {
-                        toReturn.Append(new ComponentBuilder.ComponentSegment(" |", System.Drawing.Color.Black));
-                        toReturn.Append(new ComponentBuilder.ComponentSegment(inner, System.Drawing.Color.White, System.Drawing.Color.Red));
-                        toReturn.Append(new ComponentBuilder.ComponentSegment("| ", System.Drawing.Color.Black));
+                        toReturn.Merge(Color.ApplyTo(" |" + inner + "| "));
                     }
                     else if (Bars[j].Value >= (Height - (i+1))*perTick)
                     {
@@ -84,9 +82,7 @@ namespace BetterConsole.ConsoleComponents.Graph
                             upper += '_';
                         }
                         
-                        toReturn.Append(new ComponentBuilder.ComponentSegment("  ", System.Drawing.Color.Black));
-                        toReturn.Append(new ComponentBuilder.ComponentSegment(upper, System.Drawing.Color.Black));
-                        toReturn.Append(new ComponentBuilder.ComponentSegment("  ", System.Drawing.Color.Black));
+                        toReturn.Merge(Color.ApplyTo("  " + upper + "  "));
                     }
                     else
                     {
@@ -105,15 +101,12 @@ namespace BetterConsole.ConsoleComponents.Graph
 }
 
 /*
-
-
+ 
  ^
  |
  +  _   __
  | | |  ||
  + | |  ||
  '------------------------------>
-
-
 
 */

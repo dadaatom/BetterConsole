@@ -24,7 +24,7 @@
             
             toReturn += "]";
             
-            return (Object.Color != null ? Object.Color.ApplyTo(toReturn) : BetterConsole.ConsoleStyle.DefaultColor.ApplyTo(toReturn));
+            return Object.Color.ApplyTo(toReturn);
         }
     }
 }
