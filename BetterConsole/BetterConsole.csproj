@@ -75,6 +75,7 @@
         <Compile Include="ConsoleComponents\Components\Seperator\Separator.cs" />
         <Compile Include="ConsoleComponents\Components\Seperator\SeperatorRenderer.cs" />
         <Compile Include="ConsoleComponents\Components\Table\Cell.cs" />
+        <Compile Include="ConsoleComponents\Components\Table\EmptyTableException.cs" />
         <Compile Include="ConsoleComponents\Components\Table\Table.cs" />
         <Compile Include="ConsoleComponents\Components\Table\TableRenderer.cs" />
         <Compile Include="ConsoleComponents\Components\TextComponent\TextComponent.cs" />

@@ -31,118 +31,118 @@ namespace BetterConsole.ConsoleComponents
         protected override ComponentBuilder Build()
         {
             if (Cells.GetLength(0) == 0 || Cells.GetLength(1) == 0)
+            {
+                throw new EmptyTableException();
+            }
+
+            UpdateTargetSizes();
+            
+            string upper = "_";
+            string lower = "_";
+            string seperator = "-";
+            string border = "|";
+
+            ComponentBuilder toReturn = new ComponentBuilder();
+            
+            string segment = " ";
+            
+            for (int i = 0; i < Cells.GetLength(1); i += Cells[0,i] == null ? 1 : Cells[0,i].Width)
+            {
+                for (int w = 0; w < (Cells[0,i] == null ? ColumnSizes[i] : Cells[0,i].Value.TotalWidth); w++)
                 {
-                    throw new System.Exception("Table is empty."); //TODO: Make custom exceptions
+                    segment += upper;
                 }
 
-                UpdateTargetSizes();
-                
-                string upper = "_";
-                string lower = "_";
-                string seperator = "-";
-                string border = "|";
+                segment += " ";
+            }
 
-                ComponentBuilder toReturn = new ComponentBuilder();
-                
-                string segment = " ";
-                
-                for (int i = 0; i < Cells.GetLength(1); i += Cells[0,i] == null ? 1 : Cells[0,i].Width)
+            segment += "\n";
+            
+            toReturn.Merge(Color.ApplyTo(segment));
+
+            ColumnElement[] toDisplay = new ColumnElement[Cells.GetLength(1)];
+
+            for (int i = 0; i < Cells.GetLength(0); i++)
+            {
+                for (int h = 0; h < RowSizes[i]; h++)
                 {
-                    for (int w = 0; w < (Cells[0,i] == null ? ColumnSizes[i] : Cells[0,i].Value.TotalWidth); w++)
-                    {
-                        segment += upper;
-                    }
-
-                    segment += " ";
-                }
-
-                segment += "\n";
-                
-                toReturn.Merge(Color.ApplyTo(segment));
-
-                ColumnElement[] toDisplay = new ColumnElement[Cells.GetLength(1)];
-
-                for (int i = 0; i < Cells.GetLength(0); i++)
-                {
-                    for (int h = 0; h < RowSizes[i]; h++)
-                    {
-                        toReturn.Merge(Color.ApplyTo(border));
-
-                        int num;
-                        for (int j = 0; j < Cells.GetLength(1); j += num) // Make this use the toDisplay item from that iteration.
-                        {
-                            num = 1;
-                            if (toDisplay[j] == null)
-                            {
-                                if (Cells[i, j] != null)
-                                {
-                                    toDisplay[j] = new ColumnElement(Cells[i, j]);
-                                }
-                            }
-
-                            if (toDisplay[j] == null)
-                            {
-                                for (int w = 0; w < ColumnSizes[j]; w++)
-                                {
-                                    toReturn.Merge(Color.ApplyTo(" "));
-                                }
-                            }
-                            else
-                            {
-                                toReturn.Merge(toDisplay[j].Cell.Component.Color.ApplyTo(toDisplay[j].NextLine()));
-                                num = toDisplay[j] != null ? toDisplay[j].Cell.Width : 1;
-                                
-                                if (toDisplay[j].RemainingLines <= 0)
-                                {
-                                    toDisplay[j] = null;
-                                }
-                            }
-                            
-                            toReturn.Merge(Color.ApplyTo(border));
-                        }
-                        toReturn.Merge(Color.ApplyTo("\n"));
-                    }
-                    
-                    if (i < Cells.GetLength(0) - 1)
-                    {
-                        toReturn.Merge(Color.ApplyTo(border));
-                        
-                        for (int j = 0; j < Cells.GetLength(1); j += Cells[i, j] != null ? Cells[i,j].Width : 1)
-                        {
-                            if (toDisplay[j] != null)
-                            {
-                                toReturn.Merge(toDisplay[j].Cell.Component.Color.ApplyTo(toDisplay[j].NextLine()));
-                                if (toDisplay[j].RemainingLines <= 0)
-                                {
-                                    toDisplay[j] = null;
-                                }
-                            }
-                            else{
-                                for (int w = 0; w < (Cells[i,j] == null ? ColumnSizes[j] : Cells[i,j].Value.TotalWidth); w++)
-                                {
-                                    toReturn.Merge(Color.ApplyTo(seperator));
-                                }
-                            }
-                            
-                            toReturn.Merge(Color.ApplyTo(border));
-                        }
-
-                        toReturn.Merge(Color.ApplyTo("\n"));
-                    }
-                }
-
-                toReturn.Merge(Color.ApplyTo(border));
-                
-                for (int i = 0; i < Cells.GetLength(1); i++) 
-                {
-                    for (int w = 0; w < ColumnSizes[i]; w++)
-                    {
-                        toReturn.Merge(Color.ApplyTo(lower));
-                    }
                     toReturn.Merge(Color.ApplyTo(border));
-                }
 
-                return toReturn;
+                    int num;
+                    for (int j = 0; j < Cells.GetLength(1); j += num) // Make this use the toDisplay item from that iteration.
+                    {
+                        num = 1;
+                        if (toDisplay[j] == null)
+                        {
+                            if (Cells[i, j] != null)
+                            {
+                                toDisplay[j] = new ColumnElement(Cells[i, j]);
+                            }
+                        }
+
+                        if (toDisplay[j] == null)
+                        {
+                            for (int w = 0; w < ColumnSizes[j]; w++)
+                            {
+                                toReturn.Merge(Color.ApplyTo(" "));
+                            }
+                        }
+                        else
+                        {
+                            toReturn.Merge(toDisplay[j].Cell.Component.Color.ApplyTo(toDisplay[j].NextLine()));
+                            num = toDisplay[j] != null ? toDisplay[j].Cell.Width : 1;
+                            
+                            if (toDisplay[j].RemainingLines <= 0)
+                            {
+                                toDisplay[j] = null;
+                            }
+                        }
+                        
+                        toReturn.Merge(Color.ApplyTo(border));
+                    }
+                    toReturn.Merge(Color.ApplyTo("\n"));
+                }
+                
+                if (i < Cells.GetLength(0) - 1)
+                {
+                    toReturn.Merge(Color.ApplyTo(border));
+                    
+                    for (int j = 0; j < Cells.GetLength(1); j += Cells[i, j] != null ? Cells[i,j].Width : 1)
+                    {
+                        if (toDisplay[j] != null)
+                        {
+                            toReturn.Merge(toDisplay[j].Cell.Component.Color.ApplyTo(toDisplay[j].NextLine()));
+                            if (toDisplay[j].RemainingLines <= 0)
+                            {
+                                toDisplay[j] = null;
+                            }
+                        }
+                        else{
+                            for (int w = 0; w < (Cells[i,j] == null ? ColumnSizes[j] : Cells[i,j].Value.TotalWidth); w++)
+                            {
+                                toReturn.Merge(Color.ApplyTo(seperator));
+                            }
+                        }
+                        
+                        toReturn.Merge(Color.ApplyTo(border));
+                    }
+
+                    toReturn.Merge(Color.ApplyTo("\n"));
+                }
+            }
+
+            toReturn.Merge(Color.ApplyTo(border));
+            
+            for (int i = 0; i < Cells.GetLength(1); i++) 
+            {
+                for (int w = 0; w < ColumnSizes[i]; w++)
+                {
+                    toReturn.Merge(Color.ApplyTo(lower));
+                }
+                toReturn.Merge(Color.ApplyTo(border));
+            }
+
+            return toReturn;
         }
         
         /// <summary>
