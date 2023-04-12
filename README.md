@@ -118,7 +118,7 @@ for (int i = 0; i <= n; i++) {
 ## <u>Tables</u>
 
 Tables are handy for organizing and displaying information, they are made of a 2d array of table cells. Cells will accept plain strings or console components. Additionally, table cells are able to resize in order to accomodate varying widths and heights. Cells may also span multiple rows and columns within the table in order to create larger spaces for them.
-<br/>
+
 Simple Table:
 ```
  _________________
