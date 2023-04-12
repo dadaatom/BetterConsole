@@ -275,22 +275,6 @@ Additionally, lists accept an array of ConsoleComponents or an array of strings 
 Currently there are two types of graph components:
 - Histograms
 - Scatter plots
-<br/>
-Simple Histogram:
-```
-  ^        __         
-  |       |  |        
-  |  __   |  |        
-C | |  |  |  |        
-o | |  |  |  |        
-s | |  |  |  |        
-t | |  |  |  |   __   
-  | |  |  |  |  |  |  
-  | |  |  |  |  |  |  
-  | |  |  |  |  |  |  
-  '------------------>
-          Bars
-```
 
 <details>
     <summary>
