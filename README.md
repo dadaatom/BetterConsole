@@ -118,6 +118,20 @@ for (int i = 0; i <= n; i++) {
 ## <u>Tables</u>
 
 Tables are handy for organizing and displaying information, they are made of a 2d array of table cells. Cells will accept plain strings or console components. Additionally, table cells are able to resize in order to accomodate varying widths and heights. Cells may also span multiple rows and columns within the table in order to create larger spaces for them.
+<br/>
+Simple Table:
+```
+ _________________
+| Animals Spotted |
+|-----------------|
+|     | Tom | John|
+|-----|-----|-----|
+| Dogs|  10 |  2  |
+|-----|-----|-----|
+| Cats|  6  |  9  |
+|_____|_____|_____|
+
+```
 
 <details>
     <summary>
@@ -158,21 +172,6 @@ Cell titleCell = new Cell("Animals Spotted", 3, 1);
 table.SetCell(titleCell, 0, 0);
 
 BetterConsole.Reload();
-```
-
-4. Observe your beautifully displayed table.
-
-```
- _________________
-| Animals Spotted |
-|-----------------|
-|     | Tom | John|
-|-----|-----|-----|
-| Dogs|  10 |  2  |
-|-----|-----|-----|
-| Cats|  6  |  9  |
-|_____|_____|_____|
-
 ```
 
 </details>
@@ -276,6 +275,22 @@ Additionally, lists accept an array of ConsoleComponents or an array of strings 
 Currently there are two types of graph components:
 - Histograms
 - Scatter plots
+<br/>
+Simple Histogram:
+```
+  ^        __         
+  |       |  |        
+  |  __   |  |        
+C | |  |  |  |        
+o | |  |  |  |        
+s | |  |  |  |        
+t | |  |  |  |   __   
+  | |  |  |  |  |  |  
+  | |  |  |  |  |  |  
+  | |  |  |  |  |  |  
+  '------------------>
+          Bars
+```
 
 <details>
     <summary>
