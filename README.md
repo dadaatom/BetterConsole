@@ -276,6 +276,23 @@ Currently there are two types of graph components:
 - Histograms
 - Scatter plots
 
+Simple Histogram:
+
+```
+  ^        __         
+  |       |  |        
+  |  __   |  |        
+C | |  |  |  |        
+o | |  |  |  |        
+s | |  |  |  |        
+t | |  |  |  |   __   
+  | |  |  |  |  |  |  
+  | |  |  |  |  |  |  
+  | |  |  |  |  |  |  
+  '------------------>
+          Bars
+```
+
 <details>
     <summary>
         <b>Show Code Example:</b>
