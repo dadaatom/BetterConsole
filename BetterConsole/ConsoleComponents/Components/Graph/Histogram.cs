@@ -32,9 +32,7 @@ namespace BetterConsole.ConsoleComponents.Graph
             }
 
             double perTick = max / (Height - 1);
-
             int barWidth = (Width - Bars.Count * 4 - 1) / Bars.Count;
-
             int remainder = (Width - Bars.Count * 4 - 1) % Bars.Count;
 
 
@@ -99,14 +97,3 @@ namespace BetterConsole.ConsoleComponents.Graph
         }
     }
 }
-
-/*
- 
- ^
- |
- +  _   __
- | | |  ||
- + | |  ||
- '------------------------------>
-
-*/

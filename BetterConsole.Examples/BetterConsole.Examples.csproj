@@ -45,7 +45,6 @@
         <Compile Include="ExampleDriver.cs" />
         <Compile Include="ExampleProgram.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="TestProgram.cs" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\BetterConsole.ConsoleCommands\BetterConsole.ConsoleCommands.csproj">

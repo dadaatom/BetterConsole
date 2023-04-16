@@ -12,7 +12,13 @@
 
         protected override ComponentBuilder Build()
         {
-            throw new System.NotImplementedException();
+            string value = "";
+            for (int i = 0; i < Length; i++)
+            {
+                value += '-';
+            }
+
+            return Color.ApplyTo(value);
         }
     }
 }

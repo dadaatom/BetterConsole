@@ -13,8 +13,7 @@ namespace BetterConsole.ConsoleComponents
                 throw new EmptyTableException();
             }
 
-            throw new System.Exception("UNCOMMENT THIS");
-            //Object.UpdateTargetSizes();
+            throw new System.Exception("Not implemented");
             
             string upper = "_";
             string lower = "_";
